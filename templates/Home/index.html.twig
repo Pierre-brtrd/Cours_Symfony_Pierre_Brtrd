@@ -1,0 +1,22 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+	Page d'accueil |
+	{{ parent() }}
+{% endblock %}
+
+{% block body %}
+	<h1>Ma page d'accueil</h1>
+
+	{{ dump(data) }}
+
+	<h2>
+		Prénom:
+		{{ data.prenom }}
+	</h2>
+	<h2>
+		Nom:
+		{{ data.nom }}
+	</h2>
+	<p>{{ data.age }}ans</p>
+{% endblock %}
