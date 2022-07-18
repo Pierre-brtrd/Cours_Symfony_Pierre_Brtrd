@@ -1,0 +1,24 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+	Nouvel article |
+	{{ parent() }}
+{% endblock %}
+
+{% block body %}
+	<section class="container-fluid mt-4">
+		<div class="card p-3 w-50 mx-auto mt-4">
+			<h1 class="text-center mb-4">Création d'un article</h1>
+			{{ form_start(form) }}
+
+			{{ form_widget(form.titre, {'attr': {'class': 'mb-4', 'placeholder': "Titre de l'article"} }) }}
+			{{ form_widget(form.content, {'attr': {'class': 'mb-4', 'placeholder': "Contenu de l'article", 'rows': 10} }) }}
+
+			<div class="mt-4 text-center">
+				<button type="submit" class="btn btn-primary text-light">Créer</button>
+			</div>
+
+			{{ form_end(form) }}
+		</div>
+	</section>
+{% endblock %}

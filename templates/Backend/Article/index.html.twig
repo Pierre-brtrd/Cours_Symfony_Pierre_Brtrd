@@ -1,0 +1,24 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+	Admin Article |
+	{{ parent() }}
+{% endblock %}
+
+{% block body %}
+	<section class="container mt-4">
+		<h1 class="title text-center">Administration des articles</h1>
+		<div class="row mt-4">
+			{% for article in articles %}
+				<div class="col-md-4">
+					<div class="card">
+						<h2 class="card-header">{{ article.titre }}</h2>
+						<div class="card-body">
+							<p class="card-text">{{ article.content }}</p>
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+	</section>
+{% endblock %}
