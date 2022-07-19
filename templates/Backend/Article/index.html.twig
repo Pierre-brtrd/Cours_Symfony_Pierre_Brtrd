@@ -11,14 +11,29 @@
 		<div class="row mt-4">
 			{% for article in articles %}
 				<div class="col-md-4">
-					<div class="card">
-						<h2 class="card-header">{{ article.titre }}</h2>
-						<div class="card-body">
-							<p class="card-text">{{ article.content }}</p>
+					<div class="blog-card">
+						<div class="blog-card-image">
+							<img src="https://fakeimg.pl/200x100" alt="">
+						</div>
+						<div class="blog-card-content">
+							<h2 class="blog-card-content-header">{{ article.titre }}</h2>
+							<p>{{ article.content }}</p>
+							<p>{{ article.createdAt|format_datetime('full', 'none') }}</p>
+							<div class="row mt-2">
+								<div class="col-md-6">
+									<a href="{{ path('admin.article.update', {'id': article.id, 'slug': article.slug} ) }}" class="btn btn-primary">Editer</a>
+								</div>
+								<div class="col-md-6">
+									Supprimer
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
 			{% endfor %}
+		</div>
+		<div class="text-center mt-4">
+			<a href="{{ path('admin.article.new') }}" class="btn btn-primary text-light">Créer un article</a>
 		</div>
 	</section>
 {% endblock %}
