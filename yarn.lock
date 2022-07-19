@@ -1254,6 +1254,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@fortawesome/fontawesome-common-types@npm:6.1.1":
+  version: 6.1.1
+  resolution: "@fortawesome/fontawesome-common-types@npm:6.1.1"
+  checksum: 4db285557dd9d178e313a9596ad1c4ba84e9d47efb53dea3206de1bf98252574e0d95c3a0b114cc3cb5f162e2622a2cf8f037011fc98818ccade7bfb6c0c335b
+  languageName: node
+  linkType: hard
+
+"@fortawesome/fontawesome-svg-core@npm:^6.1.1":
+  version: 6.1.1
+  resolution: "@fortawesome/fontawesome-svg-core@npm:6.1.1"
+  dependencies:
+    "@fortawesome/fontawesome-common-types": 6.1.1
+  checksum: bf3b09a1ec3c5d6be30ea04c83dffb921c5a457c547fb1b99b814591489efabf939f669878cc5b48deb9771ef705209a1bb1b3088e66f6873cc9b34cbf4c781c
+  languageName: node
+  linkType: hard
+
 "@gar/promisify@npm:^1.1.3":
   version: 1.1.3
   resolution: "@gar/promisify@npm:1.1.3"
@@ -3297,6 +3313,13 @@ __metadata:
     debug:
       optional: true
   checksum: 6aa4e3e3cdfa3b9314801a1cd192ba756a53479d9d8cca65bf4db3a3e8834e62139245cd2f9566147c8dfe2efff1700d3e6aefd103de4004a7b99985e71dd533
+  languageName: node
+  linkType: hard
+
+"fontawesome-free@npm:^1.0.4":
+  version: 1.0.4
+  resolution: "fontawesome-free@npm:1.0.4"
+  checksum: ca970ef55db191c6909d3e5d8e55b2f2cb0e219de1bef4c967225af89b49f516d23c7f8483d1c17fa0f617efe3feb46d64f282f5b60892c5955636d8dfd36efe
   languageName: node
   linkType: hard
 
@@ -5478,12 +5501,14 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "root-workspace-0b6124@workspace:."
   dependencies:
+    "@fortawesome/fontawesome-svg-core": ^6.1.1
     "@hotwired/stimulus": ^3.0.0
     "@popperjs/core": ^2.11.5
     "@symfony/stimulus-bridge": ^3.2.0
     "@symfony/webpack-encore": ^3.0.0
     bootstrap: ^5.1.3
     core-js: ^3.23.0
+    fontawesome-free: ^1.0.4
     jquery: ^3.6.0
     regenerator-runtime: ^0.13.9
     sass: ^1.53.0
