@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Security;
 
 #[Route('/admin')]
 class AdminController extends AbstractController
@@ -35,7 +36,7 @@ class AdminController extends AbstractController
     }
 
     #[Route('/article/new', name: 'admin.article.new')]
-    public function createArticle(Request $request): Response
+    public function createArticle(Request $request, Security $security): Response
     {
         $article = new Article();
 
@@ -43,6 +44,7 @@ class AdminController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $article->setUser($security->getUser());
             $this->em->persist($article);
             $this->em->flush();
             $this->addFlash('success', 'Article créé avec succès');

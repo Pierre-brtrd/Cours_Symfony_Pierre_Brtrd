@@ -18,8 +18,14 @@
 						<div class="blog-card-content">
 							<h2 class="blog-card-content-header">{{ article.titre }}</h2>
 							<p>{{ article.content }}</p>
+							{% if article.user is not null %}
+								<p class="text-muted mt-2 mb-0">
+									{{ article.user.prenom ? article.user.prenom : '' }}
+									{{ article.user.nom }}
+								</p>
+							{% endif %}
 							<p>{{ article.createdAt|format_datetime('full', 'none') }}</p>
-							<div class="row mt-2">
+							<div class="row">
 								<div class="col-md-6">
 									<a href="{{ path('admin.article.update', {'id': article.id, 'slug': article.slug} ) }}" class="btn btn-primary">Editer</a>
 								</div>
