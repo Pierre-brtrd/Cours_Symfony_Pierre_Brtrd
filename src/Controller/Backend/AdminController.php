@@ -14,10 +14,20 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/admin')]
 class AdminController extends AbstractController
 {
-    #[Route('/article', name: 'admin')]
-    public function adminListArticle(ArticleRepository $repos)
+    private $em;
+
+    private $repoArticle;
+
+    public function __construct(EntityManagerInterface $em, ArticleRepository $repoArticle)
     {
-        $articles = $repos->findAll();
+        $this->em = $em;
+        $this->repoArticle = $repoArticle;
+    }
+
+    #[Route('/article', name: 'admin')]
+    public function adminListArticle()
+    {
+        $articles = $this->repoArticle->findAll();
 
         return $this->render('Backend/Article/index.html.twig', [
             'articles' => $articles,
@@ -25,7 +35,7 @@ class AdminController extends AbstractController
     }
 
     #[Route('/article/new', name: 'admin.article.new')]
-    public function createArticle(Request $request, EntityManagerInterface $em): Response
+    public function createArticle(Request $request): Response
     {
         $article = new Article();
 
@@ -33,13 +43,38 @@ class AdminController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em->persist($article);
-            $em->flush();
-            $this->addFlash('success', 'Artcile créé avec succès');
+            $this->em->persist($article);
+            $this->em->flush();
+            $this->addFlash('success', 'Article créé avec succès');
             return $this->redirectToRoute('admin');
         }
 
         return $this->render('Backend/Article/create.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+    #[Route('/article/edit/{id}-{slug}', name: 'admin.article.update')]
+    public function editArticle(int $id, string $slug, Request $request): Response
+    {
+        $article = $this->repoArticle->find($id);
+
+        if (!$article) {
+            $this->addFlash('error', 'Article non trouvé');
+            return $this->redirectToRoute('admin');
+        }
+
+        $form = $this->createForm(ArticleType::class, $article);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->em->persist($article);
+            $this->em->flush();
+            $this->addFlash('success', 'Article modifié avec succès');
+            return $this->redirectToRoute('admin');
+        }
+
+        return $this->render('Backend/Article/update.html.twig', [
             'form' => $form->createView(),
         ]);
     }
