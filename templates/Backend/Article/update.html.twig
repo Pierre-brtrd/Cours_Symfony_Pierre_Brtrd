@@ -12,6 +12,8 @@
 			{{ form_start(form) }}
 
 			{{ form_widget(form.titre, {'attr': {'class': 'mb-4', 'placeholder': "Titre de l'article"} }) }}
+			{{ form_row(form.categories) }}
+			{{ form_row(form.imageFile) }}
 			{{ form_widget(form.content, {'attr': {'class': 'mb-4', 'placeholder': "Contenu de l'article", 'rows': 10} }) }}
 
 			<div class="mt-4 text-center">

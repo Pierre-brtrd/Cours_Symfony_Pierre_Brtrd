@@ -12,19 +12,28 @@
 			{% for article in articles %}
 				<div class="col-md-4">
 					<div class="blog-card">
-						<div class="blog-card-image">
-							<img src="https://fakeimg.pl/200x100" alt="">
-						</div>
+						{% if article.imageName %}
+							<div class="blog-card-image">
+								<img src="{{ vich_uploader_asset(article, 'imageFile') }}" alt="{{ article.titre }}">
+							</div>
+						{% else %}
+							<div class="blog-card-image">
+								<img src="https://fakeimg.pl/200x100" alt="">
+							</div>
+						{% endif %}
 						<div class="blog-card-content">
 							<h2 class="blog-card-content-header">{{ article.titre }}</h2>
-							<p>{{ article.content }}</p>
+							<p class="blog-card-content-description">{{ article.content|striptags|slice(0, 100) ~ '...'}}</p>
 							{% if article.user is not null %}
 								<p class="text-muted mt-2 mb-0">
-									{{ article.user.prenom ? article.user.prenom : '' }}
-									{{ article.user.nom }}
+									{{ article.user ? article.user.prenom : '' }}
+									{{ article.user ? article.user.nom : ''}}
 								</p>
 							{% endif %}
-							<p>{{ article.createdAt|format_datetime('full', 'none') }}</p>
+							<p>
+								<i class="far fa-calendar-alt"></i>
+								{{ article.createdAt|format_datetime('full', 'none') }}
+							</p>
 							<div class="row">
 								<div class="col-md-6">
 									<a href="{{ path('admin.article.update', {'id': article.id, 'slug': article.slug} ) }}" class="btn btn-primary">Editer</a>
