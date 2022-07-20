@@ -22,6 +22,7 @@
     },
     "dependencies": {
         "@fortawesome/fontawesome-svg-core": "^6.1.1",
+        "ckeditor4": "^4.19.1",
         "fontawesome-free": "^1.0.4"
     }
 }
