@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit User
+{% endblock %}
+
+{% block body %}
+	<section class="container mt-4">
+		<div class="card p-3 w-50 mx-auto">
+			<h1>Edit User</h1>
+
+			{% include 'Backend/user/_form.html.twig' with {button_label: 'Modifier'} %}
+
+			<div class="col-md-3">
+				<a href="{{ path('app_user_index') }}" class="btn btn inline btn-secondary">back to list</a>
+			</div>
+			{{ include('Backend/user/_delete_form.html.twig') }}
+		</div>
+	</section>
+{% endblock %}

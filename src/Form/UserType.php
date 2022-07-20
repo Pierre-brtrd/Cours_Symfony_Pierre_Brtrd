@@ -37,7 +37,8 @@ class UserType extends AbstractType
             ])
             ->add('password', PasswordType::class, [
                 'mapped' => false,
-                'constraints' => [
+                'required' => false,
+                /* 'constraints' => [
                     new NotBlank([
                         'message' => 'Veuillez rentrer un mot de passe'
                     ]),
@@ -46,7 +47,7 @@ class UserType extends AbstractType
                         'minMessage' => 'Votre mot de passe doit faire au moins {{ limit }} caractères',
                         'max' => 100
                     ])
-                ]
+                ] */
             ])
             ->add('prenom', TextType::class, [
                 'label' => 'Prénom:',
