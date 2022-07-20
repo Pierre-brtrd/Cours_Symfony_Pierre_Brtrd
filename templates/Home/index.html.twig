@@ -6,17 +6,49 @@
 {% endblock %}
 
 {% block body %}
-	<h1>Ma page d'accueil</h1>
+	<div id="hero">
+		<div class="header">
+			<h1>Bienvenue sur le blog développé en Symfony</h1>
+		</div>
+	</div>
+	<section class="container mt-4">
+		<div class="row">
+			{% for article in articles %}
+				<div class="col-md-4">
+					<div class="blog-card">
+						<a href="#">
+							{% if article.imageName %}
+								<div class="blog-card-image">
 
-	{{ dump(data) }}
+									<img src="{{ vich_uploader_asset(article, 'imageFile') }}" alt="{{ article.titre }}">
+								</a>
+							</div>
+						{% else %}
+							<div class="blog-card-image">
 
-	<h2>
-		Prénom:
-		{{ data.prenom }}
-	</h2>
-	<h2>
-		Nom:
-		{{ data.nom }}
-	</h2>
-	<p>{{ data.age }}ans</p>
-{% endblock %}
+								<img src="https://fakeimg.pl/200x100" alt="">
+
+							</div>
+						{% endif %}
+					</a>
+					<div class="blog-card-content">
+						<h2 class="blog-card-content-header">
+							<a href="#">{{ article.titre }}</a>
+						</h2>
+						<p class="blog-card-content-description">{{ article.content|striptags|slice(0, 100) ~ '...'}}</p>
+						{% if article.user is not null %}
+							<p class="text-muted mt-2 mb-0">
+								{{ article.user ? article.user.prenom : '' }}
+								{{ article.user ? article.user.nom : ''}}
+							</p>
+						{% endif %}
+						<p>
+							<i class="far fa-calendar-alt"></i>
+							{{ article.createdAt|format_datetime('full', 'none') }}
+						</p>
+					</div>
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+</section>{% endblock %}
