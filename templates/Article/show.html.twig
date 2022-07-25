@@ -7,6 +7,7 @@
 {% endblock %}
 
 {% block body %}
+	{{ dump(comments) }}
 	{% if article.imageName %}
 		<div id="hero" style="background-image: url('{{ vich_uploader_asset(article, 'imageFile') }}')">
 			<div class="header">
@@ -44,7 +45,28 @@
 						</div>
 					{% endif %}
 				</aside>
-				<article class="column-right">{{ article.content|raw }}</article>
+				<div class="column-right">
+					<article class="article-content">
+						{{ article.content|raw }}
+					</article>
+
+					<div class="comments card p-3 mt-4">
+						<h2>Ajouter un commentaire:</h2>
+						{% if app.user %}
+							{% include "Article/_formComment.html.twig" with { button_label: 'Envoyer'} %}
+						{% else %}
+							<div class="alert alert-info mt-2" role="alert">
+								<p>
+									<b>Attention!</b>
+									<br/>
+									Vous devez
+									<a href="{{ path('login') }}">être connecté</a>
+									pour laisser un commentaire.
+								</p>
+							</div>
+						{% endif %}
+					</div>
+				</div>
 			</div>
 		</section>
 	{% endif %}
