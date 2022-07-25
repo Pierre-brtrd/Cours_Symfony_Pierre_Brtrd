@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{ article.titre }}
+	|
+	{{ parent() }}
+{% endblock %}
+
+{% block body %}
+	{% if article.imageName %}
+		<div id="hero" style="background-image: url('{{ vich_uploader_asset(article, 'imageFile') }}')">
+			<div class="header">
+				<h1>{{ article.titre }}</h1>
+			</div>
+		</div>
+		<section class="container mt-4">
+			<div class="article-main-content">
+				<aside class="column-left">
+					<div class="info-article">
+						<h2>Informations:</h2>
+						<p>
+							<i class="far fa-calendar-alt"></i>
+							<strong>Date de création :</strong>
+							{{ article.createdAt|format_datetime('full', 'none', locale='fr') }}
+						</p>
+						<p>
+							<i class="far fa-user-circle"></i>
+							<strong>Auteur:</strong>
+							{{ article.user.prenom }}
+							{{ article.user.nom }}
+						</p>
+					</div>
+					{% if article.categories|length > 0 %}
+						<div class="categorie-article">
+							<h2>Catégorie:</h2>
+							<div class="list-tag">
+								{% for categorie in article.categories %}
+									<p class="tag">
+										<i class="fas fa-tags"></i>
+										{{ categorie.titre }}
+									</p>
+								{% endfor %}
+							</div>
+						</div>
+					{% endif %}
+				</aside>
+				<article class="column-right">{{ article.content|raw }}</article>
+			</div>
+		</section>
+	{% endif %}
+{% endblock %}

@@ -16,7 +16,7 @@
 			{% for article in articles %}
 				<div class="col-md-4">
 					<div class="blog-card">
-						<a href="#">
+						<a href="{{ path('article.show', {'id': article.id, 'slug': article.slug}) }}">
 							{% if article.imageName %}
 								<div class="blog-card-image">
 
@@ -33,7 +33,7 @@
 					</a>
 					<div class="blog-card-content">
 						<h2 class="blog-card-content-header">
-							<a href="#">{{ article.titre }}</a>
+							<a href="{{ path('article.show', {'id': article.id, 'slug': article.slug}) }}">{{ article.titre }}</a>
 						</h2>
 						<p class="blog-card-content-description">{{ article.content|striptags|slice(0, 100) ~ '...'}}</p>
 						{% if article.user is not null %}
