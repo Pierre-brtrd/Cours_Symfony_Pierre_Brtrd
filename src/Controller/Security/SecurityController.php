@@ -29,6 +29,7 @@ class SecurityController extends AbstractController
         ]);
     }
 
+
     #[Route('/register', name: 'register')]
     public function register(
         Request $request,

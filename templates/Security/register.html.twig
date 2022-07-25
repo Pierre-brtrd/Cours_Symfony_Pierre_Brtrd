@@ -28,6 +28,10 @@
 				</div>
 			</div>
 
+			<div class="row">
+				{{ form_row(form.imageFile) }}
+			</div>
+
 			{% if is_granted('ROLE_ADMIN') %}
 				<div class="col-md-12">
 					{{ form_row(form.roles) }}

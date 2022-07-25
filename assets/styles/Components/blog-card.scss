@@ -27,6 +27,24 @@
     &-content {
         padding: 15px 30px;
         margin-bottom: 0px;
+
+        .author {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 10px;
+
+            .avatar {
+                width: 40px;
+                height: 40px;
+                overflow: hidden;
+                border-radius: 50%;
+
+                img {
+                    width: 100%;
+                }
+            }
+        }
     }
 
     a {

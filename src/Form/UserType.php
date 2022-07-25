@@ -11,9 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Constraints\Length;
-use Symfony\Component\Validator\Constraints\NotBlank;
-use Symfony\Component\Validator\Constraints\Regex;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class UserType extends AbstractType
 {
@@ -68,6 +66,13 @@ class UserType extends AbstractType
             ->add('ville', TextType::class, [
                 'label' => 'Ville:',
                 'required' => true
+            ])
+            ->add('imageFile', VichImageType::class, [
+                'label' => 'Image: ',
+                'required' => false,
+                'download_uri' => false,
+                'image_uri' => true,
+                'by_reference' => false
             ]);
     }
 
