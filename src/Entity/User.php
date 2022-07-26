@@ -11,9 +11,7 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Symfony\Component\Serializer\Annotation\Ignore;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
-use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
@@ -84,6 +82,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
         return serialize([
             $this->id,
             $this->email,
+            $this->username,
             $this->roles,
             $this->password,
             $this->prenom,
@@ -95,11 +94,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
         ]);
     }
 
-    public function unserialize(string $serialize)
+    public function unserialize($serialize)
     {
         list(
             $this->id,
             $this->email,
+            $this->username,
             $this->roles,
             $this->password,
             $this->prenom,
