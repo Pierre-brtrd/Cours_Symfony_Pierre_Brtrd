@@ -5,6 +5,16 @@
 	{{ parent() }}
 {% endblock %}
 
+{% block stylesheets %}
+	{{ parent() }}
+	{{ encore_entry_link_tags('admin') }}
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+	{{ encore_entry_script_tags('admin') }}
+{% endblock %}
+
 {% block body %}
 	<section class="container mt-4">
 		<h1 class="title text-center">Administration des articles</h1>
@@ -46,6 +56,11 @@
 									</form>
 								</div>
 							</div>
+							{% if article.comments|length > 0 %}
+								<div class="col-md-4 mt-2">
+									<a href="{{ path('admin.article.comments', {'id': article.id, 'slug': article.slug}) }}" class="btn btn-info text-light">Commentaires</a>
+								</div>
+							{% endif %}
 						</div>
 					</div>
 				</div>

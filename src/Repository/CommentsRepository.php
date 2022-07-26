@@ -51,6 +51,19 @@ class CommentsRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function findByArticle(int $articleId, string $slug)
+    {
+        return $this->createQueryBuilder('c')
+            ->join('c.article', 'a')
+            ->andWhere('a.id = :articleId')
+            ->setParameter('articleId', $articleId)
+            ->andWhere('a.slug = :slug')
+            ->setParameter('slug', $slug)
+            ->orderBy('c.createdAt', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
     //    /**
     //     * @return Comments[] Returns an array of Comments objects
     //     */

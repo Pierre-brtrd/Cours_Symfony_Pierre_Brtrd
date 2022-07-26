@@ -64,4 +64,11 @@ h6 {
 
 .btn-primary {
     color: $white !important;
+    background-color: $secondary;
+    border: 1px solid $secondary;
+
+    &:hover {
+        background-color: darken($secondary, 10%);
+        border: 1px solid darken($secondary, 10%);
+    }
 }

@@ -5,6 +5,7 @@ namespace App\Controller\Backend;
 use App\Entity\Article;
 use App\Form\ArticleType;
 use App\Repository\ArticleRepository;
+use App\Repository\CommentsRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,14 +16,11 @@ use Symfony\Component\Security\Core\Security;
 #[Route('/admin')]
 class AdminController extends AbstractController
 {
-    private $em;
-
-    private $repoArticle;
-
-    public function __construct(EntityManagerInterface $em, ArticleRepository $repoArticle)
-    {
-        $this->em = $em;
-        $this->repoArticle = $repoArticle;
+    public function __construct(
+        private EntityManagerInterface $em,
+        private ArticleRepository $repoArticle,
+        private CommentsRepository $repoComments
+    ) {
     }
 
     #[Route('/article', name: 'admin')]
@@ -94,5 +92,20 @@ class AdminController extends AbstractController
 
         $this->addFlash('error', 'Le token n\'est pas valide');
         return $this->redirectToRoute('admin');
+    }
+
+    #[Route("/article/{id}-{slug}/comments", name: 'admin.article.comments')]
+    public function adminComments(int $id, string $slug)
+    {
+        $comments = $this->repoComments->findByArticle($id, $slug);
+
+        if (!$comments) {
+            $this->addFlash('error', 'Pas de commentaires trouvés');
+            return $this->redirectToRoute('admin');
+        }
+
+        return $this->render('backend/article/comments.html.twig', [
+            'comments' => $comments,
+        ]);
     }
 }

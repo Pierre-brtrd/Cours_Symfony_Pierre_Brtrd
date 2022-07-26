@@ -1,0 +1,1 @@
+console.error('Ok pour l\'asset Admin');
