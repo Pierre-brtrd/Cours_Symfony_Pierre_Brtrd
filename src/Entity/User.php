@@ -31,6 +31,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
     #[ORM\Column]
     private array $roles = [];
 
+    #[ORM\Column(length: 180, unique: true)]
+    private ?string $username = null;
+
     /**
      * @var string The hashed password
      */
@@ -137,7 +140,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
      */
     public function getUserIdentifier(): string
     {
-        return (string) $this->email;
+        return (string) $this->username;
+    }
+
+    public function setUsername(string $username): self
+    {
+        $this->username = $username;
+
+        return $this;
     }
 
     /**
