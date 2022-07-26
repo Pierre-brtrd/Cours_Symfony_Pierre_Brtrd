@@ -108,4 +108,20 @@ class AdminController extends AbstractController
             'comments' => $comments,
         ]);
     }
+
+    #[Route('/comments/switch/{id}', name: 'admin.comments.switch', methods: 'GET')]
+    public function switchVisibilityComment(int $id)
+    {
+        $comment = $this->repoComments->find($id);
+
+        if ($comment) {
+            $comment->isActive() ? $comment->setActive(false) : $comment->setActive(true);
+            $this->em->persist($comment);
+            $this->em->flush();
+
+            return new Response('Visibility changed', 201);
+        }
+
+        return new Response('Commentaires non trouvé', 400);
+    }
 }
