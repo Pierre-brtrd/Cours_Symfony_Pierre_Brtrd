@@ -7,7 +7,6 @@
 {% endblock %}
 
 {% block body %}
-	{{ dump(comments) }}
 	{% if article.imageName %}
 		<div id="hero" style="background-image: url('{{ vich_uploader_asset(article, 'imageFile') }}')">
 			<div class="header">
@@ -44,6 +43,35 @@
 							</div>
 						</div>
 					{% endif %}
+					{% if comments|length > 0 %}
+						<div class="show-comments mt-4">
+							<h2>Dernier commentaires</h2>
+							<div class="comments">
+								{% for comment in comments|slice(0, 3) %}
+									<div class="comment-item">
+										<div class="comment-header">{{ comment.titre }}</div>
+										<div class="comment-item-content">
+											<em class="card-text">{{ comment.user.fullName }}</em>
+											<p class="card-text">{{ comment.content }}</p>
+											<div class="ratings">
+												{% for number in range(1,5) %}
+													{% if number <= comment.note %}
+														<i class="fas fa-star rating-color"></i>
+													{% else %}
+														<i class="far fa-star rating-color"></i>
+													{% endif %}
+												{% endfor %}
+											</div>
+											<p class="card-text">
+												<small class="text-muted">Posté il y a
+													{{ comment.createdAt|ago }}</small>
+											</p>
+										</div>
+									</div>
+								{% endfor %}
+							</div>
+						</div>
+					{% endif %}
 				</aside>
 				<div class="column-right">
 					<article class="article-content">
@@ -66,6 +94,35 @@
 							</div>
 						{% endif %}
 					</div>
+					{% if comments|length > 0 %}
+						<div class="show-comments mt-4">
+							<h2>Commentaires</h2>
+							<div class="comments-list">
+								{% for comment in comments %}
+									<div class="comment-item">
+										<div class="comment-header">{{ comment.titre }}</div>
+										<div class="comment-item-content">
+											<em class="card-text">{{ comment.user.fullName }}</em>
+											<p class="card-text">{{ comment.content }}</p>
+											<div class="ratings">
+												{% for number in range(1,5) %}
+													{% if number <= comment.note %}
+														<i class="fas fa-star rating-color"></i>
+													{% else %}
+														<i class="far fa-star rating-color"></i>
+													{% endif %}
+												{% endfor %}
+											</div>
+											<p class="card-text">
+												<small class="text-muted">Posté il y a
+													{{ comment.createdAt|ago }}</small>
+											</p>
+										</div>
+									</div>
+								{% endfor %}
+							</div>
+						</div>
+					{% endif %}
 				</div>
 			</div>
 		</section>

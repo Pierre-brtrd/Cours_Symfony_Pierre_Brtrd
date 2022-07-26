@@ -14,6 +14,12 @@
 				</ul>
 				{% if app.user %}
 					{% if is_granted('ROLE_ADMIN') %}
+						<div class="navbar-btn me-2">
+							<a class="btn btn-inline btn-light" href="{{ path('app_user_index') }}">
+								<i class="fas fa-users"></i>
+								<span>Gérer les utilisateurs</span>
+							</a>
+						</div>
 						<div class="navbar-bt me-2">
 							<a href="{{ path('admin') }}" class="btn btn-inline btn-light">
 								<i class="fa-solid fa-screwdriver-wrench"></i>

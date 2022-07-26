@@ -6,6 +6,7 @@ use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Serializable;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\HttpFoundation\File\File;
@@ -17,47 +18,38 @@ use Symfony\Component\Serializer\Annotation\Groups;
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
 #[Vich\Uploadable]
-class User implements UserInterface, PasswordAuthenticatedUserInterface
+class User implements UserInterface, PasswordAuthenticatedUserInterface, Serializable
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column()]
-    #[Groups('user')]
     private ?int $id = null;
 
     #[ORM\Column(length: 180, unique: true)]
-    #[Groups('user')]
     private ?string $email = null;
 
     #[ORM\Column]
-    #[Groups('user')]
     private array $roles = [];
 
     /**
      * @var string The hashed password
      */
     #[ORM\Column]
-    #[Groups('user')]
     private ?string $password = null;
 
     #[ORM\Column(length: 150)]
-    #[Groups('user')]
     private ?string $prenom = null;
 
     #[ORM\Column(length: 100)]
-    #[Groups('user')]
     private ?string $nom = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups('user')]
     private ?string $address = null;
 
     #[ORM\Column]
-    #[Groups('user')]
     private ?int $zipCode = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups('user')]
     private ?string $ville = null;
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Article::class)]
@@ -82,6 +74,43 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $this->articles = new ArrayCollection();
         $this->comments = new ArrayCollection();
+    }
+
+    public function serialize()
+    {
+        return serialize([
+            $this->id,
+            $this->email,
+            $this->roles,
+            $this->password,
+            $this->prenom,
+            $this->nom,
+            $this->address,
+            $this->zipCode,
+            $this->ville,
+            $this->imageName
+        ]);
+    }
+
+    public function unserialize(string $serialize)
+    {
+        list(
+            $this->id,
+            $this->email,
+            $this->roles,
+            $this->password,
+            $this->prenom,
+            $this->nom,
+            $this->address,
+            $this->zipCode,
+            $this->ville,
+            $this->imageName
+        ) = unserialize($serialize);
+    }
+
+    public function getFullName()
+    {
+        return "$this->prenom $this->nom";
     }
 
     public function getId(): ?int
