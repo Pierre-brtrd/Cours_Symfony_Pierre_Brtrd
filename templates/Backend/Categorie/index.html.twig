@@ -18,19 +18,17 @@
 {% block body %}
 	<section class="container mt-4">
 		<h1 class="text-center">Admin catégorie</h1>
-		<div class="d-flex flex-wrap justify-content-between gap-2">
+		<div class="d-flex flex-wrap justify-content-between gap-2 mt-4">
 			{% for categorie in categories %}
-				<div class="col-md-3">
-					<div class="blog-card mt-0">
-						<div class="blog-card-content">
-							<h2>{{ categorie.titre }}</h2>
-							<div class="d-flex align-items-center mt-2">
-								<div class="col-md-6">
-									<a href="{{ path('app_categorie_edit', {'id': categorie.id}) }}" class="btn btn-primary">Modifier</a>
-								</div>
-								<div class="col-md-6">
-									{{ include('Backend/categorie/_delete_form.html.twig') }}
-								</div>
+				<div class="blog-card mt-0">
+					<div class="blog-card-content">
+						<h2>{{ categorie.titre }}</h2>
+						<div class="d-flex align-items-center mt-2">
+							<div class="col-md-6">
+								<a href="{{ path('app_categorie_edit', {'id': categorie.id}) }}" class="btn btn-primary">Modifier</a>
+							</div>
+							<div class="col-md-6">
+								{{ include('Backend/categorie/_delete_form.html.twig') }}
 							</div>
 						</div>
 					</div>

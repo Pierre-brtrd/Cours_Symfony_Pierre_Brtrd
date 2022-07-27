@@ -44,9 +44,6 @@
 						<td>
 							<div class="row">
 								<div class="col-md-6">
-									<a href="{{ path('app_user_show', {'id': user.id}) }}" class="btn btn-primary">show</a>
-								</div>
-								<div class="col-md-6">
 									<a href="{{ path('app_user_edit', {'id': user.id}) }}" class="btn btn-warning">edit</a>
 								</div>
 							</div>
@@ -54,12 +51,12 @@
 					</tr>
 				{% else %}
 					<tr>
-						<td colspan="10">no records found</td>
+						<td colspan="10">Pas d'utilisateur trouvé</td>
 					</tr>
 				{% endfor %}
 			</tbody>
 		</table>
 
-		<a href="{{ path('app_user_new') }}" class="btn btn-primary">Create new</a>
+		<a href="{{ path('register') }}" class="btn btn-primary">Créer un utilisateur</a>
 	</section>
 {% endblock %}

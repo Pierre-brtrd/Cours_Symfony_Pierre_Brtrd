@@ -57,7 +57,7 @@ class ArticleController extends AbstractController
             ], 301);
         }
 
-        return $this->renderForm('article/show.html.twig', [
+        return $this->renderForm('frontend/article/show.html.twig', [
             'article' => $article,
             'form' => $form,
             'comments' => $comments

@@ -14,8 +14,9 @@ class MainController extends AbstractController
     {
         $articles = $repository->findAll();
 
-        return $this->render('Home/index.html.twig', [
-            'articles' => $articles
+        return $this->render('frontend/Home/index.html.twig', [
+            'articles' => $articles,
+            'curentPage' => 'home'
         ]);
     }
 }

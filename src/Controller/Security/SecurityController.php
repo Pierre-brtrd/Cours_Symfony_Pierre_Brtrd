@@ -3,6 +3,7 @@
 namespace App\Controller\Security;
 
 use App\Entity\User;
+use App\Form\RegistrationFormType;
 use App\Form\UserType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -38,7 +39,7 @@ class SecurityController extends AbstractController
     ) {
         $user = new User();
 
-        $form = $this->createForm(UserType::class, $user);
+        $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

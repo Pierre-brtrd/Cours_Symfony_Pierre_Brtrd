@@ -9,35 +9,58 @@
 			<div class="collapse navbar-collapse" id="navbarScroll">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 					<li class="nav-item">
-						<a class="nav-link" aria-current="page" href="{{ path('home') }}">Accueil</a>
+						<a class="nav-link {{ curentPage is defined and curentPage == 'home' ? 'active'}}" aria-current="page" href="{{ path('home') }}">Accueil</a>
 					</li>
 				</ul>
 				{% if app.user %}
 					{% if is_granted('ROLE_ADMIN') %}
 						<div class="navbar-btn me-2">
-							<a class="btn btn-inline btn-light" href="{{ path('app_user_index') }}">
-								<i class="fas fa-users"></i>
-								<span>Gérer les utilisateurs</span>
-							</a>
-						</div>
-						<div class="navbar-bt me-2">
-							<a href="{{ path('admin') }}" class="btn btn-inline btn-light">
-								<i class="fa-solid fa-screwdriver-wrench"></i>
-								Admin
-							</a>
+							<div class="dropdown">
+								<button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+									<i class="fa-solid fa-screwdriver-wrench"></i>
+									Admin
+								</button>
+								<ul class="dropdown-menu">
+									<li>
+										<a class="dropdown-item" href="{{ path('app_user_index') }}">
+											<i class="fas fa-users"></i>
+											<span>Gérer les utilisateurs</span>
+										</a>
+									</li>
+									<li>
+										<a href="{{ path('admin') }}" class="dropdown-item">
+											<i class="fas fa-newspaper"></i>
+											Articles
+										</a>
+									</li>
+									<li>
+										<a href="{{ path('app_categorie_index') }}" class="dropdown-item">
+											<i class="fas fa-tags"></i>
+											Catégorie
+										</a>
+									</li>
+								</ul>
+							</div>
 						</div>
 					{% endif %}
-
+					<div class="navbar-btn me-2">
+						<a href="{{ path('compte') }}" class="btn btn-light">
+							<i class="fas fa-user"></i>
+							<span>Compte</span>
+						</a>
+					</div>
 					<div class="navbar-btn">
 						<a href="{{ path('logout') }}" class="btn btn-danger">
 							<i class="fa-solid fa-right-from-bracket"></i>
 							<span>Se déconnecter</span>
 						</a>
 					</div>
-
 				{% else %}
+					<div class="navbar-btn me-2">
+						<a href="{{path('register')}}" class="btn btn-light">S'inscrire</a>
+					</div>
 
-					<div class="ml-auto">
+					<div class="navbar-btn">
 						<a href="{{path('login')}}" class="btn btn-secondary">Se connecter</a>
 					</div>
 				{% endif %}
