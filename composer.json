@@ -1,4 +1,6 @@
 {
+    "name": "pierre-brtrd/demo_sf",
+    "description": "Project for demo symfony 6",
     "type": "project",
     "license": "proprietary",
     "minimum-stability": "stable",
