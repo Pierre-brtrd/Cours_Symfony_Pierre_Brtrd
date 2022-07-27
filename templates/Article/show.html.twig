@@ -7,14 +7,15 @@
 {% endblock %}
 
 {% block body %}
-	{% for image in article.articleImages|slice(0,1) %}
-		<div id="hero" style="background-image: url('{{ vich_uploader_asset(image, 'imageFile') }}')">
-			<div class="header">
-				<h1>{{ article.titre }}</h1>
-			</div>
+	{% if article.articleImages|length > 1 %}
+		{% include "Article/_swiper.html.twig" %}
+	{% elseif article.articleImages|length == 1 %}
+		{% include "Article/_banner.html.twig" %}
+	{% else %}
+		<div class="row text-center mt-4">
+			<h1>{{ article.titre }}</h1>
 		</div>
-	{% endfor %}
-
+	{% endif %}
 	<section class="container mt-4">
 		<div class="article-main-content">
 			<aside class="column-left">

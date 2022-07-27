@@ -1,0 +1,7 @@
+{% for image in article.articleImages|slice(0,1) %}
+	<div id="hero" style="background-image: url('{{ vich_uploader_asset(image, 'imageFile') }}')">
+		<div class="header">
+			<h1>{{ article.titre }}</h1>
+		</div>
+	</div>
+{% endfor %}
