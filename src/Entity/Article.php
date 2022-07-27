@@ -21,11 +21,10 @@ class Article
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column()]
-    #[Groups(['comment:post'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 150, unique: true)]
-    #[Groups(['comment:list', 'comment:post'])]
+    #[Groups(['comment:list'])]
     private ?string $titre = null;
 
     #[ORM\Column(type: Types::TEXT)]

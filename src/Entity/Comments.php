@@ -18,23 +18,93 @@ use Symfony\Component\Serializer\Annotation\Groups;
         'get' => [
             'normalization_context' => ['groups' => 'comment:list'],
             'openapi_context' => [
-                'summary' => 'Récupère une liste de commentaires',
-                'description' => "# Permet de récupérer une liste de commentaires\n\nLa pagination par défaut est à 5 items.",
-            ],
+                'summary' => 'Get a list of comments',
+                'description' => "# Get a list of comments\n\nThe pagination by default it's 5 items.",
+            ]
         ],
         'post' => [
             'controller' => CommentCreateController::class,
             'normalization_context' => ['groups' => 'comment:post'],
+            'openapi_context' => [
+                'summary' => 'Create a comment for article',
+                'description' => "# Create comment for article\n\nYou can create a comment but you have to get an id of article or the IRI article object",
+                'requestBody' => [
+                    'content' => [
+                        'application/ld+json' => [
+                            'schema' => [
+                                'type' => 'object',
+                                'properties' => [
+                                    'titre' => ['type' => 'string'],
+                                    'content' => ['type' => 'string'],
+                                    'note' => ['type' => 'integer'],
+                                    'active' => ['type' => 'boolean'],
+                                    'rgpd' => ['type' => 'boolean'],
+                                    'article' => ['type' => 'string']
+                                ]
+                            ],
+                            'example' => [
+                                'titre' => 'Great Title',
+                                'content' => 'It\'s a great comment example',
+                                'note' => 5,
+                                'active' => true,
+                                'rgpd' => true,
+                                'article' => '/api/articles/{id}',
+                            ]
+                        ]
+                    ]
+                ]
+            ]
         ],
     ],
     itemOperations: [
-        'get' => ['normalization_context' => ['groups' => ['comment:list', 'comment:item']]],
+        'get' => [
+            'normalization_context' => ['groups' => ['comment:list']],
+            'openapi_context' => [
+                'summary' => 'Get a comment',
+                'description' => "# Get One comment\n\nYou can retrieve one public comment.",
+            ]
+        ],
         'put' => [
-            'normalization_context' => ['groups' => ['comment:list', 'comment:post']],
+            'normalization_context' => ['groups' => ['comment:put']],
             'security' => "is_granted('EDIT_COMMENT', object)",
+            "security_message" => "Sorry, but you are not the comment owner.",
+            'openapi_context' => [
+                'summary' => 'Modify a comment',
+                'description' => "# Modify comment\n\nYou can modify a comment but you can modify only the comments you have post",
+                'requestBody' => [
+                    'content' => [
+                        'application/ld+json' => [
+                            'schema' => [
+                                'type' => 'object',
+                                'properties' => [
+                                    'titre' => ['type' => 'string'],
+                                    'content' => ['type' => 'string'],
+                                    'note' => ['type' => 'integer'],
+                                    'active' => ['type' => 'boolean'],
+                                    'rgpd' => ['type' => 'boolean'],
+                                    'article' => ['type' => 'string']
+                                ]
+                            ],
+                            'example' => [
+                                'titre' => 'Great Title Modify',
+                                'content' => 'It\'s a great comment example I can modify',
+                                'note' => 5,
+                                'active' => false,
+                                'rgpd' => true,
+                                'article' => '/api/articles/{id}',
+                            ]
+                        ]
+                    ]
+                ]
+            ]
         ],
         'delete' => [
             'security' => "is_granted('EDIT_COMMENT', object)",
+            "security_message" => "Sorry, but you are not the comment owner.",
+            'openapi_context' => [
+                'summary' => 'Delete a comment',
+                'description' => "# Delete a comment\n\nYou can delete a comment but **you have to be the owner** of the delete comment.",
+            ]
         ],
     ],
     order: ['createdAt' => 'DESC'],
@@ -50,11 +120,11 @@ class Comments
     private ?int $id = null;
 
     #[ORM\Column(length: 150)]
-    #[Groups(['comment:list', 'comment:post'])]
+    #[Groups(['comment:list', 'comment:post', 'comment:put'])]
     private ?string $titre = null;
 
     #[ORM\Column(type: Types::TEXT)]
-    #[Groups(['comment:list', 'comment:post'])]
+    #[Groups(['comment:list', 'comment:post', 'comment:put'])]
     private ?string $content = null;
 
     #[ORM\Column]
@@ -68,15 +138,15 @@ class Comments
     private ?\DateTimeImmutable $updatedAt = null;
 
     #[ORM\Column]
-    #[Groups(['comment:list', 'write:comment'])]
+    #[Groups(['comment:list', 'comment:post', 'comment:put'])]
     private ?int $note = null;
 
     #[ORM\Column]
-    #[Groups(['comment:list', 'write:comment'])]
+    #[Groups(['comment:list', 'comment:post', 'comment:put'])]
     private ?bool $active = null;
 
     #[ORM\Column]
-    #[Groups(['comment:list', 'write:comment'])]
+    #[Groups(['comment:list', 'comment:post', 'comment:put'])]
     private ?bool $rgpd = null;
 
     #[ORM\ManyToOne(inversedBy: 'comments')]
