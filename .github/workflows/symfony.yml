@@ -96,7 +96,7 @@ jobs:
         if: matrix.php-versions == '8.0'
 
       ## —— Static analysis ✨ —————————————————————————————————————————————————
-      - name: Static analysis of PHP code (PHPStan)
+      - name: Static analysis of PHP code (PHPStan) and Twig with Lint
         run: |
           bin/console about --env=prod
           vendor/bin/phpstan analyse -l 0 src tests
