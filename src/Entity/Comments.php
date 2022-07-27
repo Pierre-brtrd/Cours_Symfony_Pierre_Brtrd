@@ -2,48 +2,91 @@
 
 namespace App\Entity;
 
-use App\Repository\CommentsRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\CommentsRepository;
 use Gedmo\Mapping\Annotation as Gedmo;
+use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Annotation\ApiResource;
+use App\Controller\Api\CommentCreateController;
+use Symfony\Component\Serializer\Annotation\Groups;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 
 #[ORM\Entity(repositoryClass: CommentsRepository::class)]
+#[ApiResource(
+    collectionOperations: [
+        'get' => [
+            'normalization_context' => ['groups' => 'comment:list'],
+            'openapi_context' => [
+                'summary'     => 'Récupère une liste de commentaires',
+                'description' => "# Permet de récupérer une liste de commentaires\n\nLa pagination par défaut est à 5 items."
+            ]
+        ],
+        'post' => [
+            'controller' => CommentCreateController::class,
+            'normalization_context' => ['groups' => 'comment:post']
+        ]
+    ],
+    itemOperations: [
+        'get' => ['normalization_context' => ['groups' => ['comment:list', 'comment:item']]],
+        'put' => [
+            'normalization_context' => ['groups' => ['comment:list', 'comment:post']],
+            "security" => "is_granted('EDIT_COMMENT', object)"
+        ],
+        'delete' => [
+            "security" => "is_granted('EDIT_COMMENT', object)"
+        ],
+    ],
+    order: ['createdAt' => 'DESC'],
+    paginationItemsPerPage: 5,
+)]
+#[ApiFilter(SearchFilter::class, properties: ['article' => 'exact'])]
 class Comments
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column()]
+    #[Groups(['comment:list'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 150)]
+    #[Groups(['comment:list', 'comment:post'])]
     private ?string $titre = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Groups(['comment:list', 'comment:post'])]
     private ?string $content = null;
 
     #[ORM\Column]
     #[Gedmo\Timestampable(on: 'create')]
+    #[Groups(['comment:list'])]
     private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\Column]
     #[Gedmo\Timestampable(on: 'update')]
+    #[Groups(['comment:list'])]
     private ?\DateTimeImmutable $updatedAt = null;
 
     #[ORM\Column]
+    #[Groups(['comment:list', 'write:comment'])]
     private ?int $note = null;
 
     #[ORM\Column]
+    #[Groups(['comment:list', 'write:comment'])]
     private ?bool $active = null;
 
     #[ORM\Column]
+    #[Groups(['comment:list', 'write:comment'])]
     private ?bool $rgpd = null;
 
     #[ORM\ManyToOne(inversedBy: 'comments')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['comment:list'])]
     private ?User $user = null;
 
     #[ORM\ManyToOne(inversedBy: 'comments')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['comment:list'])]
     private ?Article $article = null;
 
     public function getId(): ?int

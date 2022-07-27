@@ -2,22 +2,30 @@
 
 namespace App\Entity;
 
-use App\Repository\ArticleRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\ArticleRepository;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Doctrine\Common\Collections\Collection;
+use ApiPlatform\Core\Annotation\ApiResource;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: ArticleRepository::class)]
+#[ApiResource(
+    collectionOperations: [],
+    itemOperations: ['get'],
+)]
 class Article
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column()]
+    #[Groups(['comment:post'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 150, unique: true)]
+    #[Groups(['comment:list', 'comment:post'])]
     private ?string $titre = null;
 
     #[ORM\Column(type: Types::TEXT)]
