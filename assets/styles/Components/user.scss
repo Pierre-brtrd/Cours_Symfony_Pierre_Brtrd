@@ -1,0 +1,26 @@
+.user-content {
+    .user-image {
+        width: 300px;
+        height: 300px;
+        margin: auto;
+        overflow: hidden;
+        border-radius: 50%;
+
+        img {
+            width: 100%;
+            margin: auto;
+        }
+    }
+
+    .list-user {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1em;
+
+        a {
+            text-decoration: none;
+        }
+    }
+}

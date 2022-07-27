@@ -1,0 +1,43 @@
+{{ form_start(form) }}
+<div class="row">
+	<div class="col-md-6">
+		{{ form_row(form.prenom) }}
+	</div>
+	<div class="col-md-6">
+		{{ form_row(form.nom) }}
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-6">
+		{{ form_row(form.email) }}
+	</div>
+</div>
+
+<div class="row">
+	{{ form_row(form.imageFile)}}
+</div>
+
+{% if is_granted('ROLE_ADMIN') %}
+	<div class="col-md-12">
+		{{ form_row(form.roles) }}
+	</div>
+{% endif %}
+
+<div class="row">
+	<div class="col-md-8">
+		{{ form_row(form.address) }}
+	</div>
+	<div class="col-md-4">
+		{{ form_row(form.zipCode) }}
+	</div>
+</div>
+
+<div class="col-md-6">
+	{{ form_row(form.ville) }}
+</div>
+
+<div class="text-center">
+	<button class="btn btn-primary">{{ button_label|default('Save') }}</button>
+</div>
+{{ form_row(form._token) }}
+{{ form_end(form, {render_rest: false}) }}

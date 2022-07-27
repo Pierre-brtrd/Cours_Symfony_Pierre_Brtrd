@@ -1,0 +1,70 @@
+<header>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="{{ path('home') }}">My app Symfony
+			</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarScroll">
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+					<li class="nav-item">
+						<a class="nav-link {{ curentPage is defined and curentPage == 'home' ? 'active'}}" aria-current="page" href="{{ path('home') }}">Accueil</a>
+					</li>
+				</ul>
+				{% if app.user %}
+					{% if is_granted('ROLE_ADMIN') %}
+						<div class="navbar-btn me-2">
+							<div class="dropdown">
+								<button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+									<i class="fa-solid fa-screwdriver-wrench"></i>
+									Admin
+								</button>
+								<ul class="dropdown-menu">
+									<li>
+										<a class="dropdown-item" href="{{ path('app_user_index') }}">
+											<i class="fas fa-users"></i>
+											<span>Gérer les utilisateurs</span>
+										</a>
+									</li>
+									<li>
+										<a href="{{ path('admin') }}" class="dropdown-item">
+											<i class="fas fa-newspaper"></i>
+											Articles
+										</a>
+									</li>
+									<li>
+										<a href="{{ path('app_categorie_index') }}" class="dropdown-item">
+											<i class="fas fa-tags"></i>
+											Catégorie
+										</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					{% endif %}
+					<div class="navbar-btn me-2">
+						<a href="{{ path('compte') }}" class="btn btn-light">
+							<i class="fas fa-user"></i>
+							<span>Compte</span>
+						</a>
+					</div>
+					<div class="navbar-btn">
+						<a href="{{ path('logout') }}" class="btn btn-danger">
+							<i class="fa-solid fa-right-from-bracket"></i>
+							<span>Se déconnecter</span>
+						</a>
+					</div>
+				{% else %}
+					<div class="navbar-btn me-2">
+						<a href="{{path('register')}}" class="btn btn-light">S'inscrire</a>
+					</div>
+
+					<div class="navbar-btn">
+						<a href="{{path('login')}}" class="btn btn-secondary">Se connecter</a>
+					</div>
+				{% endif %}
+			</div>
+		</div>
+	</nav>
+</header>

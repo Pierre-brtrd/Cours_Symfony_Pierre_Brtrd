@@ -1,0 +1,29 @@
+.show-comments {
+    margin-bottom: 3em;
+
+    .comments-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1em;
+    }
+
+    .comment-item {
+        border-radius: $border-radius;
+        border: 1px solid $secondary;
+        overflow: hidden;
+
+        &:not(:last-child) {
+            margin-bottom: 10px;
+        }
+
+        .comment-header {
+            background-color: $primary;
+            color: $white;
+            padding: 5px 10px;
+        }
+
+        .comment-item-content {
+            padding: 1em;
+        }
+    }
+}

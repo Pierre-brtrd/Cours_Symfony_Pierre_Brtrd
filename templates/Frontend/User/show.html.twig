@@ -1,0 +1,100 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	Mon compte |
+	{{ parent() }}
+{% endblock %}
+
+{% block body %}
+	<section class="container mt-4">
+		<h1 class="text-center">Votre compte</h1>
+		<div class="user-content card p-3 mt-4">
+			<div class="row align-items-start">
+				<div class="col-md-4">
+					{% if user.imageName %}
+						<div class="user-image">
+							<img src="{{ vich_uploader_asset(user, 'imageFile') }}" alt="{{ user.fullName }}">
+						</div>
+					{% endif %}
+				</div>
+				<div class="col-md-8">
+					<div class="row">
+						<h2>Vos informations:</h2>
+						<div class="row">
+							<div class="col-md-6 mt-2">
+								<p class="mb-0">
+									<strong>Nom :</strong>
+									{{ user.fullName}}
+								</p>
+								<p>
+									<strong>Email :</strong>
+									{{ user.email}}
+								</p>
+							</div>
+							<div class="col-md-6">
+								<p class="mb-0">
+									<strong>Adresse :</strong>
+									{{ user.address}}
+								</p>
+								<p class="mb-0">
+									<strong>Code postal :</strong>
+									{{ user.zipCode}}
+								</p>
+								<p>
+									<strong>Ville :</strong>
+									{{ user.ville}}
+								</p>
+							</div>
+						</div>
+					</div>
+					{% if user.articles|length > 0 %}
+						<div class="row">
+							<div class="col-md-12">
+								<h2>Vos articles:</h2>
+								<div class="list-user mt-2">
+									{% for article in user.articles %}
+										<div class="col-md-3">
+											<a href="{{path('article.show', {id: article.id, slug: article.slug})}}">
+												<div class="card">
+													<div class="card-body">
+														<p class="card-text">{{ article.titre }}</p>
+													</div>
+												</div>
+											</a>
+										</div>
+									{% endfor %}
+								</div>
+							</div>
+						</div>
+					{% endif %}
+					{% if user.comments|length > 0 %}
+						<div class="row mt-4">
+							<h2>Vos commentaires</h2>
+							<div class="list-user mt-2">
+								{% for comment in user.comments %}
+									<div class="col-md-3">
+										<div class="card">
+											<p class="card-header">{{ comment.titre }}</p>
+											<div class="card-body">
+												<p class="card-text">{{ comment.content }}</p>
+												<div class="ratings">
+													{% for number in range(1,5) %}
+														{% if number <= comment.note %}
+															<i class="fas fa-star rating-color"></i>
+														{% else %}
+															<i class="far fa-star rating-color"></i>
+														{% endif %}
+													{% endfor %}
+												</div>
+											</div>
+										</div>
+									</div>
+								{% endfor %}
+							</div>
+						</div>
+					{% endif %}
+				</div>
+			</div>
+		</div>
+	</section>
+{% endblock %}

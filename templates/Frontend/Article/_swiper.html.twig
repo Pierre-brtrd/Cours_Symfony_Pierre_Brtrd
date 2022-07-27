@@ -1,0 +1,13 @@
+<div class="swiper-image">
+	<div class="swiper-wrapper">
+		{% for image in article.articleImages %}
+			<div class="swiper-slide">
+				<img src="{{ vich_uploader_asset(image, 'imageFile') }}" alt="{{ article.titre }}" class="img">
+			</div>
+		{% endfor %}
+	</div>
+	<div class="swiper-pagination"></div>
+	<div class="header">
+		<h1>{{ article.titre }}</h1>
+	</div>
+</div>
