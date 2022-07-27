@@ -43,4 +43,4 @@ jobs:
     - name: Execute PhpStan test
       run: vendor/bin/phpstan analyse -l 0 src tests
     - name: Execute Twig test
-      run: bin/console lint:twig ./templates
+      run: php bin/console lint:twig ./templates
