@@ -22,15 +22,15 @@
 			{% for article in articles %}
 				<div class="col-md-4">
 					<div class="blog-card">
-						{% if article.imageName %}
+						{% for image in article.articleImages|slice(0,1) %}
 							<div class="blog-card-image">
-								<img src="{{ vich_uploader_asset(article, 'imageFile') }}" alt="{{ article.titre }}">
+								<img src="{{ vich_uploader_asset(image, 'imageFile') }}" alt="{{ article.titre }}">
 							</div>
 						{% else %}
 							<div class="blog-card-image">
 								<img src="https://fakeimg.pl/200x100" alt="">
 							</div>
-						{% endif %}
+						{% endfor %}
 						<div class="blog-card-content">
 							<h2 class="blog-card-content-header">{{ article.titre }}</h2>
 							<p class="blog-card-content-description">{{ article.content|striptags|slice(0, 100) ~ '...'}}</p>

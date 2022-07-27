@@ -7,124 +7,125 @@
 {% endblock %}
 
 {% block body %}
-	{% if article.imageName %}
-		<div id="hero" style="background-image: url('{{ vich_uploader_asset(article, 'imageFile') }}')">
+	{% for image in article.articleImages|slice(0,1) %}
+		<div id="hero" style="background-image: url('{{ vich_uploader_asset(image, 'imageFile') }}')">
 			<div class="header">
 				<h1>{{ article.titre }}</h1>
 			</div>
 		</div>
-		<section class="container mt-4">
-			<div class="article-main-content">
-				<aside class="column-left">
-					<div class="info-article">
-						<h2>Informations:</h2>
-						<p>
-							<i class="far fa-calendar-alt"></i>
-							<strong>Date de création :</strong>
-							{{ article.createdAt|format_datetime('full', 'none', locale='fr') }}
-						</p>
-						<p>
-							<i class="far fa-user-circle"></i>
-							<strong>Auteur:</strong>
-							{{ article.user.prenom }}
-							{{ article.user.nom }}
-						</p>
-					</div>
-					{% if article.categories|length > 0 %}
-						<div class="categorie-article">
-							<h2>Catégorie:</h2>
-							<div class="list-tag">
-								{% for categorie in article.categories %}
-									<p class="tag">
-										<i class="fas fa-tags"></i>
-										{{ categorie.titre }}
-									</p>
-								{% endfor %}
-							</div>
-						</div>
-					{% endif %}
-					{% if comments|length > 0 %}
-						<div class="show-comments mt-4">
-							<h2>Dernier commentaires</h2>
-							<div class="comments">
-								{% for comment in comments|slice(0, 3) %}
-									<div class="comment-item">
-										<div class="comment-header">{{ comment.titre }}</div>
-										<div class="comment-item-content">
-											<em class="card-text">{{ comment.user.fullName }}</em>
-											<p class="card-text">{{ comment.content }}</p>
-											<div class="ratings">
-												{% for number in range(1,5) %}
-													{% if number <= comment.note %}
-														<i class="fas fa-star rating-color"></i>
-													{% else %}
-														<i class="far fa-star rating-color"></i>
-													{% endif %}
-												{% endfor %}
-											</div>
-											<p class="card-text">
-												<small class="text-muted">Posté il y a
-													{{ comment.createdAt|ago }}</small>
-											</p>
-										</div>
-									</div>
-								{% endfor %}
-							</div>
-						</div>
-					{% endif %}
-				</aside>
-				<div class="column-right">
-					<article class="article-content">
-						{{ article.content|raw }}
-					</article>
+	{% endfor %}
 
-					<div class="comments card p-3 mt-4">
-						<h2>Ajouter un commentaire:</h2>
-						{% if app.user %}
-							{% include "Article/_formComment.html.twig" with { button_label: 'Envoyer'} %}
-						{% else %}
-							<div class="alert alert-info mt-2" role="alert">
-								<p>
-									<b>Attention!</b>
-									<br/>
-									Vous devez
-									<a href="{{ path('login') }}">être connecté</a>
-									pour laisser un commentaire.
+	<section class="container mt-4">
+		<div class="article-main-content">
+			<aside class="column-left">
+				<div class="info-article">
+					<h2>Informations:</h2>
+					<p>
+						<i class="far fa-calendar-alt"></i>
+						<strong>Date de création :</strong>
+						{{ article.createdAt|format_datetime('full', 'none', locale='fr') }}
+					</p>
+					<p>
+						<i class="far fa-user-circle"></i>
+						<strong>Auteur:</strong>
+						{{ article.user.prenom }}
+						{{ article.user.nom }}
+					</p>
+				</div>
+				{% if article.categories|length > 0 %}
+					<div class="categorie-article">
+						<h2>Catégorie:</h2>
+						<div class="list-tag">
+							{% for categorie in article.categories %}
+								<p class="tag">
+									<i class="fas fa-tags"></i>
+									{{ categorie.titre }}
 								</p>
-							</div>
-						{% endif %}
+							{% endfor %}
+						</div>
 					</div>
-					{% if comments|length > 0 %}
-						<div class="show-comments mt-4">
-							<h2>Commentaires</h2>
-							<div class="comments-list">
-								{% for comment in comments %}
-									<div class="comment-item">
-										<div class="comment-header">{{ comment.titre }}</div>
-										<div class="comment-item-content">
-											<em class="card-text">{{ comment.user.fullName }}</em>
-											<p class="card-text">{{ comment.content }}</p>
-											<div class="ratings">
-												{% for number in range(1,5) %}
-													{% if number <= comment.note %}
-														<i class="fas fa-star rating-color"></i>
-													{% else %}
-														<i class="far fa-star rating-color"></i>
-													{% endif %}
-												{% endfor %}
-											</div>
-											<p class="card-text">
-												<small class="text-muted">Posté il y a
-													{{ comment.createdAt|ago }}</small>
-											</p>
+				{% endif %}
+				{% if comments|length > 0 %}
+					<div class="show-comments mt-4">
+						<h2>Dernier commentaires</h2>
+						<div class="comments">
+							{% for comment in comments|slice(0, 3) %}
+								<div class="comment-item">
+									<div class="comment-header">{{ comment.titre }}</div>
+									<div class="comment-item-content">
+										<em class="card-text">{{ comment.user.fullName }}</em>
+										<p class="card-text">{{ comment.content }}</p>
+										<div class="ratings">
+											{% for number in range(1,5) %}
+												{% if number <= comment.note %}
+													<i class="fas fa-star rating-color"></i>
+												{% else %}
+													<i class="far fa-star rating-color"></i>
+												{% endif %}
+											{% endfor %}
 										</div>
+										<p class="card-text">
+											<small class="text-muted">Posté il y a
+												{{ comment.createdAt|ago }}</small>
+										</p>
 									</div>
-								{% endfor %}
-							</div>
+								</div>
+							{% endfor %}
+						</div>
+					</div>
+				{% endif %}
+			</aside>
+			<div class="column-right">
+				<article class="article-content">
+					{{ article.content|raw }}
+				</article>
+
+				<div class="comments card p-3 mt-4">
+					<h2>Ajouter un commentaire:</h2>
+					{% if app.user %}
+						{% include "Article/_formComment.html.twig" with { button_label: 'Envoyer'} %}
+					{% else %}
+						<div class="alert alert-info mt-2" role="alert">
+							<p>
+								<b>Attention!</b>
+								<br/>
+								Vous devez
+								<a href="{{ path('login') }}">être connecté</a>
+								pour laisser un commentaire.
+							</p>
 						</div>
 					{% endif %}
 				</div>
+				{% if comments|length > 0 %}
+					<div class="show-comments mt-4">
+						<h2>Commentaires</h2>
+						<div class="comments-list">
+							{% for comment in comments %}
+								<div class="comment-item">
+									<div class="comment-header">{{ comment.titre }}</div>
+									<div class="comment-item-content">
+										<em class="card-text">{{ comment.user.fullName }}</em>
+										<p class="card-text">{{ comment.content }}</p>
+										<div class="ratings">
+											{% for number in range(1,5) %}
+												{% if number <= comment.note %}
+													<i class="fas fa-star rating-color"></i>
+												{% else %}
+													<i class="far fa-star rating-color"></i>
+												{% endif %}
+											{% endfor %}
+										</div>
+										<p class="card-text">
+											<small class="text-muted">Posté il y a
+												{{ comment.createdAt|ago }}</small>
+										</p>
+									</div>
+								</div>
+							{% endfor %}
+						</div>
+					</div>
+				{% endif %}
 			</div>
-		</section>
-	{% endif %}
+		</div>
+	</section>
 {% endblock %}

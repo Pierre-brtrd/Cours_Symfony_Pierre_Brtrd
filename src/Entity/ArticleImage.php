@@ -2,14 +2,13 @@
 
 namespace App\Entity;
 
-use Vich\Uploadable;
-use Vich\UploadableField;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ArticleImageRepository;
 use Symfony\Component\HttpFoundation\File\File;
 
 #[ORM\Entity(repositoryClass: ArticleImageRepository::class)]
-#[Uploadable]
+#[Vich\Uploadable]
 class ArticleImage
 {
     #[ORM\Id]
@@ -17,7 +16,7 @@ class ArticleImage
     #[ORM\Column()]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(inversedBy: 'articleImages')]
+    #[ORM\ManyToOne(inversedBy: 'articleImages', cascade: ['persist'])]
     #[ORM\JoinColumn(nullable: false)]
     private ?Article $article = null;
 
@@ -89,7 +88,7 @@ class ArticleImage
         return $this;
     }
 
-    public function setImageFile(?File $imageFile = null): void
+    public function setImageFile(?File $imageFile): void
     {
         $this->imageFile = $imageFile;
 

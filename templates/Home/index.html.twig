@@ -17,49 +17,46 @@
 				<div class="col-md-4">
 					<div class="blog-card">
 						<a href="{{ path('article.show', {'id': article.id, 'slug': article.slug}) }}">
-							{% if article.imageName %}
+							{% for image in article.articleImages|slice(0,1) %}
 								<div class="blog-card-image">
-
-									<img src="{{ vich_uploader_asset(article, 'imageFile') }}" alt="{{ article.titre }}">
-								</a>
-							</div>
-						{% else %}
-							<div class="blog-card-image">
-
-								<img src="https://fakeimg.pl/200x100" alt="">
-
-							</div>
-						{% endif %}
-					</a>
-					<div class="blog-card-content">
-						<h2 class="blog-card-content-header">
-							<a href="{{ path('article.show', {'id': article.id, 'slug': article.slug}) }}">{{ article.titre }}</a>
-						</h2>
-						<p class="blog-card-content-description">{{ article.content|striptags|slice(0, 100) ~ '...'}}</p>
-						{% if article.user is not null %}
-							<div class="author">
-								{% if article.user.imageName %}
-									<div class="avatar">
-										<img src="{{ vich_uploader_asset(article.user, 'imageFile')}}" alt="{{ article.user.prenom }}">
-									</div>
-								{% else %}
-									<div class="avatar">
-										<i class="far fa-user-circle"></i>
-									</div>
-								{% endif %}
-								<p class="text-muted mt-2 mb-0">
-									{{ article.user ? article.user.prenom : '' }}
-									{{ article.user ? article.user.nom : ''}}
-								</p>
-							</div>
-						{% endif %}
-						<p>
-							<i class="far fa-calendar-alt"></i>
-							{{ article.createdAt|format_datetime('full', 'none') }}
-						</p>
+									<img src="{{ vich_uploader_asset(image, 'imageFile') }}" alt="{{ article.titre }}">
+								</div>
+							{% else %}
+								<div class="blog-card-image">
+									<img src="https://fakeimg.pl/200x100" alt="">
+								</div>
+							{% endfor %}
+						</a>
+						<div class="blog-card-content">
+							<h2 class="blog-card-content-header">
+								<a href="{{ path('article.show', {'id': article.id, 'slug': article.slug}) }}">{{ article.titre }}</a>
+							</h2>
+							<p class="blog-card-content-description">{{ article.content|striptags|slice(0, 100) ~ '...'}}</p>
+							{% if article.user is not null %}
+								<div class="author">
+									{% if article.user.imageName %}
+										<div class="avatar">
+											<img src="{{ vich_uploader_asset(article.user, 'imageFile')}}" alt="{{ article.user.prenom }}">
+										</div>
+									{% else %}
+										<div class="avatar">
+											<i class="far fa-user-circle"></i>
+										</div>
+									{% endif %}
+									<p class="text-muted mt-2 mb-0">
+										{{ article.user ? article.user.prenom : '' }}
+										{{ article.user ? article.user.nom : ''}}
+									</p>
+								</div>
+							{% endif %}
+							<p>
+								<i class="far fa-calendar-alt"></i>
+								{{ article.createdAt|format_datetime('full', 'none') }}
+							</p>
+						</div>
 					</div>
 				</div>
-			</div>
-		{% endfor %}
-	</div>
-</section>{% endblock %}
+			{% endfor %}
+		</div>
+	</section>
+{% endblock %}

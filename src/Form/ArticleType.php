@@ -4,13 +4,14 @@ namespace App\Form;
 
 use App\Entity\Article;
 use App\Entity\Categorie;
-use FOS\CKEditorBundle\Form\Type\CKEditorType;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use App\Form\ArticleImageType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Vich\UploaderBundle\Form\Type\VichImageType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 class ArticleType extends AbstractType
 {
@@ -30,11 +31,13 @@ class ArticleType extends AbstractType
                 'choice_label' => 'titre',
                 'by_reference' => false,
             ])
-            ->add('imageFile', VichImageType::class, [
-                'label' => 'Image: ',
-                'required' => false,
-                'download_uri' => false,
-                'image_uri' => true,
+            ->add('articleImages', CollectionType::class, [
+                'entry_type' => ArticleImageType::class,
+                'allow_add' => true,
+                'allow_delete' => true,
+                'delete_empty' => true,
+                'prototype' => true,
+                'by_reference' => false,
             ])
             ->add('content', CKEditorType::class, [
                 'label' => 'Contenu:',
