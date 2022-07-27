@@ -69,7 +69,7 @@ class CategorieController extends AbstractController
     #[Route('/{id}', name: 'app_categorie_delete', methods: ['POST'])]
     public function delete(Request $request, Categorie $categorie, CategorieRepository $categorieRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete' . $categorie->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete'.$categorie->getId(), $request->request->get('_token'))) {
             $categorieRepository->remove($categorie, true);
         }
 

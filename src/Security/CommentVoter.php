@@ -9,12 +9,12 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
 class CommentVoter extends Voter
 {
-    const EDIT = "EDIT_COMMENT";
+    public const EDIT = 'EDIT_COMMENT';
 
     protected function supports(string $attribute, $subject): bool
     {
         return
-            $attribute === self::EDIT &&
+            self::EDIT === $attribute &&
             $subject instanceof Comments;
     }
 

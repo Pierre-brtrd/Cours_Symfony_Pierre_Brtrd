@@ -2,15 +2,15 @@
 
 namespace App\Entity;
 
-use Doctrine\DBAL\Types\Types;
-use Doctrine\ORM\Mapping as ORM;
-use App\Repository\CommentsRepository;
-use Gedmo\Mapping\Annotation as Gedmo;
 use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
-use App\Controller\Api\CommentCreateController;
-use Symfony\Component\Serializer\Annotation\Groups;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use App\Controller\Api\CommentCreateController;
+use App\Repository\CommentsRepository;
+use Doctrine\DBAL\Types\Types;
+use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: CommentsRepository::class)]
 #[ApiResource(
@@ -18,23 +18,23 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
         'get' => [
             'normalization_context' => ['groups' => 'comment:list'],
             'openapi_context' => [
-                'summary'     => 'Récupère une liste de commentaires',
-                'description' => "# Permet de récupérer une liste de commentaires\n\nLa pagination par défaut est à 5 items."
-            ]
+                'summary' => 'Récupère une liste de commentaires',
+                'description' => "# Permet de récupérer une liste de commentaires\n\nLa pagination par défaut est à 5 items.",
+            ],
         ],
         'post' => [
             'controller' => CommentCreateController::class,
-            'normalization_context' => ['groups' => 'comment:post']
-        ]
+            'normalization_context' => ['groups' => 'comment:post'],
+        ],
     ],
     itemOperations: [
         'get' => ['normalization_context' => ['groups' => ['comment:list', 'comment:item']]],
         'put' => [
             'normalization_context' => ['groups' => ['comment:list', 'comment:post']],
-            "security" => "is_granted('EDIT_COMMENT', object)"
+            'security' => "is_granted('EDIT_COMMENT', object)",
         ],
         'delete' => [
-            "security" => "is_granted('EDIT_COMMENT', object)"
+            'security' => "is_granted('EDIT_COMMENT', object)",
         ],
     ],
     order: ['createdAt' => 'DESC'],

@@ -25,7 +25,7 @@ class AppFixtures extends Fixture
             ->setAddress('Nouvelle Maryland')
             ->setZipCode(72350)
             ->setVille('Chambéry')
-            ->setRoles(["ROLE_ADMIN"]);
+            ->setRoles(['ROLE_ADMIN']);
 
         $password = $this->hasher->hashPassword($user, 'test1234');
         $user->setPassword($password);

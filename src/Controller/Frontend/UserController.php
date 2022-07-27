@@ -2,13 +2,11 @@
 
 namespace App\Controller\Frontend;
 
-use App\Entity\User;
 use App\Repository\UserRepository;
-use Symfony\Component\BrowserKit\Request;
-use Symfony\Component\Security\Core\Security;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Security\Core\Security;
 
 class UserController extends AbstractController
 {

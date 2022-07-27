@@ -46,6 +46,7 @@ class AdminController extends AbstractController
             $this->em->persist($article);
             $this->em->flush();
             $this->addFlash('success', 'Article créé avec succès');
+
             return $this->redirectToRoute('admin');
         }
 
@@ -61,6 +62,7 @@ class AdminController extends AbstractController
 
         if (!$article) {
             $this->addFlash('error', 'Article non trouvé');
+
             return $this->redirectToRoute('admin');
         }
 
@@ -71,6 +73,7 @@ class AdminController extends AbstractController
             $this->em->persist($article);
             $this->em->flush();
             $this->addFlash('success', 'Article modifié avec succès');
+
             return $this->redirectToRoute('admin');
         }
 
@@ -82,7 +85,7 @@ class AdminController extends AbstractController
     #[Route('/article/delete/{id}', name: 'admin.article.delete', methods: 'DELETE|POST')]
     public function deleteArticle(int $id, Article $article, Request $request)
     {
-        if ($this->isCsrfTokenValid('delete' . $article->getId(), $request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete'.$article->getId(), $request->get('_token'))) {
             $this->em->remove($article);
             $this->em->flush();
             $this->addFlash('success', 'Article supprimé avec succès');
@@ -91,16 +94,18 @@ class AdminController extends AbstractController
         }
 
         $this->addFlash('error', 'Le token n\'est pas valide');
+
         return $this->redirectToRoute('admin');
     }
 
-    #[Route("/article/{id}-{slug}/comments", name: 'admin.article.comments')]
+    #[Route('/article/{id}-{slug}/comments', name: 'admin.article.comments')]
     public function adminComments(int $id, string $slug)
     {
         $comments = $this->repoComments->findByArticle($id, $slug);
 
         if (!$comments) {
             $this->addFlash('error', 'Pas de commentaires trouvés');
+
             return $this->redirectToRoute('admin');
         }
 

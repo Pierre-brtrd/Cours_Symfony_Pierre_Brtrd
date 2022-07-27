@@ -14,6 +14,7 @@
         "doctrine/doctrine-bundle": "^2.7",
         "doctrine/doctrine-migrations-bundle": "^3.2",
         "doctrine/orm": "^2.12",
+        "friendsofphp/php-cs-fixer": "^3.9",
         "friendsofsymfony/ckeditor-bundle": "^2.4",
         "knplabs/knp-time-bundle": "^1.19",
         "lexik/jwt-authentication-bundle": "^2.16",

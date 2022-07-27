@@ -30,6 +30,7 @@ class ArticleController extends AbstractController
 
         if (!$article) {
             $this->addFlash('error', 'Article non trouvé');
+
             return $this->redirectToRoute('home');
         }
 
@@ -60,7 +61,7 @@ class ArticleController extends AbstractController
         return $this->renderForm('frontend/article/show.html.twig', [
             'article' => $article,
             'form' => $form,
-            'comments' => $comments
+            'comments' => $comments,
         ]);
     }
 }
