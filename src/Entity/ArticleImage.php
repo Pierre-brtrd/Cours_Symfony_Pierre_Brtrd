@@ -57,7 +57,7 @@ class ArticleImage
         return $this->imageName;
     }
 
-    public function setImageName(string $imageName): self
+    public function setImageName(?string $imageName): self
     {
         $this->imageName = $imageName;
 
@@ -69,7 +69,7 @@ class ArticleImage
         return $this->imageSize;
     }
 
-    public function setImageSize(int $imageSize): self
+    public function setImageSize(?int $imageSize): self
     {
         $this->imageSize = $imageSize;
 

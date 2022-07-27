@@ -18,56 +18,67 @@
 {% block body %}
 	<section class="container mt-4">
 		<h1 class="title text-center">Administration des articles</h1>
-		<div class="row mt-4">
+		<div>
+			<a href="{{ path('admin.article.new') }}" class="btn btn-primary text-light">Créer un article</a>
+		</div>
+		<div class="blog-list mt-4">
 			{% for article in articles %}
-				<div class="col-md-4">
-					<div class="blog-card">
-						{% for image in article.articleImages|slice(0,1) %}
-							<div class="blog-card-image">
-								<img src="{{ vich_uploader_asset(image, 'imageFile') }}" alt="{{ article.titre }}">
-							</div>
-						{% else %}
-							<div class="blog-card-image">
-								<img src="https://fakeimg.pl/200x100" alt="">
-							</div>
-						{% endfor %}
-						<div class="blog-card-content">
-							<h2 class="blog-card-content-header">{{ article.titre }}</h2>
-							<p class="blog-card-content-description">{{ article.content|striptags|slice(0, 100) ~ '...'}}</p>
-							{% if article.user is not null %}
-								<p class="text-muted mt-2 mb-0">
+				<div class="blog-card">
+					{% for image in article.articleImages|slice(0,1) %}
+						<div class="blog-card-image">
+							<img src="{{ vich_uploader_asset(image, 'imageFile') }}" alt="{{ article.titre }}">
+						</div>
+					{% else %}
+						<div class="blog-card-image">
+							<img src="https://fakeimg.pl/200x100" alt="">
+						</div>
+					{% endfor %}
+					<div class="blog-card-content">
+						<p class="blog-card-date">
+							<i class="far fa-calendar-alt"></i>
+							{{ article.createdAt|format_datetime('full', 'none') }}
+						</p>
+						<h2 class="blog-card-content-header">{{ article.titre }}</h2>
+						<p class="blog-card-content-description">{{ article.content|striptags|slice(0, 100) ~ '...'}}</p>
+						{% if article.user is not null %}
+							<div class="author">
+								{% if article.user.imageName %}
+									<div class="avatar">
+										<img src="{{ vich_uploader_asset(article.user, 'imageFile')}}" alt="{{ article.user.prenom }}">
+									</div>
+								{% else %}
+									<div class="avatar">
+										<i class="far fa-user-circle"></i>
+									</div>
+								{% endif %}
+								<p class="text-muted mt-2 mb-4">
 									{{ article.user ? article.user.prenom : '' }}
 									{{ article.user ? article.user.nom : ''}}
 								</p>
-							{% endif %}
-							<p>
-								<i class="far fa-calendar-alt"></i>
-								{{ article.createdAt|format_datetime('full', 'none') }}
-							</p>
-							<div class="row">
-								<div class="col-md-6">
-									<a href="{{ path('admin.article.update', {'id': article.id, 'slug': article.slug} ) }}" class="btn btn-primary">Editer</a>
-								</div>
-								<div class="col-md-6">
-									<form method="POST" action="{{ path('admin.article.delete', {'id': article.id}) }}" onsubmit="return confirm('Êtes-vous sùr de vouloir supprimer cet article ?')">
-										<input type="hidden" name="_method" value="DELETE">
-										<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ article.id) }}">
-										<button class="btn btn-danger text-light">Supprimer</button>
-									</form>
-								</div>
 							</div>
-							{% if article.comments|length > 0 %}
+						{% endif %}
+						<div class="row">
+							<div class="col-md-6">
+								<a href="{{ path('admin.article.update', {'id': article.id, 'slug': article.slug} ) }}" class="btn btn-primary">Editer</a>
+							</div>
+							<div class="col-md-6">
+								<form method="POST" action="{{ path('admin.article.delete', {'id': article.id}) }}" onsubmit="return confirm('Êtes-vous sùr de vouloir supprimer cet article ?')">
+									<input type="hidden" name="_method" value="DELETE">
+									<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ article.id) }}">
+									<button class="btn btn-danger text-light">Supprimer</button>
+								</form>
+							</div>
+						</div>
+						{% if article.comments|length > 0 %}
+							<div class="row">
 								<div class="col-md-4 mt-2">
 									<a href="{{ path('admin.article.comments', {'id': article.id, 'slug': article.slug}) }}" class="btn btn-info text-light">Commentaires</a>
 								</div>
-							{% endif %}
-						</div>
+							</div>
+						{% endif %}
 					</div>
 				</div>
 			{% endfor %}
-		</div>
-		<div class="text-center mt-4">
-			<a href="{{ path('admin.article.new') }}" class="btn btn-primary text-light">Créer un article</a>
 		</div>
 	</section>
 {% endblock %}
