@@ -35,6 +35,7 @@ class ArticleType extends AbstractType
                 'delete_empty' => true,
                 'prototype' => true,
                 'by_reference' => false,
+                'mapped' => false,
             ])
             ->add('content', CKEditorType::class, [
                 'label' => 'Contenu:',

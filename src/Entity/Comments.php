@@ -20,7 +20,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
             'openapi_context' => [
                 'summary' => 'Get a list of comments',
                 'description' => "# Get a list of comments\n\nThe pagination by default it's 5 items.",
-            ]
+            ],
         ],
         'post' => [
             'controller' => CommentCreateController::class,
@@ -39,8 +39,8 @@ use Symfony\Component\Serializer\Annotation\Groups;
                                     'note' => ['type' => 'integer'],
                                     'active' => ['type' => 'boolean'],
                                     'rgpd' => ['type' => 'boolean'],
-                                    'article' => ['type' => 'string']
-                                ]
+                                    'article' => ['type' => 'string'],
+                                ],
                             ],
                             'example' => [
                                 'titre' => 'Great Title',
@@ -49,11 +49,11 @@ use Symfony\Component\Serializer\Annotation\Groups;
                                 'active' => true,
                                 'rgpd' => true,
                                 'article' => '/api/articles/{id}',
-                            ]
-                        ]
-                    ]
-                ]
-            ]
+                            ],
+                        ],
+                    ],
+                ],
+            ],
         ],
     ],
     itemOperations: [
@@ -62,12 +62,12 @@ use Symfony\Component\Serializer\Annotation\Groups;
             'openapi_context' => [
                 'summary' => 'Get a comment',
                 'description' => "# Get One comment\n\nYou can retrieve one public comment.",
-            ]
+            ],
         ],
         'put' => [
             'normalization_context' => ['groups' => ['comment:put']],
             'security' => "is_granted('EDIT_COMMENT', object)",
-            "security_message" => "Sorry, but you are not the comment owner.",
+            'security_message' => 'Sorry, but you are not the comment owner.',
             'openapi_context' => [
                 'summary' => 'Modify a comment',
                 'description' => "# Modify comment\n\nYou can modify a comment but you can modify only the comments you have post",
@@ -82,8 +82,8 @@ use Symfony\Component\Serializer\Annotation\Groups;
                                     'note' => ['type' => 'integer'],
                                     'active' => ['type' => 'boolean'],
                                     'rgpd' => ['type' => 'boolean'],
-                                    'article' => ['type' => 'string']
-                                ]
+                                    'article' => ['type' => 'string'],
+                                ],
                             ],
                             'example' => [
                                 'titre' => 'Great Title Modify',
@@ -92,19 +92,19 @@ use Symfony\Component\Serializer\Annotation\Groups;
                                 'active' => false,
                                 'rgpd' => true,
                                 'article' => '/api/articles/{id}',
-                            ]
-                        ]
-                    ]
-                ]
-            ]
+                            ],
+                        ],
+                    ],
+                ],
+            ],
         ],
         'delete' => [
             'security' => "is_granted('EDIT_COMMENT', object)",
-            "security_message" => "Sorry, but you are not the comment owner.",
+            'security_message' => 'Sorry, but you are not the comment owner.',
             'openapi_context' => [
                 'summary' => 'Delete a comment',
                 'description' => "# Delete a comment\n\nYou can delete a comment but **you have to be the owner** of the delete comment.",
-            ]
+            ],
         ],
     ],
     order: ['createdAt' => 'DESC'],

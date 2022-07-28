@@ -42,9 +42,22 @@ class AdminController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $images = [];
+
+            foreach ($form->get('articleImages') as $image) {
+                $images[] = $image;
+            }
+
             $article->setUser($security->getUser());
             $this->em->persist($article);
             $this->em->flush();
+
+            foreach ($images as $image) {
+                $article->addArticleImage($image->getData());
+            }
+            $this->em->persist($article);
+            $this->em->flush();
+
             $this->addFlash('success', 'Article créé avec succès');
 
             return $this->redirectToRoute('admin');
@@ -85,7 +98,7 @@ class AdminController extends AbstractController
     #[Route('/article/delete/{id}', name: 'admin.article.delete', methods: 'DELETE|POST')]
     public function deleteArticle(int $id, Article $article, Request $request)
     {
-        if ($this->isCsrfTokenValid('delete'.$article->getId(), $request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $article->getId(), $request->get('_token'))) {
             $this->em->remove($article);
             $this->em->flush();
             $this->addFlash('success', 'Article supprimé avec succès');
