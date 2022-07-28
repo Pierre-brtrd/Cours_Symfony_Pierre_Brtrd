@@ -13,7 +13,15 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: ArticleRepository::class)]
 #[ApiResource(
-    collectionOperations: [],
+    collectionOperations: [
+        'get' => [
+            'normalization_context' => ['groups' => ['article:list']],
+            'openapi_context' => [
+                'summary' => 'Get a list of articles',
+                'description' => "# Retrieve a list of articles\n\nThe default pagination it's 5 items per page."
+            ]
+        ]
+    ],
     itemOperations: ['get'],
 )]
 class Article
