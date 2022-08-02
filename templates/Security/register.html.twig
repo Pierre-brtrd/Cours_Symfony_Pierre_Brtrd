@@ -35,12 +35,6 @@
 				</div>
 			</div>
 
-			{% if is_granted('ROLE_ADMIN') %}
-				<div class="col-md-12">
-					{{ form_row(form.roles) }}
-				</div>
-			{% endif %}
-
 			<div class="row">
 				<div class="col-md-8">
 					{{ form_row(form.address) }}

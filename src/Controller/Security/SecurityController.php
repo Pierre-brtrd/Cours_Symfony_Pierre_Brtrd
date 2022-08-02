@@ -4,7 +4,7 @@ namespace App\Controller\Security;
 
 use App\Entity\User;
 use App\Form\RegistrationFormType;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -33,7 +33,7 @@ class SecurityController extends AbstractController
     public function register(
         Request $request,
         UserPasswordHasherInterface $passwordEncoder,
-        EntityManagerInterface $em
+        UserRepository $repo
     ) {
         $user = new User();
 
@@ -49,8 +49,7 @@ class SecurityController extends AbstractController
                 )
             );
 
-            $em->persist($user);
-            $em->flush();
+            $repo->add($user, true);
 
             $this->addFlash('success', 'Vous êtes bien inscrit à notre application');
 

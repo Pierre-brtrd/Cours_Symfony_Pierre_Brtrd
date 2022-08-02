@@ -95,7 +95,7 @@ class ArticleController extends AbstractController
     #[Route('/article/delete/{id}', name: 'admin.article.delete', methods: 'DELETE|POST')]
     public function deleteArticle(Article $article, Request $request)
     {
-        if ($this->isCsrfTokenValid('delete' . $article->getId(), $request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete'.$article->getId(), $request->get('_token'))) {
             $this->repoArticle->remove($article, true);
             $this->addFlash('success', 'Article supprimé avec succès');
 

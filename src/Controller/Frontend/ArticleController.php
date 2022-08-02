@@ -6,7 +6,6 @@ use App\Entity\Comments;
 use App\Form\CommentsType;
 use App\Repository\ArticleRepository;
 use App\Repository\CommentsRepository;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,7 +22,6 @@ class ArticleController extends AbstractController
         ArticleRepository $repo,
         Request $request,
         Security $security,
-        EntityManagerInterface $em,
         CommentsRepository $repoComment
     ): Response {
         $article = $repo->findOneBy(['id' => $id, 'slug' => $slug]);
@@ -47,8 +45,7 @@ class ArticleController extends AbstractController
                 ->setArticle($article)
                 ->setActive(true);
 
-            $em->persist($comment);
-            $em->flush();
+            $repoComment->add($comment, true);
 
             $this->addFlash('success', 'Votre commentaire a été posté avec succès');
 
