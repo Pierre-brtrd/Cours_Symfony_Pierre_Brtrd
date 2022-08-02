@@ -1,5 +1,6 @@
 {
     "devDependencies": {
+        "@ckeditor/ckeditor5-build-balloon": "^34.2.0",
         "@hotwired/stimulus": "^3.0.0",
         "@popperjs/core": "^2.11.5",
         "@symfony/stimulus-bridge": "^3.2.0",
@@ -23,7 +24,6 @@
     "dependencies": {
         "@fortawesome/fontawesome-svg-core": "^6.1.1",
         "axios": "^0.27.2",
-        "ckeditor4": "^4.19.1",
         "fontawesome-free": "^1.0.4",
         "swiper": "^8.3.2"
     }

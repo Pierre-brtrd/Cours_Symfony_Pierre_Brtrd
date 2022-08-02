@@ -1,11 +1,11 @@
-{{ form_start(form) }}
+{{ form_start(form, {'attr': {'class': 'form-article'}}) }}
 
 {{ form_widget(form.titre, {'attr': {'class': 'mb-4', 'placeholder': "Titre de l'article"} }) }}
 {{ form_row(form.categories) }}
 <div class="row mb-4">
 	<div class="col-md-12">
 		{{ form_label(form.articleImages) }}
-		<ul id="image-fields-list" class="d-flex flex-wrap gap-2 justify-content-between" data-prototype="{{ form_widget(form.articleImages.vars.prototype)|e }}" data-widget-tags="{{ '<li class="w-30"></li>'|e }}" data-widget-counter="{{ form.articleImages|length }}">
+		<ul id="image-fields-list" class="d-flex flex-wrap gap-2 justify-content-between" data-prototype="{{ form_widget(form.articleImages.vars.prototype)|e }}" data-widget-tags="{{ '<li class="w-30 image-fields"></li>'|e }}" data-widget-counter="{{ form.articleImages|length }}">
 			{% for imageField in form.articleImages %}
 				<li class="list-image w-30">
 					<a class="js-remove-image btn btn-danger">
@@ -19,7 +19,13 @@
 		<button type="button" class="btn btn-primary add-another-collection-widget" data-list-selector="#image-fields-list">Ajouter une image</button>
 	</div>
 </div>
-{{ form_widget(form.content, {'attr': {'class': 'mb-4', 'placeholder': "Contenu de l'article", 'rows': 20} }) }}
+<div class="mb-3">
+	<label for="article[content]">Contenu:</label>
+	<div id="editor" class="ckeditor-input">
+		{{ form.content.vars.value|raw }}
+	</div>
+	{{ form_row(form.content) }}
+</div>
 <div class="mt-4 text-center">
 	<button type="submit" class="btn btn-primary">{{ button_label|default('Enregistrer') }}</button>
 </div>

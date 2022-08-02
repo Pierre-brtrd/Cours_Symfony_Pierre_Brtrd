@@ -39,7 +39,7 @@
 							{{ article.createdAt|format_datetime('full', 'none') }}
 						</p>
 						<h2 class="blog-card-content-header">{{ article.titre }}</h2>
-						<p class="blog-card-content-description">{{ article.content|striptags|slice(0, 100) ~ '...'}}</p>
+						<p class="blog-card-content-description">{{ article.content|striptags|replace({'&nbsp;': ' '})|slice(0, 100) ~ '...'}}</p>
 						{% if article.user is not null %}
 							<div class="author">
 								{% if article.user.imageName %}

@@ -15,7 +15,6 @@
         "doctrine/doctrine-migrations-bundle": "^3.2",
         "doctrine/orm": "^2.12",
         "friendsofphp/php-cs-fixer": "^3.9",
-        "friendsofsymfony/ckeditor-bundle": "^2.4",
         "knplabs/knp-time-bundle": "^1.19",
         "lexik/jwt-authentication-bundle": "^2.16",
         "nelmio/cors-bundle": "^2.2",
@@ -93,7 +92,6 @@
         "auto-scripts": {
             "cache:clear": "symfony-cmd",
             "assets:install %PUBLIC_DIR%": "symfony-cmd",
-            "ckeditor:install": "symfony-cmd",
             "requirements-checker": "script"
         },
         "post-install-cmd": [
