@@ -92,6 +92,21 @@ class ArticleController extends AbstractController
         ]);
     }
 
+    #[Route('/article/switch/{id}', name: 'admin.article.switch', methods: 'GET')]
+    public function switchVisibilityArticle(int $id)
+    {
+        $article = $this->repoArticle->find($id);
+
+        if ($article) {
+            $article->isActive() ? $article->setActive(false) : $article->setActive(true);
+            $this->repoArticle->add($article, true);
+
+            return new Response('Visibility changed', 201);
+        }
+
+        return new Response('Article non trouvé', 400);
+    }
+
     #[Route('/article/delete/{id}', name: 'admin.article.delete', methods: 'DELETE|POST')]
     public function deleteArticle(Article $article, Request $request)
     {

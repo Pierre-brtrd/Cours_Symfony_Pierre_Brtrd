@@ -13,23 +13,28 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/admin/categorie')]
 class CategorieController extends AbstractController
 {
+    public function __construct(
+        private CategorieRepository $repository
+    ) {
+    }
+
     #[Route('/', name: 'app_categorie_index', methods: ['GET'])]
-    public function index(CategorieRepository $categorieRepository): Response
+    public function index(): Response
     {
         return $this->render('Backend/categorie/index.html.twig', [
-            'categories' => $categorieRepository->findAll(),
+            'categories' => $this->repository->findAll(),
         ]);
     }
 
     #[Route('/new', name: 'app_categorie_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, CategorieRepository $categorieRepository): Response
+    public function new(Request $request): Response
     {
         $categorie = new Categorie();
         $form = $this->createForm(CategorieType::class, $categorie);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $categorieRepository->add($categorie, true);
+            $this->repository->add($categorie, true);
 
             return $this->redirectToRoute('app_categorie_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -49,13 +54,13 @@ class CategorieController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_categorie_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Categorie $categorie, CategorieRepository $categorieRepository): Response
+    public function edit(Request $request, Categorie $categorie): Response
     {
         $form = $this->createForm(CategorieType::class, $categorie);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $categorieRepository->add($categorie, true);
+            $this->repository->add($categorie, true);
 
             return $this->redirectToRoute('app_categorie_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -67,12 +72,27 @@ class CategorieController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_categorie_delete', methods: ['POST'])]
-    public function delete(Request $request, Categorie $categorie, CategorieRepository $categorieRepository): Response
+    public function delete(Request $request, Categorie $categorie): Response
     {
         if ($this->isCsrfTokenValid('delete'.$categorie->getId(), $request->request->get('_token'))) {
-            $categorieRepository->remove($categorie, true);
+            $this->repository->remove($categorie, true);
         }
 
         return $this->redirectToRoute('app_categorie_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/switch/{id}', name: 'admin.comments.switch', methods: 'GET')]
+    public function switchVisibilityComment(int $id)
+    {
+        $tag = $this->repository->find($id);
+
+        if ($tag) {
+            $tag->isActive() ? $tag->setActive(false) : $tag->setActive(true);
+            $this->repository->add($tag, true);
+
+            return new Response('Visibility changed', 201);
+        }
+
+        return new Response('Catégorie non trouvée', 400);
     }
 }

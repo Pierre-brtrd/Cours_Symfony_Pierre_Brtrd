@@ -58,6 +58,14 @@
 							</div>
 						{% endif %}
 						<div class="row">
+							<div class="col-md-12">
+								<div class="form-check form-switch">
+									<input type="checkbox" class="form-check-input" value="{{ article.id }}" role="switch" data-switch-active-article {{ article.active ? 'checked' }}>
+									<label class="form-check-label">Actif</label>
+								</div>
+							</div>
+						</div>
+						<div class="row">
 							<div class="col-md-6">
 								<a href="{{ path('admin.article.update', {'id': article.id, 'slug': article.slug} ) }}" class="btn btn-primary">Editer</a>
 							</div>

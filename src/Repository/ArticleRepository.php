@@ -39,6 +39,15 @@ class ArticleRepository extends ServiceEntityRepository
         }
     }
 
+    public function createQueryListActiveArticle()
+    {
+        return $this->createQueryBuilder('a')
+            ->andWhere('a.active = :val')
+            ->setParameter('val', true)
+            ->orderBy('a.createdAt', 'DESC')
+            ->getQuery();
+    }
+
     //    /**
     //     * @return Article[] Returns an array of Article objects
     //     */

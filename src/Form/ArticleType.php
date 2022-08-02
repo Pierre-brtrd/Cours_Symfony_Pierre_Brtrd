@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Article;
 use App\Entity\Categorie;
+use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -25,6 +26,11 @@ class ArticleType extends AbstractType
             ])
             ->add('categories', EntityType::class, [
                 'class' => Categorie::class,
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('c')
+                        ->andWhere('c.active = true')
+                        ->orderBy('c.titre', 'ASC');
+                },
                 'label' => 'Categories:',
                 'multiple' => true,
                 'choice_label' => 'titre',
@@ -32,7 +38,6 @@ class ArticleType extends AbstractType
             ])
             ->add('content', HiddenType::class);
 
-        // Conditionnal set mapped element for create and update article image
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
             $article = $event->getData();
             $form = $event->getForm();
