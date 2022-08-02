@@ -49,14 +49,12 @@ class AdminController extends AbstractController
             }
 
             $article->setUser($security->getUser());
-            $this->em->persist($article);
-            $this->em->flush();
+            $this->repoArticle->add($article, true);
 
             foreach ($images as $image) {
                 $article->addArticleImage($image->getData());
             }
-            $this->em->persist($article);
-            $this->em->flush();
+            $this->repoArticle->add($article, true);
 
             $this->addFlash('success', 'Article créé avec succès');
 
@@ -83,8 +81,7 @@ class AdminController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->em->persist($article);
-            $this->em->flush();
+            $this->repoArticle->add($article, true);
             $this->addFlash('success', 'Article modifié avec succès');
 
             return $this->redirectToRoute('admin');
@@ -98,9 +95,8 @@ class AdminController extends AbstractController
     #[Route('/article/delete/{id}', name: 'admin.article.delete', methods: 'DELETE|POST')]
     public function deleteArticle(int $id, Article $article, Request $request)
     {
-        if ($this->isCsrfTokenValid('delete' . $article->getId(), $request->get('_token'))) {
-            $this->em->remove($article);
-            $this->em->flush();
+        if ($this->isCsrfTokenValid('delete'.$article->getId(), $request->get('_token'))) {
+            $this->repoArticle->remove($article, true);
             $this->addFlash('success', 'Article supprimé avec succès');
 
             return $this->redirectToRoute('admin');
@@ -134,8 +130,7 @@ class AdminController extends AbstractController
 
         if ($comment) {
             $comment->isActive() ? $comment->setActive(false) : $comment->setActive(true);
-            $this->em->persist($comment);
-            $this->em->flush();
+            $this->repoComments->add($comment, true);
 
             return new Response('Visibility changed', 201);
         }
