@@ -45,7 +45,7 @@ class UserController extends AbstractController
             return $this->redirectToRoute('compte', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('Backend/user/edit.html.twig', [
+        return $this->renderForm('Backend/User/edit.html.twig', [
             'user' => $user,
             'form' => $form,
             'title_heading' => 'Editez votre profil',
