@@ -3,15 +3,18 @@
 namespace App\Controller\Backend;
 
 use App\Entity\Article;
+use App\Data\SearchData;
+use App\Form\SearchForm;
 use App\Form\ArticleType;
 use App\Repository\ArticleRepository;
 use App\Repository\CommentsRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Security;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Security;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/admin')]
 class ArticleController extends AbstractController
@@ -24,12 +27,42 @@ class ArticleController extends AbstractController
     }
 
     #[Route('/article', name: 'admin')]
-    public function adminListArticle()
+    public function adminListArticle(Request $request)
     {
-        $articles = $this->repoArticle->findAll();
+        $data = new SearchData();
+        $data->setPage($request->get('page', 1));
 
-        return $this->render('Backend/Article/index.html.twig', [
+        $form = $this->createForm(SearchForm::class, $data);
+        $form->handleRequest($request);
+
+        $articles = $this->repoArticle->findSearch($data, false);
+
+        if ($request->get('ajax')) {
+            return new JsonResponse([
+                'content' => $this->renderView('frontend/article/_articles.html.twig', [
+                    'articles' => $articles,
+                    'admin' => true
+                ]),
+                'sorting' => $this->renderView('frontend/article/_sorting.html.twig', [
+                    'articles' => $articles,
+                    'admin' => true
+                ]),
+                'pagination' => $this->renderView('frontend/article/_pagination.html.twig', [
+                    'articles' => $articles,
+                    'admin' => true
+                ]),
+                'count' => $this->renderView('frontend/article/_count.html.twig', [
+                    'articles' => $articles,
+                    'admin' => true
+                ]),
+                'pages' => ceil($articles->getTotalItemCount() / $articles->getItemNumberPerPage()),
+            ]);
+        }
+
+        return $this->renderForm('backend/article/index.html.twig', [
             'articles' => $articles,
+            'form' => $form,
+            'curentPage' => 'articles',
         ]);
     }
 
@@ -110,7 +143,7 @@ class ArticleController extends AbstractController
     #[Route('/article/delete/{id}', name: 'admin.article.delete', methods: 'DELETE|POST')]
     public function deleteArticle(Article $article, Request $request)
     {
-        if ($this->isCsrfTokenValid('delete'.$article->getId(), $request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $article->getId(), $request->get('_token'))) {
             $this->repoArticle->remove($article, true);
             $this->addFlash('success', 'Article supprimé avec succès');
 

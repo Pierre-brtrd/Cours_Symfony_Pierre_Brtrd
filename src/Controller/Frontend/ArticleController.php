@@ -46,6 +46,9 @@ class ArticleController extends AbstractController
                 'pagination' => $this->renderView('frontend/article/_pagination.html.twig', [
                     'articles' => $articles,
                 ]),
+                'count' => $this->renderView('frontend/article/_count.html.twig', [
+                    'articles' => $articles,
+                ]),
                 'pages' => ceil($articles->getTotalItemCount() / $articles->getItemNumberPerPage()),
             ]);
         }

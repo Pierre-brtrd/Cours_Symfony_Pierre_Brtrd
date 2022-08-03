@@ -12,8 +12,11 @@
 				{% include "frontend/article/_filter.html.twig" with {form: form} only %}
 			</div>
 			<div class="col-md-9">
-				<div class="d-flex justify-content-end gap-2 mb-2 navigation-blog-list js-filter-sorting">
-					{% include "frontend/article/_sorting.html.twig" %}
+				<div class="d-flex justify-content-between mb-2 navigation-blog-list">
+					{% include "frontend/article/_count.html.twig" %}
+					<div class="d-flex justify-content-end gap-2 js-filter-sorting">
+						{% include "frontend/article/_sorting.html.twig" %}
+					</div>
 				</div>
 				<div class="blog-list js-filter-content">
 					{% include "frontend/article/_articles.html.twig" with {articles: articles} only %}

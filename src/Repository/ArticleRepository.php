@@ -64,14 +64,18 @@ class ArticleRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    public function findSearch(SearchData $search): PaginationInterface
+    public function findSearch(SearchData $search, bool $active = true): PaginationInterface
     {
         $query = $this->createQueryBuilder('a')
             ->select('a', 'c', 'u', 'i')
             ->leftJoin('a.categories', 'c')
             ->Join('a.user', 'u')
-            ->leftJoin('a.articleImages', 'i')
-            ->andWhere('a.active = true');
+            ->leftJoin('a.articleImages', 'i');
+
+        if ($active) {
+            $query->andWhere('a.active = true');
+        }
+
 
         if (!empty($search->getQuery())) {
             $query = $query->andWhere('a.titre LIKE :titre')

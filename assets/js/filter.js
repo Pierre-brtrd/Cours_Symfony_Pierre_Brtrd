@@ -1,11 +1,13 @@
 import { Flipper, spring } from "flip-toolkit";
 import { debounce } from "lodash";
+import visibilityArticle from "./visibilityArticle";
 
 /**
  * @property {HTMLElement} pagination
  * @property {HTMLElement} content
  * @property {HTMLElement} sorting
  * @property {HTMLFormElement} form
+ * @property {HTMLElement} count
  * @property {number} page
  * @property {bool} moreNav
  */
@@ -26,6 +28,7 @@ export default class Filter {
         this.form = element.querySelector('.js-filter-form');
         this.page = parseInt(new URLSearchParams(window.location.search).get('page') || 1);
         this.moreNav = this.page == 1;
+        this.count = element.querySelector('.js-filter-count');
         this.bindEvents();
     }
 
@@ -51,7 +54,7 @@ export default class Filter {
         }
 
         this.form.querySelectorAll('input[type="checkbox"]').forEach(input => {
-            input.addEventListener('change', this.loadForm.bind(this));
+            input.addEventListener('change', debounce(this.loadForm.bind(this), 300));
         });
         this.form.querySelector('input[type="text"]')
             .addEventListener('keyup', debounce(this.loadForm.bind(this), 500));
@@ -98,6 +101,7 @@ export default class Filter {
             const data = await response.json();
             this.flipContent(data.content, append);
             this.sorting.innerHTML = data.sorting;
+            this.count.innerHTML = data.count;
             if (!this.moreNav) {
                 this.pagination.innerHTML = data.pagination;
             } else if (this.page === data.pages) {
@@ -180,6 +184,7 @@ export default class Filter {
             })
         }
         flipper.update()
+        visibilityArticle();
     }
 
     showLoader() {

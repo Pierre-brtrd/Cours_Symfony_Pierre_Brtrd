@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-window.onload = () => {
+export default function visibilityArticle() {
     let switchs = document.querySelectorAll('[data-switch-active-article]');
 
     if (switchs) {
