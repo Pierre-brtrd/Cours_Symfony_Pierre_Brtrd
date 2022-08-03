@@ -10,5 +10,10 @@
 <h3 class="mb-2">Catégories</h3>
 {{ form_row(form.categories) }}
 
+{% if app.request.get('_route') == 'admin' %}
+	<h3 class="mb-2">Visibilité</h3>
+	{{ form_row(form.active) }}
+{% endif %}
+
 <button type="submit" class="btn btn-primary w-100">Filtrer</button>
-{{ form_end(form) }}
+{{ form_end(form, {render_rest: false}) }}

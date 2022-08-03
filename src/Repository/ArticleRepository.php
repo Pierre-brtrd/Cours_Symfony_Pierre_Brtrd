@@ -74,6 +74,11 @@ class ArticleRepository extends ServiceEntityRepository
 
         if ($active) {
             $query->andWhere('a.active = true');
+        } else {
+            if (!empty($search->getActive())) {
+                $query->andWhere('a.active IN (:active)')
+                    ->setParameter('active', $search->getActive());
+            }
         }
 
 

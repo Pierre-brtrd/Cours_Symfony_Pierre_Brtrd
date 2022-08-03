@@ -7,6 +7,8 @@ use App\Entity\Categorie;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -32,6 +34,16 @@ class SearchForm extends AbstractType
                         ->orderBy('c.titre', 'ASC');
                 },
                 'choice_label' => 'titre',
+                'expanded' => true,
+                'multiple' => true,
+            ])
+            ->add('active', ChoiceType::class, [
+                'label' => false,
+                'required' => false,
+                'choices' => [
+                    'Oui' => true,
+                    'non' => false
+                ],
                 'expanded' => true,
                 'multiple' => true,
             ]);

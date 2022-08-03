@@ -10,6 +10,8 @@ class SearchData
 
     private ?array $categories = [];
 
+    private ?array $active = null;
+
     /**
      * Get the value of query.
      *
@@ -72,6 +74,30 @@ class SearchData
     public function setPage(?int $page): self
     {
         $this->page = $page;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of active
+     *
+     * @return ?array
+     */
+    public function getActive(): ?array
+    {
+        return $this->active;
+    }
+
+    /**
+     * Set the value of active
+     *
+     * @param ?array $active
+     *
+     * @return self
+     */
+    public function setActive(?array $active): self
+    {
+        $this->active = $active;
 
         return $this;
     }
