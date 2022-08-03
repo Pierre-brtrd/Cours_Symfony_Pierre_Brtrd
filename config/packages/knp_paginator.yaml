@@ -9,5 +9,5 @@ knp_paginator:
     filter_value_name: filterValue # filter value query parameter name
   template:
     pagination: "@KnpPaginator/Pagination/bootstrap_v5_pagination.html.twig"
-    sortable: "@KnpPaginator/Pagination/sortable_link.html.twig" # sort link template
+    sortable: "@KnpPaginator/Pagination/bootstrap_v5_fa_sortable_link.html.twig" # sort link template
     filtration: "@KnpPaginator/Pagination/bootstrap_v5_filtration.html.twig" # filters template

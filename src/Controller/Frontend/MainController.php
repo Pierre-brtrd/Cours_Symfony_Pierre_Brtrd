@@ -12,18 +12,15 @@ use Symfony\Component\Routing\Annotation\Route;
 class MainController extends AbstractController
 {
     #[Route('/', name: 'home')]
-    public function index(
-        ArticleRepository $repository,
-        PaginatorInterface $paginator,
-        Request $request
-    ): Response {
-        $query = $repository->createQueryListActiveArticle();
+    public function index(ArticleRepository $repository): Response
+    {
+        $articles = $repository->findLatestArticleWithLimit(6);
 
-        $articles = $paginator->paginate(
-            $query, /* query NOT result */
-            $request->query->getInt('page', 1), /* page number */
-            6 /* limit per page */
-        );
+        /*$articles = $paginator->paginate(
+            $query, 
+            $request->query->getInt('page', 1),
+            6 
+        );*/
 
         return $this->render('frontend/Home/index.html.twig', [
             'articles' => $articles,

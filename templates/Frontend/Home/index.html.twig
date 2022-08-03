@@ -22,7 +22,7 @@
 							</div>
 						{% else %}
 							<div class="blog-card-image">
-								<img src="https://fakeimg.pl/200x100" alt="">
+								<img src="https://placekitten.com/350/240" alt="">
 							</div>
 						{% endfor %}
 					</a>
@@ -34,7 +34,7 @@
 						<h2 class="blog-card-content-header">
 							<a href="{{ path('article.show', {'id': article.id, 'slug': article.slug}) }}">{{ article.titre }}</a>
 						</h2>
-						<p class="blog-card-content-description">{{ article.content|striptags|slice(0, 100) ~ '...'}}</p>
+						<p class="blog-card-content-description">{{ article.content|striptags|replace({'&nbsp;': ' '})|slice(0, 100) ~ '...'}}</p>
 						{% if article.user is not null %}
 							<div class="author">
 								{% if article.user.imageName %}
@@ -55,9 +55,6 @@
 					</div>
 				</div>
 			{% endfor %}
-		</div>
-		<div class="navigation navigation-blog-list">
-			{{ knp_pagination_render(articles) }}
 		</div>
 	</section>
 {% endblock %}

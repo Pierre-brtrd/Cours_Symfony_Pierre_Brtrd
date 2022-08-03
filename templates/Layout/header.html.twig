@@ -11,6 +11,9 @@
 					<li class="nav-item">
 						<a class="nav-link {{ curentPage is defined and curentPage == 'home' ? 'active'}}" aria-current="page" href="{{ path('home') }}">Accueil</a>
 					</li>
+					<li class="nav-item">
+						<a class="nav-link {{ curentPage is defined and curentPage == 'articles' ? 'active'}}" aria-current="page" href="{{ path('article.index') }}">Articles</a>
+					</li>
 				</ul>
 				{% if app.user %}
 					{% if is_granted('ROLE_ADMIN') %}

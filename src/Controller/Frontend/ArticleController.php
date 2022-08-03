@@ -2,8 +2,10 @@
 
 namespace App\Controller\Frontend;
 
+use App\Data\SearchData;
 use App\Entity\Comments;
 use App\Form\CommentsType;
+use App\Form\SearchForm;
 use App\Repository\ArticleRepository;
 use App\Repository\CommentsRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -15,16 +17,39 @@ use Symfony\Component\Security\Core\Security;
 #[Route('/article')]
 class ArticleController extends AbstractController
 {
-    #[Route('/{id}-{slug}', name: 'article.show')]
-    public function index(
+    public function __construct(
+        private ArticleRepository $repo,
+        private CommentsRepository $repoComment
+    ) {
+    }
+
+    #[Route('/liste', name: "article.index")]
+    public function index(Request $request)
+    {
+        $data = new SearchData();
+        $data->setPage($request->get('page', 1));
+
+        $form = $this->createForm(SearchForm::class, $data);
+        $form->handleRequest($request);
+
+        $articles = $this->repo->findSearch($data);
+
+        return $this->renderForm('frontend/article/index.html.twig', [
+            'articles' => $articles,
+            'form' => $form,
+            'curentPage' => 'articles',
+        ]);
+    }
+
+
+    #[Route('/details/{id}-{slug}', name: 'article.show')]
+    public function show(
         int $id,
         string $slug,
-        ArticleRepository $repo,
-        Request $request,
         Security $security,
-        CommentsRepository $repoComment
+        Request $request
     ): Response {
-        $article = $repo->findOneBy(['id' => $id, 'slug' => $slug]);
+        $article = $this->repo->findOneBy(['id' => $id, 'slug' => $slug]);
 
         if (!$article) {
             $this->addFlash('error', 'Article non trouvé');
@@ -32,7 +57,7 @@ class ArticleController extends AbstractController
             return $this->redirectToRoute('home');
         }
 
-        $comments = $repoComment->findActiveByArticle($article->getId());
+        $comments = $this->repoComment->findActiveByArticle($article->getId());
 
         // On instancie le commentaire vide
         $comment = new Comments();
@@ -45,7 +70,7 @@ class ArticleController extends AbstractController
                 ->setArticle($article)
                 ->setActive(true);
 
-            $repoComment->add($comment, true);
+            $this->repoComment->add($comment, true);
 
             $this->addFlash('success', 'Votre commentaire a été posté avec succès');
 

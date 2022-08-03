@@ -18,7 +18,7 @@ class Categorie
     #[ORM\Column(length: 100)]
     private ?string $titre = null;
 
-    #[ORM\ManyToMany(targetEntity: Article::class, inversedBy: 'categories')]
+    #[ORM\ManyToMany(targetEntity: Article::class, inversedBy: 'categories', cascade: ['persist'])]
     private Collection $articles;
 
     #[ORM\Column]
