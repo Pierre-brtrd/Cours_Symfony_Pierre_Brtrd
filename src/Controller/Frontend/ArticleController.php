@@ -9,6 +9,7 @@ use App\Form\SearchForm;
 use App\Repository\ArticleRepository;
 use App\Repository\CommentsRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -23,7 +24,7 @@ class ArticleController extends AbstractController
     ) {
     }
 
-    #[Route('/liste', name: "article.index")]
+    #[Route('/liste', name: 'article.index')]
     public function index(Request $request)
     {
         $data = new SearchData();
@@ -34,13 +35,27 @@ class ArticleController extends AbstractController
 
         $articles = $this->repo->findSearch($data);
 
+        if ($request->get('ajax')) {
+            return new JsonResponse([
+                'content' => $this->renderView('frontend/article/_articles.html.twig', [
+                    'articles' => $articles,
+                ]),
+                'sorting' => $this->renderView('frontend/article/_sorting.html.twig', [
+                    'articles' => $articles,
+                ]),
+                'pagination' => $this->renderView('frontend/article/_pagination.html.twig', [
+                    'articles' => $articles,
+                ]),
+                'pages' => ceil($articles->getTotalItemCount() / $articles->getItemNumberPerPage()),
+            ]);
+        }
+
         return $this->renderForm('frontend/article/index.html.twig', [
             'articles' => $articles,
             'form' => $form,
             'curentPage' => 'articles',
         ]);
     }
-
 
     #[Route('/details/{id}-{slug}', name: 'article.show')]
     public function show(

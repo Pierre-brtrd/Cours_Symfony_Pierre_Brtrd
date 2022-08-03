@@ -88,7 +88,7 @@ class ArticleRepository extends ServiceEntityRepository
         return $this->paginator->paginate(
             $query,
             $search->getPage(),
-            12
+            6
         );
     }
 

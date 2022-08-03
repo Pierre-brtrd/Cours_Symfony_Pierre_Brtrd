@@ -1,4 +1,11 @@
-{{ form_start(form, {'attr': {'class': 'form-filter card p-3'}}) }}
+{{ form_start(form, {'attr': {'class': 'form-filter card p-3 js-filter-form'}}) }}
+
+<div class="loader">
+	<div class="js-loading spinner-grow text-primary float-right" role="status" aria-hidden="true" style="display: none">
+		<span class="sr-only">Loading...</span>
+	</div>
+</div>
+
 {{ form_row(form.query) }}
 <h3 class="mb-2">Catégories</h3>
 {{ form_row(form.categories) }}

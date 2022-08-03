@@ -19,8 +19,8 @@ class SearchForm extends AbstractType
             'label' => false,
             'required' => false,
             'attr' => [
-                'placeholder' => 'Rechercher'
-            ]
+                'placeholder' => 'Rechercher',
+            ],
         ])
             ->add('categories', EntityType::class, [
                 'label' => false,
@@ -33,7 +33,7 @@ class SearchForm extends AbstractType
                 },
                 'choice_label' => 'titre',
                 'expanded' => true,
-                'multiple' => true
+                'multiple' => true,
             ]);
     }
 

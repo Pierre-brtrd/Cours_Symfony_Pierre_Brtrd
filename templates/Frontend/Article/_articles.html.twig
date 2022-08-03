@@ -1,0 +1,3 @@
+{% for article in articles %}
+	{% include "frontend/article/_card.html.twig" with {article: article} only %}
+{% endfor %}

@@ -6,22 +6,19 @@
 {% endblock %}
 
 {% block body %}
-	<section class="container mt-4">
+	<section class="container mt-4 js-filter">
 		<div class="row">
 			<div class="col-md-3">
 				{% include "frontend/article/_filter.html.twig" with {form: form} only %}
 			</div>
 			<div class="col-md-9">
-				<div class="d-flex justify-content-end gap-2 mb-2 navigation-blog-list">
-					{{ knp_pagination_sortable(articles, 'Date', 'a.createdAt', {'direction': 'desc', 'class': 'btn btn-primary d-flex gap-1'}) }}
-					{{ knp_pagination_sortable(articles, 'Nom', 'a.titre', {'class': 'btn btn-primary d-flex gap-1'}) }}
+				<div class="d-flex justify-content-end gap-2 mb-2 navigation-blog-list js-filter-sorting">
+					{% include "frontend/article/_sorting.html.twig" %}
 				</div>
-				<div class="blog-list">
-					{% for article in articles %}
-						{% include "frontend/article/_card.html.twig" with {article: article} only %}
-					{% endfor %}
+				<div class="blog-list js-filter-content">
+					{% include "frontend/article/_articles.html.twig" with {articles: articles} only %}
 				</div>
-				{{ knp_pagination_render(articles) }}
+				{% include "frontend/article/_pagination.html.twig" %}
 			</div>
 		</div>
 	</section>
