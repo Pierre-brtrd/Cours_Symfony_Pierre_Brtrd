@@ -13,15 +13,15 @@
 			</div>
 			<div class="col-md-9">
 				<div class="d-flex justify-content-between mb-2 navigation-blog-list">
-					{% include "frontend/article/_count.html.twig" %}
+					{% include "Frontend/Article/_count.html.twig" %}
 					<div class="d-flex justify-content-end gap-2 js-filter-sorting">
-						{% include "frontend/article/_sorting.html.twig" %}
+						{% include "Frontend/Article/_sorting.html.twig" %}
 					</div>
 				</div>
 				<div class="blog-list js-filter-content">
-					{% include "frontend/article/_articles.html.twig" with {articles: articles} only %}
+					{% include "Frontend/Article/_articles.html.twig" with {articles: articles} only %}
 				</div>
-				{% include "frontend/article/_pagination.html.twig" %}
+				{% include "Frontend/Article/_pagination.html.twig" %}
 			</div>
 		</div>
 	</section>
