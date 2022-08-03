@@ -8,6 +8,7 @@
 /var/
 /vendor/
 /.yarn/
+/yarn.lock
 ###< symfony/framework-bundle ###
 
 ###> phpunit/phpunit ###
