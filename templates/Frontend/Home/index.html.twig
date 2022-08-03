@@ -11,50 +11,13 @@
 			<h1>Bienvenue sur le blog développé en Symfony</h1>
 		</div>
 	</div>
-	<section class="container mt-4">
-		<div class="blog-list">
-			{% for article in articles %}
-				<div class="blog-card">
-					<a href="{{ path('article.show', {'id': article.id, 'slug': article.slug}) }}">
-						{% for image in article.articleImages|slice(0,1) %}
-							<div class="blog-card-image">
-								<img src="{{ vich_uploader_asset(image, 'imageFile') }}" alt="{{ article.titre }}">
-							</div>
-						{% else %}
-							<div class="blog-card-image">
-								<img src="https://placekitten.com/350/240" alt="">
-							</div>
-						{% endfor %}
-					</a>
-					<div class="blog-card-content">
-						<p class="blog-card-date">
-							<i class="far fa-calendar-alt"></i>
-							{{ article.createdAt|format_datetime('full', 'none') }}
-						</p>
-						<h2 class="blog-card-content-header">
-							<a href="{{ path('article.show', {'id': article.id, 'slug': article.slug}) }}">{{ article.titre }}</a>
-						</h2>
-						<p class="blog-card-content-description">{{ article.content|striptags|replace({'&nbsp;': ' '})|slice(0, 100) ~ '...'}}</p>
-						{% if article.user is not null %}
-							<div class="author">
-								{% if article.user.imageName %}
-									<div class="avatar">
-										<img src="{{ vich_uploader_asset(article.user, 'imageFile')}}" alt="{{ article.user.prenom }}">
-									</div>
-								{% else %}
-									<div class="avatar">
-										<i class="far fa-user-circle"></i>
-									</div>
-								{% endif %}
-								<p class="text-muted mt-2 mb-0">
-									{{ article.user ? article.user.prenom : '' }}
-									{{ article.user ? article.user.nom : ''}}
-								</p>
-							</div>
-						{% endif %}
-					</div>
-				</div>
-			{% endfor %}
+	<section class="container position-relative mt-4">
+		<div class="position-relative">
+			<h2 class="text-center">Nos derniers articles</h2>
+			<a href="{{ path('article.index') }}" class="btn btn-primary text-light position-absolute top-0">Voir les articles</a>
+		</div>
+		<div class="blog-list mt-4">
+			{% include "frontend/article/_articles.html.twig" with {articles: articles} only %}
 		</div>
 	</section>
 {% endblock %}
