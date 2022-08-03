@@ -39,19 +39,19 @@ class ArticleController extends AbstractController
 
         if ($request->get('ajax')) {
             return new JsonResponse([
-                'content' => $this->renderView('frontend/article/_articles.html.twig', [
+                'content' => $this->renderView('Frontend/Article/_articles.html.twig', [
                     'articles' => $articles,
                     'admin' => true
                 ]),
-                'sorting' => $this->renderView('frontend/article/_sorting.html.twig', [
+                'sorting' => $this->renderView('Frontend/Article/_sorting.html.twig', [
                     'articles' => $articles,
                     'admin' => true
                 ]),
-                'pagination' => $this->renderView('frontend/article/_pagination.html.twig', [
+                'pagination' => $this->renderView('Frontend/Article/_pagination.html.twig', [
                     'articles' => $articles,
                     'admin' => true
                 ]),
-                'count' => $this->renderView('frontend/article/_count.html.twig', [
+                'count' => $this->renderView('Frontend/Article/_count.html.twig', [
                     'articles' => $articles,
                     'admin' => true
                 ]),
@@ -59,7 +59,7 @@ class ArticleController extends AbstractController
             ]);
         }
 
-        return $this->renderForm('backend/article/index.html.twig', [
+        return $this->renderForm('Backend/Article/index.html.twig', [
             'articles' => $articles,
             'form' => $form,
         ]);
@@ -165,7 +165,7 @@ class ArticleController extends AbstractController
             return $this->redirectToRoute('admin');
         }
 
-        return $this->render('backend/article/comments.html.twig', [
+        return $this->render('Backend/Article/comments.html.twig', [
             'comments' => $comments,
         ]);
     }

@@ -24,7 +24,7 @@ class UserController extends AbstractController
     {
         $user = $this->security->getUser();
 
-        return $this->render('frontend/user/show.html.twig', [
+        return $this->render('Frontend/User/show.html.twig', [
             'user' => $user,
         ]);
     }

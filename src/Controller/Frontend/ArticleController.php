@@ -37,23 +37,23 @@ class ArticleController extends AbstractController
 
         if ($request->get('ajax')) {
             return new JsonResponse([
-                'content' => $this->renderView('frontend/article/_articles.html.twig', [
+                'content' => $this->renderView('Frontend/Article/_articles.html.twig', [
                     'articles' => $articles,
                 ]),
-                'sorting' => $this->renderView('frontend/article/_sorting.html.twig', [
+                'sorting' => $this->renderView('Frontend/Article/_sorting.html.twig', [
                     'articles' => $articles,
                 ]),
-                'pagination' => $this->renderView('frontend/article/_pagination.html.twig', [
+                'pagination' => $this->renderView('Frontend/Article/_pagination.html.twig', [
                     'articles' => $articles,
                 ]),
-                'count' => $this->renderView('frontend/article/_count.html.twig', [
+                'count' => $this->renderView('Frontend/Article/_count.html.twig', [
                     'articles' => $articles,
                 ]),
                 'pages' => ceil($articles->getTotalItemCount() / $articles->getItemNumberPerPage()),
             ]);
         }
 
-        return $this->renderForm('frontend/article/index.html.twig', [
+        return $this->renderForm('Frontend/Article/index.html.twig', [
             'articles' => $articles,
             'form' => $form,
             'curentPage' => 'articles',
@@ -98,7 +98,7 @@ class ArticleController extends AbstractController
             ], 301);
         }
 
-        return $this->renderForm('frontend/article/show.html.twig', [
+        return $this->renderForm('Frontend/Article/show.html.twig', [
             'article' => $article,
             'form' => $form,
             'comments' => $comments,

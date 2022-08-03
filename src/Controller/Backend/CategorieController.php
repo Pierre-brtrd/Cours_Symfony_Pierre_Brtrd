@@ -21,7 +21,7 @@ class CategorieController extends AbstractController
     #[Route('/', name: 'app_categorie_index', methods: ['GET'])]
     public function index(): Response
     {
-        return $this->render('Backend/categorie/index.html.twig', [
+        return $this->render('Backend/Categorie/index.html.twig', [
             'categories' => $this->repository->findAll(),
         ]);
     }
@@ -39,7 +39,7 @@ class CategorieController extends AbstractController
             return $this->redirectToRoute('app_categorie_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('Backend/categorie/new.html.twig', [
+        return $this->renderForm('Backend/Categorie/new.html.twig', [
             'categorie' => $categorie,
             'form' => $form,
         ]);
@@ -48,7 +48,7 @@ class CategorieController extends AbstractController
     #[Route('/{id}', name: 'app_categorie_show', methods: ['GET'])]
     public function show(Categorie $categorie): Response
     {
-        return $this->render('Backend/categorie/show.html.twig', [
+        return $this->render('Backend/Categorie/show.html.twig', [
             'categorie' => $categorie,
         ]);
     }
@@ -65,7 +65,7 @@ class CategorieController extends AbstractController
             return $this->redirectToRoute('app_categorie_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('Backend/categorie/edit.html.twig', [
+        return $this->renderForm('Backend/Categorie/edit.html.twig', [
             'categorie' => $categorie,
             'form' => $form,
         ]);
@@ -74,7 +74,7 @@ class CategorieController extends AbstractController
     #[Route('/{id}', name: 'app_categorie_delete', methods: ['POST'])]
     public function delete(Request $request, Categorie $categorie): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$categorie->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $categorie->getId(), $request->request->get('_token'))) {
             $this->repository->remove($categorie, true);
         }
 
