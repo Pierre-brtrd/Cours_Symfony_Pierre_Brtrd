@@ -19,6 +19,7 @@ class CategorieFixtures extends Fixture
 
     public function load(ObjectManager $manager): void
     {
+        /*
         for ($i = 0; $i < 10; ++$i) {
             $categorie = new Categorie();
 
@@ -29,5 +30,6 @@ class CategorieFixtures extends Fixture
         }
 
         $manager->flush();
+        */
     }
 }

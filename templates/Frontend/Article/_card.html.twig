@@ -29,9 +29,7 @@
 						<img src="{{ vich_uploader_asset(article.user, 'imageFile')}}" alt="{{ article.user.prenom }}">
 					</div>
 				{% else %}
-					<div class="avatar">
-						<i class="far fa-user-circle"></i>
-					</div>
+					<i class="far fa-user-circle"></i>
 				{% endif %}
 				<p class="text-muted mt-2 mb-0">
 					{{ article.user ? article.user.prenom : '' }}

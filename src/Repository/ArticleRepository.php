@@ -56,6 +56,9 @@ class ArticleRepository extends ServiceEntityRepository
     public function findLatestArticleWithLimit(int $limit)
     {
         return $this->createQueryBuilder('a')
+            ->select('a', 'u', 'i')
+            ->join('a.user', 'u')
+            ->leftJoin('a.articleImages', 'i')
             ->andWhere('a.active = :active')
             ->setParameter('active', true)
             ->orderBy('a.createdAt', 'DESC')

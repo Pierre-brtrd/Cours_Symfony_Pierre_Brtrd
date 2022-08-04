@@ -24,6 +24,7 @@ class ZZArticleFixtures extends Fixture
 
     public function load(ObjectManager $manager): void
     {
+        /*
         $users = $this->repoUser->findAll();
         $categories = $this->repoCategorie->findAll();
 
@@ -38,8 +39,9 @@ class ZZArticleFixtures extends Fixture
                 ->setCreatedAt(DateTimeImmutable::createFromMutable($this->faker->dateTimeThisYear()));
 
             $manager->persist($article);
+            
         }
-
         $manager->flush();
+        */
     }
 }

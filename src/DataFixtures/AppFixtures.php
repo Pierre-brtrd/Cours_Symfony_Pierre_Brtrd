@@ -38,6 +38,7 @@ class AppFixtures extends Fixture
         $manager->persist($user);
         $manager->flush();
 
+
         for ($i = 1; $i <= 25; ++$i) {
             $user = new User();
 
@@ -45,7 +46,7 @@ class AppFixtures extends Fixture
                 ->setPrenom($this->faker->firstName())
                 ->setNom($this->faker->lastName())
                 ->setRoles([$this->faker->randomElement($roles)])
-                ->setPassword($this->hasher->hashPassword($user, $this->faker->password()))
+                ->setPassword($this->hasher->hashPassword($user, 'test1234'))
                 ->setAddress($this->faker->address())
                 ->setZipCode(72350)
                 ->setVille($this->faker->city());
