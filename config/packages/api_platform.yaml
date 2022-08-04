@@ -7,6 +7,9 @@ api_platform:
     # The version of the API.
     version: "0.0.1"
 
+    enable_swagger_ui: false
+    show_webby: true
+
     openapi:
         # The contact information for the exposed API.
         contact:
@@ -15,7 +18,7 @@ api_platform:
             # The URL pointing to the contact information. MUST be in the format of a URL.
             url: "https://www.pierre-bertrand-marketing.com/"
             # The email address of the contact person/organization. MUST be in the format of an email address.
-            email: "pierre.bertrand.profesionnel@gmailc.com"
+            email: "pierre.bertrand.profesionnel@gmail.com"
 
     formats:
         jsonld:
@@ -33,3 +36,7 @@ api_platform:
         json: ["application/merge-patch+json"]
     swagger:
         versions: [3]
+        api_keys:
+            JWT:
+                name: Authorization
+                type: header

@@ -2,15 +2,19 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiFilter;
-use ApiPlatform\Core\Annotation\ApiResource;
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
-use App\Controller\Api\CommentCreateController;
-use App\Repository\CommentsRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\CommentsRepository;
 use Gedmo\Mapping\Annotation as Gedmo;
+use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Annotation\ApiResource;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Serializer\Annotation\Context;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
+use App\Api\Controller\Comments\CommentCreateController;
+use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
 
 #[ORM\Entity(repositoryClass: CommentsRepository::class)]
 #[ApiResource(
@@ -130,11 +134,14 @@ class Comments
     #[ORM\Column]
     #[Gedmo\Timestampable(on: 'create')]
     #[Groups(['comment:list'])]
+    #[Context(normalizationContext: [DateTimeNormalizer::FORMAT_KEY => 'Y-m-d H:i'])]
+    #[ApiFilter(OrderFilter::class)]
     private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\Column]
     #[Gedmo\Timestampable(on: 'update')]
     #[Groups(['comment:list'])]
+    #[Context(normalizationContext: [DateTimeNormalizer::FORMAT_KEY => 'Y-m-d H:i'])]
     private ?\DateTimeImmutable $updatedAt = null;
 
     #[ORM\Column]
@@ -143,6 +150,7 @@ class Comments
 
     #[ORM\Column]
     #[Groups(['comment:list', 'comment:post', 'comment:put'])]
+    #[ApiFilter(BooleanFilter::class)]
     private ?bool $active = null;
 
     #[ORM\Column]

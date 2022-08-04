@@ -48,11 +48,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
     private ?string $password = null;
 
     #[ORM\Column(length: 150)]
-    #[Groups(['comment:list'])]
+    #[Groups(['comment:list', 'article:list'])]
     private ?string $prenom = null;
 
     #[ORM\Column(length: 100)]
-    #[Groups(['comment:list'])]
+    #[Groups(['comment:list', 'article:list'])]
     private ?string $nom = null;
 
     #[ORM\Column(length: 255)]

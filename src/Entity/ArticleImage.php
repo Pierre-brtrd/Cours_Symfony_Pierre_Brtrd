@@ -2,9 +2,10 @@
 
 namespace App\Entity;
 
-use App\Repository\ArticleImageRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\ArticleImageRepository;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: ArticleImageRepository::class)]
@@ -27,6 +28,7 @@ class ArticleImage
     private ?File $imageFile = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['article:list'])]
     private ?string $imageName = null;
 
     #[ORM\Column]
