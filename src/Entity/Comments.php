@@ -23,7 +23,7 @@ use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
             'normalization_context' => ['groups' => 'comment:list'],
             'openapi_context' => [
                 'summary' => 'Get a list of comments',
-                'description' => "# Get a list of comments\n\nThe pagination by default it's 5 items.",
+                'description' => "# Get a list of comments\n\nThe pagination by default it's 10 items.",
             ],
         ],
         'post' => [
@@ -112,7 +112,7 @@ use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
         ],
     ],
     order: ['createdAt' => 'DESC'],
-    paginationItemsPerPage: 5,
+    paginationItemsPerPage: 10,
 )]
 #[ApiFilter(SearchFilter::class, properties: ['article' => 'exact'])]
 class Comments

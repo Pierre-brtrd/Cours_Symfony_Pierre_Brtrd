@@ -7,7 +7,7 @@ api_platform:
     # The version of the API.
     version: "0.0.1"
 
-    enable_swagger_ui: false
+    enable_swagger_ui: true
     show_webby: true
 
     openapi:

@@ -2,10 +2,10 @@
 
 namespace App\Security;
 
-use App\Entity\User;
 use App\Entity\Article;
-use Symfony\Component\Security\Core\Authorization\Voter\Voter;
+use App\Entity\User;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\Security\Core\Security;
 
 class ArticleVoter extends Voter
@@ -34,7 +34,6 @@ class ArticleVoter extends Voter
         ) {
             return false;
         }
-
 
         return
             $subject->getUser()->getId() === $user->getId() ||
