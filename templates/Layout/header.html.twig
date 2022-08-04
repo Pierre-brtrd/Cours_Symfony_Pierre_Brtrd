@@ -16,7 +16,7 @@
 					</li>
 				</ul>
 				{% if app.user %}
-					{% if is_granted('ROLE_ADMIN') %}
+					{% if is_granted('ROLE_ADMIN') or is_granted('ROLE_EDITOR') %}
 						<div class="navbar-btn me-2">
 							<div class="dropdown">
 								<button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -24,12 +24,14 @@
 									Admin
 								</button>
 								<ul class="dropdown-menu">
-									<li>
-										<a class="dropdown-item" href="{{ path('app_user_index') }}">
-											<i class="fas fa-users"></i>
-											<span>Gérer les utilisateurs</span>
-										</a>
-									</li>
+									{% if is_granted('ROLE_ADMIN') %}
+										<li>
+											<a class="dropdown-item" href="{{ path('app_user_index') }}">
+												<i class="fas fa-users"></i>
+												<span>Gérer les utilisateurs</span>
+											</a>
+										</li>
+									{% endif %}
 									<li>
 										<a href="{{ path('admin') }}" class="dropdown-item">
 											<i class="fas fa-newspaper"></i>
