@@ -2,19 +2,19 @@
 
 namespace App\Controller\Backend;
 
-use App\Entity\Article;
 use App\Data\SearchData;
-use App\Form\SearchForm;
+use App\Entity\Article;
 use App\Form\ArticleType;
+use App\Form\SearchForm;
 use App\Repository\ArticleRepository;
 use App\Repository\CommentsRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\Security;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Security\Core\Security;
 
 #[Route('/admin')]
 class ArticleController extends AbstractController
@@ -41,19 +41,19 @@ class ArticleController extends AbstractController
             return new JsonResponse([
                 'content' => $this->renderView('Frontend/Article/_articles.html.twig', [
                     'articles' => $articles,
-                    'admin' => true
+                    'admin' => true,
                 ]),
                 'sorting' => $this->renderView('Frontend/Article/_sorting.html.twig', [
                     'articles' => $articles,
-                    'admin' => true
+                    'admin' => true,
                 ]),
                 'pagination' => $this->renderView('Frontend/Article/_pagination.html.twig', [
                     'articles' => $articles,
-                    'admin' => true
+                    'admin' => true,
                 ]),
                 'count' => $this->renderView('Frontend/Article/_count.html.twig', [
                     'articles' => $articles,
-                    'admin' => true
+                    'admin' => true,
                 ]),
                 'pages' => ceil($articles->getTotalItemCount() / $articles->getItemNumberPerPage()),
             ]);
@@ -142,7 +142,7 @@ class ArticleController extends AbstractController
     #[Route('/article/delete/{id}', name: 'admin.article.delete', methods: 'DELETE|POST')]
     public function deleteArticle(Article $article, Request $request)
     {
-        if ($this->isCsrfTokenValid('delete' . $article->getId(), $request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete'.$article->getId(), $request->get('_token'))) {
             $this->repoArticle->remove($article, true);
             $this->addFlash('success', 'Article supprimé avec succès');
 

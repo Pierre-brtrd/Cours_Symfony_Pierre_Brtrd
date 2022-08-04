@@ -84,7 +84,6 @@ class ArticleRepository extends ServiceEntityRepository
             }
         }
 
-
         if (!empty($search->getQuery())) {
             $query = $query->andWhere('a.titre LIKE :titre')
                 ->setParameter('titre', "%{$search->getQuery()}%");

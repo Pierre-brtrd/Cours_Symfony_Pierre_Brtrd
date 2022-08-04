@@ -39,7 +39,7 @@ class ZZArticleFixtures extends Fixture
                 ->setCreatedAt(DateTimeImmutable::createFromMutable($this->faker->dateTimeThisYear()));
 
             $manager->persist($article);
-            
+
         }
         $manager->flush();
         */

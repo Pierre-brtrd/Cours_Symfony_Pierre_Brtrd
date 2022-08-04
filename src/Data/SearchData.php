@@ -79,7 +79,7 @@ class SearchData
     }
 
     /**
-     * Get the value of active
+     * Get the value of active.
      *
      * @return ?array
      */
@@ -89,11 +89,9 @@ class SearchData
     }
 
     /**
-     * Set the value of active
+     * Set the value of active.
      *
      * @param ?array $active
-     *
-     * @return self
      */
     public function setActive(?array $active): self
     {

@@ -38,7 +38,6 @@ class AppFixtures extends Fixture
         $manager->persist($user);
         $manager->flush();
 
-
         for ($i = 1; $i <= 25; ++$i) {
             $user = new User();
 
