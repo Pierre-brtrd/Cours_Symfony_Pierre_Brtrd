@@ -41,7 +41,7 @@ class CommentsRepository extends ServiceEntityRepository
 
     public function findActiveByArticle(int $articleId)
     {
-        return  $this->createQueryBuilder('a')
+        return $this->createQueryBuilder('a')
             ->andWhere('a.article = :id')
             ->setParameter('id', $articleId)
             ->andWhere('a.active = :active')

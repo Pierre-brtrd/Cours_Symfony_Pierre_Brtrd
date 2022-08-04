@@ -2,14 +2,28 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\ArticleRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: ArticleRepository::class)]
+#[ApiResource(
+    collectionOperations: [
+        'get' => [
+            'normalization_context' => ['groups' => ['article:list']],
+            'openapi_context' => [
+                'summary' => 'Get a list of articles',
+                'description' => "# Retrieve a list of articles\n\nThe default pagination it's 5 items per page.",
+            ],
+        ],
+    ],
+    itemOperations: ['get'],
+)]
 class Article
 {
     #[ORM\Id]
@@ -18,6 +32,7 @@ class Article
     private ?int $id = null;
 
     #[ORM\Column(length: 150, unique: true)]
+    #[Groups(['comment:list'])]
     private ?string $titre = null;
 
     #[ORM\Column(type: Types::TEXT)]
@@ -39,7 +54,7 @@ class Article
     #[ORM\JoinColumn(nullable: true)]
     private ?User $user = null;
 
-    #[ORM\ManyToMany(targetEntity: Categorie::class, mappedBy: 'articles')]
+    #[ORM\ManyToMany(targetEntity: Categorie::class, mappedBy: 'articles', cascade: ['persist'])]
     private Collection $categories;
 
     #[ORM\OneToMany(mappedBy: 'article', targetEntity: Comments::class, orphanRemoval: true)]
@@ -48,6 +63,8 @@ class Article
     #[ORM\OneToMany(mappedBy: 'article', targetEntity: ArticleImage::class, orphanRemoval: true, cascade: ['persist'])]
     private Collection $articleImages;
 
+    #[ORM\Column]
+    private ?bool $active = null;
 
     public function __construct()
     {
@@ -209,6 +226,18 @@ class Article
                 $articleImage->setArticle(null);
             }
         }
+
+        return $this;
+    }
+
+    public function isActive(): ?bool
+    {
+        return $this->active;
+    }
+
+    public function setActive(bool $active): self
+    {
+        $this->active = $active;
 
         return $this;
     }

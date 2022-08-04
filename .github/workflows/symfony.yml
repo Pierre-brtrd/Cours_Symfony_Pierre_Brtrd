@@ -1,48 +1,103 @@
-name: Symfony
-
+name: Full CI process for Symfony 6
 on:
   push:
-    branches: ["master"]
-  pull_request:
     branches:
       - "master"
       - "api"
-
-permissions:
-  contents: read
-
+  pull_request:
+    branches:
+      - "api"
 jobs:
-  symfony-tests:
-    runs-on: ubuntu-latest
-    steps:
-      #  To automatically get bug fixes and new Php versions for shivammathur/setup-php,
-      # change this to (see https://github.com/shivammathur/setup-php#bookmark-versioning):
-      # uses: shivammathur/setup-php@v2
-      - uses: shivammathur/setup-php@2cb9b829437ee246e9b3cac53555a39208ca6d28
-        with:
-          php-version: "8.1.8"
-      - uses: actions/checkout@v3
-      - name: Copy .env.test.local
-        run: php -r "file_exists('.env.test.local') || copy('.env.test', '.env.test.local');"
-      - name: Cache Composer packages
-        id: composer-cache
-        uses: actions/cache@v3
-        with:
-          path: vendor
-          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-php-
-      - name: Install Dependencies
-        run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist --ignore-platform-reqs
-      - name: Create Database
-        run: |
-          mkdir -p data
-          touch data/database.sqlite
-      - name: Execute tests (Unit and Feature tests) via PHPUnit
+  symfony:
+    name: Symfony 6 (PHP ${{ matrix.php-versions }})
+    # https://hub.docker.com/_/ubuntu/
+    runs-on: ubuntu-20.04
+    services:
+      # https://docs.docker.com/samples/library/mysql/
+      mysql:
+        image: mysql
         env:
-          DATABASE_URL: sqlite:///%kernel.project_dir%/data/database.sqlite
-        run: vendor/bin/phpunit
-      - name: Execute PhpStan test
-        run: vendor/bin/phpstan analyse -l 0 src tests
-      - name: Execute Twig test
-        run: php bin/console lint:twig ./templates
+          MYSQL_ROOT_PASSWORD: root
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
+    strategy:
+      fail-fast: true
+      matrix:
+        php-versions: ["8.1"]
+    steps:
+      # —— Setup Github actions 🐙 —————————————————————————————————————————————
+      # https://github.com/actions/checkout (official)
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      # https://github.com/shivammathur/setup-php (community)
+      - name: Setup PHP, extensions and composer with shivammathur/setup-php
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-versions }}
+          extensions: mbstring, xml, ctype, iconv, intl, pdo, pdo_mysql, dom, filter, gd, iconv, json, mbstring, fileinfo
+        env:
+          update: true
+
+      - name: Check PHP Version
+        run: php -v
+
+      # https://github.com/zhulik/redis-action (community)
+      - name: Setup Redis with zhulik/redis-action
+        uses: zhulik/redis-action@1.1.0
+        with:
+          redis version: "5"
+
+      ## —— Yarn 🐱 ————————————————————————————————————————————————————————————
+      - name: Yarn install
+        uses: actions/setup-node@v2
+        with:
+          node-version: "18"
+          #registry-url: npm.fontawesome.com
+      - run:
+          yarn install
+          #env:
+        #NODE_AUTH_TOKEN: ${{ secrets.FONTAWESOME_NPM_AUTH_TOKEN }}
+
+      - name: Yarn build
+        run: yarn run encore production
+
+      # —— Composer 🧙‍️ —————————————————————————————————————————————————————————
+      - name: Validate composer.json and composer.lock
+        run: composer validate
+
+      - name: Get composer cache directory
+        id: composer-cache
+        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+      - name: Cache composer dependencies
+        uses: actions/cache@v1
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: ${{ runner.os }}-composer-
+
+      - name: Install Composer dependencies
+        run: composer install
+
+      # —— Symfony 🎵 ——————————————————————————————————————————————————————————
+      - name: Check Symfony requirements
+        run: vendor/bin/requirements-checker
+
+      - name: Check the Symfony console
+        run: |
+          bin/console about
+
+      ## —— Coding standards ✨ ————————————————————————————————————————————————
+      - name: Coding standards checks (php_codesniffer + php-cs-fixer)
+        run: vendor/bin/php-cs-fixer fix src
+        if: matrix.php-versions == '8.0'
+
+      ## —— Static analysis ✨ —————————————————————————————————————————————————
+      - name: Static analysis of PHP code (PHPStan) and Twig with Lint
+        run: |
+          bin/console about --env=prod
+          vendor/bin/phpstan analyse -l 0 src tests
+          bin/console lint:twig ./templates

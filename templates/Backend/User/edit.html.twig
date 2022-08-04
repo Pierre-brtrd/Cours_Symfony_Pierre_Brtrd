@@ -16,14 +16,16 @@
 {% block body %}
 	<section class="container mt-4">
 		<div class="card p-3 w-50 mx-auto">
-			<h1>Edit User</h1>
+			<h1>{{ title_heading|default('Editer un utilisateur')}}</h1>
 
-			{% include 'Backend/user/_form.html.twig' with {button_label: 'Modifier'} %}
+			{% include 'Backend/User/_form.html.twig' with {button_label: 'Modifier'} %}
 
-			<div class="col-md-3">
-				<a href="{{ path('app_user_index') }}" class="btn btn inline btn-secondary">Retour</a>
-			</div>
-			{{ include('Backend/user/_delete_form.html.twig') }}
+			{% if is_granted('ROLE_ADMIN') %}
+				<div class="col-md-3">
+					<a href="{{ path('app_user_index') }}" class="btn btn inline btn-secondary">Retour</a>
+				</div>
+				{{ include('Backend/User/_delete_form.html.twig') }}
+			{% endif %}
 		</div>
 	</section>
 {% endblock %}

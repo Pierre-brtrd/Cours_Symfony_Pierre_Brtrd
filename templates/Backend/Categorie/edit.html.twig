@@ -18,9 +18,9 @@
 	<section class="container mt-4">
 		<div class="card p-3 w-50 mx-auto">
 			<h1 class="text-center">Modifier une categorie</h1>
-			{% include 'Backend/categorie/_form.html.twig' with { button_label: 'Modifier' } %}
+			{% include 'Backend/Categorie/_form.html.twig' with { button_label: 'Modifier' } %}
 			<div class="text-end">
-				{{ include('Backend/categorie/_delete_form.html.twig') }}
+				{{ include('Backend/Categorie/_delete_form.html.twig') }}
 			</div>
 		</div>
 		<a href="{{ path('app_categorie_index') }}" class="btn btn-secondary back-btn">Retour à la liste</a>

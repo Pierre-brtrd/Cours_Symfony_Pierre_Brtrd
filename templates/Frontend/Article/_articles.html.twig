@@ -1,0 +1,10 @@
+{% if articles|length > 1 %}
+	{% for article in articles %}
+		{% include "Frontend/Article/_card.html.twig" with {article: article, admin: (admin is defined) ? admin : false } only %}
+	{% endfor %}
+{% else %}
+	<div class="alert alert-info mt-4 w-100" role="alert" id="article-no-content">
+		<i class=" fa-solid fa-circle-info"></i>
+		<span>Il n'y a pas d'article correspondant à votre recherche</span>
+	</div>
+{% endif %}

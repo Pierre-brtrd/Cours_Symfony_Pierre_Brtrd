@@ -18,8 +18,11 @@ class Categorie
     #[ORM\Column(length: 100)]
     private ?string $titre = null;
 
-    #[ORM\ManyToMany(targetEntity: Article::class, inversedBy: 'categories')]
+    #[ORM\ManyToMany(targetEntity: Article::class, inversedBy: 'categories', cascade: ['persist'])]
     private Collection $articles;
+
+    #[ORM\Column]
+    private ?bool $active = null;
 
     public function __construct()
     {
@@ -63,6 +66,18 @@ class Categorie
     public function removeArticle(Article $article): self
     {
         $this->articles->removeElement($article);
+
+        return $this;
+    }
+
+    public function isActive(): ?bool
+    {
+        return $this->active;
+    }
+
+    public function setActive(bool $active): self
+    {
+        $this->active = $active;
 
         return $this;
     }

@@ -1,4 +1,6 @@
 {
+    "name": "pierre-brtrd/demo_sf",
+    "description": "Project for demo symfony 6",
     "type": "project",
     "license": "proprietary",
     "minimum-stability": "stable",
@@ -7,16 +9,22 @@
         "php": ">=8.1",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "ext-intl": "*",
+        "api-platform/core": "^2.6",
         "doctrine/annotations": "^1.0",
         "doctrine/doctrine-bundle": "^2.7",
         "doctrine/doctrine-migrations-bundle": "^3.2",
         "doctrine/orm": "^2.12",
-        "friendsofsymfony/ckeditor-bundle": "^2.4",
+        "friendsofphp/php-cs-fixer": "^3.9",
+        "knplabs/knp-paginator-bundle": "^5.8",
         "knplabs/knp-time-bundle": "^1.19",
+        "lexik/jwt-authentication-bundle": "^2.16",
+        "nelmio/cors-bundle": "^2.2",
         "phpdocumentor/reflection-docblock": "^5.3",
         "phpstan/phpdoc-parser": "^1.6",
         "sensio/framework-extra-bundle": "^6.1",
         "stof/doctrine-extensions-bundle": "^1.7",
+        "symfony/apache-pack": "^1.0",
         "symfony/asset": "6.1.*",
         "symfony/console": "6.1.*",
         "symfony/doctrine-messenger": "6.1.*",
@@ -35,6 +43,7 @@
         "symfony/property-access": "6.1.*",
         "symfony/property-info": "6.1.*",
         "symfony/proxy-manager-bridge": "6.1.*",
+        "symfony/requirements-checker": "^2.0",
         "symfony/runtime": "6.1.*",
         "symfony/security-bundle": "6.1.*",
         "symfony/serializer": "6.1.*",
@@ -86,7 +95,7 @@
         "auto-scripts": {
             "cache:clear": "symfony-cmd",
             "assets:install %PUBLIC_DIR%": "symfony-cmd",
-            "ckeditor:install": "symfony-cmd"
+            "requirements-checker": "script"
         },
         "post-install-cmd": [
             "@auto-scripts"
@@ -106,6 +115,7 @@
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.4",
+        "fakerphp/faker": "^1.20",
         "phpstan/phpstan": "^1.8",
         "phpunit/phpunit": "^9.5",
         "symfony/browser-kit": "6.1.*",

@@ -5,6 +5,9 @@ vich_uploader:
         articles_image:
             uri_prefix: /images/articles
             upload_destination: "%kernel.project_dir%/public/images/articles"
+            directory_namer:
+                service: vich_uploader.namer_directory_property
+                options: { property: "article.slug", transliterate: true }
             namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
             inject_on_load: false
             delete_on_update: true

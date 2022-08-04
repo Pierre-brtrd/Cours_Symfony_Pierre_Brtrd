@@ -38,10 +38,12 @@
 						<h2>Catégorie:</h2>
 						<div class="list-tag">
 							{% for categorie in article.categories %}
-								<p class="tag">
-									<i class="fas fa-tags"></i>
-									{{ categorie.titre }}
-								</p>
+								{% if categorie.active %}
+									<p class="tag">
+										<i class="fas fa-tags"></i>
+										{{ categorie.titre }}
+									</p>
+								{% endif %}
 							{% endfor %}
 						</div>
 					</div>

@@ -2,12 +2,14 @@
 
 namespace App\Controller\Frontend;
 
+use App\Data\SearchData;
 use App\Entity\Comments;
 use App\Form\CommentsType;
+use App\Form\SearchForm;
 use App\Repository\ArticleRepository;
 use App\Repository\CommentsRepository;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -16,24 +18,64 @@ use Symfony\Component\Security\Core\Security;
 #[Route('/article')]
 class ArticleController extends AbstractController
 {
-    #[Route('/{id}-{slug}', name: 'article.show')]
-    public function index(
+    public function __construct(
+        private ArticleRepository $repo,
+        private CommentsRepository $repoComment
+    ) {
+    }
+
+    #[Route('/liste', name: 'article.index')]
+    public function index(Request $request)
+    {
+        $data = new SearchData();
+        $data->setPage($request->get('page', 1));
+
+        $form = $this->createForm(SearchForm::class, $data);
+        $form->handleRequest($request);
+
+        $articles = $this->repo->findSearch($data);
+
+        if ($request->get('ajax')) {
+            return new JsonResponse([
+                'content' => $this->renderView('Frontend/Article/_articles.html.twig', [
+                    'articles' => $articles,
+                ]),
+                'sorting' => $this->renderView('Frontend/Article/_sorting.html.twig', [
+                    'articles' => $articles,
+                ]),
+                'pagination' => $this->renderView('Frontend/Article/_pagination.html.twig', [
+                    'articles' => $articles,
+                ]),
+                'count' => $this->renderView('Frontend/Article/_count.html.twig', [
+                    'articles' => $articles,
+                ]),
+                'pages' => ceil($articles->getTotalItemCount() / $articles->getItemNumberPerPage()),
+            ]);
+        }
+
+        return $this->renderForm('Frontend/Article/index.html.twig', [
+            'articles' => $articles,
+            'form' => $form,
+            'curentPage' => 'articles',
+        ]);
+    }
+
+    #[Route('/details/{id}-{slug}', name: 'article.show')]
+    public function show(
         int $id,
         string $slug,
-        ArticleRepository $repo,
-        Request $request,
         Security $security,
-        EntityManagerInterface $em,
-        CommentsRepository $repoComment
+        Request $request
     ): Response {
-        $article = $repo->findOneBy(['id' => $id, 'slug' => $slug]);
+        $article = $this->repo->findOneBy(['id' => $id, 'slug' => $slug]);
 
         if (!$article) {
             $this->addFlash('error', 'Article non trouvé');
+
             return $this->redirectToRoute('home');
         }
 
-        $comments = $repoComment->findActiveByArticle($article->getId());
+        $comments = $this->repoComment->findActiveByArticle($article->getId());
 
         // On instancie le commentaire vide
         $comment = new Comments();
@@ -46,8 +88,7 @@ class ArticleController extends AbstractController
                 ->setArticle($article)
                 ->setActive(true);
 
-            $em->persist($comment);
-            $em->flush();
+            $this->repoComment->add($comment, true);
 
             $this->addFlash('success', 'Votre commentaire a été posté avec succès');
 
@@ -57,10 +98,10 @@ class ArticleController extends AbstractController
             ], 301);
         }
 
-        return $this->renderForm('frontend/article/show.html.twig', [
+        return $this->renderForm('Frontend/Article/show.html.twig', [
             'article' => $article,
             'form' => $form,
-            'comments' => $comments
+            'comments' => $comments,
         ]);
     }
 }

@@ -2,19 +2,22 @@
 
 namespace App\Controller\Backend;
 
+use App\Data\SearchData;
 use App\Entity\Article;
 use App\Form\ArticleType;
+use App\Form\SearchForm;
 use App\Repository\ArticleRepository;
 use App\Repository\CommentsRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Security;
 
 #[Route('/admin')]
-class AdminController extends AbstractController
+class ArticleController extends AbstractController
 {
     public function __construct(
         private EntityManagerInterface $em,
@@ -24,12 +27,41 @@ class AdminController extends AbstractController
     }
 
     #[Route('/article', name: 'admin')]
-    public function adminListArticle()
+    public function adminListArticle(Request $request)
     {
-        $articles = $this->repoArticle->findAll();
+        $data = new SearchData();
+        $data->setPage($request->get('page', 1));
 
-        return $this->render('Backend/Article/index.html.twig', [
+        $form = $this->createForm(SearchForm::class, $data);
+        $form->handleRequest($request);
+
+        $articles = $this->repoArticle->findSearch($data, false);
+
+        if ($request->get('ajax')) {
+            return new JsonResponse([
+                'content' => $this->renderView('Frontend/Article/_articles.html.twig', [
+                    'articles' => $articles,
+                    'admin' => true,
+                ]),
+                'sorting' => $this->renderView('Frontend/Article/_sorting.html.twig', [
+                    'articles' => $articles,
+                    'admin' => true,
+                ]),
+                'pagination' => $this->renderView('Frontend/Article/_pagination.html.twig', [
+                    'articles' => $articles,
+                    'admin' => true,
+                ]),
+                'count' => $this->renderView('Frontend/Article/_count.html.twig', [
+                    'articles' => $articles,
+                    'admin' => true,
+                ]),
+                'pages' => ceil($articles->getTotalItemCount() / $articles->getItemNumberPerPage()),
+            ]);
+        }
+
+        return $this->renderForm('Backend/Article/index.html.twig', [
             'articles' => $articles,
+            'form' => $form,
         ]);
     }
 
@@ -42,10 +74,22 @@ class AdminController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $images = [];
+
+            foreach ($form->get('articleImages') as $image) {
+                $images[] = $image;
+            }
+
             $article->setUser($security->getUser());
-            $this->em->persist($article);
-            $this->em->flush();
+            $this->repoArticle->add($article, true);
+
+            foreach ($images as $image) {
+                $article->addArticleImage($image->getData());
+            }
+            $this->repoArticle->add($article, true);
+
             $this->addFlash('success', 'Article créé avec succès');
+
             return $this->redirectToRoute('admin');
         }
 
@@ -61,6 +105,7 @@ class AdminController extends AbstractController
 
         if (!$article) {
             $this->addFlash('error', 'Article non trouvé');
+
             return $this->redirectToRoute('admin');
         }
 
@@ -68,9 +113,9 @@ class AdminController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->em->persist($article);
-            $this->em->flush();
+            $this->repoArticle->add($article, true);
             $this->addFlash('success', 'Article modifié avec succès');
+
             return $this->redirectToRoute('admin');
         }
 
@@ -79,32 +124,48 @@ class AdminController extends AbstractController
         ]);
     }
 
-    #[Route('/article/delete/{id}', name: 'admin.article.delete', methods: 'DELETE|POST')]
-    public function deleteArticle(int $id, Article $article, Request $request)
+    #[Route('/article/switch/{id}', name: 'admin.article.switch', methods: 'GET')]
+    public function switchVisibilityArticle(int $id)
     {
-        if ($this->isCsrfTokenValid('delete' . $article->getId(), $request->get('_token'))) {
-            $this->em->remove($article);
-            $this->em->flush();
+        $article = $this->repoArticle->find($id);
+
+        if ($article) {
+            $article->isActive() ? $article->setActive(false) : $article->setActive(true);
+            $this->repoArticle->add($article, true);
+
+            return new Response('Visibility changed', 201);
+        }
+
+        return new Response('Article non trouvé', 400);
+    }
+
+    #[Route('/article/delete/{id}', name: 'admin.article.delete', methods: 'DELETE|POST')]
+    public function deleteArticle(Article $article, Request $request)
+    {
+        if ($this->isCsrfTokenValid('delete'.$article->getId(), $request->get('_token'))) {
+            $this->repoArticle->remove($article, true);
             $this->addFlash('success', 'Article supprimé avec succès');
 
             return $this->redirectToRoute('admin');
         }
 
         $this->addFlash('error', 'Le token n\'est pas valide');
+
         return $this->redirectToRoute('admin');
     }
 
-    #[Route("/article/{id}-{slug}/comments", name: 'admin.article.comments')]
+    #[Route('/article/{id}-{slug}/comments', name: 'admin.article.comments')]
     public function adminComments(int $id, string $slug)
     {
         $comments = $this->repoComments->findByArticle($id, $slug);
 
         if (!$comments) {
             $this->addFlash('error', 'Pas de commentaires trouvés');
+
             return $this->redirectToRoute('admin');
         }
 
-        return $this->render('backend/article/comments.html.twig', [
+        return $this->render('Backend/Article/comments.html.twig', [
             'comments' => $comments,
         ]);
     }
@@ -116,8 +177,7 @@ class AdminController extends AbstractController
 
         if ($comment) {
             $comment->isActive() ? $comment->setActive(false) : $comment->setActive(true);
-            $this->em->persist($comment);
-            $this->em->flush();
+            $this->repoComments->add($comment, true);
 
             return new Response('Visibility changed', 201);
         }

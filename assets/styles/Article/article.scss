@@ -1,3 +1,28 @@
+.form-filter {
+    display: block;
+    position: sticky;
+    top: 2em;
+
+    .loader {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    &.is-loading::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        background-color: $white;
+        opacity: 0.5;
+        z-index: 3;
+    }
+}
+
 .article-main-content {
     display: flex;
     flex-wrap: wrap-reverse;

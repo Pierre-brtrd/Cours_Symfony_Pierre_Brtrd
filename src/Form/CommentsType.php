@@ -27,8 +27,8 @@ class CommentsType extends AbstractType
                         'minMessage' => 'Le titre de votre commentaire doit être supérieur à {{ limit }} caractères',
                         'max' => 150,
                         'maxMessage' => 'Le titre de votre commentaire ne doit pas dépasser {{ limit }} caractères',
-                    ])
-                ]
+                    ]),
+                ],
             ])
             ->add('content', TextareaType::class, [
                 'label' => 'Contenu du commentaire',
@@ -40,15 +40,15 @@ class CommentsType extends AbstractType
                     'max' => 5,
                 ],
                 'help' => 'Selectionner une note pour l\'article',
-                'required' => true
+                'required' => true,
             ])
             ->add('rgpd', CheckboxType::class, [
                 'help' => 'En cochant cette case vous acceptez notre politique de confidentialité',
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Veuillez cocher la case RGPD pour poster un commentaire'
-                    ])
-                ]
+                        'message' => 'Veuillez cocher la case RGPD pour poster un commentaire',
+                    ]),
+                ],
             ]);
     }
 
