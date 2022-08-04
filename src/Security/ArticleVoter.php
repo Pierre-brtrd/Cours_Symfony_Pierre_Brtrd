@@ -2,7 +2,6 @@
 
 namespace App\Security;
 
-use App\Entity\Article;
 use App\Entity\User;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
@@ -13,14 +12,11 @@ class ArticleVoter extends Voter
 
     protected function supports(string $attribute, $subject): bool
     {
-        return
-            self::EDIT === $attribute;
+        return self::EDIT === $attribute;
     }
 
     public function voteOnAttribute(string $attribute, $subject, TokenInterface $token): bool
     {
-
-
         $user = $token->getUser();
 
         if (!$user instanceof User) {
