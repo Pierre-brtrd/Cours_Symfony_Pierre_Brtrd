@@ -1,4 +1,4 @@
-{% if articles|length > 1 %}
+{% if articles|length > 0 %}
 	{% for article in articles %}
 		{% include "Frontend/Article/_card.html.twig" with {article: article, admin: (admin is defined) ? admin : false } only %}
 	{% endfor %}
