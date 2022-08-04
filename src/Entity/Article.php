@@ -2,18 +2,19 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiFilter;
-use ApiPlatform\Core\Annotation\ApiResource;
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
-use App\Api\Controller\Articles\ArticleCreateController;
-use App\Repository\ArticleRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\ArticleRepository;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Symfony\Component\Serializer\Annotation\Context;
+use ApiPlatform\Core\Annotation\ApiFilter;
+use Doctrine\Common\Collections\Collection;
+use ApiPlatform\Core\Annotation\ApiResource;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Serializer\Annotation\Context;
+use App\Api\Controller\Articles\ArticleCreateController;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
 use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
 
 #[ORM\Entity(repositoryClass: ArticleRepository::class)]
@@ -42,15 +43,15 @@ use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
                                 'properties' => [
                                     'titre' => ['type' => 'string'],
                                     'content' => ['type' => 'string'],
-                                    'categories' => ['type' => 'object'],
+                                    'categories' => ['type' => 'array of string(Resource Identifier)'],
                                     'active' => ['type' => 'boolean'],
                                 ],
                                 'example' => [
                                     'titre' => 'Great Title of Article',
                                     'content' => 'It\'s a great article I write here',
                                     'categories' => [
-                                        '/api/categories/{id}',
-                                        '/api/categories/{id}',
+                                        '/api/categories/1',
+                                        '/api/categories/2',
                                     ],
                                     'active' => true,
                                 ],
@@ -69,10 +70,55 @@ use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
                 'description' => "# Get One article\n\nYou can retrieve one public article.",
             ],
         ],
+        'put' => [
+            'normalization_context' => ['groups' => ['article:put']],
+            'security' => "is_granted('EDIT_ARTICLE', object)",
+            'security_message' => 'Sorry, but you don\'t have the owernship on this article.',
+            'openapi_context' => [
+                'summary' => 'Modify an article',
+                'description' => "# Edit One article\n\nYou can edit an article but you have to be the owner or administrator rights.",
+                'requestBody' => [
+                    'content' => [
+                        'application/ld+json' => [
+                            'schema' => [
+                                'type' => 'object',
+                                'properties' => [
+                                    'titre' => ['type' => 'string'],
+                                    'content' => ['type' => 'string'],
+                                    'categories' => ['type' => 'array of string(Resource Identifier)'],
+                                    'active' => ['type' => 'boolean'],
+                                ],
+                            ],
+                            'example' => [
+                                'titre' => 'Great New Title of Article',
+                                'content' => 'It\'s a great article I edit here',
+                                'categories' => [
+                                    '/api/categories/1',
+                                    '/api/categories/2',
+                                ],
+                                'active' => true,
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ],
+        'delete' => [
+            'security' => "is_granted('EDIT_ARTICLE', object)",
+            'security_message' => 'Sorry, but you don\'t have the owernship on this article.',
+            'openapi_context' => [
+                'summary' => 'Delete an article',
+                'description' => "# Delete Article\n\nYou can delete an article but **you have to be the owner** of the delete comment or an **Admin user**.",
+            ],
+        ],
     ],
     order: ['createdAt' => 'DESC'],
     paginationItemsPerPage: 5,
 )]
+#[ApiFilter(SearchFilter::class, properties: [
+    'titre' => 'partial',
+    'user.prenom' => 'partial',
+])]
 #[ApiFilter(BooleanFilter::class, properties: ['active'])]
 class Article
 {
@@ -82,11 +128,11 @@ class Article
     private ?int $id = null;
 
     #[ORM\Column(length: 150, unique: true)]
-    #[Groups(['comment:list', 'article:list', 'article:post'])]
+    #[Groups(['comment:list', 'article:list', 'article:post', 'article:put'])]
     private ?string $titre = null;
 
     #[ORM\Column(type: Types::TEXT)]
-    #[Groups(['comment:list', 'article:list', 'article:item', 'article:post'])]
+    #[Groups(['article:list', 'article:item', 'article:post', 'article:put'])]
     private ?string $content = null;
 
     #[ORM\Column(length: 150, unique: true)]
@@ -111,7 +157,7 @@ class Article
     private ?User $user = null;
 
     #[ORM\ManyToMany(targetEntity: Categorie::class, mappedBy: 'articles', cascade: ['persist'])]
-    #[Groups(['article:list', 'article:post'])]
+    #[Groups(['article:list', 'article:post', 'article:put'])]
     private Collection $categories;
 
     #[ORM\OneToMany(mappedBy: 'article', targetEntity: Comments::class, orphanRemoval: true)]
@@ -122,6 +168,7 @@ class Article
     private Collection $articleImages;
 
     #[ORM\Column]
+    #[Groups(['article:list', 'article:post', 'article:put'])]
     private ?bool $active = null;
 
     public function __construct()
