@@ -43,7 +43,10 @@ use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
                                     'note' => ['type' => 'integer'],
                                     'active' => ['type' => 'boolean'],
                                     'rgpd' => ['type' => 'boolean'],
-                                    'article' => ['type' => 'string'],
+                                    'article' => [
+                                        'type' => 'string',
+                                        'format' => 'iri'
+                                    ],
                                 ],
                             ],
                             'example' => [
@@ -86,7 +89,10 @@ use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
                                     'note' => ['type' => 'integer'],
                                     'active' => ['type' => 'boolean'],
                                     'rgpd' => ['type' => 'boolean'],
-                                    'article' => ['type' => 'string'],
+                                    'article' => [
+                                        'type' => 'string',
+                                        'format' => 'iri'
+                                    ],
                                 ],
                             ],
                             'example' => [

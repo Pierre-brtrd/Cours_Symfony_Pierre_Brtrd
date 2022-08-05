@@ -34,7 +34,10 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
                                         'type' => 'string',
                                         'format' => 'binary',
                                     ],
-                                    'article' => ['type', 'integer'],
+                                    'article' => [
+                                        'type', 'integer',
+                                        'format' => 'id'
+                                    ],
                                 ],
                             ],
                             'example' => [

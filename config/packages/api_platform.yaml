@@ -5,9 +5,9 @@ api_platform:
     description: "API for demo to learn about symfony and API Platform"
 
     # The version of the API.
-    version: "0.0.1"
+    version: "1.0.0"
 
-    enable_swagger_ui: true
+    enable_swagger_ui: false
     show_webby: true
 
     openapi:

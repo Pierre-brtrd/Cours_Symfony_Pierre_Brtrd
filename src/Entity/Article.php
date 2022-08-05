@@ -46,7 +46,7 @@ use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
                                     'content' => ['type' => 'string'],
                                     'categories' => [
                                         'type' => 'array',
-                                        'format' => 'string(Resource Identifier)',
+                                        'format' => 'iri',
                                     ],
                                     'active' => ['type' => 'boolean'],
                                 ],
@@ -89,7 +89,10 @@ use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
                                 'properties' => [
                                     'titre' => ['type' => 'string'],
                                     'content' => ['type' => 'string'],
-                                    'categories' => ['type' => 'array of string(Resource Identifier)'],
+                                    'categories' => [
+                                        'type' => 'array',
+                                        'format' => 'iri'
+                                    ],
                                     'active' => ['type' => 'boolean'],
                                 ],
                             ],
