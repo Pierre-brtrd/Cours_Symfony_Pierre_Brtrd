@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
@@ -43,7 +44,10 @@ use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
                                 'properties' => [
                                     'titre' => ['type' => 'string'],
                                     'content' => ['type' => 'string'],
-                                    'categories' => ['type' => 'array of string(Resource Identifier)'],
+                                    'categories' => [
+                                        'type' => 'array',
+                                        'format' => 'string(Resource Identifier)',
+                                    ],
                                     'active' => ['type' => 'boolean'],
                                 ],
                                 'example' => [
@@ -165,7 +169,8 @@ class Article
     private Collection $comments;
 
     #[ORM\OneToMany(mappedBy: 'article', targetEntity: ArticleImage::class, orphanRemoval: true, cascade: ['persist'])]
-    #[Groups(['article:list'])]
+    #[Groups(['article:list', 'image:post'])]
+    #[ApiProperty(iri: 'https://schema.org/image')]
     private Collection $articleImages;
 
     #[ORM\Column]
