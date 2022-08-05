@@ -3,10 +3,10 @@ on:
   push:
     branches:
       - "master"
-      - "api"
+      - "api-platform"
   pull_request:
     branches:
-      - "api"
+      - "api-platform"
 jobs:
   symfony:
     name: Symfony 6 (PHP ${{ matrix.php-versions }})

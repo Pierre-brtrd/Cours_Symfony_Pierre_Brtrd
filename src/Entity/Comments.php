@@ -4,13 +4,17 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
-use App\Controller\Api\CommentCreateController;
+use App\Api\Controller\Comments\CommentCreateController;
 use App\Repository\CommentsRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Serializer\Annotation\Context;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
 
 #[ORM\Entity(repositoryClass: CommentsRepository::class)]
 #[ApiResource(
@@ -19,7 +23,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
             'normalization_context' => ['groups' => 'comment:list'],
             'openapi_context' => [
                 'summary' => 'Get a list of comments',
-                'description' => "# Get a list of comments\n\nThe pagination by default it's 5 items.",
+                'description' => "# Get a list of comments\n\nThe pagination by default it's 10 items.",
             ],
         ],
         'post' => [
@@ -39,7 +43,10 @@ use Symfony\Component\Serializer\Annotation\Groups;
                                     'note' => ['type' => 'integer'],
                                     'active' => ['type' => 'boolean'],
                                     'rgpd' => ['type' => 'boolean'],
-                                    'article' => ['type' => 'string'],
+                                    'article' => [
+                                        'type' => 'string',
+                                        'format' => 'iri'
+                                    ],
                                 ],
                             ],
                             'example' => [
@@ -82,7 +89,10 @@ use Symfony\Component\Serializer\Annotation\Groups;
                                     'note' => ['type' => 'integer'],
                                     'active' => ['type' => 'boolean'],
                                     'rgpd' => ['type' => 'boolean'],
-                                    'article' => ['type' => 'string'],
+                                    'article' => [
+                                        'type' => 'string',
+                                        'format' => 'iri'
+                                    ],
                                 ],
                             ],
                             'example' => [
@@ -108,7 +118,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
         ],
     ],
     order: ['createdAt' => 'DESC'],
-    paginationItemsPerPage: 5,
+    paginationItemsPerPage: 10,
 )]
 #[ApiFilter(SearchFilter::class, properties: ['article' => 'exact'])]
 class Comments
@@ -130,11 +140,14 @@ class Comments
     #[ORM\Column]
     #[Gedmo\Timestampable(on: 'create')]
     #[Groups(['comment:list'])]
+    #[Context(normalizationContext: [DateTimeNormalizer::FORMAT_KEY => 'Y-m-d H:i'])]
+    #[ApiFilter(OrderFilter::class)]
     private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\Column]
     #[Gedmo\Timestampable(on: 'update')]
     #[Groups(['comment:list'])]
+    #[Context(normalizationContext: [DateTimeNormalizer::FORMAT_KEY => 'Y-m-d H:i'])]
     private ?\DateTimeImmutable $updatedAt = null;
 
     #[ORM\Column]
@@ -143,6 +156,7 @@ class Comments
 
     #[ORM\Column]
     #[Groups(['comment:list', 'comment:post', 'comment:put'])]
+    #[ApiFilter(BooleanFilter::class)]
     private ?bool $active = null;
 
     #[ORM\Column]
