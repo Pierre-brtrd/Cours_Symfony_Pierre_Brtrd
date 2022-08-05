@@ -91,7 +91,7 @@ use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
                                     'content' => ['type' => 'string'],
                                     'categories' => [
                                         'type' => 'array',
-                                        'format' => 'iri'
+                                        'format' => 'iri',
                                     ],
                                     'active' => ['type' => 'boolean'],
                                 ],

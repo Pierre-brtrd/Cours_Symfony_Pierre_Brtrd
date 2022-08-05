@@ -6,7 +6,6 @@ use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Serializable;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -23,7 +22,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
     message: 'Cet email est déjà utilisé par un autre compte'
 )]
 #[Vich\Uploadable]
-class User implements UserInterface, PasswordAuthenticatedUserInterface, Serializable
+class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -45,6 +44,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
      * @var string The hashed password
      */
     #[ORM\Column]
+    #[Assert\Regex(
+        pattern: '/^((?=\S*?[A-Z])(?=\S*?[a-z])(?=\S*?[0-9]).{6,})\S$/',
+        message: 'Votre mot de passe doit comporter au moins 6 caractères, une lettre majuscule, une lettre miniscule et 1 chiffre sans espace blanc'
+    )]
     private ?string $password = null;
 
     #[ORM\Column(length: 150)]
@@ -93,7 +96,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
         $this->comments = new ArrayCollection();
     }
 
-    public function serialize()
+    public function __serialize()
     {
         return serialize([
             $this->id,
@@ -109,7 +112,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
         ]);
     }
 
-    public function unserialize($serialize)
+    public function __unserialize($serialize)
     {
         list(
             $this->id,

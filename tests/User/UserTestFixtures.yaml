@@ -1,0 +1,20 @@
+App\Entity\User:
+  userAdmin:
+    email: pierre@test.com
+    password: "Test1234"
+    nom: "Bertrand"
+    prenom: "Pierre"
+    roles: ["ROLE_ADMIN"]
+    address: "15 rue de paradis"
+    zipCode: "73250"
+    ville: "Chambéry"
+
+  user{1..10}:
+    email: user<current()>\@domain.fr
+    password: "Test1234"
+    nom: <firstName()>
+    prenom: <lastName()>
+    roles: ["ROLE_ADMIN"]
+    address: <address()>
+    zipCode: "73000"
+    ville: <city()>
