@@ -96,36 +96,34 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->comments = new ArrayCollection();
     }
 
-    public function __serialize()
+    public function __serialize(): array
     {
-        return serialize([
-            $this->id,
-            $this->email,
-            $this->roles,
-            $this->password,
-            $this->prenom,
-            $this->nom,
-            $this->address,
-            $this->zipCode,
-            $this->ville,
-            $this->imageName,
-        ]);
+        return [
+            'id' => $this->id,
+            'email' => $this->email,
+            'roles' => $this->roles,
+            'password' => $this->password,
+            'prenom' => $this->prenom,
+            'nom' => $this->nom,
+            'address' => $this->address,
+            'zip_code' => $this->zipCode,
+            'ville' => $this->ville,
+            'image_name' => $this->imageName,
+        ];
     }
 
-    public function __unserialize($serialize)
+    public function __unserialize(array $data)
     {
-        list(
-            $this->id,
-            $this->email,
-            $this->roles,
-            $this->password,
-            $this->prenom,
-            $this->nom,
-            $this->address,
-            $this->zipCode,
-            $this->ville,
-            $this->imageName
-        ) = unserialize($serialize);
+        $this->id = $data['id'];
+        $this->email = $data['email'];
+        $this->roles = $data['roles'];
+        $this->password = $data['password'];
+        $this->prenom = $data['prenom'];
+        $this->nom = $data['nom'];
+        $this->address = $data['address'];
+        $this->zipCode = $data['zip_code'];
+        $this->ville = $data['ville'];
+        $this->imageName = $data['image_name'];
     }
 
     public function getFullName()
