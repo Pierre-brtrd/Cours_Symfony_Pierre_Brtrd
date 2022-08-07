@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\User;
+namespace App\Tests\Entity;
 
 use App\Entity\User;
 use App\Repository\UserRepository;
@@ -21,9 +21,12 @@ class UserTest extends KernelTestCase
 
     public function testRepositoryCount()
     {
-        $users = $this->databaseTool->loadAliceFixture([
-            __DIR__.'/UserTestFixtures.yaml',
-        ]);
+        $users = $this->databaseTool->loadAliceFixture(
+            [
+                dirname(__DIR__) . '/Fixtures/UserTestFixtures.yaml'
+            ]
+        );
+
         $users = self::getContainer()->get(UserRepository::class)->count([]);
 
         $this->assertEquals(11, $users);
@@ -51,7 +54,7 @@ class UserTest extends KernelTestCase
 
         /** @var ConstraintViolation $error */
         foreach ($errors as $error) {
-            $messages[] = $error->getPropertyPath().' -> '.$error->getMessage();
+            $messages[] = $error->getPropertyPath() . ' -> ' . $error->getMessage();
         }
 
         $this->assertCount($number, $errors, implode(', ', $messages));

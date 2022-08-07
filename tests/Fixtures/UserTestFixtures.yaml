@@ -10,7 +10,7 @@ App\Entity\User:
     ville: "Chambéry"
 
   user{1..10}:
-    email: user<current()>\@domain.fr
+    email (unique): user<current()>\@domain.fr
     password: "Test1234"
     nom: <firstName()>
     prenom: <lastName()>
