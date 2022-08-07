@@ -1,0 +1,5 @@
+App\Entity\Article:
+  article{1..10}:
+    titre: "Titre-<current()>"
+    content: "<sentence(10)>"
+    active: true

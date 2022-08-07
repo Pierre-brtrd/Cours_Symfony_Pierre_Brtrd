@@ -1,0 +1,4 @@
+App\Entity\Categorie:
+  caategorie{1..10}:
+    titre: "Tag <current()>"
+    active: true
