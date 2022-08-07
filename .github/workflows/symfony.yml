@@ -99,8 +99,8 @@ jobs:
       ## -- Unit Test analysis ✨ —————————————————————————————————————————————————
       - name: PHPUnit test for unit test application
         run: |
-          symfony console doctrine:database:create --env=test
-          symfony console doctrine:schema:update --env=test --force 
+          bin/console doctrine:database:create --env=test
+          bin/console doctrine:schema:update --env=test --force 
           bin/phpunit
 
       ## —— Static analysis ✨ —————————————————————————————————————————————————
