@@ -2,15 +2,15 @@
 
 namespace App\Tests\Entity;
 
-use App\Entity\Article;
+use App\Entity\Comments;
 use App\Repository\ArticleRepository;
-use App\Repository\CategorieRepository;
+use App\Repository\CommentsRepository;
 use App\Repository\UserRepository;
 use Liip\TestFixturesBundle\Services\DatabaseToolCollection;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Validator\ConstraintViolation;
 
-class ArticleTest extends KernelTestCase
+class CommentsTest extends KernelTestCase
 {
     protected $databaseTool;
 
@@ -23,33 +23,33 @@ class ArticleTest extends KernelTestCase
 
     public function testRepositoryCount()
     {
-        $articles = $this->databaseTool->loadAliceFixture(
+        $tags = $this->databaseTool->loadAliceFixture(
             [
-                dirname(__DIR__).'/Fixtures/UserTestFixtures.yaml',
-                dirname(__DIR__).'/Fixtures/ArticleTestFixtures.yaml',
-                dirname(__DIR__).'/Fixtures/TagTestFixtures.yaml',
+                dirname(__DIR__).'/Fixtures/CommentsTestFixtures.yaml',
             ]
         );
 
-        $articles = self::getContainer()->get(ArticleRepository::class)->count([]);
+        $tags = self::getContainer()->get(CommentsRepository::class)->count([]);
 
-        $this->assertEquals(10, $articles);
+        $this->assertEquals(10, $tags);
     }
 
     public function getEntity()
     {
+        $article = self::getContainer()->get(ArticleRepository::class)->find(1);
         $user = self::getContainer()->get(UserRepository::class)->find(1);
-        $tag = self::getContainer()->get(CategorieRepository::class)->find(1);
 
-        return (new Article())
-            ->setTitre('Article de Test')
-            ->setContent('Description de test')
-            ->setUser($user)
+        return (new Comments())
+            ->setTitre('Commentaire de test')
+            ->setContent('Description')
             ->setActive(true)
-            ->addCategory($tag);
+            ->setRgpd(true)
+            ->setNote(5)
+            ->setUser($user)
+            ->setArticle($article);
     }
 
-    public function assertHasErrors(Article $article, int $number = 0)
+    public function assertHasErrors(Comments $article, int $number = 0)
     {
         self::bootKernel();
         $errors = self::getContainer()->get('validator')->validate($article);
@@ -67,22 +67,6 @@ class ArticleTest extends KernelTestCase
     public function testValideArticleEntity()
     {
         $this->assertHasErrors($this->getEntity());
-    }
-
-    public function testNonUniqueTitreEntity()
-    {
-        $article = $this->getEntity()
-            ->setTitre('Titre-1');
-
-        $this->assertHasErrors($article, 1);
-    }
-
-    public function testMinLentgthContentEntity()
-    {
-        $article = $this->getEntity()
-            ->setContent('Desc');
-
-        $this->assertHasErrors($article, 1);
     }
 
     protected function tearDown(): void

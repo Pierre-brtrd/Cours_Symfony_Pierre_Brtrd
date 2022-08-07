@@ -23,7 +23,7 @@ class UserTest extends KernelTestCase
     {
         $users = $this->databaseTool->loadAliceFixture(
             [
-                dirname(__DIR__) . '/Fixtures/UserTestFixtures.yaml'
+                dirname(__DIR__).'/Fixtures/UserTestFixtures.yaml',
             ]
         );
 
@@ -54,7 +54,7 @@ class UserTest extends KernelTestCase
 
         /** @var ConstraintViolation $error */
         foreach ($errors as $error) {
-            $messages[] = $error->getPropertyPath() . ' -> ' . $error->getMessage();
+            $messages[] = $error->getPropertyPath().' -> '.$error->getMessage();
         }
 
         $this->assertCount($number, $errors, implode(', ', $messages));

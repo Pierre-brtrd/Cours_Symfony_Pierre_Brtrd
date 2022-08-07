@@ -1,0 +1,26 @@
+App\Entity\User:
+  userAdmin:
+    email: pierre@test.com
+    password: "Test1234"
+    nom: "Bertrand"
+    prenom: "Pierre"
+    roles: ["ROLE_ADMIN"]
+    address: "15 rue de paradis"
+    zipCode: "73250"
+    ville: "Chambéry"
+
+App\Entity\Article:
+  articleTest:
+    titre: "Titre-1"
+    content: "<sentence(10)>"
+    active: true
+
+App\Entity\Comments:
+  comments{1..10}:
+    titre: "Comment <current()>"
+    content: <sentence(10)>
+    user: "@userAdmin"
+    article: "@articleTest"
+    note: <numberBetween(0, 5)>
+    active: <boolean()>
+    rgpd: true

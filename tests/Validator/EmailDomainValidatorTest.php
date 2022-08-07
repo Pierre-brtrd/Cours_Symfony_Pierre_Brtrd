@@ -97,7 +97,7 @@ class EmailDomainValidatorTest extends TestCase
                 ->method('buildViolation');
         }
 
-        /** @var ExecutionContextInterface $context */
+        /* @var ExecutionContextInterface $context */
         return $context;
     }
 }
