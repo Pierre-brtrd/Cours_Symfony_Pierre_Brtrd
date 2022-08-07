@@ -98,7 +98,10 @@ jobs:
 
       ## -- Unit Test analysis ✨ —————————————————————————————————————————————————
       - name: PHPUnit test for unit test application
-        run: bin/phpunit
+        run: |
+          symfony console doctrine:database:create --env=test
+          symfony console doctrine:schema:update --env=test --force 
+          bin/phpunit
 
       ## —— Static analysis ✨ —————————————————————————————————————————————————
       - name: Static analysis of PHP code (PHPStan) and Twig with Lint
