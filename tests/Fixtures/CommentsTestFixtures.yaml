@@ -7,7 +7,7 @@ App\Entity\Comments:
     titre: "Comment <current()>"
     content: <sentence(10)>
     user: "@userAdmin"
-    article: "@articleTest"
+    article: "@articleName"
     note: <numberBetween(0, 5)>
     active: <boolean()>
     rgpd: true

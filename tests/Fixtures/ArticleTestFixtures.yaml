@@ -9,7 +9,8 @@ App\Entity\Article:
     active: true
     user: "@userAdmin"
 
-  articleTest:
-    titre: "Titre article de test"
+  articleName:
+    titre: "Article de test"
     content: "<sentence(10)>"
     active: true
+    user: "@userAdmin"
