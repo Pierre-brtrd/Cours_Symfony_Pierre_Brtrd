@@ -1,19 +1,6 @@
-App\Entity\User:
-  userAdmin:
-    email: pierre@test.com
-    password: "Test1234"
-    nom: "Bertrand"
-    prenom: "Pierre"
-    roles: ["ROLE_ADMIN"]
-    address: "15 rue de paradis"
-    zipCode: "73250"
-    ville: "Chambéry"
-
-App\Entity\Article:
-  articleTest:
-    titre: "Titre-1"
-    content: "<sentence(10)>"
-    active: true
+include:
+  - UserTestFixtures.yaml
+  - ArticleTestFixtures.yaml
 
 App\Entity\Comments:
   comments{1..10}:

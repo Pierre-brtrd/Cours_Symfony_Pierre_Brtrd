@@ -9,12 +9,22 @@ App\Entity\User:
     zipCode: "73250"
     ville: "Chambéry"
 
+  userEditor:
+    email: editor@test.com
+    password: "Test1234"
+    nom: <firstName()>
+    prenom: <lastName()>
+    roles: ["ROLE_EDITOR"]
+    address: <address()>
+    zipCode: "73000"
+    ville: <city()>
+
   user{1..10}:
     email (unique): user<current()>\@domain.fr
     password: "Test1234"
     nom: <firstName()>
     prenom: <lastName()>
-    roles: ["ROLE_ADMIN"]
+    roles: ["ROLE_USER"]
     address: <address()>
     zipCode: "73000"
     ville: <city()>

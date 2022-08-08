@@ -64,7 +64,7 @@ class CommentsTest extends KernelTestCase
         $this->assertCount($number, $errors, implode(', ', $messages));
     }
 
-    public function testValideArticleEntity()
+    public function testValideCommentEntity()
     {
         $this->assertHasErrors($this->getEntity());
     }

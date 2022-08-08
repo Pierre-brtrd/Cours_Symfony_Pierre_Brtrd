@@ -29,7 +29,7 @@ class UserTest extends KernelTestCase
 
         $users = self::getContainer()->get(UserRepository::class)->count([]);
 
-        $this->assertEquals(11, $users);
+        $this->assertEquals(12, $users);
     }
 
     public function getEntity()

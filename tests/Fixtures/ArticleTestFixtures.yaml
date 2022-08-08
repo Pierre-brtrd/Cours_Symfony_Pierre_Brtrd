@@ -1,5 +1,15 @@
+include:
+  - UserTestFixtures.yaml
+  - TagTestFixtures.yaml
+
 App\Entity\Article:
-  article{1..10}:
+  article{1..9}:
     titre: "Titre-<current()>"
+    content: "<sentence(10)>"
+    active: true
+    user: "@userAdmin"
+
+  articleTest:
+    titre: "Titre article de test"
     content: "<sentence(10)>"
     active: true
