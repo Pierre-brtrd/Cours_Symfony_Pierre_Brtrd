@@ -88,6 +88,7 @@ export default class Filter {
      */
     async loadUrl(url, append = false) {
         this.showLoader();
+        this.content.classList.remove('form-response');
         const params = new URLSearchParams(url.split('?')[1] || '');
         params.set('ajax', 1);
 
@@ -102,6 +103,7 @@ export default class Filter {
             this.flipContent(data.content, append);
             this.sorting.innerHTML = data.sorting;
             this.count.innerHTML = data.count;
+            this.content.classList.add('form-response');
             if (!this.moreNav) {
                 this.pagination.innerHTML = data.pagination;
             } else if (this.page === data.pages) {

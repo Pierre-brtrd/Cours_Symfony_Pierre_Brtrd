@@ -36,11 +36,11 @@ class ArticlePantherTest extends PantherTestCase
     {
         $crawler = $this->client->request('GET', '/article/liste');
 
-        $this->client->waitFor('.btn-show-more');
+        $this->client->waitFor('.btn-show-more', 2);
 
         $this->client->executeScript("document.querySelector('.btn-show-more').click()");
 
-        $this->client->waitForEnabled('.btn-show-more');
+        $this->client->waitForEnabled('.btn-show-more', 2);
 
         $crawler = $this->client->refreshCrawler();
 
@@ -51,7 +51,7 @@ class ArticlePantherTest extends PantherTestCase
     {
         $crawler = $this->client->request('GET', '/article/liste');
 
-        $this->client->waitFor('.form-filter');
+        $this->client->waitFor('.form-filter', 2);
 
         $form = $crawler->selectButton('Filtrer')->form([
             'query' => 'Titre-2'
@@ -64,10 +64,6 @@ class ArticlePantherTest extends PantherTestCase
         $this->assertCount(1, $crawler->filter('.blog-list .blog-card'));
     }
 
-    /*
-
-    @TODO BUGFIX the problem of time with assert
-    
     public function testArticlePageSearchAjax()
     {
         $crawler = $this->client->request('GET', '/article/liste');
@@ -77,12 +73,13 @@ class ArticlePantherTest extends PantherTestCase
         $search = $this->client->findElement(WebDriverBy::cssSelector('.form-filter input[type="text"]'));
         $search->sendKeys('Titre-2');
 
-        $this->client->waitForAttributeToContain('.js-loading', 'aria-hidden', 'false');
-        $this->client->waitForAttributeToContain('.js-loading', 'aria-hidden', 'true');
+        $this->client->waitFor('.form-response', 2);
+
+        // For the flip content time response
+        sleep(1);
 
         $crawler = $this->client->refreshCrawler();
 
         $this->assertCount(1, $crawler->filter('.blog-list .blog-card'));
     }
-    */
 }
