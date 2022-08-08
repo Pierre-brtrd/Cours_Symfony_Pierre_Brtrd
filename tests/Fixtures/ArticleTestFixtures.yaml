@@ -3,7 +3,7 @@ include:
   - TagTestFixtures.yaml
 
 App\Entity\Article:
-  article{1..9}:
+  article{1..19}:
     titre: "Titre-<current()>"
     content: "<sentence(10)>"
     active: true

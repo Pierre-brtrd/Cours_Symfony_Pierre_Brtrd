@@ -25,15 +25,15 @@ class ArticleTest extends KernelTestCase
     {
         $articles = $this->databaseTool->loadAliceFixture(
             [
-                dirname(__DIR__).'/Fixtures/UserTestFixtures.yaml',
-                dirname(__DIR__).'/Fixtures/ArticleTestFixtures.yaml',
-                dirname(__DIR__).'/Fixtures/TagTestFixtures.yaml',
+                dirname(__DIR__) . '/Fixtures/UserTestFixtures.yaml',
+                dirname(__DIR__) . '/Fixtures/ArticleTestFixtures.yaml',
+                dirname(__DIR__) . '/Fixtures/TagTestFixtures.yaml',
             ]
         );
 
         $articles = self::getContainer()->get(ArticleRepository::class)->count([]);
 
-        $this->assertEquals(10, $articles);
+        $this->assertEquals(20, $articles);
     }
 
     public function getEntity()
@@ -58,7 +58,7 @@ class ArticleTest extends KernelTestCase
 
         /** @var ConstraintViolation $error */
         foreach ($errors as $error) {
-            $messages[] = $error->getPropertyPath().' -> '.$error->getMessage();
+            $messages[] = $error->getPropertyPath() . ' -> ' . $error->getMessage();
         }
 
         $this->assertCount($number, $errors, implode(', ', $messages));

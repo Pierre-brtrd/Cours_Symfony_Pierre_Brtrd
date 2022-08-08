@@ -47,7 +47,7 @@ export default class Filter {
             this.page = 1;
         });
         if (this.moreNav) {
-            this.pagination.innerHTML = '<button class="btn btn-primary mt-2">Voir plus</button>';
+            this.pagination.innerHTML = '<button class="btn btn-primary btn-show-more mt-2">Voir plus</button>';
             this.pagination.querySelector('button').addEventListener('click', this.loadMore.bind(this));
         } else {
             this.pagination.addEventListener('click', linkClikListener);
@@ -111,10 +111,10 @@ export default class Filter {
             }
             params.delete('ajax');
             history.replaceState({}, '', url.split('?')[0] + '?' + params.toString());
+            this.hideLoader();
         } else {
             console.error(response);
         }
-        this.hideLoader();
     }
 
     /**
