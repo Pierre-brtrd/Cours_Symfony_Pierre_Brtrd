@@ -101,7 +101,7 @@ jobs:
         run: |
           bin/console doctrine:database:create --env=test
           bin/console doctrine:schema:update --env=test --force 
-          bin/phpunit
+          bin/phpunit --testdox
 
       ## —— Static analysis ✨ —————————————————————————————————————————————————
       - name: Static analysis of PHP code (PHPStan) and Twig with Lint
