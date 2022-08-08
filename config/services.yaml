@@ -32,3 +32,6 @@ services:
         class: App\Validator\EmailDomainValidator
         arguments:
             $globalBlockedDomains: "globalblocked.fr, aze.fr"
+
+    App\DataFixtures\Providers\HashPasswordProvider:
+        tags: [{ name: nelmio_alice.faker.provider }]

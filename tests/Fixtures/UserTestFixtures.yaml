@@ -1,7 +1,7 @@
 App\Entity\User:
   userAdmin:
-    email: pierre@test.com
-    password: "Test1234"
+    email: "pierre@test.com"
+    password: "<hashPassword('Test1234')>"
     nom: "Bertrand"
     prenom: "Pierre"
     roles: ["ROLE_ADMIN"]
@@ -11,7 +11,7 @@ App\Entity\User:
 
   userEditor:
     email: editor@test.com
-    password: "Test1234"
+    password: "<hashPassword('Test1234')>"
     nom: <firstName()>
     prenom: <lastName()>
     roles: ["ROLE_EDITOR"]
@@ -21,7 +21,7 @@ App\Entity\User:
 
   user{1..10}:
     email (unique): user<current()>\@domain.fr
-    password: "Test1234"
+    password: "<hashPassword('Test1234')>"
     nom: <firstName()>
     prenom: <lastName()>
     roles: ["ROLE_USER"]

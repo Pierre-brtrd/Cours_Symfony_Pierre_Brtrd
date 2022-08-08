@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Test\Controller;
+namespace App\Test\Panther;
 
 use Facebook\WebDriver\WebDriverBy;
 use Liip\TestFixturesBundle\Services\DatabaseToolCollection;
