@@ -8,7 +8,7 @@ App\Entity\Article:
     content: "<sentence(10)>"
     active: true
     user: "@userAdmin"
-    articleImages: [<uploadImageArticle()>]
+    #articleImages: [<uploadImageArticle()>]
 
   articleName:
     titre: "Article de test"
