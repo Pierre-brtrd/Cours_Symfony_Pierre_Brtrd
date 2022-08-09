@@ -12,8 +12,6 @@ use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormEvent;
-use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ArticleType extends AbstractType
@@ -39,34 +37,16 @@ class ArticleType extends AbstractType
             ])
             ->add('content', HiddenType::class)
             ->add('active', CheckboxType::class, [
-                'label' => 'Actif'
+                'label' => 'Actif',
+            ])
+            ->add('articleImages', CollectionType::class, [
+                'entry_type' => ArticleImageType::class,
+                'allow_add' => true,
+                'allow_delete' => true,
+                'delete_empty' => true,
+                'prototype' => true,
+                'by_reference' => false,
             ]);
-
-        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
-            $article = $event->getData();
-            $form = $event->getForm();
-
-            if (!$article || null === $article->getId()) {
-                $form->add('articleImages', CollectionType::class, [
-                    'entry_type' => ArticleImageType::class,
-                    'allow_add' => true,
-                    'allow_delete' => true,
-                    'delete_empty' => true,
-                    'prototype' => true,
-                    'by_reference' => false,
-                    'mapped' => false,
-                ]);
-            } else {
-                $form->add('articleImages', CollectionType::class, [
-                    'entry_type' => ArticleImageType::class,
-                    'allow_add' => true,
-                    'allow_delete' => true,
-                    'delete_empty' => true,
-                    'prototype' => true,
-                    'by_reference' => false,
-                ]);
-            }
-        });
     }
 
     public function configureOptions(OptionsResolver $resolver): void

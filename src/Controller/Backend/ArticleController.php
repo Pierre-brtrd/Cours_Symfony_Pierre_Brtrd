@@ -74,18 +74,7 @@ class ArticleController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $images = [];
-
-            foreach ($form->get('articleImages') as $image) {
-                $images[] = $image;
-            }
-
             $article->setUser($security->getUser());
-            $this->repoArticle->add($article, true);
-
-            foreach ($images as $image) {
-                $article->addArticleImage($image->getData());
-            }
             $this->repoArticle->add($article, true);
 
             $this->addFlash('success', 'Article créé avec succès');

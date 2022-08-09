@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Entity\ArticleImage;
+use App\Repository\ArticleImageRepository;
 use App\Repository\ArticleRepository;
 use Vich\UploaderBundle\Mapping\PropertyMapping;
 use Vich\UploaderBundle\Naming\DirectoryNamerInterface;
@@ -10,24 +11,29 @@ use Vich\UploaderBundle\Naming\DirectoryNamerInterface;
 class ArticleDirectoryNamer implements DirectoryNamerInterface
 {
     public function __construct(
-        private ArticleRepository $repository
+        private ArticleRepository $repository,
+        private ArticleImageRepository $repoImage
     ) {
     }
 
     /**
-     * DirectoryNamer for article
+     * DirectoryNamer for article.
      *
      * @param ArticleImage $object
-     * @param PropertyMapping $mapping
-     * @return string
      */
     public function directoryName($object, PropertyMapping $mapping): string
     {
-        $articleInDb = $this->repository->find($object->getArticle()->getId() ?: 0);
+        /*
+         * @TODO do resolve path for delete file
+         */
+        if (!$object->getArticle()) {
+            return '';
+        }
 
+        $articleInDb = $this->repository->find($object->getArticle()->getId() ?: 0);
         if (
             $object->getArticle()->getSlug() ||
-            $articleInDb->getSlug() === $object->getArticle()->getSlug()
+            $articleInDb ? $articleInDb->getSlug() : null === self::slugify($object->getArticle()->getTitre())
         ) {
             return $object->getArticle()->getSlug();
         }

@@ -117,6 +117,7 @@
         "dbrekelmans/bdi": "^1.0",
         "doctrine/doctrine-fixtures-bundle": "^3.4",
         "fakerphp/faker": "^1.20",
+        "hautelook/alice-bundle": "^2.11",
         "liip/test-fixtures-bundle": "^2.0.0",
         "nelmio/alice": "^3.11",
         "phpstan/phpstan": "^1.8",
