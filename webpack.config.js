@@ -82,7 +82,8 @@ Encore
 
     .addPlugin(new CKEditorWebpackPlugin({
         // See https://ckeditor.com/docs/ckeditor5/latest/features/ui-language.html
-        language: 'fr'
+        language: 'fr',
+        addMainLanguageTranslationsToAllAssets: true
     }))
 
     // Use raw-loader for CKEditor 5 SVG files.

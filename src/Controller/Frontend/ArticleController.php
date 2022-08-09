@@ -3,6 +3,7 @@
 namespace App\Controller\Frontend;
 
 use App\Data\SearchData;
+use App\Entity\Article;
 use App\Entity\Comments;
 use App\Form\CommentsType;
 use App\Form\SearchForm;
@@ -60,16 +61,13 @@ class ArticleController extends AbstractController
         ]);
     }
 
-    #[Route('/details/{id}-{slug}', name: 'article.show')]
+    #[Route('/details/{slug}', name: 'article.show')]
     public function show(
-        int $id,
-        string $slug,
+        Article $article,
         Security $security,
         Request $request
     ): Response {
-        $article = $this->repo->findOneBy(['id' => $id, 'slug' => $slug]);
-
-        if (!$article) {
+        if (!$article instanceof Article) {
             $this->addFlash('error', 'Article non trouvé');
 
             return $this->redirectToRoute('home');
