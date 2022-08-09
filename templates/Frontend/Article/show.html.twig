@@ -19,64 +19,66 @@
 	<section class="container mt-4">
 		<div class="article-main-content">
 			<aside class="column-left">
-				<div class="info-article">
-					<h2>Informations:</h2>
-					<p>
-						<i class="far fa-calendar-alt"></i>
-						<strong>Date de création :</strong>
-						{{ article.createdAt|format_datetime('full', 'none', locale='fr') }}
-					</p>
-					<p>
-						<i class="far fa-user-circle"></i>
-						<strong>Auteur:</strong>
-						{{ article.user.prenom }}
-						{{ article.user.nom }}
-					</p>
-				</div>
-				{% if article.categories|length > 0 %}
-					<div class="categorie-article">
-						<h2>Catégorie:</h2>
-						<div class="list-tag">
-							{% for categorie in article.categories %}
-								{% if categorie.active %}
-									<p class="tag">
-										<i class="fas fa-tags"></i>
-										{{ categorie.titre }}
-									</p>
-								{% endif %}
-							{% endfor %}
-						</div>
+				<div class="sidebar-content">
+					<div class="info-article">
+						<h2>Informations:</h2>
+						<p>
+							<i class="far fa-calendar-alt"></i>
+							<strong>Date de création :</strong>
+							{{ article.createdAt|format_datetime('full', 'none', locale='fr') }}
+						</p>
+						<p>
+							<i class="far fa-user-circle"></i>
+							<strong>Auteur:</strong>
+							{{ article.user.prenom }}
+							{{ article.user.nom }}
+						</p>
 					</div>
-				{% endif %}
-				{% if comments|length > 0 %}
-					<div class="show-comments mt-4">
-						<h2>Dernier commentaires</h2>
-						<div class="comments">
-							{% for comment in comments|slice(0, 3) %}
-								<div class="comment-item">
-									<div class="comment-header">{{ comment.titre }}</div>
-									<div class="comment-item-content">
-										<em class="card-text">{{ comment.user.fullName }}</em>
-										<p class="card-text">{{ comment.content }}</p>
-										<div class="ratings">
-											{% for number in range(1,5) %}
-												{% if number <= comment.note %}
-													<i class="fas fa-star rating-color"></i>
-												{% else %}
-													<i class="far fa-star rating-color"></i>
-												{% endif %}
-											{% endfor %}
-										</div>
-										<p class="card-text">
-											<small class="text-muted">Posté il y a
-												{{ comment.createdAt|ago }}</small>
+					{% if article.categories|length > 0 %}
+						<div class="categorie-article">
+							<h2>Catégorie:</h2>
+							<div class="list-tag">
+								{% for categorie in article.categories %}
+									{% if categorie.active %}
+										<p class="tag">
+											<i class="fas fa-tags"></i>
+											{{ categorie.titre }}
 										</p>
-									</div>
-								</div>
-							{% endfor %}
+									{% endif %}
+								{% endfor %}
+							</div>
 						</div>
-					</div>
-				{% endif %}
+					{% endif %}
+					{% if comments|length > 0 %}
+						<div class="show-comments mt-4">
+							<h2>Dernier commentaires</h2>
+							<div class="comments">
+								{% for comment in comments|slice(0, 3) %}
+									<div class="comment-item">
+										<div class="comment-header">{{ comment.titre }}</div>
+										<div class="comment-item-content">
+											<em class="card-text">{{ comment.user.fullName }}</em>
+											<p class="card-text">{{ comment.content }}</p>
+											<div class="ratings">
+												{% for number in range(1,5) %}
+													{% if number <= comment.note %}
+														<i class="fas fa-star rating-color"></i>
+													{% else %}
+														<i class="far fa-star rating-color"></i>
+													{% endif %}
+												{% endfor %}
+											</div>
+											<p class="card-text">
+												<small class="text-muted">Posté il y a
+													{{ comment.createdAt|ago }}</small>
+											</p>
+										</div>
+									</div>
+								{% endfor %}
+							</div>
+						</div>
+					{% endif %}
+				</div>
 			</aside>
 			<div class="column-right">
 				<article class="article-content">
