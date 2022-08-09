@@ -6,7 +6,6 @@ use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Serializable;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -23,7 +22,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
     message: 'Cet email est déjà utilisé par un autre compte'
 )]
 #[Vich\Uploadable]
-class User implements UserInterface, PasswordAuthenticatedUserInterface, Serializable
+class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -45,6 +44,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
      * @var string The hashed password
      */
     #[ORM\Column]
+    #[Assert\Regex(
+        pattern: '/^((?=\S*?[A-Z])(?=\S*?[a-z])(?=\S*?[0-9]).{6,})\S$/',
+        message: 'Votre mot de passe doit comporter au moins 6 caractères, une lettre majuscule, une lettre miniscule et 1 chiffre sans espace blanc'
+    )]
     private ?string $password = null;
 
     #[ORM\Column(length: 150)]
@@ -93,36 +96,34 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
         $this->comments = new ArrayCollection();
     }
 
-    public function serialize()
+    public function __serialize(): array
     {
-        return serialize([
-            $this->id,
-            $this->email,
-            $this->roles,
-            $this->password,
-            $this->prenom,
-            $this->nom,
-            $this->address,
-            $this->zipCode,
-            $this->ville,
-            $this->imageName,
-        ]);
+        return [
+            'id' => $this->id,
+            'email' => $this->email,
+            'roles' => $this->roles,
+            'password' => $this->password,
+            'prenom' => $this->prenom,
+            'nom' => $this->nom,
+            'address' => $this->address,
+            'zip_code' => $this->zipCode,
+            'ville' => $this->ville,
+            'image_name' => $this->imageName,
+        ];
     }
 
-    public function unserialize($serialize)
+    public function __unserialize(array $data)
     {
-        list(
-            $this->id,
-            $this->email,
-            $this->roles,
-            $this->password,
-            $this->prenom,
-            $this->nom,
-            $this->address,
-            $this->zipCode,
-            $this->ville,
-            $this->imageName
-        ) = unserialize($serialize);
+        $this->id = $data['id'];
+        $this->email = $data['email'];
+        $this->roles = $data['roles'];
+        $this->password = $data['password'];
+        $this->prenom = $data['prenom'];
+        $this->nom = $data['nom'];
+        $this->address = $data['address'];
+        $this->zipCode = $data['zip_code'];
+        $this->ville = $data['ville'];
+        $this->imageName = $data['image_name'];
     }
 
     public function getFullName()

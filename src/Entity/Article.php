@@ -14,9 +14,11 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Serializer\Annotation\Context;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ArticleRepository::class)]
 #[ApiResource(
@@ -91,7 +93,7 @@ use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
                                     'content' => ['type' => 'string'],
                                     'categories' => [
                                         'type' => 'array',
-                                        'format' => 'iri'
+                                        'format' => 'iri',
                                     ],
                                     'active' => ['type' => 'boolean'],
                                 ],
@@ -128,6 +130,10 @@ use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
     'categories.titre' => 'partial',
 ])]
 #[ApiFilter(BooleanFilter::class, properties: ['active'])]
+#[UniqueEntity(
+    fields: ['titre'],
+    message: 'Ce titre est déjà utilisé par un autre article'
+)]
 class Article
 {
     #[ORM\Id]
@@ -141,6 +147,10 @@ class Article
 
     #[ORM\Column(type: Types::TEXT)]
     #[Groups(['article:list', 'article:item', 'article:post', 'article:put'])]
+    #[Assert\Length(
+        min: 10,
+        minMessage: 'Le contenu de l\'article ne peut être inférieur à {{ limit }} caractères.'
+    )]
     private ?string $content = null;
 
     #[ORM\Column(length: 150, unique: true)]

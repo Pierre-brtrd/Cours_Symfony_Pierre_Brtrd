@@ -45,7 +45,7 @@ use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
                                     'rgpd' => ['type' => 'boolean'],
                                     'article' => [
                                         'type' => 'string',
-                                        'format' => 'iri'
+                                        'format' => 'iri',
                                     ],
                                 ],
                             ],
@@ -91,7 +91,7 @@ use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
                                     'rgpd' => ['type' => 'boolean'],
                                     'article' => [
                                         'type' => 'string',
-                                        'format' => 'iri'
+                                        'format' => 'iri',
                                     ],
                                 ],
                             ],

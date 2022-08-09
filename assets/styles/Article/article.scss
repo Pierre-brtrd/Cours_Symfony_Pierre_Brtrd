@@ -1,7 +1,7 @@
 .form-filter {
     display: block;
     position: sticky;
-    top: 2em;
+    top: 4em;
 
     .loader {
         position: absolute;
@@ -25,11 +25,18 @@
 
 .article-main-content {
     display: flex;
-    flex-wrap: wrap-reverse;
 
     .column-left {
         flex: 1 0 30%;
         padding-right: 1em;
+
+        .sidebar-content {
+            display: block;
+            position: sticky;
+            top: 4em;
+            height: 100vh;
+            overflow: scroll;
+        }
 
         .categorie-article {
             .list-tag {

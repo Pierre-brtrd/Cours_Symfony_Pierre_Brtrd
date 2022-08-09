@@ -36,7 +36,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
                                     ],
                                     'article' => [
                                         'type', 'integer',
-                                        'format' => 'id'
+                                        'format' => 'id',
                                     ],
                                 ],
                             ],

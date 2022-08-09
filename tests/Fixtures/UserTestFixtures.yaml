@@ -1,0 +1,30 @@
+App\Entity\User:
+  userAdmin:
+    email: "pierre@test.com"
+    password: "<hashPassword('Test1234')>"
+    nom: "Bertrand"
+    prenom: "Pierre"
+    roles: ["ROLE_ADMIN"]
+    address: "15 rue de paradis"
+    zipCode: "73250"
+    ville: "Chambéry"
+
+  userEditor:
+    email: editor@test.com
+    password: "<hashPassword('Test1234')>"
+    nom: <firstName()>
+    prenom: <lastName()>
+    roles: ["ROLE_EDITOR"]
+    address: <address()>
+    zipCode: "73000"
+    ville: <city()>
+
+  user{1..10}:
+    email (unique): user<current()>\@domain.fr
+    password: "<hashPassword('Test1234')>"
+    nom: <firstName()>
+    prenom: <lastName()>
+    roles: ["ROLE_USER"]
+    address: <address()>
+    zipCode: "73000"
+    ville: <city()>

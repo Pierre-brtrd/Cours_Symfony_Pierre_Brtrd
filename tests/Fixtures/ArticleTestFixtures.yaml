@@ -1,0 +1,17 @@
+include:
+  - UserTestFixtures.yaml
+  - TagTestFixtures.yaml
+
+App\Entity\Article:
+  article{1..19}:
+    titre: "Titre-<current()>"
+    content: "<sentence(10)>"
+    active: true
+    user: "@userAdmin"
+    #articleImages: [<uploadImageArticle()>]
+
+  articleName:
+    titre: "Article de test"
+    content: "<sentence(10)>"
+    active: true
+    user: "@userAdmin"

@@ -1,0 +1,18 @@
+include:
+  - UserTestFixtures.yaml
+  - TagTestFixtures.yaml
+
+App\Entity\Article:
+  article{1..50}:
+    titre: "<words(2, true)>"
+    content: "<generateLoremDesc()>"
+    active: true
+    user: "@userAdmin"
+    categories: "<randomElements(@categorie{1..10})>"
+    createdAt: <generateDate()>
+
+  articleName:
+    titre: "Article de test"
+    content: "<sentence(10)>"
+    active: true
+    user: "@userAdmin"

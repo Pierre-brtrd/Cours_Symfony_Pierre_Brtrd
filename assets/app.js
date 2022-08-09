@@ -5,6 +5,7 @@ import './styles/main.scss';
 import './bootstrap';
 import './js/headerFixed';
 import './js/swiperArticle';
+import './js/highlight';
 import Filter from './js/filter';
 new Filter(document.querySelector('.js-filter'));
 

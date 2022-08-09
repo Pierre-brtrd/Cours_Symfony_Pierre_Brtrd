@@ -1,0 +1,8 @@
+include:
+  - ArticleTestFixtures.yaml
+
+App\Entity\Categorie:
+  categorie{1..10}:
+    titre: "Tag <current()>"
+    active: true
+    articles: ["@article1", "@article2"]

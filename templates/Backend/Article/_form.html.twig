@@ -24,7 +24,11 @@
 	<div id="editor" class="ckeditor-input">
 		{{ form.content.vars.value|raw }}
 	</div>
+	<div id="word-count"></div>
 	{{ form_row(form.content) }}
+</div>
+<div class="mb-3">
+	{{ form_widget(form.active)}}
 </div>
 <div class="mt-4 text-center">
 	<button type="submit" class="btn btn-primary">{{ button_label|default('Enregistrer') }}</button>

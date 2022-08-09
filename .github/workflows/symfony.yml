@@ -3,10 +3,11 @@ on:
   push:
     branches:
       - "master"
-      - "api-platform"
+      - "test-unit"
   pull_request:
     branches:
-      - "api-platform"
+      - "test-unit"
+
 jobs:
   symfony:
     name: Symfony 6 (PHP ${{ matrix.php-versions }})
@@ -94,6 +95,13 @@ jobs:
       - name: Coding standards checks (php_codesniffer + php-cs-fixer)
         run: vendor/bin/php-cs-fixer fix src
         if: matrix.php-versions == '8.0'
+
+      ## -- Unit Test analysis ✨ —————————————————————————————————————————————————
+      - name: PHPUnit test for unit test application
+        run: |
+          bin/console doctrine:database:create --env=test
+          bin/console doctrine:schema:update --env=test --force 
+          bin/phpunit --testdox
 
       ## —— Static analysis ✨ —————————————————————————————————————————————————
       - name: Static analysis of PHP code (PHPStan) and Twig with Lint

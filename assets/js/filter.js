@@ -47,7 +47,7 @@ export default class Filter {
             this.page = 1;
         });
         if (this.moreNav) {
-            this.pagination.innerHTML = '<button class="btn btn-primary mt-2">Voir plus</button>';
+            this.pagination.innerHTML = '<button class="btn btn-primary btn-show-more mt-2">Voir plus</button>';
             this.pagination.querySelector('button').addEventListener('click', this.loadMore.bind(this));
         } else {
             this.pagination.addEventListener('click', linkClikListener);
@@ -88,6 +88,7 @@ export default class Filter {
      */
     async loadUrl(url, append = false) {
         this.showLoader();
+        this.content.classList.remove('content-response');
         const params = new URLSearchParams(url.split('?')[1] || '');
         params.set('ajax', 1);
 
@@ -102,6 +103,7 @@ export default class Filter {
             this.flipContent(data.content, append);
             this.sorting.innerHTML = data.sorting;
             this.count.innerHTML = data.count;
+            this.content.classList.add('content-response');
             if (!this.moreNav) {
                 this.pagination.innerHTML = data.pagination;
             } else if (this.page === data.pages) {
@@ -111,10 +113,10 @@ export default class Filter {
             }
             params.delete('ajax');
             history.replaceState({}, '', url.split('?')[0] + '?' + params.toString());
+            this.hideLoader();
         } else {
             console.error(response);
         }
-        this.hideLoader();
     }
 
     /**

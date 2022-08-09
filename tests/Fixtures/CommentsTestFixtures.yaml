@@ -1,0 +1,13 @@
+include:
+  - UserTestFixtures.yaml
+  - ArticleTestFixtures.yaml
+
+App\Entity\Comments:
+  comments{1..10}:
+    titre: "Comment <current()>"
+    content: <sentence(10)>
+    user: "@userAdmin"
+    article: "@articleName"
+    note: <numberBetween(0, 5)>
+    active: <boolean()>
+    rgpd: true
