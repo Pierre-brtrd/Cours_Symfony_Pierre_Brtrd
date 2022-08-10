@@ -70,15 +70,25 @@
 				{% endif %}
 				<div class="switch-locale navbar-btn ms-2">
 					<div class="dropdown dropstart">
-						<a class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-							{{ ('locale.name.' ~ app.request.locale)|trans(domain = 'locale')}}
+						<a class="dropdown-toggle locale-dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+							<img src="https://flagcdn.com/{{ app.request.locale == 'en' ? 'gb' : app.request.locale}}.svg" width="40">
 						</a>
 						<ul class="dropdown-menu">
 							<li>
-								<a class="dropdown-item" href="{{ path('locale.switch', {_locale: 'en'}) }}">{{ 'locale.name.en'|trans(domain = 'locale') }}</a>
+								<a class="dropdown-item locale-item" href="{{ path('locale.switch', {_locale: 'en'}) }}" data-js-locale="en">
+									<div class="flag-icon">
+										<img src="https://flagcdn.com/gb.svg" loading="lazy" width="20">
+									</div>
+									{{ 'locale.name.en'|trans(domain = 'locale') }}
+								</a>
 							</li>
 							<li>
-								<a class="dropdown-item" href="{{ path('locale.switch', {_locale: 'fr'}) }}">{{ 'locale.name.fr'|trans(domain = 'locale') }}</a>
+								<a class="dropdown-item locale-item" href="{{ path('locale.switch', {_locale: 'fr'}) }}" data-js-locale="fr">
+									<div class="flag-icon">
+										<img src="https://flagcdn.com/fr.svg" loading="lazy" width="20">
+									</div>
+									{{ 'locale.name.fr'|trans(domain = 'locale') }}
+								</a>
 							</li>
 						</ul>
 					</div>

@@ -20,6 +20,18 @@ header {
                 color: inherit;
                 text-decoration: none;
             }
+
+            .locale-dropdown {
+                &::before {
+                    display: none !important;
+                }
+            }
+
+            .locale-item {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
         }
     }
 }
