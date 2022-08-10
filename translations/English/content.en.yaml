@@ -1,0 +1,12 @@
+home:
+  header:
+    home: Home
+    posts: Posts
+    login: Log in
+    sign_up: Sign up
+
+  content:
+    heading1: Welcome to the Blog Symfony
+    posts:
+      last: Latest Posts
+      btn_show_post: Show posts

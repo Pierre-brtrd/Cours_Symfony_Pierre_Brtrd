@@ -8,13 +8,13 @@
 {% block body %}
 	<div id="hero">
 		<div class="header">
-			<h1>Bienvenue sur le blog développé en Symfony</h1>
+			<h1>{{ 'home.content.heading1'|trans(domain = 'content') }}</h1>
 		</div>
 	</div>
 	<section class="container position-relative mt-4">
 		<div class="position-relative">
-			<h2 class="text-center">Nos derniers articles</h2>
-			<a href="{{ path('article.index') }}" class="btn btn-primary text-light position-absolute top-0">Voir les articles</a>
+			<h2 class="text-center">{{ 'home.content.posts.last'|trans(domain = 'content') }}</h2>
+			<a href="{{ path('article.index') }}" class="btn btn-primary text-light position-absolute top-0">{{ 'home.content.posts.btn_show_post'|trans(domain = 'content') }}</a>
 		</div>
 		<div class="blog-list mt-4">
 			{% include "Frontend/Article/_articles.html.twig" with {articles: articles} only %}

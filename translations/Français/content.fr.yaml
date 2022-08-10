@@ -1,0 +1,11 @@
+home:
+  header:
+    home: Accueil
+    posts: Articles
+    login: Connexion
+    sign_up: S'inscrire
+  content:
+    heading1: Bienvenue sur le blog développé en Symfony
+    posts:
+      last: Nos derniers articles
+      btn_show_post: Voir les articles

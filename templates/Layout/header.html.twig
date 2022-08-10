@@ -9,10 +9,10 @@
 			<div class="collapse navbar-collapse" id="navbarScroll">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 					<li class="nav-item">
-						<a class="nav-link {{ curentPage is defined and curentPage == 'home' ? 'active'}}" aria-current="page" href="{{ path('home') }}">Accueil</a>
+						<a class="nav-link {{ curentPage is defined and curentPage == 'home' ? 'active'}}" aria-current="page" href="{{ path('home') }}">{{ 'home.header.home'|trans(domain = 'content') }}</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link {{ curentPage is defined and curentPage == 'articles' ? 'active'}}" aria-current="page" href="{{ path('article.index') }}">Articles</a>
+						<a class="nav-link {{ curentPage is defined and curentPage == 'articles' ? 'active'}}" aria-current="page" href="{{ path('article.index') }}">{{ 'home.header.posts'|trans(domain = 'content') }}</a>
 					</li>
 				</ul>
 				{% if app.user %}
@@ -62,11 +62,11 @@
 					</div>
 				{% else %}
 					<div class="navbar-btn me-2">
-						<a href="{{path('register')}}" class="btn btn-light">S'inscrire</a>
+						<a href="{{path('register')}}" class="btn btn-light">{{ 'home.header.login'|trans(domain = 'content') }}</a>
 					</div>
 
 					<div class="navbar-btn">
-						<a href="{{path('login')}}" class="btn btn-secondary">Se connecter</a>
+						<a href="{{path('login')}}" class="btn btn-secondary">{{ 'home.header.sign_up'|trans(domain = 'content') }}</a>
 					</div>
 				{% endif %}
 				<div class="switch-locale navbar-btn ms-2">
