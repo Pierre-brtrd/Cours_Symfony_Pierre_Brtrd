@@ -25,7 +25,6 @@
         "@ckeditor/ckeditor5-source-editing": "^35.0.1",
         "@ckeditor/ckeditor5-theme-lark": "^35.0.1",
         "@ckeditor/ckeditor5-upload": "^35.0.1",
-        "@ckeditor/ckeditor5-word-count": "^35.0.1",
         "@hotwired/stimulus": "^3.0.0",
         "@popperjs/core": "^2.11.5",
         "@symfony/stimulus-bridge": "^3.2.0",
