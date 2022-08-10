@@ -18,11 +18,11 @@
 		<div class="card p-3 w-50 mx-auto">
 			<h1 class="text-center">{{ 'form.user.title.edit'|trans(domain = 'forms') }}</h1>
 
-			{% include 'Backend/User/_form.html.twig' with {button_label: 'Modifier'} %}
+			{% include 'Backend/User/_form.html.twig' with {button_label: ('main.btn.edit'|trans(domain = 'content'))} %}
 
 			{% if is_granted('ROLE_ADMIN') %}
 				<div class="col-md-3">
-					<a href="{{ path('app_user_index') }}" class="btn btn inline btn-secondary">Retour</a>
+					<a href="{{ path('app_user_index') }}" class="btn btn inline btn-secondary text-light">{{ 'main.btn.back'|trans(domain = 'content')}}</a>
 				</div>
 				{{ include('Backend/User/_delete_form.html.twig') }}
 			{% endif %}

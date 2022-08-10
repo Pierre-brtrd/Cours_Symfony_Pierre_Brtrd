@@ -1,0 +1,60 @@
+# Translation French Form
+form:
+  filter:
+    fields:
+      search: Search
+      yes: Yes
+      no: No
+    btn: Filter
+
+  user:
+    title:
+      edit: Edit user
+      create: Create new user
+      register: Sign Up
+      login: Log In
+    fields:
+      firstname: "First name:"
+      lastname: "Last name:"
+      email: "Email:"
+      address: "Adress:"
+      zipcode: "Zip code:"
+      image: "Image:"
+      choices.user: User
+      choices.editor: Editor
+      choices.admin: Administrator
+      roles: "Roles:"
+      city: "City:"
+      password:
+        main: "Password:"
+        repeat: "Repeat password:"
+
+  tag:
+    title:
+      edit: "Edit Tag"
+      create: "Create new Tag"
+    fields:
+      title: "Title:"
+
+  article:
+    title:
+      create: Creation of Article
+      edit: Edition of Article
+    fields:
+      title:
+        label: "Title:"
+        placeholder: "Title of the Article"
+      content:
+        label: "Content:"
+        placeholder: "Content of the Article"
+      tags: "Tags:"
+      image:
+        multiple: "Images:"
+        single: "Image:"
+      enable: "Enable"
+    btn:
+      create: Create
+      add_image: Add an Image
+
+# Bundles
+vich_uploader.form_label.delete_confirm: Delete image ?

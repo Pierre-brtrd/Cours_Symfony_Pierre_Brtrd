@@ -41,26 +41,26 @@
 					<div class="col-md-12">
 						<div class="form-check form-switch">
 							<input type="checkbox" class="form-check-input" value="{{ article.id }}" role="switch" data-switch-active-article {{ article.active ? 'checked' }}>
-							<label class="form-check-label">Actif</label>
+							<label class="form-check-label">{{ 'main.btn.enable'|trans(domain = 'content') }}</label>
 						</div>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-md-6">
-						<a href="{{ path('admin.article.update', {'id': article.id, 'slug': article.slug} ) }}" class="btn btn-primary">Editer</a>
+						<a href="{{ path('admin.article.update', {'id': article.id, 'slug': article.slug} ) }}" class="btn btn-primary">{{ 'main.btn.edit'|trans(domain = 'content') }}</a>
 					</div>
 					<div class="col-md-6">
 						<form method="POST" action="{{ path('admin.article.delete', {'id': article.id}) }}" onsubmit="return confirm('Êtes-vous sùr de vouloir supprimer cet article ?')">
 							<input type="hidden" name="_method" value="DELETE">
 							<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ article.id) }}">
-							<button class="btn btn-danger text-light">Supprimer</button>
+							<button class="btn btn-danger text-light">{{ 'main.btn.delete'|trans(domain = 'content') }}</button>
 						</form>
 					</div>
 				</div>
 				{% if article.comments|length > 0 %}
 					<div class="row">
 						<div class="col-md-4 mt-2">
-							<a href="{{ path('admin.article.comments', {'id': article.id, 'slug': article.slug}) }}" class="btn btn-info text-light">Commentaires</a>
+							<a href="{{ path('admin.article.comments', {'id': article.id, 'slug': article.slug}) }}" class="btn btn-info text-light">{{ 'main.btn.comments'|trans(domain = 'content') }}</a>
 						</div>
 					</div>
 				{% endif %}

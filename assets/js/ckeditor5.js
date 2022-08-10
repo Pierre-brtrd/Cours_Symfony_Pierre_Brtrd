@@ -25,8 +25,11 @@ import SourceEditing from '@ckeditor/ckeditor5-source-editing/src/sourceediting'
 let form = document.querySelector('.form-article');
 
 if (form) {
+    let editorInput = document.querySelector('#editor');
+    let placeholder = editor.dataset.placeholder;
+
     ClassicEditor
-        .create(document.querySelector('#editor'), {
+        .create(editorInput, {
             plugins: [
                 EssentialsPlugin, AutoformatPlugin, Bold, Italic, Underline, Code,
                 Font, Alignment, Indent, IndentBlock, BlockQuotePlugin, HeadingPlugin,
@@ -50,7 +53,7 @@ if (form) {
                 ],
                 shouldNotGroupWhenFull: false
             },
-            placeholder: 'Contenu de votre article',
+            placeholder: placeholder,
             heading: {
                 options: [
                     { model: 'paragraph', title: 'Paragraphe', class: 'ck-heading_paragraph' },

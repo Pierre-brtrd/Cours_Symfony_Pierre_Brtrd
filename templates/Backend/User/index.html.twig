@@ -15,9 +15,8 @@
 
 {% block body %}
 	<section class="container mt-4">
-		<h1>User index</h1>
-
-		<table class="table">
+		<h1 class="text-center">{{ 'user.admin.index.heading1'|trans(domain = 'content') }}</h1>
+		<table class="table mt-4">
 			<thead>
 				<tr>
 					<th>Id</th>
@@ -44,7 +43,7 @@
 						<td>
 							<div class="row">
 								<div class="col-md-6">
-									<a href="{{ path('app_user_edit', {'id': user.id}) }}" class="btn btn-warning">edit</a>
+									<a href="{{ path('app_user_edit', {'id': user.id}) }}" class="btn btn-warning">{{ 'main.btn.edit'|trans(domain = 'content') }}</a>
 								</div>
 							</div>
 						</td>
@@ -56,7 +55,5 @@
 				{% endfor %}
 			</tbody>
 		</table>
-
-		<a href="{{ path('register') }}" class="btn btn-primary">Créer un utilisateur</a>
 	</section>
 {% endblock %}

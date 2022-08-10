@@ -1,6 +1,6 @@
 {{ form_start(form, {'attr': {'class': 'form-article'}}) }}
 
-{{ form_widget(form.titre, {'attr': {'class': 'mb-4', 'placeholder': "Titre de l'article"} }) }}
+{{ form_row(form.titre) }}
 {{ form_row(form.categories) }}
 <div class="row mb-4">
 	<div class="col-md-12">
@@ -16,12 +16,12 @@
 				</li>
 			{% endfor %}
 		</ul>
-		<button type="button" class="btn btn-primary add-another-collection-widget" data-list-selector="#image-fields-list">Ajouter une image</button>
+		<button type="button" class="btn btn-primary add-another-collection-widget" data-list-selector="#image-fields-list">{{ 'form.article.btn.add_image'|trans(domain = 'forms') }}</button>
 	</div>
 </div>
 <div class="mb-3">
-	<label for="article[content]">Contenu:</label>
-	<div id="editor" class="ckeditor-input">
+	<label for="article[content]">{{ 'form.article.fields.content.label'|trans(domain = 'forms') }}</label>
+	<div id="editor" class="ckeditor-input" data-placeholder="{{ 'form.article.fields.content.placeholder'|trans(domain = 'forms') }}">
 		{{ form.content.vars.value|raw }}
 	</div>
 	<div id="word-count"></div>

@@ -16,7 +16,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Security;
 
-#[Route('/article')]
 class ArticleController extends AbstractController
 {
     public function __construct(
@@ -25,7 +24,7 @@ class ArticleController extends AbstractController
     ) {
     }
 
-    #[Route('/liste', name: 'article.index')]
+    #[Route('/article/liste', name: 'article.index')]
     public function index(Request $request)
     {
         $data = new SearchData();
@@ -61,7 +60,7 @@ class ArticleController extends AbstractController
         ]);
     }
 
-    #[Route('/details/{slug}', name: 'article.show')]
+    #[Route('/article/details/{slug}', name: 'article.show')]
     public function show(
         Article $article,
         Security $security,

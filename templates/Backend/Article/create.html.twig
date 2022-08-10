@@ -18,8 +18,8 @@
 {% block body %}
 	<section class="container-fluid mt-4">
 		<div class="card p-3 w-75 mx-auto mt-4">
-			<h1 class="text-center mb-4">Création d'un article</h1>
-			{% include "Backend/Article/_form.html.twig" with {button_label: "Créer"} %}
+			<h1 class="text-center mb-4">{{ 'form.article.title.create'|trans(domain = 'forms') }}</h1>
+			{% include "Backend/Article/_form.html.twig" with {button_label: ('main.btn.create'|trans(domain = 'content'))} %}
 		</div>
 	</section>
 {% endblock %}

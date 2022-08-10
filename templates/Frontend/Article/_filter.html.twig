@@ -7,13 +7,13 @@
 </div>
 
 {{ form_row(form.query) }}
-<h3 class="mb-2">Catégories</h3>
+<h3 class="mb-2">{{ 'tag.name.multiple'|trans(domain = 'content') }}</h3>
 {{ form_row(form.categories) }}
 
 {% if app.request.get('_route') == 'admin' %}
-	<h3 class="mb-2">Visibilité</h3>
+	<h3 class="mb-2">{{ 'main.title.visibility'|trans(domain = 'content') }}</h3>
 	{{ form_row(form.active) }}
 {% endif %}
 
-<button type="submit" class="btn btn-primary w-100 btn-filter-form">Filtrer</button>
+<button type="submit" class="btn btn-primary w-100 btn-filter-form">{{ 'form.filter.btn'|trans(domain = 'forms') }}</button>
 {{ form_end(form, {render_rest: false}) }}

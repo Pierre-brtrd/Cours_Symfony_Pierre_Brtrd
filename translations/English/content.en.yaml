@@ -1,0 +1,80 @@
+# Header
+header:
+  home: Home
+  posts: Posts
+  login: Log in
+  sign_up: Sign up
+  logout: Log out
+  profile: Account
+  admin:
+    users: Manage users
+    posts: Posts
+    tags: Tags
+
+# Homepage
+home:
+  content:
+    heading1: Welcome to the Blog Symfony
+    posts:
+      last: Latest Posts
+      btn_show_post: Show posts
+
+# Article
+article:
+  index:
+    count:
+      single: Post
+      multiple: Posts
+    sortable:
+      date: Date
+      name: Name
+  admin:
+    index:
+      heading1: Administration of Posts
+  btn:
+    create: Create Post
+
+# User
+user:
+  show:
+    heading1: Your Profile
+    info:
+      title: "Your informations:"
+      name: "Name :"
+      email: "Email :"
+      address: "Address : "
+      zip_code: "Zip code :"
+      city: "City :"
+    articles:
+      title: Your Posts
+    comments:
+      title: Your Comments
+  admin:
+    index:
+      heading1: Administration of Users
+  btn:
+    create: Create User
+    edit_account: Edit your account
+
+# Tag
+tag:
+  name:
+    single: Tag
+    multiple: Tags
+  admin:
+    index:
+      heading1: Admin of Tags
+  btn:
+    create: Create Tag
+
+# Main
+main:
+  title:
+    visibility: Visibility
+  btn:
+    create: Create
+    edit: Edit
+    delete: Delete
+    comments: Comments
+    enable: Enable
+    back: Back

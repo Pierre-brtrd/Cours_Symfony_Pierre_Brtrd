@@ -1,4 +1,4 @@
 <div class="js-filter-count">
 	{{ articles.getTotalItemCount }}
-	{{ articles.getTotalItemCount > 1 ? 'articles' : 'article' }}
+	{{ articles.getTotalItemCount > 1 ? 'article.index.count.multiple'|trans(domain = 'content') : 'article.index.count.single'|trans(domain = 'content') }}
 </div>

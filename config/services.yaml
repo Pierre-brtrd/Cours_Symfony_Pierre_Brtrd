@@ -6,8 +6,8 @@
 parameters:
     container.dumper.inline_factories: true
     locale: fr
-    locale_en: en
     app.supported_locales: "fr|en"
+    brand_name: "My App Symfony"
 
 services:
     # default configuration for services in *this* file

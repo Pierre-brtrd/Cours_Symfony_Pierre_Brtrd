@@ -1,0 +1,80 @@
+# Header
+header:
+  home: Accueil
+  posts: Articles
+  login: Connexion
+  sign_up: S'inscrire
+  logout: Déconnexion
+  profile: Compte
+  admin:
+    users: Gérer les utilisateurs
+    posts: Articles
+    tags: Catégories
+
+# Homepage
+home:
+  content:
+    heading1: Bienvenue sur le blog développé en Symfony
+    posts:
+      last: Nos derniers articles
+      btn_show_post: Voir les articles
+
+# Article
+article:
+  index:
+    count:
+      single: Article
+      multiple: Articles
+    sortable:
+      date: Date
+      name: Nom
+  admin:
+    index:
+      heading1: Administration des articles
+  btn:
+    create: Créer un article
+
+# User
+user:
+  show:
+    heading1: Votre Profil
+    info:
+      title: "Vos informations:"
+      name: "Nom :"
+      email: "Email :"
+      address: "Adresse : "
+      zip_code: "Code postal :"
+      city: "Ville :"
+    articles:
+      title: Vos Articles
+    comments:
+      title: Vos Commentaires
+  admin:
+    index:
+      heading1: Administration des utilisateurs
+  btn:
+    create: Créer un utilisateur
+    edit_account: Modifier votre compte
+
+# Tag
+tag:
+  name:
+    single: Catégorie
+    multiple: Catégories
+  admin:
+    index:
+      heading1: Administration des Catégories
+  btn:
+    create: Créer une Catégorie
+
+# Main
+main:
+  title:
+    visibility: Visibilité
+  btn:
+    create: Créer
+    edit: Editer
+    delete: Supprimer
+    comments: Commentaires
+    enable: Actif
+    back: Retour

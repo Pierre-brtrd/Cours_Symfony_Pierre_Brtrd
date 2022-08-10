@@ -17,7 +17,10 @@
 
 {% block body %}
 	<section class="container mt-4">
-		<h1 class="text-center">Admin catégorie</h1>
+		<h1 class="text-center">{{ 'tag.admin.index.heading1'|trans(domain = 'content') }}</h1>
+		<div class="btn-add mt-4">
+			<a href="{{ path('app_categorie_new') }}" class="btn btn-primary">{{ 'tag.btn.create'|trans(domain = 'content') }}</a>
+		</div>
 		<div class="d-flex flex-wrap justify-content-between gap-2 mt-4">
 			{% for categorie in categories %}
 				<div class="blog-card mt-0">
@@ -29,13 +32,13 @@
 							<div class="col-md-6">
 								<div class="form-check form-switch">
 									<input type="checkbox" class="form-check-input" value="{{ categorie.id }}" role="switch" data-switch-active-tag {{ categorie.active ? 'checked' }}>
-									<label class="form-check-label">Actif</label>
+									<label class="form-check-label">{{ 'main.btn.enable'|trans(domain = 'content')}}</label>
 								</div>
 							</div>
 						</div>
 						<div class="d-flex align-items-center mt-2">
 							<div class="col-md-6">
-								<a href="{{ path('app_categorie_edit', {'id': categorie.id}) }}" class="btn btn-primary">Modifier</a>
+								<a href="{{ path('app_categorie_edit', {'id': categorie.id}) }}" class="btn btn-primary">{{ 'main.btn.edit'|trans(domain = 'content')}}</a>
 							</div>
 							<div class="col-md-6">
 								{{ include('Backend/Categorie/_delete_form.html.twig') }}
@@ -45,10 +48,5 @@
 				</div>
 			{% endfor %}
 		</div>
-		<div class="btn-add mt-4 text-center">
-			<a href="{{ path('app_categorie_new') }}" class="btn btn-primary">Créer une catégorie</a>
-		</div>
 	</section>
-
-
 {% endblock %}

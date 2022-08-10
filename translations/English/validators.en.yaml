@@ -1,0 +1,8 @@
+# Form validator
+form:
+  user:
+    validator:
+      password:
+        not_blank: Please enter a password
+        min_length: Your password must have minium {{ limit }} caracters
+        no_match: Both passwords not match
