@@ -16,7 +16,7 @@
 {% block body %}
 	<section class="container mt-4">
 		<div class="card p-3 w-50 mx-auto">
-			<h1>Create new User</h1>
+			<h1>{{ 'form.user.title.create'|trans(domain = 'forms') }}</h1>
 
 			{% include 'Backend/User/_form.html.twig' with {button_label: 'Create'} %}
 

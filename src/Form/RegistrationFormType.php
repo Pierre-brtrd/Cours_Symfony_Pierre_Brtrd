@@ -20,7 +20,7 @@ class RegistrationFormType extends AbstractType
     {
         $builder
             ->add('email', EmailType::class, [
-                'label' => 'Votre Email:',
+                'label' => 'form.user.fields.email',
                 'required' => true,
             ])
             ->add('password', RepeatedType::class, [
@@ -29,48 +29,48 @@ class RegistrationFormType extends AbstractType
                     'attr' => ['autocomplete' => 'new-password'],
                     'constraints' => [
                         new NotBlank([
-                            'message' => 'Entrez un mot de passe',
+                            'message' => 'form.user.validator.password.not_blank',
                         ]),
                         new Length([
                             'min' => 6,
-                            'minMessage' => 'Votre mot de passe doit faire plus de {{ limit }} caractères',
+                            'minMessage' => 'form.user.validator.password.min_length',
                             // max length allowed by Symfony for security reasons
                             'max' => 4096,
                         ]),
                     ],
-                    'label' => 'Mot de passe',
+                    'label' => 'form.user.fields.password.main',
                 ],
                 'second_options' => [
                     'attr' => ['autocomplete' => 'new-password'],
-                    'label' => 'Répétez le mot de passe',
+                    'label' => 'form.user.fields.password.repeat',
                 ],
-                'invalid_message' => 'Les mot de passe ne correspondent pas.',
+                'invalid_message' => 'form.user.validator.password.no_match',
                 // Instead of being set onto the object directly,
                 // this is read and encoded in the controller
                 'mapped' => false,
             ])
             ->add('prenom', TextType::class, [
-                'label' => 'Prénom:',
+                'label' => 'form.user.fields.firstname',
                 'required' => true,
             ])
             ->add('nom', TextType::class, [
-                'label' => 'Nom:',
+                'label' => 'form.user.fields.lastname',
                 'required' => true,
             ])
             ->add('address', TextType::class, [
-                'label' => 'Adresse:',
+                'label' => 'form.user.fields.address',
                 'required' => true,
             ])
             ->add('zipCode', TextType::class, [
-                'label' => 'Code postal:',
+                'label' => 'form.user.fields.zipcode',
                 'required' => true,
             ])
             ->add('ville', TextType::class, [
-                'label' => 'Ville:',
+                'label' => 'form.user.fields.city',
                 'required' => true,
             ])
             ->add('imageFile', VichImageType::class, [
-                'label' => 'Image: ',
+                'label' => 'form.user.fields.image',
                 'required' => false,
                 'download_uri' => false,
                 'image_uri' => true,
@@ -82,6 +82,7 @@ class RegistrationFormType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => User::class,
+            'translation_domain' => 'forms'
         ]);
     }
 }

@@ -1,0 +1,8 @@
+# Form validator
+form:
+  user:
+    validator:
+      password:
+        not_blank: Entrez un mot de passe
+        min_length: Votre mot de passe doit faire plus de {{ limit }} caractères
+        no_match: Les mots de passe ne correspondent pas

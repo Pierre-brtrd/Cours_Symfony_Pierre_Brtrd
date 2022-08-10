@@ -8,16 +8,16 @@
 {% block body %}
 	<section class="container-fluid mt-4">
 		<form action="{{ path('login') }}" method="POST" class="p-3 card w-50 mx-auto">
-			<h1 class="title text-center">Se connecter</h1>
+			<h1 class="title text-center">{{ 'form.user.title.login'|trans(domain = 'forms') }}</h1>
 			{% if error %}
 				<div class="alert alert-danger" role="alert">
 					{{ error.messageKey|trans(error.messageData, 'security') }}
 				</div>
 			{% endif %}
-			<label for="username" class="form-label">Email:</label>
+			<label for="username" class="form-label">{{ 'form.user.fields.email'|trans(domain = 'forms') }}</label>
 			<input type="text" id="username" class="form-control" name="_username" value="{{ lastUsername }}"/>
 
-			<label for="password" class="form-label">Password:</label>
+			<label for="password" class="form-label">{{ 'form.user.fields.password.main'|trans(domain = 'forms') }}</label>
 			<input type="password" id="password" class="form-control" name="_password"/>
 
 			<div class="d-grid gap-2 d-md-block mt-4 text-center">

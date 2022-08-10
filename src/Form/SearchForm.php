@@ -20,7 +20,7 @@ class SearchForm extends AbstractType
             'label' => false,
             'required' => false,
             'attr' => [
-                'placeholder' => 'Rechercher',
+                'placeholder' => 'form.filter.fields.search',
             ],
         ])
             ->add('categories', EntityType::class, [
@@ -40,8 +40,8 @@ class SearchForm extends AbstractType
                 'label' => false,
                 'required' => false,
                 'choices' => [
-                    'Oui' => true,
-                    'non' => false,
+                    'form.filter.fields.yes' => true,
+                    'form.filter.fields.no' => false,
                 ],
                 'expanded' => true,
                 'multiple' => true,
@@ -54,6 +54,7 @@ class SearchForm extends AbstractType
             'data_class' => SearchData::class,
             'method' => 'GET',
             'csrf_protection' => false,
+            'translation_domain' => 'forms'
         ]);
     }
 

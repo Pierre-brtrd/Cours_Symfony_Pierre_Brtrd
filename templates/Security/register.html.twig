@@ -8,7 +8,7 @@
 {% block body %}
 	<section class="container mt-4">
 		<div class="card p-3 w-50 mx-auto">
-			<h1 class="title text-center">S'inscrire</h1>
+			<h1 class="title text-center">{{ 'form.user.title.register'|trans(domain = 'forms') }}</h1>
 			{{ form_start(form) }}
 			<div class="row">
 				<div class="col-md-6">

@@ -16,7 +16,7 @@
 {% block body %}
 	<section class="container mt-4">
 		<div class="card p-3 w-50 mx-auto">
-			<h1>{{ title_heading|default('Editer un utilisateur')}}</h1>
+			<h1 class="text-center">{{ 'form.user.title.edit'|trans(domain = 'forms') }}</h1>
 
 			{% include 'Backend/User/_form.html.twig' with {button_label: 'Modifier'} %}
 

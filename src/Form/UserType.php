@@ -29,27 +29,27 @@ class UserType extends AbstractType
             if ($user == $this->security->getUser()) {
                 $form
                     ->add('prenom', TextType::class, [
-                        'label' => 'Prénom:',
+                        'label' => 'form.user.fields.firstname',
                         'required' => true,
                     ])
                     ->add('nom', TextType::class, [
-                        'label' => 'Nom:',
+                        'label' => 'form.user.fields.firstname',
                         'required' => true,
                     ])
                     ->add('address', TextType::class, [
-                        'label' => 'Adresse:',
+                        'label' => 'form.user.fields.address',
                         'required' => true,
                     ])
                     ->add('zipCode', IntegerType::class, [
-                        'label' => 'Code postal:',
+                        'label' => 'form.user.fields.zipcode',
                         'required' => true,
                     ])
                     ->add('ville', TextType::class, [
-                        'label' => 'Ville:',
+                        'label' => 'form.user.fields.city',
                         'required' => true,
                     ])
                     ->add('imageFile', VichImageType::class, [
-                        'label' => 'Image: ',
+                        'label' => 'form.user.fields.image',
                         'required' => false,
                         'download_uri' => false,
                         'image_uri' => true,
@@ -60,11 +60,11 @@ class UserType extends AbstractType
             if ($this->security->isGranted('ROLE_ADMIN')) {
                 $form->add('roles', ChoiceType::class, [
                     'choices' => [
-                        'Utilisateur' => 'ROLE_USER',
-                        'Éditeur' => 'ROLE_EDITOR',
-                        'Administrateur' => 'ROLE_ADMIN',
+                        'form.user.fields.choices.user' => 'ROLE_USER',
+                        'form.user.fields.choices.editor' => 'ROLE_EDITOR',
+                        'form.user.fields.choices.admin' => 'ROLE_ADMIN',
                     ],
-                    'label' => 'Roles:',
+                    'label' => 'form.user.fields.roles',
                     'required' => false,
                     'expanded' => true,
                     'multiple' => true,
@@ -77,6 +77,7 @@ class UserType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => User::class,
+            'translation_domain' => 'forms'
         ]);
     }
 }

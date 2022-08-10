@@ -1,0 +1,39 @@
+# Translation French Form
+form:
+  filter:
+    fields:
+      search: Rechercher
+      yes: Oui
+      no: Non
+
+  user:
+    title:
+      edit: Editer un utilisateur
+      create: Créer un utilisateur
+      register: S'inscrire
+      login: Se connecter
+    fields:
+      firstname: "Prénom:"
+      lastname: "Nom:"
+      email: "Email:"
+      address: "Adresse:"
+      zipcode: "Code postal:"
+      image: "Image:"
+      choices.user: Utilisateur
+      choices.editor: Éditeur
+      choices.admin: Administrateur
+      roles: "Rôles:"
+      city: "Ville:"
+      password:
+        main: "Mot de passe:"
+        repeat: Répétez le mot de passe
+
+  tag:
+    title:
+      edit: "Modifier une catégorie"
+      create: "Créer une catégorie"
+    fields:
+      title: "Titre:"
+
+# Bundles
+vich_uploader.form_label.delete_confirm: Supprimer l'image ?
