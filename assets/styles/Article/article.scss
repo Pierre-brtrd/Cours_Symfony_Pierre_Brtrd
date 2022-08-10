@@ -59,5 +59,9 @@
 
     .column-right {
         flex: 1 0 70%;
+
+        .article-content {
+            display: grid;
+        }
     }
 }

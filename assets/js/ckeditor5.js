@@ -20,6 +20,7 @@ import CodeBlock from '@ckeditor/ckeditor5-code-block/src/codeblock';
 import ListProperties from '@ckeditor/ckeditor5-list/src/listproperties';
 import HorizontalLine from '@ckeditor/ckeditor5-horizontal-line/src/horizontalline';
 import SourceEditing from '@ckeditor/ckeditor5-source-editing/src/sourceediting';
+//import CKEditorInspector from '@ckeditor/ckeditor5-inspector';
 
 let form = document.querySelector('.form-article');
 
@@ -49,7 +50,6 @@ if (form) {
                 ],
                 shouldNotGroupWhenFull: false
             },
-            language: 'fr',
             placeholder: 'Contenu de votre article',
             heading: {
                 options: [
@@ -76,18 +76,27 @@ if (form) {
                     // Use the "php-code" class for PHP code blocks.
                     { language: 'php', label: 'PHP', class: 'php-code' },
 
+                    { langague: 'twig', label: 'Twig', class: 'code-language-twig', forceValue: true },
+
+                    { language: 'yaml', label: 'YAML', class: 'lang-yaml' },
+
+                    { language: 'bash', label: 'Bash', class: 'bash' },
+
                     // Use the "js" class for JavaScript code blocks.
                     // Note that only the first ("js") class will determine the language of the block when loading data.
                     { language: 'javascript', label: 'JavaScript', class: 'js javascript js-code' },
 
-                    // Python code blocks will have the default "language-python" CSS class.
-                    { language: 'python', label: 'Python' },
+                    { langague: 'html', label: 'HTML', class: 'html' },
 
-                    { language: 'yaml', label: 'YAML', class: 'lang-yaml s-code-block' }
+                    { langague: 'css', label: 'CSS', class: 'css' },
+
+                    // Python code blocks will have the default "language-python" CSS class.
+                    { language: 'python', label: 'Python' }
                 ]
             }
         })
         .then(editor => {
+            //CKEditorInspector.attach(editor);
             window.editor = editor;
             // Prevent showing a warning notification when user is pasting a content from MS Word or Google Docs.
             window.preventPasteFromOfficeNotification = true;
@@ -99,5 +108,8 @@ if (form) {
                 input.value = editorData;
                 form.submit();
             })
+        })
+        .catch(error => {
+            console.error(error);
         });
 }
