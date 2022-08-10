@@ -3,10 +3,10 @@ on:
   push:
     branches:
       - "master"
-      - "test-unit"
+      - "translation"
   pull_request:
     branches:
-      - "test-unit"
+      - "translation"
 
 jobs:
   symfony:

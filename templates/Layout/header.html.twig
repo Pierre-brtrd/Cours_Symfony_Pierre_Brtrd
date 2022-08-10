@@ -1,18 +1,17 @@
 <header>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
 		<div class="container-fluid">
-			<a class="navbar-brand" href="{{ path('home') }}">My app Symfony
-			</a>
+			<a class="navbar-brand" href="{{ path('home') }}">{{ brandName }}</a>
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
 			<div class="collapse navbar-collapse" id="navbarScroll">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 					<li class="nav-item">
-						<a class="nav-link {{ curentPage is defined and curentPage == 'home' ? 'active'}}" aria-current="page" href="{{ path('home') }}">{{ 'home.header.home'|trans(domain = 'content') }}</a>
+						<a class="nav-link {{ curentPage is defined and curentPage == 'home' ? 'active'}}" aria-current="page" href="{{ path('home') }}">{{ 'header.home'|trans(domain = 'content') }}</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link {{ curentPage is defined and curentPage == 'articles' ? 'active'}}" aria-current="page" href="{{ path('article.index') }}">{{ 'home.header.posts'|trans(domain = 'content') }}</a>
+						<a class="nav-link {{ curentPage is defined and curentPage == 'articles' ? 'active'}}" aria-current="page" href="{{ path('article.index') }}">{{ 'header.posts'|trans(domain = 'content') }}</a>
 					</li>
 				</ul>
 				{% if app.user %}
@@ -28,20 +27,20 @@
 										<li>
 											<a class="dropdown-item" href="{{ path('app_user_index') }}">
 												<i class="fas fa-users"></i>
-												<span>Gérer les utilisateurs</span>
+												<span>{{ 'header.admin.users'|trans(domain = 'content') }}</span>
 											</a>
 										</li>
 									{% endif %}
 									<li>
 										<a href="{{ path('admin') }}" class="dropdown-item">
 											<i class="fas fa-newspaper"></i>
-											Articles
+											{{ 'header.admin.posts'|trans(domain = 'content') }}
 										</a>
 									</li>
 									<li>
 										<a href="{{ path('app_categorie_index') }}" class="dropdown-item">
 											<i class="fas fa-tags"></i>
-											Catégorie
+											{{ 'header.admin.tags'|trans(domain = 'content') }}
 										</a>
 									</li>
 								</ul>
@@ -51,22 +50,22 @@
 					<div class="navbar-btn me-2">
 						<a href="{{ path('compte') }}" class="btn btn-light">
 							<i class="fas fa-user"></i>
-							<span>Compte</span>
+							<span>{{ 'header.profile'|trans(domain = 'content') }}</span>
 						</a>
 					</div>
 					<div class="navbar-btn">
 						<a href="{{ path('logout') }}" class="btn btn-danger">
 							<i class="fa-solid fa-right-from-bracket"></i>
-							<span>Se déconnecter</span>
+							<span>{{ 'header.logout'|trans(domain = 'content') }}</span>
 						</a>
 					</div>
 				{% else %}
 					<div class="navbar-btn me-2">
-						<a href="{{path('register')}}" class="btn btn-light">{{ 'home.header.login'|trans(domain = 'content') }}</a>
+						<a href="{{path('register')}}" class="btn btn-light">{{ 'header.sign_up'|trans(domain = 'content') }}</a>
 					</div>
 
 					<div class="navbar-btn">
-						<a href="{{path('login')}}" class="btn btn-secondary">{{ 'home.header.sign_up'|trans(domain = 'content') }}</a>
+						<a href="{{path('login')}}" class="btn btn-secondary">{{ 'header.login'|trans(domain = 'content') }}</a>
 					</div>
 				{% endif %}
 				<div class="switch-locale navbar-btn ms-2">
@@ -76,10 +75,10 @@
 						</a>
 						<ul class="dropdown-menu">
 							<li>
-								<a class="dropdown-item" href="{{ path('home.switch.locale', {_locale: 'en'}) }}">{{ 'locale.name.en'|trans(domain = 'locale') }}</a>
+								<a class="dropdown-item" href="{{ path('locale.switch', {_locale: 'en'}) }}">{{ 'locale.name.en'|trans(domain = 'locale') }}</a>
 							</li>
 							<li>
-								<a class="dropdown-item" href="{{ path('home') }}">{{ 'locale.name.fr'|trans(domain = 'locale') }}</a>
+								<a class="dropdown-item" href="{{ path('locale.switch', {_locale: 'fr'}) }}">{{ 'locale.name.fr'|trans(domain = 'locale') }}</a>
 							</li>
 						</ul>
 					</div>

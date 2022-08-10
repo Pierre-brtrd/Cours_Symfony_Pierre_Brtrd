@@ -1,10 +1,18 @@
-home:
-  header:
-    home: Home
+# Header
+header:
+  home: Home
+  posts: Posts
+  login: Log in
+  sign_up: Sign up
+  logout: Log out
+  profile: Account
+  admin:
+    users: Manage users
     posts: Posts
-    login: Log in
-    sign_up: Sign up
+    tags: Tags
 
+# Homepage
+home:
   content:
     heading1: Welcome to the Blog Symfony
     posts:

@@ -1,9 +1,18 @@
-home:
-  header:
-    home: Accueil
+# Header
+header:
+  home: Accueil
+  posts: Articles
+  login: Connexion
+  sign_up: S'inscrire
+  logout: Déconnexion
+  profile: Compte
+  admin:
+    users: Gérer les utilisateurs
     posts: Articles
-    login: Connexion
-    sign_up: S'inscrire
+    tags: Catégories
+
+# Homepage
+home:
   content:
     heading1: Bienvenue sur le blog développé en Symfony
     posts:
