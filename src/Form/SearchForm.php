@@ -54,7 +54,7 @@ class SearchForm extends AbstractType
             'data_class' => SearchData::class,
             'method' => 'GET',
             'csrf_protection' => false,
-            'translation_domain' => 'forms'
+            'translation_domain' => 'forms',
         ]);
     }
 

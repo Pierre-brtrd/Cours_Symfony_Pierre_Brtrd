@@ -4,9 +4,9 @@ namespace App\Form;
 
 use App\Entity\Categorie;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class CategorieType extends AbstractType
 {
@@ -14,7 +14,7 @@ class CategorieType extends AbstractType
     {
         $builder
             ->add('titre', TextType::class, [
-                'label' => 'form.tag.fields.title'
+                'label' => 'form.tag.fields.title',
             ]);
     }
 
@@ -22,7 +22,7 @@ class CategorieType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Categorie::class,
-            'translation_domain' => 'forms'
+            'translation_domain' => 'forms',
         ]);
     }
 }

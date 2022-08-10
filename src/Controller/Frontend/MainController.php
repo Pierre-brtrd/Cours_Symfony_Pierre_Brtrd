@@ -9,6 +9,11 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class MainController extends AbstractController
 {
+    #[Route(
+        '/{_locale<%app.supported_locales%>}',
+        defaults: ['_locale<%locale_en%>'],
+        name: 'home.switch.locale'
+    )]
     #[Route('/', name: 'home')]
     public function index(ArticleRepository $repository): Response
     {

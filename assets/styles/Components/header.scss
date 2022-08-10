@@ -1,0 +1,25 @@
+header {
+    .navbar {
+        .switch-locale {
+            position: relative;
+            color: $grey-aside;
+            padding: 0 0 0 10px;
+
+            &::before {
+                content: "";
+                position: absolute;
+                left: 0;
+                top: 0;
+                height: 100%;
+                width: 2px;
+                border-radius: $border-radius;
+                background-color: $grey-aside;
+            }
+
+            a {
+                color: inherit;
+                text-decoration: none;
+            }
+        }
+    }
+}

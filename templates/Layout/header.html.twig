@@ -69,6 +69,21 @@
 						<a href="{{path('login')}}" class="btn btn-secondary">Se connecter</a>
 					</div>
 				{% endif %}
+				<div class="switch-locale navbar-btn ms-2">
+					<div class="dropdown dropstart">
+						<a class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+							{{ ('locale.name.' ~ app.request.locale)|trans(domain = 'locale')}}
+						</a>
+						<ul class="dropdown-menu">
+							<li>
+								<a class="dropdown-item" href="{{ path('home.switch.locale', {_locale: 'en'}) }}">{{ 'locale.name.en'|trans(domain = 'locale') }}</a>
+							</li>
+							<li>
+								<a class="dropdown-item" href="{{ path('home') }}">{{ 'locale.name.fr'|trans(domain = 'locale') }}</a>
+							</li>
+						</ul>
+					</div>
+				</div>
 			</div>
 		</div>
 	</nav>
