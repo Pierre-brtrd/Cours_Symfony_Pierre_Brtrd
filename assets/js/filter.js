@@ -47,7 +47,7 @@ export default class Filter {
             this.page = 1;
         });
         if (this.moreNav) {
-            this.pagination.innerHTML = '<button class="btn btn-primary btn-show-more mt-2">Voir plus</button>';
+            this.pagination.innerHTML = `<button class="btn btn-primary btn-show-more mt-2">${this.content.dataset.jsLocale == 'fr' ? 'Voir plus' : 'Show More'}</button>`;
             this.pagination.querySelector('button').addEventListener('click', this.loadMore.bind(this));
         } else {
             this.pagination.addEventListener('click', linkClikListener);

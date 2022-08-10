@@ -18,3 +18,19 @@ home:
     posts:
       last: Latest Posts
       btn_show_post: Show posts
+
+# Article
+article:
+  index:
+    count:
+      single: Post
+      multiple: Posts
+    sortable:
+      date: Date
+      name: Name
+
+# Tag
+tag:
+  name:
+    single: Tag
+    multiple: Tags

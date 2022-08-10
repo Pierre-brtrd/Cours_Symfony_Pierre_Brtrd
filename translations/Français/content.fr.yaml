@@ -18,3 +18,19 @@ home:
     posts:
       last: Nos derniers articles
       btn_show_post: Voir les articles
+
+# Article
+article:
+  index:
+    count:
+      single: Article
+      multiple: Articles
+    sortable:
+      date: Date
+      name: Nom
+
+# Tag
+tag:
+  name:
+    single: Catégorie
+    multiple: Catégories

@@ -5,6 +5,7 @@ form:
       search: Search
       yes: Yes
       no: No
+    btn: Filter
 
   user:
     title:
