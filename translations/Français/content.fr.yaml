@@ -34,6 +34,28 @@ article:
   btn:
     create: Créer un article
 
+# User
+user:
+  show:
+    heading1: Votre Profil
+    info:
+      title: "Vos informations:"
+      name: "Nom :"
+      email: "Email :"
+      address: "Adresse : "
+      zip_code: "Code postal :"
+      city: "Ville :"
+    articles:
+      title: Vos Articles
+    comments:
+      title: Vos Commentaires
+  admin:
+    index:
+      heading1: Administration des utilisateurs
+  btn:
+    create: Créer un utilisateur
+    edit_account: Modifier votre compte
+
 # Tag
 tag:
   name:
@@ -50,3 +72,4 @@ main:
     delete: Supprimer
     comments: Commentaires
     enable: Actif
+    back: Retour

@@ -7,7 +7,7 @@
 
 {% block body %}
 	<section class="container mt-4">
-		<h1 class="text-center">Votre compte</h1>
+		<h1 class="text-center">{{ 'user.show.heading1'|trans(domain = 'content')}}</h1>
 		<div class="user-content card p-3 mt-4">
 			<div class="row align-items-start">
 				<div class="col-md-4">
@@ -19,41 +19,41 @@
 				</div>
 				<div class="col-md-8">
 					<div class="row">
-						<h2>Vos informations:</h2>
+						<h2>{{ 'user.show.info.title'|trans(domain = 'content')}}</h2>
 						<div class="row">
 							<div class="col-md-6 mt-2">
 								<p class="mb-0">
-									<strong>Nom :</strong>
+									<strong>{{ 'user.show.info.name'|trans(domain = 'content')}}</strong>
 									{{ user.fullName}}
 								</p>
 								<p>
-									<strong>Email :</strong>
+									<strong>{{ 'user.show.info.email'|trans(domain = 'content')}}</strong>
 									{{ user.email}}
 								</p>
 							</div>
 							<div class="col-md-6">
 								<p class="mb-0">
-									<strong>Adresse :</strong>
+									<strong>{{ 'user.show.info.address'|trans(domain = 'content')}}</strong>
 									{{ user.address}}
 								</p>
 								<p class="mb-0">
-									<strong>Code postal :</strong>
+									<strong>{{ 'user.show.info.zip_code'|trans(domain = 'content')}}</strong>
 									{{ user.zipCode}}
 								</p>
 								<p>
-									<strong>Ville :</strong>
+									<strong>{{ 'user.show.info.city'|trans(domain = 'content')}}</strong>
 									{{ user.ville}}
 								</p>
 							</div>
 						</div>
 						<div class="text-center">
-							<a href="{{ path('front_user_edit') }}" class="btn btn-primary">Modifier votre compte</a>
+							<a href="{{ path('front_user_edit') }}" class="btn btn-primary">{{ 'user.btn.edit_account'|trans(domain = 'content') }}</a>
 						</div>
 					</div>
 					{% if user.articles|length > 0 %}
 						<div class="row">
 							<div class="col-md-12">
-								<h2>Vos articles:</h2>
+								<h2>{{ 'user.show.articles.title'|trans(domain = 'content')}}</h2>
 								<div class="list-user mt-2">
 									{% for article in user.articles %}
 										<div class="col-md-3">
@@ -72,7 +72,7 @@
 					{% endif %}
 					{% if user.comments|length > 0 %}
 						<div class="row mt-4">
-							<h2>Vos commentaires</h2>
+							<h2>{{ 'user.show.comments.title'|trans(domain = 'content')}}</h2>
 							<div class="list-user mt-2">
 								{% for comment in user.comments %}
 									<div class="col-md-3">
