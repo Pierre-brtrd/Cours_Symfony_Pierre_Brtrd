@@ -39,6 +39,7 @@ form:
   article:
     title:
       create: Creation of Article
+      edit: Edition of Article
     fields:
       title:
         label: "Title:"

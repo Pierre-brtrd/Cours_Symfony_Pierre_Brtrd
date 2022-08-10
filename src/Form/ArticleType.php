@@ -49,7 +49,7 @@ class ArticleType extends AbstractType
                 'delete_empty' => true,
                 'prototype' => true,
                 'by_reference' => false,
-                'label' => 'form.article.fields.image.multiple'
+                'label' => 'form.article.fields.image.multiple',
             ]);
     }
 

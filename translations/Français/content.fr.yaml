@@ -45,6 +45,7 @@ main:
   title:
     visibility: Visibilité
   btn:
+    create: Créer
     edit: Editer
     delete: Supprimer
     comments: Commentaires

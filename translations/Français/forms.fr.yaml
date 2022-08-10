@@ -39,6 +39,7 @@ form:
   article:
     title:
       create: Création d'un article
+      edit: Modification d'un article
     fields:
       title:
         label: "Titre:"
