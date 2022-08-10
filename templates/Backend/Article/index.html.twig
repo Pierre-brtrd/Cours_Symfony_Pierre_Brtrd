@@ -17,9 +17,9 @@
 
 {% block body %}
 	<section class="container mt-4 js-filter">
-		<h1 class="title text-center">Administration des articles</h1>
+		<h1 class="title text-center">{{ 'article.admin.index.heading1'|trans(domain = 'content')}}</h1>
 		<div>
-			<a href="{{ path('admin.article.new') }}" class="btn btn-primary text-light">Créer un article</a>
+			<a href="{{ path('admin.article.new') }}" class="btn btn-primary text-light">{{ 'article.btn.create'|trans(domain = 'content') }}</a>
 		</div>
 		<div class="row mt-4">
 			<div class="col-md-3">

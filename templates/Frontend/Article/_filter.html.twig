@@ -11,7 +11,7 @@
 {{ form_row(form.categories) }}
 
 {% if app.request.get('_route') == 'admin' %}
-	<h3 class="mb-2">Visibilité</h3>
+	<h3 class="mb-2">{{ 'main.title.visibility'|trans(domain = 'content') }}</h3>
 	{{ form_row(form.active) }}
 {% endif %}
 

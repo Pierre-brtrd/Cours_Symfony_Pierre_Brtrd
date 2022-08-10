@@ -28,9 +28,24 @@ article:
     sortable:
       date: Date
       name: Name
+  admin:
+    index:
+      heading1: Administration of Posts
+  btn:
+    create: Create Post
 
 # Tag
 tag:
   name:
     single: Tag
     multiple: Tags
+
+# Main
+main:
+  title:
+    visibility: Visibility
+  btn:
+    edit: Edit
+    delete: Delete
+    comments: Comments
+    enable: Enable
