@@ -20,11 +20,11 @@
 	<section class="container mt-4">
 		<div class="card p-3 w-50 mx-auto">
 			<h1 class="text-center">{{ 'form.tag.title.edit'|trans(domain = 'forms') }}</h1>
-			{% include 'Backend/Categorie/_form.html.twig' with { button_label: 'Modifier' } %}
+			{% include 'Backend/Categorie/_form.html.twig' with { button_label: ('main.btn.edit'|trans(domain = 'content')) } %}
 			<div class="text-end">
 				{{ include('Backend/Categorie/_delete_form.html.twig') }}
 			</div>
 		</div>
-		<a href="{{ path('app_categorie_index') }}" class="btn btn-secondary back-btn">Retour à la liste</a>
+		<a href="{{ path('app_categorie_index') }}" class="btn btn-secondary back-btn text-light">{{ 'main.btn.back'|trans(domain = 'content')}}</a>
 	</section>
 {% endblock %}

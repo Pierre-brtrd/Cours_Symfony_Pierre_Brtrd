@@ -61,6 +61,11 @@ tag:
   name:
     single: Catégorie
     multiple: Catégories
+  admin:
+    index:
+      heading1: Administration des Catégories
+  btn:
+    create: Créer une Catégorie
 
 # Main
 main:
