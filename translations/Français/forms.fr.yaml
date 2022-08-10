@@ -36,5 +36,24 @@ form:
     fields:
       title: "Titre:"
 
+  article:
+    title:
+      create: Création d'un article
+    fields:
+      title:
+        label: "Titre:"
+        placeholder: "Titre de l'article"
+      content:
+        label: "Contenu:"
+        placeholder: "Contenu de l'article"
+      tags: "Catégories:"
+      image:
+        multiple: "Images:"
+        single: "Image:"
+      enable: "Actif:"
+    btn:
+      create: Créer
+      add_image: Ajouter une image
+
 # Bundles
 vich_uploader.form_label.delete_confirm: Supprimer l'image ?

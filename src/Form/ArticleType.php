@@ -20,7 +20,10 @@ class ArticleType extends AbstractType
     {
         $builder
             ->add('titre', TextType::class, [
-                'label' => 'Titre:',
+                'label' => 'form.article.fields.title.label',
+                'attr' => [
+                    'placeholder' => 'form.article.fields.title.placeholder',
+                ],
                 'required' => true,
             ])
             ->add('categories', EntityType::class, [
@@ -30,14 +33,14 @@ class ArticleType extends AbstractType
                         ->andWhere('c.active = true')
                         ->orderBy('c.titre', 'ASC');
                 },
-                'label' => 'Categories:',
+                'label' => 'form.article.fields.tags',
                 'multiple' => true,
                 'choice_label' => 'titre',
                 'by_reference' => false,
             ])
             ->add('content', HiddenType::class)
             ->add('active', CheckboxType::class, [
-                'label' => 'Actif',
+                'label' => 'form.article.fields.enable',
             ])
             ->add('articleImages', CollectionType::class, [
                 'entry_type' => ArticleImageType::class,
@@ -46,6 +49,7 @@ class ArticleType extends AbstractType
                 'delete_empty' => true,
                 'prototype' => true,
                 'by_reference' => false,
+                'label' => 'form.article.fields.image.multiple'
             ]);
     }
 
@@ -53,6 +57,7 @@ class ArticleType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Article::class,
+            'translation_domain' => 'forms',
         ]);
     }
 }
