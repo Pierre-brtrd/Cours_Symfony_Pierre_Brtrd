@@ -4,6 +4,7 @@ namespace App\Controller\Backend;
 
 use App\Data\SearchData;
 use App\Entity\Article;
+use App\Entity\Comments;
 use App\Form\ArticleType;
 use App\Form\SearchForm;
 use App\Repository\ArticleRepository;
@@ -88,10 +89,8 @@ class ArticleController extends AbstractController
     }
 
     #[Route('/article/edit/{id}-{slug}', name: 'admin.article.update')]
-    public function editArticle(int $id, string $slug, Request $request): Response
+    public function editArticle(Article $article, Request $request): Response
     {
-        $article = $this->repoArticle->find($id);
-
         if (!$article) {
             $this->addFlash('error', 'Article non trouvé');
 
@@ -114,10 +113,8 @@ class ArticleController extends AbstractController
     }
 
     #[Route('/article/switch/{id}', name: 'admin.article.switch', methods: 'GET')]
-    public function switchVisibilityArticle(int $id)
+    public function switchVisibilityArticle(Article $article)
     {
-        $article = $this->repoArticle->find($id);
-
         if ($article) {
             $article->isActive() ? $article->setActive(false) : $article->setActive(true);
             $this->repoArticle->add($article, true);
@@ -160,10 +157,8 @@ class ArticleController extends AbstractController
     }
 
     #[Route('/comments/switch/{id}', name: 'admin.comments.switch', methods: 'GET')]
-    public function switchVisibilityComment(int $id)
+    public function switchVisibilityComment(Comments $comment)
     {
-        $comment = $this->repoComments->find($id);
-
         if ($comment) {
             $comment->isActive() ? $comment->setActive(false) : $comment->setActive(true);
             $this->repoComments->add($comment, true);
@@ -172,5 +167,20 @@ class ArticleController extends AbstractController
         }
 
         return new Response('Commentaires non trouvé', 400);
+    }
+
+    #[Route('/comment/delete/{id}', name: 'admin.comment.delete', methods: 'DELETE|POST')]
+    public function deleteComment(Comments $comment, Request $request)
+    {
+        if ($this->isCsrfTokenValid('delete'.$comment->getId(), $request->get('_token'))) {
+            $this->repoComments->remove($comment, true);
+            $this->addFlash('success', 'Commentaire supprimé avec succès');
+
+            return $this->redirectToRoute('admin');
+        }
+
+        $this->addFlash('error', 'Le token n\'est pas valide');
+
+        return $this->redirectToRoute('admin');
     }
 }

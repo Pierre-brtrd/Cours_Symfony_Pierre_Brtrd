@@ -28,6 +28,22 @@ article:
     sortable:
       date: Date
       name: Name
+    review:
+      single: "note"
+      multiple: "notes"
+  show:
+    title:
+      infos:
+        label: "Informations:"
+        date: "Date of create:"
+        author: "Author:"
+      tags:
+        single: "Tag:"
+        multiple: "Tags:"
+      comments:
+        single: "Lastest comment:"
+        multiple: "Lastest comments:"
+
   admin:
     index:
       heading1: Administration of Posts
@@ -67,6 +83,14 @@ tag:
   btn:
     create: Create Tag
 
+# Comments
+comment:
+  name:
+    single: Comment
+    multiple: Comments
+  admin:
+    index:
+      heading1: Administration of Comments
 # Main
 main:
   title:

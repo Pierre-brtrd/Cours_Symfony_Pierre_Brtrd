@@ -70,8 +70,9 @@ class ArticleRepository extends ServiceEntityRepository
     public function findSearch(SearchData $search, bool $active = true): PaginationInterface
     {
         $query = $this->createQueryBuilder('a')
-            ->select('a', 'c', 'u', 'i')
+            ->select('a', 'c', 'u', 'i', 'co')
             ->leftJoin('a.categories', 'c')
+            ->leftJoin('a.comments', 'co')
             ->Join('a.user', 'u')
             ->leftJoin('a.articleImages', 'i');
 

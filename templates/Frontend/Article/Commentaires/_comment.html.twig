@@ -1,0 +1,19 @@
+<div class="comment-item">
+	<div class="comment-header">{{ comment.titre }}</div>
+	<div class="comment-item-content">
+		<em class="card-text">{{ comment.user.fullName }}</em>
+		<p class="card-text">{{ comment.content }}</p>
+		<div class="ratings">
+			{% for number in range(1,5) %}
+				{% if number <= comment.note %}
+					<i class="fas fa-star rating-color"></i>
+				{% else %}
+					<i class="far fa-star rating-color"></i>
+				{% endif %}
+			{% endfor %}
+		</div>
+		<p class="card-text">
+			<small class="text-muted">{{ comment.createdAt|ago }}</small>
+		</p>
+	</div>
+</div>

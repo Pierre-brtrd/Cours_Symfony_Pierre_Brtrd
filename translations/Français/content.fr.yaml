@@ -28,6 +28,21 @@ article:
     sortable:
       date: Date
       name: Nom
+    review:
+      single: "note"
+      multiple: "notes"
+  show:
+    title:
+      infos:
+        label: "Informations:"
+        date: "Date de création:"
+        author: "Auteur:"
+      tags:
+        single: "Catégorie:"
+        multiple: "Catégories:"
+      comments:
+        single: "Dernier commentaire:"
+        multiple: "Derniers commentaires:"
   admin:
     index:
       heading1: Administration des articles
@@ -66,6 +81,15 @@ tag:
       heading1: Administration des Catégories
   btn:
     create: Créer une Catégorie
+
+# Comments
+comment:
+  name:
+    single: Commentaire
+    multiple: Commentaires
+  admin:
+    index:
+      heading1: Administration des Commentaires
 
 # Main
 main:

@@ -19,7 +19,10 @@ class CommentsType extends AbstractType
     {
         $builder
             ->add('titre', TextType::class, [
-                'label' => 'Titre de votre commentaire',
+                'attr' => [
+                    'placeholder' => 'form.comments.fields.title.placeholder',
+                ],
+                'label' => 'form.comments.fields.title.label',
                 'required' => true,
                 'constraints' => [
                     new Length([
@@ -31,19 +34,25 @@ class CommentsType extends AbstractType
                 ],
             ])
             ->add('content', TextareaType::class, [
-                'label' => 'Contenu du commentaire',
+                'label' => 'form.comments.fields.content.label',
+                'attr' => [
+                    'placeholder' => 'form.comments.fields.content.placeholder',
+                ],
                 'required' => true,
             ])
             ->add('note', RangeType::class, [
+                'label' => 'form.comments.fields.grade.label',
                 'attr' => [
                     'min' => 0,
                     'max' => 5,
+                    'value' => 3,
                 ],
-                'help' => 'Selectionner une note pour l\'article',
+                'help' => 'form.comments.fields.grade.help',
                 'required' => true,
             ])
             ->add('rgpd', CheckboxType::class, [
-                'help' => 'En cochant cette case vous acceptez notre politique de confidentialité',
+                'label' => 'form.comments.fields.gdpr.label',
+                'help' => 'form.comments.fields.gdpr.help',
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Veuillez cocher la case RGPD pour poster un commentaire',
@@ -56,6 +65,7 @@ class CommentsType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Comments::class,
+            'translation_domain' => 'forms',
         ]);
     }
 }

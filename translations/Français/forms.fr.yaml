@@ -56,5 +56,22 @@ form:
       create: Créer
       add_image: Ajouter une image
 
+  comments:
+    title:
+      add: Ajouter un commentaire
+    fields:
+      title:
+        label: "Titre:"
+        placeholder: Titre de votre commentaire
+      content:
+        label: "Contenu:"
+        placeholder: "Contenu de votre commentaire"
+      grade:
+        label: "Note:"
+        help: "Sélectionnez une note pour l'article"
+      gdpr:
+        label: Rgpd
+        help: "En cochant cette case vous acceptez notre politique de confidentialité"
+
 # Bundles
 vich_uploader.form_label.delete_confirm: Supprimer l'image ?

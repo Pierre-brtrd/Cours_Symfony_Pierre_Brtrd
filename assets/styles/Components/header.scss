@@ -22,8 +22,19 @@ header {
             }
 
             .locale-dropdown {
+                display: flex;
+                align-items: center;
+
                 &::before {
                     display: none !important;
+                }
+
+                .flag-icon-main {
+                    border-radius: 50%;
+                    background-size: cover;
+                    background-position: center;
+                    width: 30px;
+                    height: 30px;
                 }
             }
 

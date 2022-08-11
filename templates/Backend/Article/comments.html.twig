@@ -17,7 +17,7 @@
 
 {% block body %}
 	<section class="container mt-4 show-comments">
-		<h1 class="text-center">Admin de commentaires</h1>
+		<h1 class="text-center">{{ 'comment.admin.index.heading1'|trans(domain = 'content') }}</h1>
 		<div class="comments-list mt-4">
 			{% for comment in comments %}
 				<div class="comment-item">
@@ -36,7 +36,14 @@
 						</div>
 						<div class="form-check form-switch">
 							<input type="checkbox" class="form-check-input" value="{{ comment.id }}" role="switch" data-switch-active-comment {{ comment.active ? 'checked' }}>
-							<label class="form-check-label">Actif</label>
+							<label class="form-check-label">{{ 'main.btn.enable'|trans(domain = 'content') }}</label>
+						</div>
+						<div class="row">
+							<form method="POST" action="{{ path('admin.comment.delete', {'id': comment.id}) }}" onsubmit="return confirm('Êtes-vous sùr de vouloir supprimer ce commentaire ?')">
+								<input type="hidden" name="_method" value="DELETE">
+								<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ comment.id) }}">
+								<button class="btn btn-danger text-light">{{ 'main.btn.delete'|trans(domain = 'content') }}</button>
+							</form>
 						</div>
 						<p class="card-text">
 							<small class="text-muted">Posté il y a

@@ -56,5 +56,22 @@ form:
       create: Create
       add_image: Add an Image
 
+  comments:
+    title:
+      add: Add a comment
+    fields:
+      title:
+        label: "Title:"
+        placeholder: Title of your comment
+      content:
+        label: "Content:"
+        placeholder: "Content of your comment"
+      grade:
+        label: "Grade:"
+        help: "Select a grade for this post"
+      gdpr:
+        label: Gdpr
+        help: "By checking this box you agree to our privacy policy"
+
 # Bundles
 vich_uploader.form_label.delete_confirm: Delete image ?

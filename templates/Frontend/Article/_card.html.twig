@@ -1,3 +1,14 @@
+{% set sumNote = 0 %}
+{% set countNote = article.comments|length %}
+
+{% for comment in article.comments %}
+	{% set sumNote = sumNote + comment.note %}
+{% endfor %}
+
+{% if sumNote > 0 %}
+	{% set avgNote = sumNote / countNote %}
+{% endif %}
+
 <div class="blog-card" id="article-{{article.id}}">
 	<a href="{{ path('article.show', {'slug': article.slug}) }}">
 		{% for image in article.articleImages|slice(0,1) %}
@@ -19,9 +30,25 @@
 			<a href="{{ path('article.show', {'slug': article.slug}) }}">{{ article.titre }}</a>
 		</h2>
 		<p class="blog-card-content-description">{{ article.content|striptags|replace({'&nbsp;': ' '})|slice(0, 100) ~ '...'}}</p>
+		{% if avgNote is defined %}
+			<p class="blog-card-reviews text-muted">
+				{% for number in range(1,5) %}
+					{% if number <= avgNote %}
+						<i class="fas fa-star rating-color"></i>
+					{% else %}
+						<i class="far fa-star rating-color"></i>
+					{% endif %}
+				{% endfor %}
+				<em>
+					({{ countNote }})
+					{{ (countNote > 1 ? 'article.index.review.multiple' : 'article.index.review.single' )|trans(domain = 'content')}}
+				</em>
+			</p>
+		{% endif %}
 		{% for categorie in article.categories %}
 			<em class="text-muted text-primary text-italic">#{{ categorie.titre }}</em>
 		{% endfor %}
+
 		{% if article.user is not null %}
 			<div class="author mt-2">
 				{% if article.user.imageName %}
