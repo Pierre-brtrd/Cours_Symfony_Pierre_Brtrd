@@ -7,7 +7,7 @@
   <img src="https://img.shields.io/badge/Code-Scss-blueviolet?style=flat&logo=sass&color=CD6799" />
 </p>
 <p>
-  <img alt="GitHub Build" src="https://img.shields.io/github/checks-status/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/master?label=Build&logo=github">
+  <img alt="GitHub Workflow Status (event)" src="https://img.shields.io/github/workflow/status/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/Full%20CI%20process%20for%20Symfony%206?label=Build&logo=github">
   <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd?label=Last%20Commit">
   <img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/m/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd?label=Commit%20Activity">
   <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd">
