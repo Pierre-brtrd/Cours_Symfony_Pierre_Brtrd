@@ -1,12 +1,5 @@
 name: Full CI process for Symfony 6
-on:
-  push:
-    branches:
-      - "master"
-      - "translation"
-  pull_request:
-    branches:
-      - "translation"
+on: [push, pull_request]
 
 jobs:
   symfony:
