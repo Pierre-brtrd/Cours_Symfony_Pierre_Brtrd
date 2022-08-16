@@ -70,9 +70,9 @@
 				{% endif %}
 				<div class="switch-locale navbar-btn ms-2">
 					<div class="dropdown dropstart">
-						<a class="dropdown-toggle locale-dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+						<button class="dropdown-toggle locale-dropdown" data-bs-toggle="dropdown" aria-expanded="false">
 							<div class="flag-icon-main" style="background-image: url(https://flagcdn.com/{{ app.request.locale == 'en' ? 'gb' : app.request.locale}}.svg)"></div>
-						</a>
+						</button>
 						<ul class="dropdown-menu">
 							<li>
 								<a class="dropdown-item locale-item" href="{{ path('locale.switch', {_locale: 'en'}) }}" data-js-locale="en">

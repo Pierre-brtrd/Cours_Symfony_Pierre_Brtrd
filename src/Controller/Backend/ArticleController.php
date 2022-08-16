@@ -122,13 +122,13 @@ class ArticleController extends AbstractController
             return new Response('Visibility changed', 201);
         }
 
-        return new Response('Article non trouvé', 400);
+        return new Response('Article non trouvé', 404);
     }
 
     #[Route('/article/delete/{id}', name: 'admin.article.delete', methods: 'DELETE|POST')]
     public function deleteArticle(Article $article, Request $request)
     {
-        if ($this->isCsrfTokenValid('delete'.$article->getId(), $request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $article->getId(), $request->get('_token'))) {
             $this->repoArticle->remove($article, true);
             $this->addFlash('success', 'Article supprimé avec succès');
 
@@ -157,22 +157,24 @@ class ArticleController extends AbstractController
     }
 
     #[Route('/comments/switch/{id}', name: 'admin.comments.switch', methods: 'GET')]
-    public function switchVisibilityComment(Comments $comment)
+    public function switchVisibilityComment(?Comments $comment)
     {
+        if (!$comment instanceof Comments) {
+            return new Response('Commentaires non trouvé', 404);
+        }
+
         if ($comment) {
             $comment->isActive() ? $comment->setActive(false) : $comment->setActive(true);
             $this->repoComments->add($comment, true);
 
             return new Response('Visibility changed', 201);
         }
-
-        return new Response('Commentaires non trouvé', 400);
     }
 
     #[Route('/comment/delete/{id}', name: 'admin.comment.delete', methods: 'DELETE|POST')]
     public function deleteComment(Comments $comment, Request $request)
     {
-        if ($this->isCsrfTokenValid('delete'.$comment->getId(), $request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $comment->getId(), $request->get('_token'))) {
             $this->repoComments->remove($comment, true);
             $this->addFlash('success', 'Commentaire supprimé avec succès');
 

@@ -70,29 +70,4 @@ class CategorieController extends AbstractController
             'form' => $form,
         ]);
     }
-
-    #[Route('/{id}', name: 'app_categorie_delete', methods: ['POST'])]
-    public function delete(Request $request, Categorie $categorie): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$categorie->getId(), $request->request->get('_token'))) {
-            $this->repository->remove($categorie, true);
-        }
-
-        return $this->redirectToRoute('app_categorie_index', [], Response::HTTP_SEE_OTHER);
-    }
-
-    #[Route('/switch/{id}', name: 'admin.comments.switch', methods: 'GET')]
-    public function switchVisibilityComment(int $id)
-    {
-        $tag = $this->repository->find($id);
-
-        if ($tag) {
-            $tag->isActive() ? $tag->setActive(false) : $tag->setActive(true);
-            $this->repository->add($tag, true);
-
-            return new Response('Visibility changed', 201);
-        }
-
-        return new Response('Catégorie non trouvée', 400);
-    }
 }

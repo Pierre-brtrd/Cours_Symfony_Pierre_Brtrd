@@ -28,6 +28,7 @@ article:
     sortable:
       date: Date
       name: Nom
+      grade: Note
     review:
       single: "note"
       multiple: "notes"

@@ -1,5 +1,29 @@
 # Cours Symfony :
 
+<p>
+  <img src="https://img.shields.io/badge/Code-Php-blueviolet?style=flat&logo=php&color=787CB5" />
+  <img src="https://img.shields.io/badge/Code-Twig-brightgreen?style=flat&color=AFC97E" />
+  <img src="https://img.shields.io/badge/Code-Javascipt-blueviolet?style=flat&logo=javascript&color=yellow" />
+  <img src="https://img.shields.io/badge/Code-Scss-blueviolet?style=flat&logo=sass&color=CD6799" />
+</p>
+<p>
+  <img alt="GitHub Build" src="https://img.shields.io/github/checks-status/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/master?label=Build&logo=github">
+  <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd?label=Last%20Commit">
+  <img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/m/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd?label=Commit%20Activity">
+  <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd">
+  <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd?label=Languages&color=yellow">
+  <img alt="W3C Validation" src="https://img.shields.io/w3c-validation/html?label=validate&logo=w3c&targetUrl=http%3A%2F%2Fdemo-sf-app.herokuapp.com%2F">
+  <img alt="GitHub release (latest SemVer)" src="https://img.shields.io/github/v/release/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd?display_name=tag">
+</p>
+
+**Minimum requirements pour les stacks :**
+<p>
+  <img src="https://img.shields.io/badge/Php-8.1-brightgreen?style=flat&logo=php&color=787CB5"/>
+  <img src="https://img.shields.io/badge/Node-18.0-brightgreen?style=flat&logo=nodedotjs&color=3C873A"/>
+  <img src="https://img.shields.io/badge/Yarn-4.0-brightgreen?style=flat&logo=yarn&color=25799f"/>
+  <img src="https://img.shields.io/badge/Mysql-8.0.25-brightgreen?style=flat&logo=mysql&color=00758F&logoColor=F29111"/>
+</p>
+
 Le but de ce cours est de découvrir le framework Symfony est de pouvoir développer des applications web.
 
 Nous verrons pendant la formation :
@@ -57,86 +81,124 @@ Vous devez dans un premier temps configurer votre environnement avec Git :
     ```shell
     git config –list
     ```
-    
+
 ### Yarn
 
 Yarn est un manager de paquets en ligne de commande qui va nous permettre d'installer et de gérer des composants de notre application symfony.
 
 Pour l'installer sur vos postes, vous devez :
 
-- Ouvrir un terminal de commande
-- Entrez la commande :
-	```shell
-	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-	```
-	* Si vous avez une erreur, Attendre que Hombrew soit installer pour lancer la commande suivante et mettre le mot de passe de votre poste :
-	```shell
-	sudo chown -R $(whoami) /usr/local/share/zsh /usr/local/share/zsh/site-founctions
-	```
-- Entrez la commande :
-	```shell
-	brew install yarn
-	```
-	
-### Docker
+- Pour les macs
 
-Pour faciliter la configuration de l'environnement de chaque participants, nous allons utiliser **Docker** (pour les plus curieux, voici <a href="https://docs.docker.com/" target="_blank">la doc de docker</a>.
+  - Ouvrir un terminal de commande
 
-Pour ça, vous avez simplement à télécharger et installer Docker sur votre poste : le lien est <a href="https://www.docker.com/products/docker-desktop" target="_blank">juste ici</a>.
+  - Entrez la commande :
 
-## Télécharger le repos :
+    ```shell
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    ```
 
-Maintenant que vous avez finis votre configuration d'environnement, vous pouvez télécharger le repos en local pour pouvoir modifier les fichiers et passer à la pratique.
+    * Si vous avez une erreur, Attendre que Hombrew soit installer pour lancer la commande suivante et mettre le mot de passe de votre poste :
 
-Voici les étapes à suivre :
+    ```shell
+    sudo chown -R $(whoami) /usr/local/share/zsh /usr/local/share/zsh/site-founctions
+    ```
 
-- Allez sur le repos dans l'onglet `code`
-- cliquez sur le bouton vert `code` et sélectionnez l'onglet `https`
-- Copiez le lien du repos
-- Ouvrer un terminal de commande
-- Allez dans le dossier où vous voulez télécharger le repos.
-  - Pour rappel `cd NomDossier` -> changement de dossier en ligne de commande
-  - `cd ..` -> revenir dans le dossier précédent
-  - `ls` -> montrer les fichiers dans le dossier actuel
-- Entrez la commande
+  - Entrez la commande :
 
-  ```shell
-  git clone https://github.com/Pierre-brtrd/cours_symfony_pierre_brtrd.git
+    ```shell
+    brew install yarn
+    ```
+
+- Pour les windows :
+
+  - Vous devez avoir installé au préalable **node** pour avoir **npm** [lien de la documentation](https://nodejs.org/en/download/).
+
+  - Ensuite rentrez la commande dans un terminal :
+
+    ```bash
+    npm install -g yarn
+    ```
+
+### Installer votre stack
+
+Une stack est un environnement de développement pour votre application, votre stack se compose de tout les composants indispensables pour faire tourner votre application.
+
+Avec Symonfy 6, vous devez obligatoirement avec sur votre environnement PHP 8 au minimum.
+
+#### PHP
+
+Pour installer Php 8 avec un windows :
+
+- Rendez-vous sur le site de Php pour [télécharger le dossier](https://windows.php.net/download#php-8.1)
+
+  - Vous devez télécharger la dernière version de Php en **Thread Safe** :
+
+    ![Capture d’écran 2022-08-02 à 10.09.13](/Users/pierre/Desktop/Capture d’écran 2022-08-02 à 10.09.13.png)
+
+    
+
+  - Un fois le dossier zip téléchargé vous allez devoir l'extraire à la racine de votre environnement **(dossier `C:\`)** dans un dossier que vous allez nommer **`php`** :
+
+  
+
+  - Ensuite vous allez devoir configurer le **php.ini**, rendez-vous dans le nouveau dossier php que vous avez créé et dupliquez le fichier **`C:\php\php.ini-development`** que vous allez renommer en **`C:\php\php.ini`**. 
+
+    
+
+  - Maintenant vous allez devoir ouvrir ce nouveau fichier et ajouter les extensions indispensable pour utiliser Symfony, faite un ctrl + f pour chercher les lignes **`Dynamic Extensions`**, vous allez devoir décommenter certaines lignes pour ajouter les extensions utiles pour votre serveur PHP :
+
+    ```ini
+    extension=curl
+    extension=fileinfo
+    extension=gd
+    extension=intl
+    extension=mbstring
+    extension=openssl
+    extension=pdo_mysql
+    ```
+
+    Cherchez ces lignes et enlevez le `;` en début de ligne pour activer les extensions, puis enregistrez vos modifications.
+
+    
+
+  - Ajouter php dans vos variables d'environnement système, chercher dans la barre de recherche windows **`Modifier les variables d'environnement systèmes`**, ouvrez la page, cliquez sur le bouton **`Variables d'environnement`**, ensuite trouvez la section **`Variables système`**, dans la liste cliquez sur la ligne qui commence par **`Path`** et ensuite sur le bouton **`Modifier`**. Maintenant cliquez sur le bouton **`nouveau`** et ajouter la ligne **`C:\php`**.
+
+  - Maintenant vous pouvez ouvrir un CMD et lancer la commande `php -v` pour vérifier votre version de php, si vous avez bien ce résultat : 
+
+    ```bash
+    PHP 8.1.8 (cli) (built: Jul  7 2022 03:11:30) (NTS)
+    ```
+
+    C'est que Php est bien installé sur votre système. Sinon essayez de fermer votre CMD et de le rouvrir en lançant la même commande.
+
+#### Composer
+
+Composer est un gestionnaire de dépendance pour PHP qui est indispensable quand vous utilisez un projet symfony, pour l'installer rendez-vous sur la [documentation composer](https://getcomposer.org/download/) et installé l'installer de composer pour windows, vous n'aurez plus qu'à le lancer et suivre les indications d'installations.
+
+#### Le Symfony CLI
+
+Pour faciliter l'installation et le démarrage d'un serveur symfony nous allons utiliser le CLI Symfony, pour l'installer suivez ces étapes :
+
+- Ouvrez un terminal PowerShell
+
+- Entrez la commande 
+
+  ```powershell
+  Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
   ```
 
-## Ouvrir sa branch de développement :
+- Puis :
 
-Pour pouvoir travailler avec Github, vous ne devez pas faire votre développement sur la branch `Master`, c'est la branch d'origin et ne doit jamais être modifié directement. Pour pouvoir travailler de manière efficace, vous allez créer votre propre branch de développement depuis la branch `Master`.
-
-Pour ça, ouvrez le dossier du repos que vous venez de télécharger avec VsCode.
-
-- Ouvrir un terminal de commande VsCode
-- Entrez la commande suivante : 
-```shell
-git checkout -b le-nom-de-votre-branch
-```
-
-## Lancement de l'environnement avec Docker :
-
-Une fois que vous avez le repos en local, il ne reste plus que 2 choses à faire : lancer l'environnement Docker, et installer le projet Symfony.
-
-### Docker :
-
-- Ouvrez le dossier du repos avec VsCode
-- Ouvrez un terminal VsCode `Terminal > New Terminal`
-- Entrez la commande
-  ```shell
-  docker-compose build
+  ```powershell
+  irm get.scoop.sh | iex
   ```
-- Ensuite, entrez la commande
-  ```shell
-  docker-compose up -d
+
+- Et enfin :
+
+  ```powershell
+  scoop install symfony-cli
   ```
-- Enfin, entrez la commande
-  ```shell
-  docker exec -it -u dev app_symfony bash
-  ```
-- Vous êtes maintenant sur le terminal de l'environnement Docker et vous allez pouvoir débuter l'installation du projet Symfony.
 
 ### Installer un projet Symfony
 
@@ -155,6 +217,14 @@ symfony new my_project_directory --version="6.*" --webapp
 ```
 
 Cette commande va vous installer un projet Symfony vierge avec l'installation des dépendances.
+
+**Versions multiple de php sur votre environnement**, Si vous utilisez WAMP ou que vous avez plusieurs version de Php sur votre système, il se peut que l'installation de Symfony soit en erreur si Symfony n'utilise pas la version de Php 8.1, pour corriger se problème, vous devez simplement entrez une commande à l'emplacement où vous voulez installer votre nouveau projet :
+
+```bash
+echo 8.1 > .php-version
+```
+
+Cette commande devrait vous créer un fichier .php-version avec seulement écrit à l'intérieur 8.1, ce fichier va stipuler à Symfony quelle version de php il doit utiliser pour faire l'installation, une fois le fichier créé, vous pouvez relancer la commande ci-dessus pour installer un nouveau projet.
 
 Dernière chose à faire, installer une dépendance à notre projet PHPStan, qui va permettre d'analyser votre code PHP pendant le développement.
 
@@ -366,12 +436,7 @@ use Symfony\Component\Routing\Annotation\Route; // <- va permettre de définir l
 
 class FrontController extends AbstractController
 {
-  /**
-   * @Route("/", name="home")
-   *    Nous définition ci-dessus la route "/" (donc la home page) que nous allons appeler home
-   * @return Response
-   *    Permets de dire à symfony qu'il faut qu'il renvoi une réponse après le traitement de la donnée
-   */
+  #[Route('/', name: 'home')]
   public function index(): Response
     {
         return new Response("Hello World !"); // On demande au controller d'envoyer une réponse avec le contenu Hello World
@@ -431,6 +496,7 @@ Voici les différentes balises Twig :
 - ```TWIG
   {{ maVariable }}
   ```
+
 - ```TWIG
   {% if foo = 0 %}
     Condition 1
@@ -808,22 +874,18 @@ Ici nous avons créer un nouvel objet de type User et définit ces propriétés,
 Nous allons tout d'abord importer la classe UserPasswordHasherInterface que va nous permettre de hasher notre password, pour se faire, nous allons devoir créer un constructeur :
 
 ```php
- private UserPasswordHasherInterface $hasher;
-
-public function __construct(UserPasswordHasherInterface $hasher)
-{
-  $this->hasher = $hasher;
+public function __construct(
+  private UserPasswordHasherInterface $hasher
+) {
 }
 ```
 
 Maintenant, dans notre fonction de création de fixture user, nous allons pouvoir utiliser le password hash avec `$this->hash->hashPassword()` :
 
 ```php
- private UserPasswordHasherInterface $hasher;
-
-public function __construct(UserPasswordHasherInterface $hasher)
-{
-  $this->hasher = $hasher;
+public function __construct(
+  private UserPasswordHasherInterface $hasher
+) {
 }
 
 public function load(ObjectManager $manager): void
@@ -1011,10 +1073,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * Class Admin Controller
- * @Route("/admin")
- */
+#[Route('/admin')]
 class AdminController extends AbstractController
 {
 }
@@ -1147,7 +1206,6 @@ class ArticleType extends AbstractType
         ]);
     }
 }
-
 ```
 
 Et voilà, notre classe ArticleType va permettre de générer automatiquement un formulaire pour créer un article.
@@ -1288,16 +1346,9 @@ Nous stockons l'instance directement dans la variable $em et nous l'utilisons en
 2.  Importer globalement la classe EntityManagerInterface pour pouvoir l'utiliser dans d'autre méthode de notre classe AdminController, pour ce faire nous allons l'instancier dans le constructeur de notre classe AdminController :
 
 ```php
-/**
-* Entity manager interface
-*
-* @var EntityManagerInterface
-*/
-private $em;
-
-public function __construct(EntityManagerInterface $em)
-{
-  $this->em = $em;
+public function __construct(
+  private EntityManagerInterface $em
+){
 }
 
 #[Route('/article/create', name: 'admin.article.create')]
@@ -1319,6 +1370,83 @@ public function createArticle(Request $request)
 }
 ```
 
+Avant de vouloir envoyer l'article en base de données, nous allons vouloir lui rattacher un auteur (un utilisateur).
+
+Pour ça nous allons devoir modifier légèrement notre table Article pour ajouter une relation **OneToMany** avec la table User étant donnée qu'un article ne peut avoir qu'un auteur, et qu'un auteur peut écrire plusieurs articles.
+
+Faites la commande `php bin/console make:entity Article` et ajoutez le champs **user** de type relation à la table user.
+
+Vous devriez avoir se résultat :
+
+```php
+/* .... Autres propriétés */
+
+#[ORM\ManyToOne(inversedBy: 'articles')]
+private ?User $user = null;
+
+/* .... Autres accesseurs */
+public function getUser(): ?User
+{
+  return $this->user;
+}
+
+public function setUser(?User $user): self
+{
+  $this->user = $user;
+
+  return $this;
+}
+```
+
+Maintenant vous pouvez envoyer ces modifications en base de données (`php bin/console make:migration` PUIS `php bin/console doctrine:migrations:migrate`).
+
+Maintenant, vos articles ont besoins d'avoir un utilisateur, donc si nous soumettons le formulaire, nous n'allons pas définir l'auteur automatiquement.
+
+Nous allons devoir ajouter un peu de logique : 
+
+Pour écrire un article, il faut que l'utilisateur soit connecté sur notre application, donc nous allons pouvoir récupérer l'utilisateur très facilement.
+
+Dans votre **Admin Controller**, vous devez importer dans le constructeur la class **Security** qui permet entre autre, de récupérer rapidement l'utilisateur qui est connecté.
+
+```php
+public function __construct(
+  private EntityManagerInterface $em,
+  private Security $security
+) {
+}
+```
+
+Une fois que c'est fait, nous allons devoir ajouter l'utilisateur automatiquement si le formulaire de création d'un article est soumis, donc rendez vous toujours dans votre AdminController dans la méthode `createArticle` :
+
+```php
+public function __construct(
+  private EntityManagerInterface $em
+){
+}
+
+#[Route('/article/create', name: 'admin.article.create')]
+public function createArticle(Request $request)
+{
+  $article = new Article();
+
+  $form = $this->createForm(ArticleType::class, $article);
+  $form->handleRequest($request);
+
+  if ($form->isSubmitted() && $form->isValid()) {
+    // On récupère l'article et on lui injecte l'utilisateur avant de l'envoyer en base
+    $article->setUser($this->security->getUser());
+    $this->em->persist($article);
+    $this->em->flush();
+  }
+
+  return $this->render('Backend/Article/create.html.twig', [
+    'form' => $form->createView()
+  ]);
+}
+```
+
+Et voilà, votre article a bien un utilisateur maintenant !
+
 Dernière chose à faire, ajouter un petit message et rediriger vers une autre page :
 
 ```php
@@ -1331,6 +1459,7 @@ public function createArticle(Request $request)
   $form->handleRequest($request);
 
   if ($form->isSubmitted() && $form->isValid()) {
+    $article->setUser($this->security->getUser());
     $this->em->persist($article);
     $this->em->flush();
     $this->addFlash('success', 'Article créé avec succès');
@@ -1364,32 +1493,11 @@ Maintenant nous voulons pouvoir récupérer tous les users ainsi que tous les ar
 Nous allons devoir importer 2 classe globalement (dans notre constructeur) le UserRepository ainsi que le ArticleRepository :
 
 ```php
-/**
-* Article repository to find article object
-* 
-* @var ArticleRepository
-*/
-private $repoArticle;
-
-/**
-* User repository to find user object
-* 
-* @var UserRepository
-*/
-private $repoUser;
-
-/**
-* Entity manager interface
-*
-* @var EntityManagerInterface
-*/
-private $em;
-
-public function __construct(ArticleRepository $repoArticle, UserRepository $repoUser, EntityManagerInterface $em)
-{
-  $this->repoArticle = $repoArticle;
-  $this->repoUser = $repoUser;
-  $this->em = $em;
+public function __construct(
+  private ArticleRepository $repoArticle, 
+  private UserRepository $repoUser, 
+  private EntityManagerInterface $em
+){
 }
 ```
 
@@ -1424,10 +1532,8 @@ Toujours dans l'AdminController, nous allons créer une nouvelle méthode qui va
 
 ```php
  #[Route('/article/edit/{id}', name: 'admin.article.edit', methods: 'GET|POST')]
-public function editArticle($id, Request $request)
+public function editArticle(Article $article, Request $request)
 {
-  $article = $this->repoArticle->find($id);
-
   $form = $this->createForm(ArticleType::class, $article);
   $form->handleRequest($request);
 
@@ -1447,3 +1553,1304 @@ public function editArticle($id, Request $request)
 Dans un premier temps, vous voyez que dans le commentaire pour définir la route, nous avons passer un paramètre dynamique `/article/edit/{id}` les accolades dans une url symbolise un paramètre qui sera envoyé directement dans l'url, en l'occurrence, nous voulons récupérer l'id de l'article à modifier afin de le retrouver en base de données et de générer le formulaire avec les informations qui sont disponible en base de données.
 
 Ensuite plutôt que de créer un nouvel article avant la génération du formulaire, nous avons simplement recherché l'article avec l'id, et nous avons envoyé cet article dans le formulaire.
+
+Vous pouvez maintenant créer ou modifier des articles.
+
+## Ajouter une image à un article
+
+Maintenant que nous pouvons créer et modifier des articles, nous allons vouloir rajouter une image à un article, pour ce faire, nous allons utiliser un bundle de Symfony : **VichUploader** qui va nous simplifier l'upload de l'image sur les articles.
+
+### Installation et configuration du bundle
+
+La première à faire est d'installer le bundle, pour ce faire vous devez entrez la commande suivante dans un terminal :
+
+```bash
+composer require vich/uploader-bundle
+```
+
+N'oubliez pas d'autoriser la recette de cette installation (configuration automatique du bundle) ce qui va permettre de créer les fichier de config.
+
+Une fois l'installation finit, vous pourrez retrouver un nouveau fichier dans le dossier **config/packages/vich_uploader.yaml** qui va configurer votre upload d'image.
+
+Vous allez devoir créer un nouveau mapping, ce qui signifie que vous allez dire à votre nouveau bundle où il doit uploader vos fichiers pour les articles ainsi que les options :
+
+```yaml
+vich_uploader:
+    db_driver: orm
+
+    mappings:
+    		# Mapping pour l'image des articles
+        articles_image:
+            uri_prefix: /images/articles
+            upload_destination: "%kernel.project_dir%/public/images/articles"
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+            inject_on_load: false
+            delete_on_update: true
+            delete_on_remove: true
+
+    metadata:
+        type: attribute
+```
+
+### Configuration de la table article
+
+Maintenant que vous avez configuré votre nouveau mapping, il va falloir modifier votre Entity Article pour modifier votre table et stocker le nom de l'image rattachée à votre article.
+
+Rendez-vous donc dans le fichier **src/Entity/Article.php**.
+
+Première chose à faire c'est d'indiquer à Symfony que cette table contient des champs uploadable :
+
+```php
+namespace App\Entity;
+
+use App\Repository\ArticleRepository;
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+
+#[ORM\Entity(repositoryClass: ArticleRepository::class)]
+#[Vich\Uploadable]
+class Article
+{
+}
+```
+
+N'oubliez pas les uses pour importer les classes.
+
+Maintenant il va falloir ajouter les champs utiles pour l'upload d'image :
+
+```php
+// [...] Autres propriétés de la table
+
+#[Vich\UploadableField(mapping: 'articles_image', fileNameProperty: 'imageName', size: 'imageSize')]
+private ?File $imageFile = null;
+
+#[ORM\Column(length: 255)]
+private ?string $imageName = null;
+
+#[ORM\Column]
+private ?int $imageSize = null;
+```
+
+Pour fonctionner, VichUploader à besoin de 3 champs indispensables :
+
+- **ImageFile** qui va stoker l'image et permettre l'upload, notez que cette propriété ne sera pas en base de données, elle sert simplement à VichUpload de récupérer le fichier et de faire le traitement de l'upload.
+  Nous avons également rajouter des options à cette propriété pour que VichUploader gère tout seul les informations :
+  - **`mapping`** -> qui indique le nom du mapping à utiliser (celui que nous avons configurer dans le fichier yaml du bundle), il faut que le nom du mapping soit identique à celui que vous avez mis dans le fichier vich_uploader.yaml.
+  - **`fileNameProperty`** -> qui va automatiquement remplir le champ **imageName** en base de données pour stocker le nom de l'image rattachée à l'article en base de données.
+  - **`size`** -> qui va automatiquement remplir le champ **ImageSize** en base de données stockant la taille de l'image.
+
+Maintenant il faut ajouter les accesseurs pour ces propriétés :
+
+``` php
+// [...] Autres accesseurs
+public function setImageFile(?File $imageFile = null): void
+{
+  $this->imageFile = $imageFile;
+
+  if (null !== $imageFile) {
+    // Il faut biensur que la propriété updatedAt soit crée sur l'Entity.
+    $this->updatedAt = new \DateTimeImmutable();
+  }
+}
+
+public function getImageFile(): ?File
+{
+  return $this->imageFile;
+}
+
+public function setImageName(?string $imageName): void
+{
+  $this->imageName = $imageName;
+}
+
+public function getImageName(): ?string
+{
+  return $this->imageName;
+}
+
+public function setImageSize(?int $imageSize): void
+{
+  $this->imageSize = $imageSize;
+}
+
+public function getImageSize(): ?int
+{
+  return $this->imageSize;
+}
+```
+
+Une fois que vous avez fait vos modifications, n'oubliez pas de faire les deux commande pour envoyer ces modifications en base de données :
+
+- `php bin/console make:migration`
+- `php bin/console doctrine:migrations:migrate`
+
+### Ajout du champ dans le formulaire
+
+Maintenant que nous avons nos champs en base de données et fait la configuration du bundle, il ne nous reste plus qu'à ajouter le champ dans le formulaire.
+
+Ouvrez le fichier **src/Form/ArticleType.php** et ajoutez le champs `imageFile` :
+
+```php
+<?php
+
+namespace App\Form;
+
+use App\Entity\Article;
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichImageType;
+
+class ArticleType extends AbstractType
+{
+    public function buildForm(FormBuilderInterface $builder, array $options): void
+    {
+        $builder
+            ->add('titre', TextType::class, [
+                'label' => 'Titre:',
+                'required' => true
+            ])
+            ->add('content', TextareaType::class, [
+                'label' => 'Contenu:',
+                'required' => true
+            ])
+          	->add('imageFile', VichImageType::class, [
+              'required' => false,
+              'download_uri' => false,
+              'image_uri' => true,
+              'asset_helper' => true,
+              'label' => 'Image',
+        		]);
+    }
+
+    public function configureOptions(OptionsResolver $resolver): void
+    {
+        $resolver->setDefaults([
+            'data_class' => Article::class,
+        ]);
+    }
+}
+```
+
+N'oubliez pas d'importer les classes que nous utilisons.
+
+### Modification de la vue
+
+Maintenant, il ne nous reste plus qu'à modifier notre vue pour afficher le nouvel input de type file qui va nous permettre d'uploader une image dans la vu qui est utilisée pour la création et l'édition d'un article en ajoutant où vous souhaitez dans votre formulaire le champ :
+
+```twig
+{{ form_row(form.imageFile)}}
+```
+
+## Supprimer un article
+
+Maintenant pour avoir toutes les actions **CRUD** sur nos articles, il faut gérer la suppression d'un article.
+
+Pour ça nous allons devoir créer une nouvelle méthode dans l'AdminController qui va nous permettre de supprimer un article.
+
+Cependant, quand on parle de suppression en base de données, il faut être très prudent, donc nous allons devoir faire des vérifications plus poussées avant de faire quoique ce soit en base.
+
+Pour ce faire Symonfy génère automatiquement des tokens de validation de formulaire, ce qui va nous permettre de vérifier si un formulaire est bien soumis via notre application et que la requête n'a pas été interceptée ni modifier entre temps, c'es le **token Csrf** de Symfony, nous allons devoir en générer un dans la vue sur le bouton de soumission du formulaire de suppression, et vérifier dans le controller que le token est valide avant de supprimer l'élément.
+
+Tout d'abord, faisons notre méthode dans le controller :
+
+```php
+#[Route('/article/delete/{id}', name: 'admin.article.delete', methods: 'DELETE|POST')]
+public function deleteArticle(Article $article, Request $request)
+{
+  // Méthode de suppression d'un article
+}
+```
+
+Nous pouvons voir que dans l'url nous allons passer l'id d'un article afin de pouvoir identifier quel article doit être supprimé que nous stockons dans la variable php $article.
+
+Maintenant nous allons devoir vérifier le token Csrf avant de supprimer cet article :
+
+```php
+#[Route('/article/delete/{id}', name: 'admin.article.delete', methods: 'DELETE|POST')]
+public function deleteArticle(Article $article, Request $request)
+{
+  if ($this->isCsrfTokenValid('delete' . $article->getId(), $request->get('_token'))) {
+    // Le token est valide on suprrime l'article
+    $this->em->remove($article);
+    $this->em->flush();
+    $this->addFlash('success', 'Article supprimé avec succès');
+    
+    return $this->redirectToRoute('admin');
+  }
+
+  $this->addFlash('error', 'Le token n\'est pas valide');
+
+  return $this->redirectToRoute('admin');
+}
+```
+
+Maintenant nous devons modifier la vue qui liste nos article en ajoutant un formulaire avec le token que nous allons générer ainsi que le bouton de suppression pour chaque article :
+
+```twig
+<form method="POST" action="{{ path('admin.article.delete', {'id': article.id}) }}" onsubmit="return confirm('Êtes-vous sùr de vouloir supprimer cet article ?')">
+  <input type="hidden" name="_method" value="DELETE">
+  <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ article.id) }}">
+  <button class="btn btn-danger text-light">Supprimer</button>
+</form>
+```
+
+## Ajout de catégories aux articles
+
+Maintenant, nous allons vouloir ajouter une nouvelle table et une nouvelle fonctionnalité à notre application, l'attribution de catégorie à nos article afin de les trier.
+
+### Création de la table
+
+Pour commencer nous allons stocker les catégories dans une nouvelle table, vous devez donc créer une nouvelle entity.
+
+Pour ce faire utiliser le maker bundle avec la commande **`php bin/console make:entity Categorie`**, pour la structure de votre table vous devez avoir les champs suivants :
+
+- `titre` -> string maxi 100 caractères
+- `articles` -> relation ManyToMany avec la table article
+
+La relation va être géré automatiquement avec doctrine, donc vous avez simplement à suivre les instructions dans le terminal pour créer ce champ et cette relation.
+
+Une fois que vous avez ajouter les deux champs, faites la migration en base de données -> `php bin/console make:migration` PUIS `php bin/console doctrine:migrations:migrate`.
+
+### Génération du CRUD
+
+Nous avons vu précédemment comment mettre en place manuellement notre CRUD sur les articles, mais Symfony nous laisse la possibilité de générer automatiquement le controller avec toutes les méthodes CRUD déjà prête, ainsi que toutes les vues.
+
+Pour générer tout ça, vous avez simplement à lancer la commande **`php bin/console make:crud`**, ensuite vous devez simplement définir qu'elle entity va être concernée pour la génération du CRUD, et enfin quelle doit être le nom du controller que Symfony va vous générer.
+
+Et automatiquement, vous avez un nouveau controller avec toutes les méthodes CRUD pour votre entity, ainsi que le Form builder pour votre entity et enfin toutes les vues pour les différentes pages du CRUD.
+
+Vous pouvez déplacer les fichiers générés automatiquement dans les différents dossiers pour garder une architecture plus propre, mais attention à changer les namespaces ainsi que les liens vers les vues dans le controller si besoin.
+
+### Ajouter des catégories
+
+Maintenant vous pouvez vous rendre sur la page de création de catégories pour en créer plusieurs.
+
+Il ne restera plus qu'à modifier le formulaire des articles pour que l'on puisse récupérer toutes les catégories stockées en base de données et de pouvoir rattacher des  catégories à nos articles.
+
+### Relier les catégories aux articles
+
+Maintenant que tout est en place, il faut modifier le formulaire des articles pour ajouter des catégories, modifier donc votre fichier **`ArticleType`** :
+
+```php
+<?php
+
+namespace App\Form;
+
+use App\Entity\Article;
+use App\Entity\Categorie;
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichImageType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+
+class ArticleType extends AbstractType
+{
+    public function buildForm(FormBuilderInterface $builder, array $options): void
+    {
+        $builder
+            ->add('titre', TextType::class, [
+                'label' => 'Titre:',
+                'required' => true
+            ])
+          	->add('categories', EntityType::class, [
+                'class' => Categorie::class,
+                'label' => 'Categories:',
+                'multiple' => true,
+                'choice_label' => 'titre',
+                'by_reference' => false,
+            ])
+            ->add('content', TextareaType::class, [
+                'label' => 'Contenu:',
+                'required' => true
+            ])
+          	->add('imageFile', VichImageType::class, [
+              'required' => false,
+              'download_uri' => false,
+              'image_uri' => true,
+              'asset_helper' => true,
+              'label' => 'Image',
+        		]);
+    }
+
+    public function configureOptions(OptionsResolver $resolver): void
+    {
+        $resolver->setDefaults([
+            'data_class' => Article::class,
+        ]);
+    }
+}
+```
+
+Nous avons rajouté le champs categories qui est de type **`EntityType`**, ce qui veut dire que Symfony va générer soit une liste déroulante soit une liste à choix multiple avec toutes les entrées de la table Catégorie, et va pouvoir attribuer les catégories aux articles rapidement et automatiquement avec le formulaire.
+
+Pour finir, n'oubliez pas de modifier la vue avec les formulaire des articles pour afficher ce nouveau champ où vous souhaitez.
+
+## Création des pages frontend article
+
+Maintenant que nous avons géré la partie backend, nous pouvons créer les pages qui vont afficher un seul article.
+
+Pour ce faire, nous allons créer un nouveau contrôleur ArticleController qui sera dans le dossier **src/frontend** afin de ne pas mélanger les controllers pour le frontend et ceux pour le backend.
+
+Pour créer le nouveau contrôleur, faites la commande `php bin/console make:controller ArticleController` ce qui va vous générer le controller, ensuite vous devez le ranger dans le bon dossier (src/frontend) et changer le namespace du fichier généré.
+
+Le fichier doit ressembler à cela :
+
+```php
+<?php
+
+namespace App\Controller\Frontend;
+
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+
+#[Route('/article')]
+class ArticleController extends AbstractController
+{
+}
+```
+
+Maintenant nous allons créer une méthode qui va afficher une page avec 1 seul article, pour ce faire nous devons envoyer dans l'url le **slug** en paramètre pour que notre controller puisse retrouver l'article en base de données et envoyer toutes les informations à la vue :
+
+```php
+#[Route('/details/{slug}', name: 'article.show')]
+public function index(?Article $article, ArticleRepository $repo): Response
+{
+  // Si aucun article trouvé, on redirige vers la page d'accueil avec un message d'erreur
+  if (!$article instanceof Article) {
+    $this->addFlash('error', 'Article non trouvé');
+
+    return $this->redirectToRoute('home');
+  }
+  
+  // On envoie les informations à la vue
+  return $this->renderForm('frontend/article/show.html.twig', [
+    'article' => $article,
+  ]);
+}
+```
+
+Rien de plus simple, maintenant il faut créer le fichier pour la vue et afficher les informations.
+
+Une fois votre vue mise en place, vous pouvez maintenant modifier la page d'accueil pour qu'elle puisse afficher la liste de tous les articles et intégrer des liens vers les pages des articles, pour ça modifiez simplement le MainController :
+
+```php
+<?php
+
+namespace App\Controller\Frontend;
+
+use App\Repository\ArticleRepository;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+
+class MainController extends AbstractController
+{
+    #[Route('/', name: 'home')]
+    public function index(ArticleRepository $repository): Response
+    {
+        $articles = $repository->findAll();
+
+        return $this->render('frontend/Home/index.html.twig', [
+            'articles' => $articles,
+        ]);
+    }
+}
+```
+
+On utilise l'`ArticleRepository` pour chercher tous les articles dans la table et on les envoie à la vue, il ne vous reste plus qu'à modifier la vue pour avoir les articles sur la page d'accueil.
+
+## Gérer les utilisateurs
+
+Maintenant, il nous reste une partie importante sur notre application, la gestion des utilisateurs, que ce soit pour enregistrer un nouvel utilisateur, ou pour que l'administrateur puisse modifier les droits de chaque utilisateur.
+
+### Inscription des utilisateurs
+
+Dans un premier temps, nous allons créer la page d'inscription utilisateur.
+
+Pour ça nous allons créer un nouveau formulaire pour les inscriptions des utilisateurs, vous pouvez générer ce formulaire avec la commande `php bin/console make:form` et vous pouvez appeler ce nouveau formulaire **RegistrationFormType**
+
+Une fois que vous avez générez le fichier vous allez devoir le modifier légèrement :
+
+```php
+<?php
+
+namespace App\Form;
+
+use App\Entity\User;
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Vich\UploaderBundle\Form\Type\VichImageType;
+
+class RegistrationFormType extends AbstractType
+{
+    public function buildForm(FormBuilderInterface $builder, array $options): void
+    {
+        $builder
+            ->add('email', EmailType::class, [
+                'label' => 'Votre Email:',
+                'required' => true,
+            ])
+            ->add('password', RepeatedType::class, [
+                'type' => PasswordType::class,
+                'first_options' => [
+                    'attr' => ['autocomplete' => 'new-password'],
+                    'constraints' => [
+                        new NotBlank([
+                            'message' => 'Entrez un mot de passe',
+                        ]),
+                        new Length([
+                            'min' => 6,
+                            'minMessage' => 'Votre mot de passe doit faire plus de {{ limit }} caractères',
+                            // max length allowed by Symfony for security reasons
+                            'max' => 4096,
+                        ]),
+                    ],
+                    'label' => 'Mot de passe',
+                ],
+                'second_options' => [
+                    'attr' => ['autocomplete' => 'new-password'],
+                    'label' => 'Répétez le mot de passe',
+                ],
+                'invalid_message' => 'Les mot de passe ne correspondent pas.',
+                // Instead of being set onto the object directly,
+                // this is read and encoded in the controller
+                'mapped' => false,
+            ])
+            ->add('prenom', TextType::class, [
+                'label' => 'Prénom:',
+                'required' => true,
+            ])
+            ->add('nom', TextType::class, [
+                'label' => 'Nom:',
+                'required' => true,
+            ])
+            ->add('address', TextType::class, [
+                'label' => 'Adresse:',
+                'required' => true,
+            ])
+            ->add('zipCode', IntegerType::class, [
+                'label' => 'Code postal:',
+                'required' => true,
+            ])
+            ->add('ville', TextType::class, [
+                'label' => 'Ville:',
+                'required' => true,
+            ])
+            ->add('imageFile', VichImageType::class, [
+                'label' => 'Image: ',
+                'required' => false,
+                'download_uri' => false,
+                'image_uri' => true,
+                'by_reference' => false,
+            ]);
+    }
+
+    public function configureOptions(OptionsResolver $resolver): void
+    {
+        $resolver->setDefaults([
+            'data_class' => User::class,
+        ]);
+    }
+}
+```
+
+Maintenant que vous avez un beau formulaire, vous allez pouvoir créer la page qui peut enregistrer de nouveau utilisateurs, donc passer par un controller, vous pouvez passer par le SecurityController si vous le souhaitez et ajouter la méthode suivante :
+
+```php
+#[Route('/register', name: 'register')]
+public function register(
+  Request $request,
+  UserPasswordHasherInterface $passwordEncoder,
+  UserRepository $repo
+) {
+  $user = new User();
+
+  $form = $this->createForm(RegistrationFormType::class, $user);
+  $form->handleRequest($request);
+
+  if ($form->isSubmitted() && $form->isValid()) {
+    // Hash the password
+    $user->setPassword(
+      $passwordEncoder->hashPassword(
+        $user,
+        $form->get('password')->getData()
+      )
+    );
+
+    $repo->add($user, true);
+
+    $this->addFlash('success', 'Vous êtes bien inscrit à notre application');
+
+    return $this->redirectToRoute('login');
+  }
+
+  return $this->renderForm('Security/register.html.twig', [
+    'form' => $form,
+  ]);
+}
+```
+
+Et il ne vous reste plus qu'à créer votre vue.
+
+### Gestion des rôles
+
+Maintenant que vous avez gérer l'inscription, il va falloir laisser la possibilité aux utilisateurs admin de pouvoir modifier le rôles des utilisateurs.
+
+Pour ça vous allez créer un nouveau controller dans le dossier **src/backend** que vous nommerez UserController et dans lequel vous allez vouloir créer les méthodes CRUD (sans le create) :
+
+```php
+<?php
+
+namespace App\Controller\Backend;
+
+use App\Entity\User;
+use App\Form\UserType;
+use App\Repository\UserRepository;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+
+#[Route('/admin/user')]
+class UserController extends AbstractController
+{
+    #[Route('/', name: 'app_user_index', methods: ['GET'])]
+    public function index(UserRepository $userRepository): Response
+    {
+        return $this->render('Backend/user/index.html.twig', [
+            'users' => $userRepository->findAll(),
+        ]);
+    }
+
+    #[Route('/{id}/edit', name: 'app_user_edit', methods: ['GET', 'POST'])]
+    public function edit(Request $request, User $user, UserRepository $userRepository): Response
+    {
+        $form = $this->createForm(UserType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $userRepository->add($user, true);
+
+            return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('Backend/user/edit.html.twig', [
+            'user' => $user,
+            'form' => $form,
+        ]);
+    }
+
+    #[Route('/{id}', name: 'app_user_delete', methods: ['POST'])]
+    public function delete(Request $request, User $user, UserRepository $userRepository): Response
+    {
+        if ($this->isCsrfTokenValid('delete' . $user->getId(), $request->request->get('_token'))) {
+            $userRepository->remove($user, true);
+        }
+
+        return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
+    }
+}
+```
+
+Je vous laisse bien entendu faire vos vue.
+
+Si vous suivez bien, vous aurez remarqué que pour la partie admin, nous utilisons un autre FormType pour les utilisateurs, c'est normal car nous ne voulons pas que l'admin puisse modifier les informations personnel des utilisateurs, seulement les rôles.
+
+Donc nous allons créer un nouveau FormType qui va intégrer plusieurs conditions :
+
+- Si l'utilisateur connecté en tant qu'Admin
+- Si l'utilisateur connecté est le même que l'utilisateur qui va être modifié (si oui, il aura accès à plus de champs pour modifier son profil)
+
+Nous faisons cela pour vous montrer que nous pouvons générer des formulaires en intégrant des conditions, et que certains champs vont être affiché de manière dynamique en fonction de condition sans besoin de devoir créer plusieurs FormType pour le même objet.
+
+Donc générez votre fichier UserType.php et modifiez-le comme ceci :
+
+```php
+<?php
+
+namespace App\Form;
+
+use App\Entity\User;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Security\Core\Security;
+use Symfony\Component\Form\FormBuilderInterface;
+use Vich\UploaderBundle\Form\Type\VichImageType;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+
+class UserType extends AbstractType
+{
+    public function __construct(
+      private Security $security
+    ){
+    }
+
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+      // On ajoute une condition dans notre FormType
+      $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
+        $user = $event->getData();
+        $form = $event->getForm();
+
+        // On vérifie si l'utilisateur qui est connecté est celui qui va être modifié
+        if ($user == $this->security->getUser()) {
+          // On ajoute les champs pour la modification de son propre profil
+          $form
+            ->add('prenom', TextType::class, [
+              'label' => 'Prénom:',
+              'required' => true,
+            ])
+            ->add('nom', TextType::class, [
+              'label' => 'Nom:',
+              'required' => true,
+            ])
+            ->add('address', TextType::class, [
+              'label' => 'Adresse:',
+              'required' => true,
+            ])
+            ->add('zipCode', IntegerType::class, [
+              'label' => 'Code postal:',
+              'required' => true,
+            ])
+            ->add('ville', TextType::class, [
+              'label' => 'Ville:',
+              'required' => true,
+            ])
+            ->add('imageFile', VichImageType::class, [
+              'label' => 'Image: ',
+              'required' => false,
+              'download_uri' => false,
+              'image_uri' => true,
+              'by_reference' => false,
+            ]);
+        }
+
+        // On vérifie si l'utillisateur connecté est un admin
+        if ($this->security->isGranted('ROLE_ADMIN')) {
+          // On ajoute le champ rôle pour gérer les rôles
+          $form->add('roles', ChoiceType::class, [
+            'choices' => [
+              'Utilisateur' => 'ROLE_USER',
+              'Éditeur' => 'ROLE_EDITOR',
+              'Administrateur' => 'ROLE_ADMIN',
+            ],
+            'label' => 'Roles:',
+            'required' => false,
+            'expanded' => true,
+            'multiple' => true,
+          ]);
+        }
+      });
+    }
+
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults([
+            'data_class' => User::class,
+        ]);
+    }
+}
+```
+
+Vous noterez que dans ce formulaire, nous n'intégrons pas la modification du mot de passe, nous allons mettre en place une structure de réinitialisation de mot de passe plus complexe et plus sécurisé (que nous ferons plus tard).
+
+Maintenant la vue de votre formulaire d'édition d'utilisateur doit également être modifié :
+
+```twig
+{{ form_start(form) }}
+{% if form.prenom is defined and form.nom is defined %}
+	<div class="row">
+		<div class="col-md-6">
+			{{ form_row(form.prenom) }}
+		</div>
+		<div class="col-md-6">
+			{{ form_row(form.nom) }}
+		</div>
+	</div>
+{% endif %}
+
+{% if form.imageFile is defined %}
+	<div class="row">
+		{{ form_row(form.imageFile)}}
+	</div>
+{% endif %}
+
+{% if form.roles is defined %}
+	<div class="col-md-12">
+		{{ form_row(form.roles) }}
+	</div>
+{% endif %}
+
+{% if form.address is defined and form.zipCode is defined and form.ville is defined %}
+	<div class="row">
+		<div class="col-md-8">
+			{{ form_row(form.address) }}
+		</div>
+		<div class="col-md-4">
+			{{ form_row(form.zipCode) }}
+		</div>
+	</div>
+
+	<div class="col-md-6">
+		{{ form_row(form.ville) }}
+	</div>
+{% endif %}
+
+<div class="text-center">
+	<button class="btn btn-primary">{{ button_label|default('Save') }}</button>
+</div>
+{{ form_row(form._token) }}
+{{ form_end(form, {render_rest: false}) }}
+```
+
+Avant de vouloir afficher les champs, on vérifie qu'ils ont été généré et qu'ils existent.
+
+Maintenant, quand vous allez modifier un user, votre formulaire va prendre en compte toute nos conditions pour afficher les bons champs en fonction de la situation.
+
+### La partie frontend des utilisateurs
+
+Nous avons géré pour le moment seulement le cas où les admin souhaite modifier un utilisateur, mais nous n'avons pas géré le cas où un utilisateur qui est connecté souhaite afficher ces informations ainsi que modifier ces informations personnelles.
+
+Dans un premier temps, vous allez devoir modifier votre bundle security pour ajouter une règle sur les urls qui commencent par '/compte', pour que ces pages soient disponible uniquement aux utilisateurs connecté.
+
+Ouvrez-le fichier **config/packages/security.yaml** et faites la modification suivante :
+
+```yaml
+access_control:
+    - { path: ^/admin, roles: ROLE_ADMIN }
+    - { path: ^/compte, roles: ROLE_USER }
+```
+
+De ce fait, vous avez sécurisé les urls qui commencent par '/compte' pour qu'elles soient disponible seulement aux utilisateurs connecté.
+
+Maintenant il va falloir créer les pages de compte et d'édition pour les utilisateurs qui sont connecté, donc un nouveau controller.
+
+Générez un nouveau controller dans le dossier frontend du nom de UserController :
+
+```php
+<?php
+
+namespace App\Controller\Frontend;
+
+use App\Entity\User;
+use App\Form\UserType;
+use App\Repository\UserRepository;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Security;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+
+#[Route('/compte')]
+class UserController extends AbstractController
+{
+    public function __construct(
+        private Security $security,
+        private UserRepository $repo
+    ) {
+    }
+
+    #[Route('', name: 'compte')]
+    public function show(): Response
+    {
+        $user = $this->security->getUser();
+
+        return $this->render('frontend/user/show.html.twig', [
+            'user' => $user,
+        ]);
+    }
+
+    #[Route('/edit-account', name: 'front_user_edit', methods: ['GET', 'POST'])]
+    public function edit(
+        Request $request,
+        UserRepository $userRepository
+    ): Response {
+
+        $user = $this->security->getUser();
+
+        $form = $this->createForm(UserType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $userRepository->add($user, true);
+
+            return $this->redirectToRoute('compte', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('Backend/user/edit.html.twig', [
+            'user' => $user,
+            'form' => $form,
+            'title_heading' => 'Editez votre profil'
+        ]);
+    }
+}
+```
+
+Vous devez biensur créer vos vue maintenant.
+
+### Le reset password
+
+Dernière chose à mettre en place pour les utilisateurs, c'est la fonctionnalité de changer de mot de passe, en effet pour le moment nous ne laissons pas la possibilité à nos utilisateurs de modifier leur mot de passe (par mesure de sécurité).
+
+Nous voulons ajouter cette feature de sorte à ce qu'un utilisateur qui veut changer son mot de passe doit faire une demande sur l'application en rentrant son adresse email, et qu'automatiquement notre application lui envoie un email avec un lien sécurisé pour réinitialiser son mot de passe.
+
+Pour ça nous allons utiliser un bundle de Symfony pour simplifier les choses.
+
+#### Installation du bundle
+
+Pour installer le bundle vous devez rentrer la commande :
+
+```bash
+composer require symfonycasts/reset-password-bundle
+```
+
+Une fois que vous avez installé le bundle entrez la commande :
+
+```bash
+php bin/console make:reset-password
+```
+
+Ce qui va vous générer tout les fichiers dont vous avez besoin pour effectuer un reset de password (même les vues !).
+
+Ensuite vous allez devoir faire la migration en base de données des changements que le bundle à fait (création d'un table qui stocke les demande de réinitialisation de mot de passe avec les token), donc -> `php bin/console make:migration` PUIS `php bin/console doctrine:migrations:migrate`.
+
+#### Configuration du bundle
+
+Avec l'installation, vous avez un nouveau fichier **config/packages/reset_password.yaml**, c'est le fichier de configuration du bundle de reset password. Modifié le comme ceci :
+
+```yaml
+symfonycasts_reset_password:
+    request_password_repository: App\Repository\ResetPasswordRequestRepository
+    lifetime: 5300
+    enable_garbage_collection: true
+```
+
+Ensuite, afin de pouvoir tester l'envoi d'email, vous pouvez utiliser mailldev ou mailltrap qui va nous permettre de pouvoir tester l'envoie d'email de notre application sans avoir besoin d'avoir un serveur SMTP sous la main.
+
+Première étapes, vous devez modifier le fichier **config/packages/messenger.yaml** :
+
+```yaml
+framework:
+    messenger:
+        failure_transport: failed
+
+        transports:
+            # https://symfony.com/doc/current/messenger.html#transport-configuration
+            async:
+                dsn: "%env(MESSENGER_TRANSPORT_DSN)%"
+                options:
+                    use_notify: true
+                    check_delayed_interval: 60000
+                retry_strategy:
+                    max_retries: 3
+                    multiplier: 2
+            failed: "doctrine://default?queue_name=failed"
+            # sync: 'sync://'
+
+        routing:
+        		# Commentez la ligne ci dessous
+            #Symfony\Component\Mailer\Messenger\SendEmailMessage: async
+            Symfony\Component\Notifier\Message\ChatMessage: async
+            Symfony\Component\Notifier\Message\SmsMessage: async
+
+            # Route your messages to the transports
+            # 'App\Message\YourMessage': async
+```
+
+Ensuite vous allez devoir vous créer un compte sur le [site de mailTrap](https://mailtrap.io/) (service gratuit).
+
+Une fois que vous l'avez fait, vous devriez tomber sur la page d'intégration de mailtrap dans vos applications, vous devriez voir un menu déroulant avec marqué `curl`, ouvrez ce menu et sélectionnez Symfony 5+ :
+
+![image-20220802161647629](/Users/pierre/Library/Application Support/typora-user-images/image-20220802161647629.png)
+
+Copiez ensuite la ligne qui commence par **MAILER_DSN** et allez dans le fichier .env de votre projet Symfony, cherchez la ligne qui commence par **MAILER_DSN**  dans le fichier .env et remplacez-là par celle que vous avez copié sur Mailtrap.
+
+Dernière étape lancez la commande :
+
+```bash
+composer dump-env dev
+```
+
+Terminez le process avec la commande :
+
+```bash
+php bin/console cache:clear
+```
+
+#### Tester le reset de password
+
+Maintenant il ne nous reste plus qu'à tester que tout fonctionne correctement, pour ça, rendez-vous sur l'url reset-password et rentrez une adresse email d'un utilisateur existant dans votre base de données.
+
+En soumettant le formulaire, cela va envoyer un email avec le lien pour modifier le mot de passe de l'utilisateur qui a fait la demande. 
+
+Vous pourrez retrouver ce lien en allant sur votre compte mailtrap en ligne dans l'onglet Inboxes > My inbox.
+
+Cliquez sur le lien et modifiez le mot de passe, ensuite essayer de vous connecter avec l'utilisateur dont vous avez modifié le mot de passe pour vérifier qu'il a bien été changé.
+
+## Gestion des commentaires
+
+Maintenant que nous avons une application fonctionnelle avec des utilisateurs, la possibilité de créer des articles, les modifier, les supprimer, nous allons pouvoir ajoute un **module de commentaires** sur les articles.
+
+Nous voulons que chaque utilisateur identifié (connecté) puisse pouvoir laisser un commentaire pour chaque article.
+
+### La table commentaire
+
+Première chose à faire, nous devons créer la table commentaire, pour ça faites la commande `php bin/console make:entity Comment`
+
+Ensuite vous allez devoir ajouter les champs suivants :
+
+- Titre -> string
+- Content -> string
+- createdAt -> date time
+- updatedAt -> date time
+- Note -> integer
+- Active -> boolean
+- Rgpd -> Boolean
+- User -> Relation ManyToOne avec la table user
+- Article -> Relation ManyToOne avec la table article
+
+Une fois que votre classe est faite, il faut envoyer les modifications en base de données avec `php bin/console make:migration` puis `php bin/console doctrine:migrations:migrate`.
+
+### Le formulaire de commentaire
+
+Maintenant, il faut créer un formulaire pour pouvoir laisser la possibilité de poster un commentaire, donc pour créer le formulaire, faites la commande `php bin/console make:form` et sélectionnez l'entity que nous venons de créer (Comment).
+
+Maintenant il ne reste plus qu'à modifier notre fichier CommentType pour lui donner les champs souhaitez :
+
+```php
+<?php
+
+namespace App\Form;
+
+use App\Entity\Comments;
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\RangeType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
+
+class CommentsType extends AbstractType
+{
+    public function buildForm(FormBuilderInterface $builder, array $options): void
+    {
+        $builder
+            ->add('titre', TextType::class, [
+              	'label' => 'Titre:',
+                'attr' => [
+                    'placeholder' => 'Titre du commentaire',
+                ],
+                'required' => true,
+                'constraints' => [
+                    new Length([
+                        'min' => 10,
+                        'minMessage' => 'Le titre de votre commentaire doit être supérieur à {{ limit }} caractères',
+                        'max' => 150,
+                        'maxMessage' => 'Le titre de votre commentaire ne doit pas dépasser {{ limit }} caractères',
+                    ]),
+                ],
+            ])
+            ->add('content', TextareaType::class, [
+                'label' => 'Contenu:',
+                'attr' => [
+                    'placeholder' => 'Contenu de votre commentaire',
+                ],
+                'required' => true,
+            ])
+            ->add('note', RangeType::class, [
+                'label' => 'Note:',
+                'attr' => [
+                    'min' => 0,
+                    'max' => 5,
+                    'value' => 3,
+                ],
+                'help' => 'Sélectionnez une note pour l\'article',
+                'required' => true,
+            ])
+            ->add('rgpd', CheckboxType::class, [
+                'label' => 'Rgpd',
+                'help' => 'En cochant cette case vous acceptez notre politique de confidentialité',
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Veuillez cocher la case RGPD pour poster un commentaire',
+                    ]),
+                ],
+            ]);
+    }
+
+    public function configureOptions(OptionsResolver $resolver): void
+    {
+        $resolver->setDefaults([
+            'data_class' => Comments::class,
+        ]);
+    }
+}
+```
+
+### Envoyer le formulaire à la vue
+
+Maintenant que nous avons tout préparé, nous allons envoyer ce nouveau formulaire à une vue pour que nos utilisateurs puissent laisser des commentaires.
+
+Pour ça, nous allons utiliser la page de details d'un article pour afficher le formulaire de commentaires, donc rendez vous dans le fichier **src/Controller/Frontend/ArticleController.php** pour envoyer le formulaire de soumission de commentaire.
+
+Tout d'abord nous allons devoir importer le repository pour retrouver les commentaires s'il y en a :
+
+```php
+/* Constructeur de notre classe */
+public function __construct(
+  private ArticleRepository $repo,
+  /* On ajoute le repository des commentaires pour retrouver les commentaires s'il y en a */
+  private CommentsRepository $repoComment,
+) {
+}
+```
+
+### Ajouter une méthode de recherche custom
+
+Avant d'aller plus loins dans l'envoi du formulaire à la vue, il va falloir qu'on ajoute une méthode de recherche custom pour retrouver les commentaires, en effet, nous allons vouloir **récupérer tous les commentaires pour 1 seul article** (étant donnée que nous allons afficher les commentaires sur la page de details d'un article).
+
+De plus nous allons vouloir créer 2 méthodes de recherche, une pour le frontend qui affichera **seulement les commentaires actifs**, et une autre pour le backend qui affichera tout les commentaires pour les gérer.
+
+Pour ajouter une méthode de rechercher dans une table custom, nous avons simplement à rajouter une nouvelle méthode dans le repository de la table ciblée, dans notre cas, le **CommentRepository**.
+
+Donc rendez-vous dans le fichier pour ajouter nos méthodes de recherche, d'abord la recherche de commentaires actif pour un seul article :
+
+```php
+public function findActiveByArticle(int $articleId)
+{
+  return $this->createQueryBuilder('C');
+}
+```
+
+Pour le moment, notre nouvelle méthode envoie seulement une queryBuilder (un builder de requête), vous noterez que nous **donnons un alias à notre queryBuilder** pour lui ajouter plus facilement les options. 
+
+Autre point à noter ici, notre **méthode prend l'id de l'article en paramètre**, ce qui veut dire que quand on voudra executer cette requête, nous allons **obligatoirement devoir lui passer l'id de l'article**.
+
+Mais maintenant, nous allons devoir lui stipuler les options de recherches il doit ajouter avant de lui demander de récupérer toutes les entrées qui correspondent à notre recherche :
+
+```php
+public function findActiveByArticle(int $articleId)
+{
+  return $this->createQueryBuilder('c')
+    /* On filtre sur l'article (on utilise la relation entre les deux tables */
+    ->andWhere('c.article = :id')
+    /* On attribut la valeur du marker de la ligne ci-dessus */
+    ->setParameter('id', $articleId)
+    /* On ne sélectionne que les commentaires actifs */
+    ->andWhere('c.active = :active')
+    /* On attribut la valeur du marker de la ligne ci-dessus */
+    ->setParameter('active', true)
+    /* On ordonnance les résultats en récupérant les derniers commentaires en premier */
+    ->orderBy('c.createdAt', 'DESC')
+    /* On récupère la requête SQL complète */
+    ->getQuery()
+    /* On récupère les résultats de la requête que notre méthode va renvoyer */
+    ->getResult();
+}
+```
+
+Maintenant nous allons faire la deuxième méthode de recherche qui va récupérer tout les commentaires (même inactif) pour un article :
+
+```php
+public function findByArticle(int $articleId, string $slug)
+{
+  return $this->createQueryBuilder('c')
+    ->join('c.article', 'a')
+    ->andWhere('a.id = :articleId')
+    ->setParameter('articleId', $articleId)
+    ->andWhere('a.slug = :slug')
+    ->setParameter('slug', $slug)
+    ->orderBy('c.createdAt', 'DESC')
+    ->getQuery()
+    ->getResult();
+}
+```
+
+C'est exactement la même chose que précédemment, mais cette fois, on ne filtre pas sur le champ actif pour récupérer tous les commentaires.
+
+### Utiliser nos recherches custom
+
+Maintenant que nous avons nos méthode de recherche, nous allons pouvoir les utiliser, d'abord sur la partie frontend afin de récupérer seulement les articles actifs, donc dans le ArticleController (frontend), nous allons ajouter une variables comments qui va stocker les commentaires de l'article, les envoyer à la vue, et ensuite nous allons générer notre formulaire de soumission de commentaire :
+
+```php
+#[Route('/article/details/{slug}', name: 'article.show')]
+public function show(?Article $article, Security $security, Request $request): Response 
+{
+  if (!$article instanceof Article) {
+    $this->addFlash('error', 'Article non trouvé');
+
+    return $this->redirectToRoute('home');
+  }
+
+  /* On cherche les commentaires de notre article */
+  $comments = $this->repoComment->findActiveByArticle($article->getId());
+
+  /* On instancie le commentaire vide */
+  $comment = new Comments();
+
+  /* On génère le formulaire */
+  $form = $this->createForm(CommentsType::class, $comment);
+  $form->handleRequest($request);
+  
+  return $this->renderForm('Frontend/Article/show.html.twig', [
+    'article' => $article,
+    /* On envoie le formulaire ainsi que les commentaires à la vue */
+    'form' => $form,
+    'comments' => $comments,
+  ]);
+}
+```
+
+Maintenant il va falloir gérer la validation du formulaire pour créer un commentaire :
+
+```php
+if ($form->isSubmitted() && $form->isValid()) {
+  /* On ajoute l'utilisateur connecté au commentaire */
+  $comment->setUser($security->getUser())
+    /* On ajoute l'article qui va être rataché au commentaire */
+    ->setArticle($article)
+    /* On définit par défaut actif le commentaire */
+    ->setActive(true);
+
+  /* On ajoute le commentaire en base de données */
+  $this->repoComment->add($comment, true);
+
+  /* On redirige sur la même page pour mettre à jour les commentaires */
+  $this->addFlash('success', 'Votre commentaire a été posté avec succès');
+
+  return $this->redirectToRoute('article.show', [
+    'slug' => $article->getSlug(),
+  ], 301);
+}
+```
+
+### Envoyer à la vue
+
+Très bien, maintenant il va falloir gérer la vue pour afficher les commentaires s'il y en a, et afficher le formulaire mais seulement si l'utilisateur est connecté, dans le cas contraire, on lui demande de se connecter.
+
+Dans ce contexte, l'idéal est de séparer ces fichiers twig en créant un petit fichier qui va afficher les commentaires, et de l'appeler sur la page de details via un include, ce qui va éviter d'avoir un seul fichier trop lourd et incompréhensible.
+
+Donc dans le dossier template/Frontend/Article, créez un nouveau dossier Commentaires dans lequel vous allez mettre tout les fichiers partials qui concerne les commentaires.
+
+Commençons par l'affichage du formulaire :
+
+```twig
+{# Commentaires/_formComment.html.twig #}
+
+{{ form_start(form) }}
+{{ form_row(form.note) }}
+{{ form_widget(form.titre, {'attr' : {'class': 'mt-4'} }) }}
+{{ form_errors(form.titre)}}
+{{ form_widget(form.content, {'attr' : {'class': 'mt-4 mb-4', 'rows': 5} }) }}
+{{ form_row(form.rgpd)}}
+<button type="submit" class="btn btn-primary">{{ button_label|default('Save')}}</button>
+{{ form_end(form) }}
+```
+
+Maintenant, sur le fichier article show.html.twig, nous allons devoir vérifier si l'utilisateur est connecté ou non, si oui on lui affiche le formulaire, sinon on lui affiche un message pour qu'il se connecte :
+
+```twig
+{# Article/show.html.twig #}
+
+<div class="comments card p-3 mt-4">
+  <h2>Ajouter un commentaire</h2>
+  {% if app.user %}
+  	{% include "Frontend/Article/Commentaires/_formComment.html.twig" with { button_label: 'Envoyer'} %}
+  {% else %}
+    <div class="alert alert-info mt-2" role="alert">
+      <p>
+      <b>Attention!</b>
+      <br/>
+      Vous devez
+      <a href="{{ path('login') }}">être connecté</a>
+      pour laisser un commentaire.
+      </p>
+  	</div>
+	{% endif %}
+</div>
+```
+
+Et voilà, votre formulaire ne va s'afficher que si un utilisateur est connecté !
+
+Dernière chose à faire, afficher les commentaires s'il y en a, pour a rien de plus simple, vous savez que votre variable `comments` stocke les commentaires actif, donc vous allez pouvoir l'utiliser pour afficher les commentaires sur la vue :
+
+```twig
+{# Article/show.html.twig #}
+
+{% if comments|length > 0 %}
+  <div class="show-comments mt-4">
+    <h2>Commentaires: </h2>
+    <div class="comments-list">
+      {% for comment in comments %}
+      {% include "Frontend/Article/Commentaires/_comment.html.twig" %}
+      {% endfor %}
+    </div>
+  </div>
+{% endif %}
+```
+
+Vous l'aurez compris, il faut maintenant créer le fichier partial `_comment.html.twig` pour afficher chaque commentaire :
+
+```twig
+{# Commentaires/_comment.html.twig #}
+
+<div class="comment-item">
+	<div class="comment-header">{{ comment.titre }}</div>
+	<div class="comment-item-content">
+		<em class="card-text">{{ comment.user.fullName }}</em>
+		<p class="card-text">{{ comment.content }}</p>
+		<div class="ratings">
+			{% for number in range(1,5) %}
+				{% if number <= comment.note %}
+					<i class="fas fa-star rating-color"></i>
+				{% else %}
+					<i class="far fa-star rating-color"></i>
+				{% endif %}
+			{% endfor %}
+		</div>
+		<p class="card-text">
+			<small class="text-muted">{{ comment.createdAt|ago }}</small>
+		</p>
+	</div>
+</div>
+```
+
+**Attention**, ici nous avons utilisé un filtre twig **`|ago`** qui n'existe pas par défaut. Ce filtre va nous permettre de calculer depuis combien de temps le commentaire est posté et d'afficher un message. Mais il faut rajouter un bundle pour pouvoir l'utiliser, c'est le bundle [knpTimeBundle](https://github.com/KnpLabs/KnpTimeBundle), et pour l'installer, il vous suffit de rentrer la commande :
+
+```bash
+composer require knplabs/knp-time-bundle
+```
+
+Une fois que vous avez installé ce bundle, votre vue va fonctionner et vous verrez depuis combien de temps votre commentaire a été posté.
+
+Voilà pour la partie frontend des commentaires !
+
+### Gestion backend des commentaires
+
+Maintenant que nos utilisateurs peuvent ajouter des commentaires, nous allons devoir ajouter la gestion en admin des commentaires pour pouvoir les rendre inactif ou supprimer les commentaires si besoin.

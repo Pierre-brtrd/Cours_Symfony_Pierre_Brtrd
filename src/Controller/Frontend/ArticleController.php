@@ -62,7 +62,7 @@ class ArticleController extends AbstractController
 
     #[Route('/article/details/{slug}', name: 'article.show')]
     public function show(
-        Article $article,
+        ?Article $article,
         Security $security,
         Request $request
     ): Response {
