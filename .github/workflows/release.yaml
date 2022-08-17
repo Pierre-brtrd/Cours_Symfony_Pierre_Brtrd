@@ -1,0 +1,27 @@
+name: Release changelog
+on:
+  push:
+    branches: [master]
+
+jobs:
+  changelog:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Conventional Changelog Action
+        id: changelog
+        uses: TriPSs/conventional-changelog-action@v3.14.0
+        with:
+          github-token: ${{ secrets.CHANGELOG_RELEASE }}
+
+      - name: Create Release
+        uses: ncipollo/release-action@v1.10.0
+        if: ${{ steps.changelog.outputs.skipped == 'false' }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.CHANGELOG_RELEASE }}
+        with:
+          tag_name: ${{ steps.changelog.outputs.tag }}
+          release_name: ${{ steps.changelog.outputs.tag }}
+          body: ${{ steps.changelog.outputs.clean_changelog }}
