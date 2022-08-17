@@ -1,3 +1,12 @@
+## [2.4.2](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/compare/v2.4.0...v2.4.2) (2022-08-17)
+
+
+### Bug Fixes
+
+* **build:** update composer-lock for build CI ([d4985b6](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/commit/d4985b6ace75604fafabeeeb6c26bcd34f01d8bc))
+
+
+
 # [2.4.0](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/compare/v2.3.2...v2.4.0) (2022-08-17)
 
 
