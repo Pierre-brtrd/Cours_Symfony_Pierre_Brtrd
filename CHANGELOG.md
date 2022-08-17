@@ -1,3 +1,24 @@
+# [2.4.0](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/compare/v2.3.2...v2.4.0) (2022-08-17)
+
+
+### Bug Fixes
+
+* **article:** update query for home and test ([0511807](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/commit/05118070e36102f5892827aa57379a48f6f1d123))
+
+
+### Features
+
+* **images:** add and setup gaufrette storage for images ([dda468a](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/commit/dda468a1f9ad294296b5a7c9efc9f86680716cf8))
+* **images:** add liip imagine for thumbnail images ([1c9f7f0](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/commit/1c9f7f0671fed9ef98bb76f4e340971c2573ef49))
+
+
+### Performance Improvements
+
+* **cache:** update cache for homepage ([f8c8978](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/commit/f8c89780715624ae5d94e097a11b26163996b883))
+* **database:** improve query performance in database ([f553ddb](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/commit/f553ddbe5f97a80aa2e70b3a56e2ebc7d11b6ead))
+
+
+
 ## [2.3.2](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/compare/v2.3.0...v2.3.2) (2022-08-17)
 
 
