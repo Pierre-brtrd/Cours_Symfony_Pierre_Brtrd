@@ -70,4 +70,19 @@ class CategorieController extends AbstractController
             'form' => $form,
         ]);
     }
+
+    #[Route('/delete/{id}', name: 'app_categorie_delete', methods: 'DELETE|POST')]
+    public function deleteArticle(Categorie $categorie, Request $request)
+    {
+        if ($this->isCsrfTokenValid('delete' . $categorie->getId(), $request->get('_token'))) {
+            $this->repository->remove($categorie, true);
+            $this->addFlash('success', 'Categorie supprimée avec succès');
+
+            return $this->redirectToRoute('app_categorie_index');
+        }
+
+        $this->addFlash('error', 'Le token n\'est pas valide');
+
+        return $this->redirectToRoute('app_categorie_index');
+    }
 }

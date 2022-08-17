@@ -13,7 +13,7 @@
 	<a href="{{ path('article.show', {'slug': article.slug}) }}">
 		{% for image in article.articleImages|slice(0,1) %}
 			<div class="blog-card-image">
-				<img src="{{ vich_uploader_asset(image, 'imageFile') }}" alt="{{ article.titre }}">
+				<img src="{{ vich_uploader_asset(image, 'imageFile')|imagine_filter('thumb_list') }}" alt="{{ article.titre }}">
 			</div>
 		{% else %}
 			<div class="blog-card-image">
