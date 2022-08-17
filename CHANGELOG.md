@@ -1,4 +1,15 @@
-# 2.3.0 (2022-08-17)
+## [2.3.2](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/compare/v2.3.0...v2.3.2) (2022-08-17)
+
+
+### Bug Fixes
+
+* **pr-description:** change action github for run job ([59d0a5d](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/commit/59d0a5d1eefd90c6203bc7a768bf45cdff9b032a))
+* **pr-description:** change action pr desc ([0bb6cef](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/commit/0bb6cef8c54c251fad121579e8e135ccfccb86f3))
+* **pr-description:** update config for run job ([db8806a](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/commit/db8806a3c0c3fefed00b97013f9c6372a2d59bd4))
+
+
+
+# [2.3.0](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/compare/9c9d93086c4fb0b1d5e8beed25597d6fcaba8bb5...v2.3.0) (2022-08-17)
 
 
 ### Bug Fixes
