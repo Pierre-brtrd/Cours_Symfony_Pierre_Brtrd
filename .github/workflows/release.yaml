@@ -14,13 +14,16 @@ jobs:
         id: changelog
         uses: TriPSs/conventional-changelog-action@v3.14.0
         with:
-          github-token: ${{ secrets.CHANGELOG_RELEASE }}
+          github-token: ${{ secrets.github_token }}
+          git-message: "chore(release): {version}"
+          git-user-name: "Changelog Release"
+          git-user-email: "changelog@github.actions.com"
 
       - name: Create Release
-        uses: ncipollo/release-action@v1.10.0
+        uses: actions/create-release@v1
         if: ${{ steps.changelog.outputs.skipped == 'false' }}
         env:
-          GITHUB_TOKEN: ${{ secrets.CHANGELOG_RELEASE }}
+          GITHUB_TOKEN: ${{ secrets.github_token }}
         with:
           tag_name: ${{ steps.changelog.outputs.tag }}
           release_name: ${{ steps.changelog.outputs.tag }}
