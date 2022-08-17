@@ -87,7 +87,7 @@
 				{% if article.comments|length > 0 %}
 					<div class="row">
 						<div class="col-md-4 mt-2">
-							<a href="{{ path('admin.article.comments', {'id': article.id, 'slug': article.slug}) }}" class="btn btn-info text-light">{{ 'main.btn.comments'|trans(domain = 'content') }}</a>
+							<a href="{{ path('admin.article.comments', {'id': article.id}) }}" class="btn btn-info text-light">{{ 'main.btn.comments'|trans(domain = 'content') }}</a>
 						</div>
 					</div>
 				{% endif %}
