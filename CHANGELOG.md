@@ -1,4 +1,4 @@
-# 0.1.0 (2022-08-17)
+# 2.3.0 (2022-08-17)
 
 
 ### Bug Fixes
@@ -18,6 +18,7 @@
 * **CD:** update package-lock for build heroku ([b847e51](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/commit/b847e510bae23e2cc047ba203da31408a2570c1e))
 * **ci-release:** add action TripSs for generate ([6603aaa](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/commit/6603aaafa62d6603936c1a729750af577ca70434))
 * **ci-release:** remove npm bug scripts ([a255f0b](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/commit/a255f0b0d602b9598ed35e9b94ad799bd7345ad1))
+* **ci-release:** update package.json for version ([335a408](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/commit/335a4088839e577c2b9edf11cd7ea25e7356a407))
 * **CI:** update command bin/console ([3f97fa8](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/commit/3f97fa83d2a64b886f02a7704f93f4327438170f))
 * **CI:** update command for test db ([f6b8f69](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/commit/f6b8f6962b953d4c48de1ae24654c21ea2e73aad))
 * **CI:** update config CI ([596907f](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/commit/596907f0146d0b2b14662459b0619e542c0be126))
