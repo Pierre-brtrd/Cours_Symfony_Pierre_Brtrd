@@ -74,7 +74,7 @@ class CategorieController extends AbstractController
     #[Route('/delete/{id}', name: 'app_categorie_delete', methods: 'DELETE|POST')]
     public function deleteArticle(Categorie $categorie, Request $request)
     {
-        if ($this->isCsrfTokenValid('delete' . $categorie->getId(), $request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete'.$categorie->getId(), $request->get('_token'))) {
             $this->repository->remove($categorie, true);
             $this->addFlash('success', 'Categorie supprimée avec succès');
 

@@ -21,6 +21,10 @@ jobs:
           git-message: "chore(release): {version}"
           git-user-name: "Changelog Release"
           git-user-email: "changelog@github.actions.com"
+          release-count: "10"
+          version-file: "./version.yaml"
+          version-path: "version"
+          skip-version-file: false
           create-summary: true
 
       - name: Create Release

@@ -128,7 +128,7 @@ class ArticleController extends AbstractController
     #[Route('/article/delete/{id}', name: 'admin.article.delete', methods: 'DELETE|POST')]
     public function deleteArticle(Article $article, Request $request)
     {
-        if ($this->isCsrfTokenValid('delete' . $article->getId(), $request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete'.$article->getId(), $request->get('_token'))) {
             $this->repoArticle->remove($article, true);
             $this->addFlash('success', 'Article supprimé avec succès');
 
@@ -174,7 +174,7 @@ class ArticleController extends AbstractController
     #[Route('/comment/delete/{id}', name: 'admin.comment.delete', methods: 'DELETE|POST')]
     public function deleteComment(Comments $comment, Request $request)
     {
-        if ($this->isCsrfTokenValid('delete' . $comment->getId(), $request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete'.$comment->getId(), $request->get('_token'))) {
             $this->repoComments->remove($comment, true);
             $this->addFlash('success', 'Commentaire supprimé avec succès');
 
