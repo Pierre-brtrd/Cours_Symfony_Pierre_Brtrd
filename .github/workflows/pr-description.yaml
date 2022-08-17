@@ -1,0 +1,17 @@
+on:
+  workflow_run:
+    workflows: [Full CI process for Symfony 6]
+    types: [completed]
+    pull_request:
+      types: [opened, synchronize]
+
+name: Pull Request updated
+
+jobs:
+  history:
+    name: Pull Request Body
+    runs-on: ubuntu-latest
+    if: startsWith(github.event.pull_request.head.ref, 'release/')
+    steps:
+      - name: Pull Request Body
+        uses: technote-space/pr-commit-body-action@v1
