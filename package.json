@@ -25,6 +25,8 @@
         "@ckeditor/ckeditor5-source-editing": "^35.0.1",
         "@ckeditor/ckeditor5-theme-lark": "^35.0.1",
         "@ckeditor/ckeditor5-upload": "^35.0.1",
+        "@commitlint/cli": "^17.0.3",
+        "@commitlint/config-conventional": "^17.0.3",
         "@hotwired/stimulus": "^3.0.0",
         "@popperjs/core": "^2.11.5",
         "@symfony/stimulus-bridge": "^3.2.0",
@@ -33,6 +35,7 @@
         "bootstrap": "^5.1.3",
         "core-js": "^3.23.0",
         "css-loader": "5",
+        "husky": "^8.0.1",
         "jquery": "^3.6.0",
         "lodash": "^4.17.21",
         "postcss-loader": "4",
@@ -43,7 +46,7 @@
         "style-loader": "2",
         "webpack-notifier": "^1.15.0"
     },
-    "license": "UNLICENSED",
+    "license": "MIT",
     "private": true,
     "engines": {
         "node": "18.x",
@@ -53,8 +56,9 @@
         "dev-server": "encore dev-server",
         "dev": "encore dev",
         "watch": "encore dev --watch",
-        "build": "encore production --progress"
-    },
+        "build": "encore production --progress",
+        "postinstall": "husky install"
+    }, 
     "dependencies": {
         "@fortawesome/fontawesome-svg-core": "^6.1.1",
         "axios": "^0.27.2",
