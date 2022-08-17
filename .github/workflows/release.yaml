@@ -13,7 +13,7 @@ jobs:
 
       - name: Generate changelog
         id: changelog
-        uses: ./
+        uses: TriPSs/conventional-changelog-action@v3
         with:
           github-token: ${{ secrets.github_token }}
           git-message: "chore(release): {version}"
