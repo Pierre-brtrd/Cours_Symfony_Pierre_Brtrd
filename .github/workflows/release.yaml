@@ -8,20 +8,25 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-      - name: Conventional Changelog Action
+      - run: npm ci --prod
+      - run: git add node_modules -f
+
+      - name: Generate changelog
         id: changelog
-        uses: TriPSs/conventional-changelog-action@v3.14.0
+        uses: ./
         with:
           github-token: ${{ secrets.github_token }}
           git-message: "chore(release): {version}"
           git-user-name: "Changelog Release"
           git-user-email: "changelog@github.actions.com"
+          create-summary: true
 
       - name: Create Release
         uses: actions/create-release@v1
-        if: ${{ steps.changelog.outputs.skipped == 'false' }}
+        if: steps.changelog.outputs.skipped != 'true'
         env:
           GITHUB_TOKEN: ${{ secrets.github_token }}
         with:
