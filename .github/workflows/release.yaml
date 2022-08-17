@@ -1,6 +1,8 @@
 name: Release changelog
 on:
-  push:
+  workflow_run:
+    workflows: [Full CI process for Symfony 6]
+    types: [completed]
     branches: [master]
 
 jobs:
