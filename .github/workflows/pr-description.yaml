@@ -1,9 +1,6 @@
 on:
-  workflow_run:
-    workflows: ["Full CI process for Symfony 6"]
-    types: [completed]
-    branches-ignore:
-      - "master"
+  pull_request:
+    branches: [master]
 
 name: Pull Request updated
 
