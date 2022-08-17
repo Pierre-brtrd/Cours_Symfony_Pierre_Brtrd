@@ -2,7 +2,7 @@
 	<div class="swiper-wrapper">
 		{% for image in article.articleImages %}
 			<div class="swiper-slide">
-				<img src="{{ vich_uploader_asset(image, 'imageFile') }}" alt="{{ article.titre }}" class="img">
+				<img src="{{ vich_uploader_asset(image, 'imageFile')|imagine_filter('banner_article') }}" alt="{{ article.titre }}" class="img">
 			</div>
 		{% endfor %}
 	</div>
