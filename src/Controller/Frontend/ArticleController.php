@@ -24,6 +24,12 @@ class ArticleController extends AbstractController
     ) {
     }
 
+    /**
+     * Page liste posts frontend
+     *
+     * @param Request $request
+     * @return void
+     */
     #[Route('/article/liste', name: 'article.index')]
     public function index(Request $request)
     {
@@ -60,6 +66,14 @@ class ArticleController extends AbstractController
         ]);
     }
 
+    /**
+     * Page detail of post frontend
+     *
+     * @param Article|null $article
+     * @param Security $security
+     * @param Request $request
+     * @return Response
+     */
     #[Route('/article/details/{slug}', name: 'article.show')]
     public function show(
         ?Article $article,

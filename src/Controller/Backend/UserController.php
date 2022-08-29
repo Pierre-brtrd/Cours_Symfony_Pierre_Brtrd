@@ -13,6 +13,12 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/admin/user')]
 class UserController extends AbstractController
 {
+    /**
+     * Page admin index User
+     *
+     * @param UserRepository $userRepository
+     * @return Response
+     */
     #[Route('', name: 'app_user_index', methods: ['GET'])]
     public function index(UserRepository $userRepository): Response
     {
@@ -21,6 +27,14 @@ class UserController extends AbstractController
         ]);
     }
 
+    /**
+     * Page admin edit user
+     *
+     * @param Request $request
+     * @param User $user
+     * @param UserRepository $userRepository
+     * @return Response
+     */
     #[Route('/{id}/edit', name: 'app_user_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, User $user, UserRepository $userRepository): Response
     {
@@ -39,10 +53,18 @@ class UserController extends AbstractController
         ]);
     }
 
+    /**
+     * Delete a user
+     *
+     * @param Request $request
+     * @param User $user
+     * @param UserRepository $userRepository
+     * @return Response
+     */
     #[Route('/{id}', name: 'app_user_delete', methods: ['POST'])]
     public function delete(Request $request, User $user, UserRepository $userRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $user->getId(), $request->request->get('_token'))) {
             $userRepository->remove($user, true);
         }
 

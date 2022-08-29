@@ -12,6 +12,7 @@ use App\Repository\CommentsRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -27,8 +28,14 @@ class ArticleController extends AbstractController
     ) {
     }
 
+    /**
+     * Get the admin list posts page
+     *
+     * @param Request $request
+     * @return Response
+     */
     #[Route('/article', name: 'admin')]
-    public function adminListArticle(Request $request)
+    public function adminListArticle(Request $request): Response
     {
         $data = new SearchData();
         $data->setPage($request->get('page', 1));
@@ -66,6 +73,13 @@ class ArticleController extends AbstractController
         ]);
     }
 
+    /**
+     * Page for create a new post
+     *
+     * @param Request $request
+     * @param Security $security
+     * @return Response
+     */
     #[Route('/article/new', name: 'admin.article.new')]
     public function createArticle(Request $request, Security $security): Response
     {
@@ -88,6 +102,13 @@ class ArticleController extends AbstractController
         ]);
     }
 
+    /**
+     * Page for edit a post
+     *
+     * @param Article|null $article
+     * @param Request $request
+     * @return Response
+     */
     #[Route('/article/edit/{id}-{slug}', name: 'admin.article.update')]
     public function editArticle(?Article $article, Request $request): Response
     {
@@ -112,6 +133,12 @@ class ArticleController extends AbstractController
         ]);
     }
 
+    /**
+     * Switch visibility for post
+     *
+     * @param Article $article
+     * @return void
+     */
     #[Route('/article/switch/{id}', name: 'admin.article.switch', methods: 'GET')]
     public function switchVisibilityArticle(Article $article)
     {
@@ -125,8 +152,15 @@ class ArticleController extends AbstractController
         return new Response('Article non trouvé', 404);
     }
 
+    /**
+     * Delete a post with the id param url
+     *
+     * @param Article $article
+     * @param Request $request
+     * @return RedirectResponse
+     */
     #[Route('/article/delete/{id}', name: 'admin.article.delete', methods: 'DELETE|POST')]
-    public function deleteArticle(Article $article, Request $request)
+    public function deleteArticle(Article $article, Request $request): RedirectResponse
     {
         if ($this->isCsrfTokenValid('delete' . $article->getId(), $request->get('_token'))) {
             $this->repoArticle->remove($article, true);
@@ -140,8 +174,14 @@ class ArticleController extends AbstractController
         return $this->redirectToRoute('admin');
     }
 
+    /**
+     * Admin comments page
+     *
+     * @param Article|null $article
+     * @return Response
+     */
     #[Route('/article/{id}/comments', name: 'admin.article.comments')]
-    public function adminComments(?Article $article)
+    public function adminComments(?Article $article): Response
     {
         if (!$article instanceof Article) {
             $this->addFlash('error', 'Article non trouvé');
@@ -162,8 +202,14 @@ class ArticleController extends AbstractController
         ]);
     }
 
+    /**
+     * Switch the visibility of a comment
+     *
+     * @param Comments|null $comment
+     * @return Response
+     */
     #[Route('/comments/switch/{id}', name: 'admin.comments.switch', methods: 'GET')]
-    public function switchVisibilityComment(?Comments $comment)
+    public function switchVisibilityComment(?Comments $comment): Response
     {
         if (!$comment instanceof Comments) {
             return new Response('Commentaires non trouvé', 404);
@@ -177,8 +223,15 @@ class ArticleController extends AbstractController
         }
     }
 
+    /**
+     * Delete a comment with the id url
+     *
+     * @param Comments $comment
+     * @param Request $request
+     * @return RedirectResponse
+     */
     #[Route('/comment/delete/{id}', name: 'admin.comment.delete', methods: 'DELETE|POST')]
-    public function deleteComment(Comments $comment, Request $request)
+    public function deleteComment(Comments $comment, Request $request): RedirectResponse
     {
         if ($this->isCsrfTokenValid('delete' . $comment->getId(), $request->get('_token'))) {
             $this->repoComments->remove($comment, true);

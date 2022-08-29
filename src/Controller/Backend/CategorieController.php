@@ -18,6 +18,11 @@ class CategorieController extends AbstractController
     ) {
     }
 
+    /**
+     * Get the index admin tag page
+     *
+     * @return Response
+     */
     #[Route('/', name: 'app_categorie_index', methods: ['GET'])]
     public function index(): Response
     {
@@ -26,6 +31,12 @@ class CategorieController extends AbstractController
         ]);
     }
 
+    /**
+     * Page for create a new tag
+     *
+     * @param Request $request
+     * @return Response
+     */
     #[Route('/new', name: 'app_categorie_new', methods: ['GET', 'POST'])]
     public function new(Request $request): Response
     {
@@ -45,6 +56,12 @@ class CategorieController extends AbstractController
         ]);
     }
 
+    /**
+     * Page for show one tag
+     *
+     * @param Categorie $categorie
+     * @return Response
+     */
     #[Route('/{id}', name: 'app_categorie_show', methods: ['GET'])]
     public function show(Categorie $categorie): Response
     {
@@ -53,6 +70,13 @@ class CategorieController extends AbstractController
         ]);
     }
 
+    /**
+     * Page for edit tag
+     *
+     * @param Request $request
+     * @param Categorie $categorie
+     * @return Response
+     */
     #[Route('/{id}/edit', name: 'app_categorie_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Categorie $categorie): Response
     {
@@ -71,10 +95,17 @@ class CategorieController extends AbstractController
         ]);
     }
 
+    /**
+     * Delete a tag
+     *
+     * @param Categorie $categorie
+     * @param Request $request
+     * @return void
+     */
     #[Route('/delete/{id}', name: 'app_categorie_delete', methods: 'DELETE|POST')]
     public function deleteArticle(Categorie $categorie, Request $request)
     {
-        if ($this->isCsrfTokenValid('delete'.$categorie->getId(), $request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $categorie->getId(), $request->get('_token'))) {
             $this->repository->remove($categorie, true);
             $this->addFlash('success', 'Categorie supprimée avec succès');
 

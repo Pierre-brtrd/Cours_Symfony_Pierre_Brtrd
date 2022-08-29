@@ -19,6 +19,11 @@ class UserController extends AbstractController
     ) {
     }
 
+    /**
+     * Account page user
+     *
+     * @return Response
+     */
     #[Route('', name: 'compte')]
     public function show(): Response
     {

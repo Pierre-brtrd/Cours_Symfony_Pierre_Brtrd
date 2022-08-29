@@ -3,17 +3,19 @@ import { debounce } from "lodash";
 import visibilityArticle from "./visibilityArticle";
 
 /**
- * @property {HTMLElement} pagination
- * @property {HTMLElement} content
- * @property {HTMLElement} sorting
- * @property {HTMLFormElement} form
- * @property {HTMLElement} count
- * @property {number} page
- * @property {bool} moreNav
+ * Class filter for the posts page in ajax
+ * 
+ * @property {HTMLElement} pagination - the element with the button(s) for pagination
+ * @property {HTMLElement} content - the element with the main content
+ * @property {HTMLElement} sorting - the element with the button(s) for sorting the content
+ * @property {HTMLFormElement} form - the element with the form for search
+ * @property {HTMLElement} count - the element with the number total of posts
+ * @property {number} page - the number of the actual page
+ * @property {bool} moreNav - boolean to verify if the show more button is display
  */
 export default class Filter {
     /**
-     * Constructor de la class Filter
+     * Constructor of the class
      * 
      * @param {HTMLElement|null} element 
      */
@@ -33,7 +35,7 @@ export default class Filter {
     }
 
     /**
-     * Ajoute les comportements aux différents éléments
+     * Add the action to the elements
      */
     bindEvents() {
         const linkClikListener = (e) => {
@@ -60,6 +62,9 @@ export default class Filter {
             .addEventListener('keyup', debounce(this.loadForm.bind(this), 500));
     };
 
+    /**
+     * Load more content on the page
+     */
     async loadMore() {
         const button = this.pagination.querySelector('button');
         button.setAttribute('disabled', 'disabled');
@@ -67,7 +72,7 @@ export default class Filter {
         const url = new URL(window.location.href);
         const params = new URLSearchParams(url.search)
         params.set('page', this.page);
-        await this.loadUrl(url.pathname + '?' + params.toString(), true);
+        await this.loadUrl(`${url.pathname}?${params.toString()}`, true);
         button.removeAttribute('disabled');
     }
 
@@ -85,6 +90,9 @@ export default class Filter {
 
     /**
      * Charge la requête ajax
+     * 
+     * @param {URL} url - Url to load in ajax
+     * @param {bool} append - add content to existent
      */
     async loadUrl(url, append = false) {
         this.showLoader();
@@ -98,7 +106,7 @@ export default class Filter {
             }
         });
 
-        if (response.status === 200 && response.status < 300) {
+        if (response.status >= 200 && response.status < 300) {
             const data = await response.json();
             this.flipContent(data.content, append);
             this.sorting.innerHTML = data.sorting;
@@ -122,7 +130,8 @@ export default class Filter {
     /**
      * Remplace les éléments de la grille avec animation flip
      * 
-     * @param {string} content 
+     * @param {string} content
+     * @param {bool} append
      */
     flipContent(content, append) {
         const springName = 'veryGentle'
@@ -189,6 +198,10 @@ export default class Filter {
         visibilityArticle();
     }
 
+    /**
+     * Show the loader for the request
+     * 
+     */
     showLoader() {
         this.form.classList.add('is-loading')
         const loader = this.form.querySelector('.js-loading')
@@ -201,6 +214,10 @@ export default class Filter {
         loader.style.display = null
     }
 
+    /**
+     * Remove the loader for the request
+     * 
+     */
     hideLoader() {
         this.form.classList.remove('is-loading')
         const loader = this.form.querySelector('.js-loading')

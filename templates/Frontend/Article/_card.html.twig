@@ -48,7 +48,6 @@
 		{% for categorie in article.categories %}
 			<em class="text-muted text-primary text-italic">#{{ categorie.titre }}</em>
 		{% endfor %}
-
 		{% if article.user is not null %}
 			<div class="author mt-2">
 				{% if article.user.imageName %}

@@ -15,6 +15,12 @@ class LocaleController extends AbstractController
     ) {
     }
 
+    /**
+     * Switch locale
+     *
+     * @param Request $request
+     * @return RedirectResponse
+     */
     #[Route(
         '/switch/{_locale<%app.supported_locales%>}',
         defaults: ['_locale<%locale%>'],
