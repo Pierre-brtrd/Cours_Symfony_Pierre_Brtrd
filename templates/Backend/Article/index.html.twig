@@ -23,19 +23,19 @@
 		</div>
 		<div class="row mt-4">
 			<div class="col-md-3">
-				{% include "Frontend/Article/_filter.html.twig" with {form: form} only %}
+				{% include "Components/Article/_filter.html.twig" with {form: form} only %}
 			</div>
 			<div class="col-md-9">
 				<div class="d-flex justify-content-between mb-2 navigation-blog-list">
-					{% include "Frontend/Article/_count.html.twig" %}
+					{% include "Components/Article/_count.html.twig" %}
 					<div class="d-flex justify-content-end gap-2 js-filter-sorting">
-						{% include "Frontend/Article/_sorting.html.twig" %}
+						{% include "Components/Article/_sorting.html.twig" %}
 					</div>
 				</div>
 				<div class="blog-list js-filter-content">
-					{% include "Frontend/Article/_articles.html.twig" with {articles: articles, admin: true} only %}
+					{% include "Components/Article/_articles.html.twig" with {articles: articles, admin: true} only %}
 				</div>
-				{% include "Frontend/Article/_pagination.html.twig" %}
+				{% include "Components/Article/_pagination.html.twig" %}
 			</div>
 		</div>
 	</section>

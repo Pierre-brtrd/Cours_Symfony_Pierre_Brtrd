@@ -96,6 +96,7 @@ comment:
 main:
   title:
     visibility: Visibilité
+    author: Auteur
   btn:
     create: Créer
     edit: Editer

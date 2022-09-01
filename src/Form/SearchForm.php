@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Data\SearchData;
 use App\Entity\Categorie;
+use App\Entity\User;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -33,6 +34,19 @@ class SearchForm extends AbstractType
                         ->orderBy('c.titre', 'ASC');
                 },
                 'choice_label' => 'titre',
+                'expanded' => true,
+                'multiple' => true,
+            ])
+            ->add('author', EntityType::class, [
+                'label' => false,
+                'required' => false,
+                'class' => User::class,
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('u')
+                        ->join('u.articles', 'a')
+                        ->andWhere('a.active = true')
+                        ->orderBy('u.nom', 'ASC');
+                },
                 'expanded' => true,
                 'multiple' => true,
             ])

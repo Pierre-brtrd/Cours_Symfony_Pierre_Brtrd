@@ -12,11 +12,7 @@ use Symfony\Contracts\Cache\ItemInterface;
 class MainController extends AbstractController
 {
     /**
-     * Homepage
-     *
-     * @param ArticleRepository $repository
-     * @param CacheInterface $cache
-     * @return Response
+     * Homepage.
      */
     #[Route('/', name: 'home')]
     public function index(ArticleRepository $repository, CacheInterface $cache): Response

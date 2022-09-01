@@ -46,9 +46,7 @@ class ArticleRepository extends ServiceEntityRepository
     }
 
     /**
-     * Creat query builder with enable posts
-     *
-     * @return Query
+     * Creat query builder with enable posts.
      */
     public function createQueryListActiveArticle(): Query
     {
@@ -60,10 +58,7 @@ class ArticleRepository extends ServiceEntityRepository
     }
 
     /**
-     * Search the latest posts with a limit
-     *
-     * @param integer $limit
-     * @return array
+     * Search the latest posts with a limit.
      */
     public function findLatestArticleWithLimit(int $limit): array
     {
@@ -78,12 +73,9 @@ class ArticleRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
     /**
-     * SearchData for posts with query, categories and return by default only enable posts
-     *
-     * @param SearchData $search
-     * @param boolean $active
-     * @return PaginationInterface
+     * SearchData for posts with query, categories and return by default only enable posts.
      */
     public function findSearch(SearchData $search, bool $active = true): PaginationInterface
     {
@@ -111,6 +103,11 @@ class ArticleRepository extends ServiceEntityRepository
         if (!empty($search->getCategories())) {
             $query = $query->andWhere('c.id IN (:categories)')
                 ->setParameter('categories', $search->getCategories());
+        }
+
+        if (!empty($search->getAuthor())) {
+            $query = $query->andWhere('u.id IN (:authors)')
+                ->setParameter('authors', $search->getAuthor());
         }
 
         $query = $query->getQuery();

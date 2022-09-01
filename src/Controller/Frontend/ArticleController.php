@@ -25,9 +25,8 @@ class ArticleController extends AbstractController
     }
 
     /**
-     * Page liste posts frontend
+     * Page liste posts frontend.
      *
-     * @param Request $request
      * @return void
      */
     #[Route('/article/liste', name: 'article.index')]
@@ -43,16 +42,16 @@ class ArticleController extends AbstractController
 
         if ($request->get('ajax')) {
             return new JsonResponse([
-                'content' => $this->renderView('Frontend/Article/_articles.html.twig', [
+                'content' => $this->renderView('Components/Article/_articles.html.twig', [
                     'articles' => $articles,
                 ]),
-                'sorting' => $this->renderView('Frontend/Article/_sorting.html.twig', [
+                'sorting' => $this->renderView('Components/Article/_sorting.html.twig', [
                     'articles' => $articles,
                 ]),
-                'pagination' => $this->renderView('Frontend/Article/_pagination.html.twig', [
+                'pagination' => $this->renderView('Components/Article/_pagination.html.twig', [
                     'articles' => $articles,
                 ]),
-                'count' => $this->renderView('Frontend/Article/_count.html.twig', [
+                'count' => $this->renderView('Components/Article/_count.html.twig', [
                     'articles' => $articles,
                 ]),
                 'pages' => ceil($articles->getTotalItemCount() / $articles->getItemNumberPerPage()),
@@ -67,12 +66,7 @@ class ArticleController extends AbstractController
     }
 
     /**
-     * Page detail of post frontend
-     *
-     * @param Article|null $article
-     * @param Security $security
-     * @param Request $request
-     * @return Response
+     * Page detail of post frontend.
      */
     #[Route('/article/details/{slug}', name: 'article.show')]
     public function show(

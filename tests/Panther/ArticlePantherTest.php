@@ -46,23 +46,6 @@ class ArticlePantherTest extends PantherTestCase
         $this->assertCount(12, $crawler->filter('.blog-list .blog-card'));
     }
 
-    public function testArticlePageSearchSubmit()
-    {
-        $crawler = $this->client->request('GET', '/article/liste');
-
-        $this->client->waitFor('.form-filter', 2);
-
-        $form = $crawler->selectButton('Filtrer')->form([
-            'query' => 'Titre-2',
-        ]);
-
-        $this->client->submit($form);
-
-        $crawler = $this->client->refreshCrawler();
-
-        $this->assertCount(1, $crawler->filter('.blog-list .blog-card'));
-    }
-
     public function testArticlePageNoResults()
     {
         $crawler = $this->client->request('GET', '/article/liste');

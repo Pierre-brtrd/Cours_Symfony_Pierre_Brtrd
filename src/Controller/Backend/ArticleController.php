@@ -29,10 +29,7 @@ class ArticleController extends AbstractController
     }
 
     /**
-     * Get the admin list posts page
-     *
-     * @param Request $request
-     * @return Response
+     * Get the admin list posts page.
      */
     #[Route('/article', name: 'admin')]
     public function adminListArticle(Request $request): Response
@@ -47,19 +44,19 @@ class ArticleController extends AbstractController
 
         if ($request->get('ajax')) {
             return new JsonResponse([
-                'content' => $this->renderView('Frontend/Article/_articles.html.twig', [
+                'content' => $this->renderView('Components/Article/_articles.html.twig', [
                     'articles' => $articles,
                     'admin' => true,
                 ]),
-                'sorting' => $this->renderView('Frontend/Article/_sorting.html.twig', [
+                'sorting' => $this->renderView('Components/Article/_sorting.html.twig', [
                     'articles' => $articles,
                     'admin' => true,
                 ]),
-                'pagination' => $this->renderView('Frontend/Article/_pagination.html.twig', [
+                'pagination' => $this->renderView('Components/Article/_pagination.html.twig', [
                     'articles' => $articles,
                     'admin' => true,
                 ]),
-                'count' => $this->renderView('Frontend/Article/_count.html.twig', [
+                'count' => $this->renderView('Components/Article/_count.html.twig', [
                     'articles' => $articles,
                     'admin' => true,
                 ]),
@@ -74,11 +71,7 @@ class ArticleController extends AbstractController
     }
 
     /**
-     * Page for create a new post
-     *
-     * @param Request $request
-     * @param Security $security
-     * @return Response
+     * Page for create a new post.
      */
     #[Route('/article/new', name: 'admin.article.new')]
     public function createArticle(Request $request, Security $security): Response
@@ -103,11 +96,7 @@ class ArticleController extends AbstractController
     }
 
     /**
-     * Page for edit a post
-     *
-     * @param Article|null $article
-     * @param Request $request
-     * @return Response
+     * Page for edit a post.
      */
     #[Route('/article/edit/{id}-{slug}', name: 'admin.article.update')]
     public function editArticle(?Article $article, Request $request): Response
@@ -134,9 +123,8 @@ class ArticleController extends AbstractController
     }
 
     /**
-     * Switch visibility for post
+     * Switch visibility for post.
      *
-     * @param Article $article
      * @return void
      */
     #[Route('/article/switch/{id}', name: 'admin.article.switch', methods: 'GET')]
@@ -153,16 +141,12 @@ class ArticleController extends AbstractController
     }
 
     /**
-     * Delete a post with the id param url
-     *
-     * @param Article $article
-     * @param Request $request
-     * @return RedirectResponse
+     * Delete a post with the id param url.
      */
     #[Route('/article/delete/{id}', name: 'admin.article.delete', methods: 'DELETE|POST')]
     public function deleteArticle(Article $article, Request $request): RedirectResponse
     {
-        if ($this->isCsrfTokenValid('delete' . $article->getId(), $request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete'.$article->getId(), $request->get('_token'))) {
             $this->repoArticle->remove($article, true);
             $this->addFlash('success', 'Article supprimé avec succès');
 
@@ -175,10 +159,7 @@ class ArticleController extends AbstractController
     }
 
     /**
-     * Admin comments page
-     *
-     * @param Article|null $article
-     * @return Response
+     * Admin comments page.
      */
     #[Route('/article/{id}/comments', name: 'admin.article.comments')]
     public function adminComments(?Article $article): Response
@@ -203,10 +184,7 @@ class ArticleController extends AbstractController
     }
 
     /**
-     * Switch the visibility of a comment
-     *
-     * @param Comments|null $comment
-     * @return Response
+     * Switch the visibility of a comment.
      */
     #[Route('/comments/switch/{id}', name: 'admin.comments.switch', methods: 'GET')]
     public function switchVisibilityComment(?Comments $comment): Response
@@ -224,16 +202,12 @@ class ArticleController extends AbstractController
     }
 
     /**
-     * Delete a comment with the id url
-     *
-     * @param Comments $comment
-     * @param Request $request
-     * @return RedirectResponse
+     * Delete a comment with the id url.
      */
     #[Route('/comment/delete/{id}', name: 'admin.comment.delete', methods: 'DELETE|POST')]
     public function deleteComment(Comments $comment, Request $request): RedirectResponse
     {
-        if ($this->isCsrfTokenValid('delete' . $comment->getId(), $request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete'.$comment->getId(), $request->get('_token'))) {
             $this->repoComments->remove($comment, true);
             $this->addFlash('success', 'Commentaire supprimé avec succès');
 

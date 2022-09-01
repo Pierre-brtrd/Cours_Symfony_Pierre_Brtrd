@@ -96,6 +96,7 @@ comment:
 main:
   title:
     visibility: Visibility
+    author: Author
   btn:
     create: Create
     edit: Edit

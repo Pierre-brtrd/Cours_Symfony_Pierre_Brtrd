@@ -8,6 +8,8 @@ class SearchData
 
     private ?string $query = '';
 
+    private ?array $author = [];
+
     private ?array $categories = [];
 
     private ?array $active = null;
@@ -96,6 +98,28 @@ class SearchData
     public function setActive(?array $active): self
     {
         $this->active = $active;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of author.
+     *
+     * @return ?array
+     */
+    public function getAuthor(): ?array
+    {
+        return $this->author;
+    }
+
+    /**
+     * Set the value of author.
+     *
+     * @param ?array $author
+     */
+    public function setAuthor(?array $author): self
+    {
+        $this->author = $author;
 
         return $this;
     }
