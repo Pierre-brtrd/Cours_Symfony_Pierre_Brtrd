@@ -55,7 +55,7 @@ class ArticlePantherTest extends PantherTestCase
         $search = $this->client->findElement(WebDriverBy::cssSelector('.form-filter input[type="text"]'));
         $search->sendKeys('qskfhkqjshfqdsf');
 
-        $this->client->waitFor('.content-response', 2);
+        $this->client->waitFor('.content-response', 3);
 
         // For the flip content time response
         sleep(1);

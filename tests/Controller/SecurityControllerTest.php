@@ -31,7 +31,7 @@ class SecurityControllerTest extends WebTestCase
     public function testLoginPage()
     {
         $this->client->request('GET', '/login');
-        $this->assertResponseStatusCodeSame(Response::HTTP_OK);
+        $this->assertResponseIsSuccessful();
     }
 
     public function testLoginPageContentHeadingPage()
@@ -105,7 +105,7 @@ class SecurityControllerTest extends WebTestCase
     public function testRegisterPage()
     {
         $this->client->request('GET', '/register');
-        $this->assertResponseStatusCodeSame(Response::HTTP_OK);
+        $this->assertResponseIsSuccessful();
     }
 
     public function testRegisterPageContentHeadingPage()
