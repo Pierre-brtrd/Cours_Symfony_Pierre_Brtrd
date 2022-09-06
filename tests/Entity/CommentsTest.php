@@ -6,12 +6,14 @@ use App\Entity\Comments;
 use App\Repository\ArticleRepository;
 use App\Repository\CommentsRepository;
 use App\Repository\UserRepository;
+use App\Tests\Utils\AssertTestTrait;
 use Liip\TestFixturesBundle\Services\DatabaseToolCollection;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
-use Symfony\Component\Validator\ConstraintViolation;
 
 class CommentsTest extends KernelTestCase
 {
+    use AssertTestTrait;
+
     protected $databaseTool;
 
     public function setUp(): void
@@ -47,21 +49,6 @@ class CommentsTest extends KernelTestCase
             ->setNote(5)
             ->setUser($user)
             ->setArticle($article);
-    }
-
-    public function assertHasErrors(Comments $article, int $number = 0)
-    {
-        self::bootKernel();
-        $errors = self::getContainer()->get('validator')->validate($article);
-
-        $messages = [];
-
-        /** @var ConstraintViolation $error */
-        foreach ($errors as $error) {
-            $messages[] = $error->getPropertyPath().' -> '.$error->getMessage();
-        }
-
-        $this->assertCount($number, $errors, implode(', ', $messages));
     }
 
     public function testValideCommentEntity()

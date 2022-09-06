@@ -6,12 +6,14 @@ use App\Entity\Article;
 use App\Repository\ArticleRepository;
 use App\Repository\CategorieRepository;
 use App\Repository\UserRepository;
+use App\Tests\Utils\AssertTestTrait;
 use Liip\TestFixturesBundle\Services\DatabaseToolCollection;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
-use Symfony\Component\Validator\ConstraintViolation;
 
 class ArticleTest extends KernelTestCase
 {
+    use AssertTestTrait;
+
     protected $databaseTool;
 
     public function setUp(): void
@@ -47,21 +49,6 @@ class ArticleTest extends KernelTestCase
             ->setUser($user)
             ->setActive(true)
             ->addCategory($tag);
-    }
-
-    public function assertHasErrors(Article $article, int $number = 0)
-    {
-        self::bootKernel();
-        $errors = self::getContainer()->get('validator')->validate($article);
-
-        $messages = [];
-
-        /** @var ConstraintViolation $error */
-        foreach ($errors as $error) {
-            $messages[] = $error->getPropertyPath().' -> '.$error->getMessage();
-        }
-
-        $this->assertCount($number, $errors, implode(', ', $messages));
     }
 
     public function testValideArticleEntity()
