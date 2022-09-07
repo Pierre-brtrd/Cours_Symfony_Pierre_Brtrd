@@ -26,7 +26,7 @@ class UserType extends AbstractType
             $user = $event->getData();
             $form = $event->getForm();
 
-            if ($user == $this->security->getUser()) {
+            if ($user === $this->security->getUser()) {
                 $form
                     ->add('prenom', TextType::class, [
                         'label' => 'form.user.fields.firstname',

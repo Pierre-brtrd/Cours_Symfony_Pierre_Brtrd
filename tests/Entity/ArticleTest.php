@@ -16,7 +16,7 @@ class ArticleTest extends KernelTestCase
 
     protected $databaseTool;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -27,15 +27,15 @@ class ArticleTest extends KernelTestCase
     {
         $articles = $this->databaseTool->loadAliceFixture(
             [
-                dirname(__DIR__).'/Fixtures/UserTestFixtures.yaml',
-                dirname(__DIR__).'/Fixtures/ArticleTestFixtures.yaml',
-                dirname(__DIR__).'/Fixtures/TagTestFixtures.yaml',
+                \dirname(__DIR__).'/Fixtures/UserTestFixtures.yaml',
+                \dirname(__DIR__).'/Fixtures/ArticleTestFixtures.yaml',
+                \dirname(__DIR__).'/Fixtures/TagTestFixtures.yaml',
             ]
         );
 
         $articles = self::getContainer()->get(ArticleRepository::class)->count([]);
 
-        $this->assertEquals(20, $articles);
+        $this->assertSame(20, $articles);
     }
 
     public function getEntity()

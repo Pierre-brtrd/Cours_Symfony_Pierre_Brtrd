@@ -18,9 +18,15 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Security;
 
+/**
+ * Article controller backend class.
+ */
 #[Route('/admin')]
 class ArticleController extends AbstractController
 {
+    /**
+     * Constructeur of class ArticleController.
+     */
     public function __construct(
         private EntityManagerInterface $em,
         private ArticleRepository $repoArticle,
@@ -29,7 +35,7 @@ class ArticleController extends AbstractController
     }
 
     /**
-     * Get the admin list posts page.
+     * Admin liste posts page.
      */
     #[Route('/article', name: 'admin')]
     public function adminListArticle(Request $request): Response
@@ -71,7 +77,7 @@ class ArticleController extends AbstractController
     }
 
     /**
-     * Page for create a new post.
+     * Create new post page.
      */
     #[Route('/article/new', name: 'admin.article.new')]
     public function createArticle(Request $request, Security $security): Response
@@ -96,7 +102,7 @@ class ArticleController extends AbstractController
     }
 
     /**
-     * Page for edit a post.
+     * Edit post page with the id and slug url parameter.
      */
     #[Route('/article/edit/{id}-{slug}', name: 'admin.article.update')]
     public function editArticle(?Article $article, Request $request): Response
@@ -123,7 +129,7 @@ class ArticleController extends AbstractController
     }
 
     /**
-     * Switch visibility for post.
+     * Switch visibility in ajax for post.
      *
      * @return void
      */

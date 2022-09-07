@@ -10,11 +10,14 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * User controller class.
+ */
 #[Route('/admin/user')]
 class UserController extends AbstractController
 {
     /**
-     * Page admin index User.
+     * Page admin index Users.
      */
     #[Route('', name: 'app_user_index', methods: ['GET'])]
     public function index(UserRepository $userRepository): Response
@@ -25,7 +28,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * Page admin edit user.
+     * Page admin edit user with id paramter url.
      */
     #[Route('/{id}/edit', name: 'app_user_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, User $user, UserRepository $userRepository): Response
@@ -46,7 +49,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * Delete a user.
+     * Delete a user with id paramter url.
      */
     #[Route('/{id}', name: 'app_user_delete', methods: ['POST'])]
     public function delete(Request $request, User $user, UserRepository $userRepository): Response

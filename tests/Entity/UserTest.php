@@ -14,7 +14,7 @@ class UserTest extends KernelTestCase
 
     protected $databaseTool;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -25,13 +25,13 @@ class UserTest extends KernelTestCase
     {
         $users = $this->databaseTool->loadAliceFixture(
             [
-                dirname(__DIR__).'/Fixtures/UserTestFixtures.yaml',
+                \dirname(__DIR__).'/Fixtures/UserTestFixtures.yaml',
             ]
         );
 
         $users = self::getContainer()->get(UserRepository::class)->count([]);
 
-        $this->assertEquals(12, $users);
+        $this->assertSame(12, $users);
     }
 
     public function getEntity()

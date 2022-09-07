@@ -24,7 +24,7 @@ class EmailDomain extends Constraint
     public function __construct($options = null)
     {
         parent::__construct($options);
-        if (!is_array($options['blocked'])) {
+        if (!\is_array($options['blocked'])) {
             throw new ConstraintDefinitionException('The "blocked" option must be an array of blocked domain');
         }
     }

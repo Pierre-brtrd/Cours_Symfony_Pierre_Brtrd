@@ -10,9 +10,15 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Security;
 
+/**
+ * User controller frontend class.
+ */
 #[Route('/compte')]
 class UserController extends AbstractController
 {
+    /**
+     * Constructor of class UserController.
+     */
     public function __construct(
         private Security $security,
         private UserRepository $repo
@@ -20,7 +26,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * Account page user.
+     * Show account user connect.
      */
     #[Route('', name: 'compte')]
     public function show(): Response
@@ -32,6 +38,9 @@ class UserController extends AbstractController
         ]);
     }
 
+    /**
+     * Edit account user.
+     */
     #[Route('/edit-account', name: 'front_user_edit', methods: ['GET', 'POST'])]
     public function edit(
         Request $request,

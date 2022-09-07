@@ -10,16 +10,22 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * Tag controller class.
+ */
 #[Route('/admin/categorie')]
 class CategorieController extends AbstractController
 {
+    /**
+     * Constructeur of class CategorieController.
+     */
     public function __construct(
         private CategorieRepository $repository
     ) {
     }
 
     /**
-     * Get the index admin tag page.
+     * Admin list tags page.
      */
     #[Route('/', name: 'app_categorie_index', methods: ['GET'])]
     public function index(): Response
@@ -30,7 +36,7 @@ class CategorieController extends AbstractController
     }
 
     /**
-     * Page for create a new tag.
+     * Create new tag page.
      */
     #[Route('/new', name: 'app_categorie_new', methods: ['GET', 'POST'])]
     public function new(Request $request): Response
@@ -52,7 +58,7 @@ class CategorieController extends AbstractController
     }
 
     /**
-     * Page for show one tag.
+     * Page for show one tag with id in parameter url.
      */
     #[Route('/{id}', name: 'app_categorie_show', methods: ['GET'])]
     public function show(Categorie $categorie): Response
@@ -63,7 +69,7 @@ class CategorieController extends AbstractController
     }
 
     /**
-     * Page for edit tag.
+     * Page for edit tag with id parameter url.
      */
     #[Route('/{id}/edit', name: 'app_categorie_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Categorie $categorie): Response
@@ -84,7 +90,7 @@ class CategorieController extends AbstractController
     }
 
     /**
-     * Delete a tag.
+     * Delete a tag with id paramter url.
      *
      * @return void
      */

@@ -16,8 +16,14 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Security;
 
+/**
+ * Article controller Fontend class.
+ */
 class ArticleController extends AbstractController
 {
+    /**
+     * Construtor of class ArticleController.
+     */
     public function __construct(
         private ArticleRepository $repo,
         private CommentsRepository $repoComment
@@ -26,11 +32,9 @@ class ArticleController extends AbstractController
 
     /**
      * Page liste posts frontend.
-     *
-     * @return void
      */
     #[Route('/article/liste', name: 'article.index')]
-    public function index(Request $request)
+    public function index(Request $request): Response|JsonResponse
     {
         $data = new SearchData();
         $data->setPage($request->get('page', 1));

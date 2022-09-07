@@ -2,16 +2,34 @@
 
 namespace App\Data;
 
+/**
+ * Search Data class to search object in application.
+ */
 class SearchData
 {
+    /**
+     * Number of the page of search.
+     */
     private ?int $page = 1;
 
+    /**
+     * The query for the search (for title fields).
+     */
     private ?string $query = '';
 
+    /**
+     * Array of author filter.
+     */
     private ?array $author = [];
 
+    /**
+     * Array of tags filter.
+     */
     private ?array $categories = [];
 
+    /**
+     * Array of visibility filter.
+     */
     private ?array $active = null;
 
     /**

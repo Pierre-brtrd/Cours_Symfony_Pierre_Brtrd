@@ -42,12 +42,6 @@ jobs:
       - name: Check PHP Version
         run: php -v
 
-      # https://github.com/zhulik/redis-action (community)
-      - name: Setup Redis with zhulik/redis-action
-        uses: zhulik/redis-action@1.1.0
-        with:
-          redis version: "5"
-
       ## —— Yarn 🐱 ————————————————————————————————————————————————————————————
       - name: Yarn install
         uses: actions/setup-node@v2
