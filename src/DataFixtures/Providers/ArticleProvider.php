@@ -15,7 +15,7 @@ class ArticleProvider
         $this->faker = Factory::create('fr_FR');
     }
 
-    public function generateLoremDesc(): string
+    public function generateLoremDesc(): string|false
     {
         $content = file_get_contents('https://loripsum.net/api/10/long/headers/link/ul/dl');
 

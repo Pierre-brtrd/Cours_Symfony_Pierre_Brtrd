@@ -2,6 +2,7 @@
 
 namespace App\Controller\Frontend;
 
+use App\Entity\User;
 use App\Form\UserType;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -20,8 +21,7 @@ class UserController extends AbstractController
      * Constructor of class UserController.
      */
     public function __construct(
-        private Security $security,
-        private UserRepository $repo
+        private Security $security
     ) {
     }
 
@@ -46,6 +46,7 @@ class UserController extends AbstractController
         Request $request,
         UserRepository $userRepository
     ): Response {
+        /** @var User $user */
         $user = $this->security->getUser();
 
         $form = $this->createForm(UserType::class, $user);

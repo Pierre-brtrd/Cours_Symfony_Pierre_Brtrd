@@ -21,7 +21,7 @@ use Knp\Component\Pager\PaginatorInterface;
 class ArticleRepository extends ServiceEntityRepository
 {
     public function __construct(
-        private ManagerRegistry $registry,
+        ManagerRegistry $registry,
         private PaginatorInterface $paginator
     ) {
         parent::__construct($registry, Article::class);
@@ -59,8 +59,12 @@ class ArticleRepository extends ServiceEntityRepository
 
     /**
      * Search the latest posts with a limit.
+     *
+     * @param int $limit
+     *
+     * @return mixed
      */
-    public function findLatestArticleWithLimit(int $limit): array
+    public function findLatestArticleWithLimit(int $limit): mixed
     {
         return $this->createQueryBuilder('a')
             ->select('a', 'u', 'i')
@@ -76,6 +80,11 @@ class ArticleRepository extends ServiceEntityRepository
 
     /**
      * SearchData for posts with query, categories and return by default only enable posts.
+     *
+     * @param SearchData $search
+     * @param bool       $active
+     *
+     * @return PaginationInterface
      */
     public function findSearch(SearchData $search, bool $active = true): PaginationInterface
     {

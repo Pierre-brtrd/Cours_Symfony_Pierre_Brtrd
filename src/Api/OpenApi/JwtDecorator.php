@@ -15,6 +15,13 @@ final class JwtDecorator implements OpenApiFactoryInterface
     ) {
     }
 
+    /**
+     * Decorate onpen API for token.
+     *
+     * @param array<int, mixed> $context
+     *
+     * @return OpenApi
+     */
     public function __invoke(array $context = []): OpenApi
     {
         $openApi = ($this->decorated)($context);

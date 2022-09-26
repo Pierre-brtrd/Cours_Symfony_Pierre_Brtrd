@@ -5,6 +5,7 @@ namespace App\Controller\Frontend;
 use App\Data\SearchData;
 use App\Entity\Article;
 use App\Entity\Comments;
+use App\Entity\User;
 use App\Form\CommentsType;
 use App\Form\SearchForm;
 use App\Repository\ArticleRepository;
@@ -37,7 +38,10 @@ class ArticleController extends AbstractController
     public function index(Request $request): Response|JsonResponse
     {
         $data = new SearchData();
-        $data->setPage($request->get('page', 1));
+
+        /** @var ?int $page */
+        $page = $request->get('page', 1);
+        $data->setPage($page);
 
         $form = $this->createForm(SearchForm::class, $data);
         $form->handleRequest($request);
@@ -84,7 +88,10 @@ class ArticleController extends AbstractController
             return $this->redirectToRoute('home');
         }
 
-        $comments = $this->repoComment->findActiveByArticle($article->getId());
+        /** @var int $articleId */
+        $articleId = $article->getId();
+
+        $comments = $this->repoComment->findByArticle($articleId);
 
         // On instancie le commentaire vide
         $comment = new Comments();
@@ -93,7 +100,9 @@ class ArticleController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $comment->setUser($security->getUser())
+            /** @var User $user */
+            $user = $security->getUser();
+            $comment->setUser($user)
                 ->setArticle($article)
                 ->setActive(true);
 

@@ -18,6 +18,10 @@ class UserController extends AbstractController
 {
     /**
      * Page admin index Users.
+     *
+     * @param UserRepository $userRepository
+     *
+     * @return Response
      */
     #[Route('', name: 'app_user_index', methods: ['GET'])]
     public function index(UserRepository $userRepository): Response
@@ -29,6 +33,12 @@ class UserController extends AbstractController
 
     /**
      * Page admin edit user with id paramter url.
+     *
+     * @param Request        $request
+     * @param User           $user
+     * @param UserRepository $userRepository
+     *
+     * @return Response
      */
     #[Route('/{id}/edit', name: 'app_user_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, User $user, UserRepository $userRepository): Response
@@ -50,11 +60,20 @@ class UserController extends AbstractController
 
     /**
      * Delete a user with id paramter url.
+     *
+     * @param Request        $request
+     * @param User           $user
+     * @param UserRepository $userRepository
+     *
+     * @return Response
      */
     #[Route('/{id}', name: 'app_user_delete', methods: ['POST'])]
     public function delete(Request $request, User $user, UserRepository $userRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
+        /** @var string|null $token */
+        $token = $request->get('_token');
+
+        if ($this->isCsrfTokenValid('delete'.$user->getId(), $token)) {
             $userRepository->remove($user, true);
         }
 

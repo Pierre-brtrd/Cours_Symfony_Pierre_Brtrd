@@ -12,6 +12,7 @@ use App\Repository\CommentsRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Context;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
@@ -262,12 +263,12 @@ class Comments
         return $this;
     }
 
-    public function getUser(): ?User
+    public function getUser(): User|UserInterface|null
     {
         return $this->user;
     }
 
-    public function setUser(?User $user): self
+    public function setUser(User|UserInterface|null $user): self
     {
         $this->user = $user;
 

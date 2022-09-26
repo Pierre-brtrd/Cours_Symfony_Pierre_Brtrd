@@ -2,10 +2,6 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Article;
-use App\Repository\CategorieRepository;
-use App\Repository\UserRepository;
-use DateTimeImmutable;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
@@ -13,12 +9,10 @@ use Faker\Generator;
 
 class ZZArticleFixtures extends Fixture
 {
-    private Generator $faker;
+    public Generator $faker;
 
-    public function __construct(
-        private UserRepository $repoUser,
-        private CategorieRepository $repoCategorie
-    ) {
+    public function __construct()
+    {
         $this->faker = Factory::create('fr_FR');
     }
 

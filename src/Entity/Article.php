@@ -155,7 +155,7 @@ class Article
 
     #[ORM\Column(length: 150, unique: true)]
     #[Gedmo\Slug(fields: ['titre'])]
-    private $slug;
+    private ?string $slug;
 
     #[ORM\Column]
     #[Gedmo\Timestampable(on: 'create')]
@@ -229,6 +229,13 @@ class Article
     public function getSlug(): ?string
     {
         return $this->slug;
+    }
+
+    public function setSlug(?string $slug): self
+    {
+        $this->slug = $slug;
+
+        return $this;
     }
 
     public function getCreatedAt(): ?\DateTimeImmutable

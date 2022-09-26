@@ -9,6 +9,7 @@ class ArticleImageProvider
 {
     public function uploadImageArticle(): ArticleImage
     {
+        /** @var array<string> $files */
         $files = glob(realpath(\dirname(__DIR__).'/images').'/*.*');
 
         $file = array_rand($files);

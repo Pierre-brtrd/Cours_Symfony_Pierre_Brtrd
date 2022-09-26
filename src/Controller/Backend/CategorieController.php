@@ -6,6 +6,7 @@ use App\Entity\Categorie;
 use App\Form\CategorieType;
 use App\Repository\CategorieRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -18,6 +19,8 @@ class CategorieController extends AbstractController
 {
     /**
      * Constructeur of class CategorieController.
+     *
+     * @param CategorieRepository $repository
      */
     public function __construct(
         private CategorieRepository $repository
@@ -26,6 +29,8 @@ class CategorieController extends AbstractController
 
     /**
      * Admin list tags page.
+     *
+     * @return Response
      */
     #[Route('/', name: 'app_categorie_index', methods: ['GET'])]
     public function index(): Response
@@ -37,6 +42,10 @@ class CategorieController extends AbstractController
 
     /**
      * Create new tag page.
+     *
+     * @param Request $request
+     *
+     * @return Response
      */
     #[Route('/new', name: 'app_categorie_new', methods: ['GET', 'POST'])]
     public function new(Request $request): Response
@@ -59,6 +68,10 @@ class CategorieController extends AbstractController
 
     /**
      * Page for show one tag with id in parameter url.
+     *
+     * @param Categorie $categorie
+     *
+     * @return Response
      */
     #[Route('/{id}', name: 'app_categorie_show', methods: ['GET'])]
     public function show(Categorie $categorie): Response
@@ -70,6 +83,11 @@ class CategorieController extends AbstractController
 
     /**
      * Page for edit tag with id parameter url.
+     *
+     * @param Request   $request
+     * @param Categorie $categorie
+     *
+     * @return Response
      */
     #[Route('/{id}/edit', name: 'app_categorie_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Categorie $categorie): Response
@@ -92,12 +110,18 @@ class CategorieController extends AbstractController
     /**
      * Delete a tag with id paramter url.
      *
-     * @return void
+     * @param Categorie $categorie
+     * @param Request   $request
+     *
+     * @return RedirectResponse
      */
     #[Route('/delete/{id}', name: 'app_categorie_delete', methods: 'DELETE|POST')]
-    public function deleteArticle(Categorie $categorie, Request $request)
+    public function deleteArticle(Categorie $categorie, Request $request): RedirectResponse
     {
-        if ($this->isCsrfTokenValid('delete'.$categorie->getId(), $request->get('_token'))) {
+        /** @var string|null $token */
+        $token = $request->get('_token');
+
+        if ($this->isCsrfTokenValid('delete'.$categorie->getId(), $token)) {
             $this->repository->remove($categorie, true);
             $this->addFlash('success', 'Categorie supprimée avec succès');
 
