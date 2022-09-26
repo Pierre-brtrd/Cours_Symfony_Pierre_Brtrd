@@ -1,3 +1,20 @@
+# [2.5.0](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/compare/v2.4.2...v2.5.0) (2022-09-26)
+
+
+### Bug Fixes
+
+* **comments:** update routing and query for comments ([4420f1e](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/commit/4420f1e5b7f7a4cce39d58b89aeb426702b522e1))
+* **phpcs:** review phpcs code ([72ae1e5](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/commit/72ae1e52506639f29337f2f1202cb026e53bcfc9))
+
+
+### Features
+
+* add bootstrap icons lib ([75c405c](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/commit/75c405cf4f288d6332eb72b93484ce906bacb978))
+* add ux-components for entity type ([01dfc87](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/commit/01dfc874fea7e76a5ad217d06bd229ba9c53cf32))
+* **search:** add search for user article list ([c9d9f14](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/commit/c9d9f145c164ee3ebc08be43c420538073ca2b46))
+
+
+
 ## [2.4.2](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/compare/v2.4.0...v2.4.2) (2022-08-17)
 
 
