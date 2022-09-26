@@ -7,6 +7,7 @@ use Symfony\Component\Validator\Exception\ConstraintDefinitionException;
 
 /**
  * @Annotation
+ *
  * @Target({"PROPERTY", "METHOD", "ANNOTATION"})
  */
 #[\Attribute(\Attribute::TARGET_PROPERTY | \Attribute::TARGET_METHOD | \Attribute::IS_REPEATABLE)]
@@ -23,7 +24,7 @@ class EmailDomain extends Constraint
     public function __construct($options = null)
     {
         parent::__construct($options);
-        if (!is_array($options['blocked'])) {
+        if (!\is_array($options['blocked'])) {
             throw new ConstraintDefinitionException('The "blocked" option must be an array of blocked domain');
         }
     }

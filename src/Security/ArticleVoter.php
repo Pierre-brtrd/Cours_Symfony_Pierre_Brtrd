@@ -35,8 +35,11 @@ class ArticleVoter extends Voter
             return false;
         }
 
+        /** @var User $userToTest */
+        $userToTest = $subject->getUser();
+
         return
-            $subject->getUser()->getId() === $user->getId() ||
+            $userToTest->getId() === $user->getId() ||
             $this->security->isGranted('ROLE_ADMIN');
     }
 }

@@ -72,6 +72,8 @@ form:
       gdpr:
         label: Gdpr
         help: "By checking this box you agree to our privacy policy"
+    btn:
+      send: Send
 
 # Bundles
 vich_uploader.form_label.delete_confirm: Delete image ?

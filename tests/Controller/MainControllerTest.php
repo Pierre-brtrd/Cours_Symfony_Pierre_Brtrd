@@ -12,14 +12,14 @@ class MainControllerTest extends WebTestCase
 
     protected $databaseTool;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->client = self::createClient();
 
         $this->databaseTool = self::getContainer()->get(DatabaseToolCollection::class)->get();
         $this->databaseTool->loadAliceFixture([
-            dirname(__DIR__).'/Fixtures/UserTestFixtures.yaml',
-            dirname(__DIR__).'/Fixtures/ArticleTestFixtures.yaml',
+            \dirname(__DIR__).'/Fixtures/UserTestFixtures.yaml',
+            \dirname(__DIR__).'/Fixtures/ArticleTestFixtures.yaml',
         ]);
     }
 

@@ -33,7 +33,7 @@
         .sidebar-content {
             display: block;
             position: sticky;
-            top: 4em;
+            top: 4.5rem;
             height: 100vh;
             overflow: scroll;
         }
@@ -58,7 +58,7 @@
     }
 
     .column-right {
-        flex: 1 0 70%;
+        flex: 1 0 65%;
 
         .article-content {
             display: grid;

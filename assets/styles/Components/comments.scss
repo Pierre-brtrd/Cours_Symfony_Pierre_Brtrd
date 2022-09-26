@@ -1,29 +1,34 @@
 .show-comments {
-    margin-bottom: 3em;
+    margin-bottom: 3rem;
+
+    .comments-sidebar-list {
+        width: 90%;
+
+        .comment-item {
+            &:not(:last-child) {
+                margin-bottom: 1rem;
+            }
+        }
+    }
 
     .comments-list {
         display: flex;
         flex-wrap: wrap;
-        gap: 1em;
+        gap: 1rem;
     }
 
     .comment-item {
-        border-radius: $border-radius;
         border: 1px solid $secondary;
+        border-radius: $border-radius;
         overflow: hidden;
 
-        &:not(:last-child) {
-            margin-bottom: 10px;
-        }
-
         .comment-header {
-            background-color: $primary;
-            color: $white;
+            background: $primary;
             padding: 5px 10px;
         }
 
-        .comment-item-content {
-            padding: 1em;
+        .comment-content {
+            padding: 1rem;
         }
     }
 }

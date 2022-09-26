@@ -21,9 +21,9 @@
 			<input type="password" id="password" class="form-control" name="_password"/>
 
 			<div class="d-grid gap-2 d-md-block mt-4 text-center">
-				<button type="submit" class="btn btn-primary">Se connecter</button>
+				<button type="submit" class="btn btn-primary">{{ 'main.btn.login'|trans(domain = 'content') }}</button>
 			</div>
-			<a href="{{ path('app_forgot_password_request')}}">Mot de passe oublié ?</a>
+			<a href="{{ path('app_forgot_password_request')}}">{{ 'main.btn.forgotPassword'|trans(domain = 'content') }}</a>
 		</form>
 	</section>
 {% endblock %}

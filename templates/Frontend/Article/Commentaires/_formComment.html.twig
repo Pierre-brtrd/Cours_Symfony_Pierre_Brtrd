@@ -1,8 +1,23 @@
-{{ form_start(form) }}
-{{ form_row(form.note) }}
-{{ form_widget(form.titre, {'attr' : {'class': 'mt-4'} }) }}
-{{ form_errors(form.titre)}}
-{{ form_widget(form.content, {'attr' : {'class': 'mt-4 mb-4', 'rows': 5} }) }}
-{{ form_row(form.rgpd)}}
-<button type="submit" class="btn btn-primary">{{ button_label|default('Save')}}</button>
-{{ form_end(form) }}
+<div class="comments card p-3 mt-4">
+	<h2>{{ 'form.comments.title.add'|trans(domain = 'forms') }}</h2>
+	{% if app.user %}
+		{{ form_start(form) }}
+		{{ form_row(form.note) }}
+		{{ form_widget(form.titre, {'attr' : {'class': 'mt-4'} }) }}
+		{{ form_errors(form.titre)}}
+		{{ form_widget(form.content, {'attr' : {'class': 'mt-4 mb-4', 'rows': 5} }) }}
+		{{ form_row(form.rgpd)}}
+		<button type="submit" class="btn btn-primary">{{ 'form.comments.btn.send'|trans(domain = 'forms')}}</button>
+		{{ form_end(form) }}
+	{% else %}
+		<div class="alert alert-info mt-2" role="alert">
+			<p>
+				<b>Attention!</b>
+				<br/>
+				Vous devez
+				<a href="{{ path('login') }}">être connecté</a>
+				pour laisser un commentaire.
+			</p>
+		</div>
+	{% endif %}
+</div>

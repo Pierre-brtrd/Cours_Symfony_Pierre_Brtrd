@@ -1,0 +1,11 @@
+parameters:
+	level: 6
+
+	excludePaths:
+		- src/entity/ResetPasswordRequest.php
+
+	paths:
+		- src
+#		- tests
+	
+	checkGenericClassInNonGenericObjectType: false

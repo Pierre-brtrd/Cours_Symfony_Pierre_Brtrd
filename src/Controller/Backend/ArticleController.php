@@ -9,29 +9,47 @@ use App\Form\ArticleType;
 use App\Form\SearchForm;
 use App\Repository\ArticleRepository;
 use App\Repository\CommentsRepository;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Security;
 
+/**
+ * Article controller backend class.
+ */
 #[Route('/admin')]
 class ArticleController extends AbstractController
 {
+    /**
+     * Constructor of class ArticleController.
+     *
+     * @param ArticleRepository  $repoArticle
+     * @param CommentsRepository $repoComments
+     */
     public function __construct(
-        private EntityManagerInterface $em,
         private ArticleRepository $repoArticle,
         private CommentsRepository $repoComments
     ) {
     }
 
+    /**
+     * Admin list article page.
+     *
+     * @param Request $request
+     *
+     * @return Response
+     */
     #[Route('/article', name: 'admin')]
-    public function adminListArticle(Request $request)
+    public function adminListArticle(Request $request): Response
     {
         $data = new SearchData();
-        $data->setPage($request->get('page', 1));
+
+        /** @var ?int $page */
+        $page = $request->get('page', 1);
+        $data->setPage($page);
 
         $form = $this->createForm(SearchForm::class, $data);
         $form->handleRequest($request);
@@ -40,19 +58,19 @@ class ArticleController extends AbstractController
 
         if ($request->get('ajax')) {
             return new JsonResponse([
-                'content' => $this->renderView('Frontend/Article/_articles.html.twig', [
+                'content' => $this->renderView('Components/Article/_articles.html.twig', [
                     'articles' => $articles,
                     'admin' => true,
                 ]),
-                'sorting' => $this->renderView('Frontend/Article/_sorting.html.twig', [
+                'sorting' => $this->renderView('Components/Article/_sorting.html.twig', [
                     'articles' => $articles,
                     'admin' => true,
                 ]),
-                'pagination' => $this->renderView('Frontend/Article/_pagination.html.twig', [
+                'pagination' => $this->renderView('Components/Article/_pagination.html.twig', [
                     'articles' => $articles,
                     'admin' => true,
                 ]),
-                'count' => $this->renderView('Frontend/Article/_count.html.twig', [
+                'count' => $this->renderView('Components/Article/_count.html.twig', [
                     'articles' => $articles,
                     'admin' => true,
                 ]),
@@ -66,6 +84,14 @@ class ArticleController extends AbstractController
         ]);
     }
 
+    /**
+     * Create new post page.
+     *
+     * @param Request  $request
+     * @param Security $security
+     *
+     * @return Response
+     */
     #[Route('/article/new', name: 'admin.article.new')]
     public function createArticle(Request $request, Security $security): Response
     {
@@ -88,10 +114,18 @@ class ArticleController extends AbstractController
         ]);
     }
 
+    /**
+     * Edit post page with the id and slug url parameter.
+     *
+     * @param Article|null $article
+     * @param Request      $request
+     *
+     * @return Response
+     */
     #[Route('/article/edit/{id}-{slug}', name: 'admin.article.update')]
-    public function editArticle(Article $article, Request $request): Response
+    public function editArticle(?Article $article, Request $request): Response
     {
-        if (!$article) {
+        if (!$article instanceof Article) {
             $this->addFlash('error', 'Article non trouvé');
 
             return $this->redirectToRoute('admin');
@@ -112,10 +146,17 @@ class ArticleController extends AbstractController
         ]);
     }
 
+    /**
+     * Switch visibility in ajax for post.
+     *
+     * @param Article $article
+     *
+     * @return Response
+     */
     #[Route('/article/switch/{id}', name: 'admin.article.switch', methods: 'GET')]
-    public function switchVisibilityArticle(Article $article)
+    public function switchVisibilityArticle(?Article $article): Response
     {
-        if ($article) {
+        if ($article instanceof Article) {
             $article->isActive() ? $article->setActive(false) : $article->setActive(true);
             $this->repoArticle->add($article, true);
 
@@ -125,10 +166,21 @@ class ArticleController extends AbstractController
         return new Response('Article non trouvé', 404);
     }
 
+    /**
+     * Delete a post with the id param url.
+     *
+     * @param Article $article
+     * @param Request $request
+     *
+     * @return RedirectResponse
+     */
     #[Route('/article/delete/{id}', name: 'admin.article.delete', methods: 'DELETE|POST')]
-    public function deleteArticle(Article $article, Request $request)
+    public function deleteArticle(Article $article, Request $request): RedirectResponse
     {
-        if ($this->isCsrfTokenValid('delete'.$article->getId(), $request->get('_token'))) {
+        /** @var string|null $token */
+        $token = $request->get('_token');
+
+        if ($this->isCsrfTokenValid('delete'.$article->getId(), $token)) {
             $this->repoArticle->remove($article, true);
             $this->addFlash('success', 'Article supprimé avec succès');
 
@@ -140,10 +192,26 @@ class ArticleController extends AbstractController
         return $this->redirectToRoute('admin');
     }
 
-    #[Route('/article/{id}-{slug}/comments', name: 'admin.article.comments')]
-    public function adminComments(int $id, string $slug)
+    /**
+     * Admin comments page.
+     *
+     * @param Article|null $article
+     *
+     * @return Response
+     */
+    #[Route('/article/{id}/comments', name: 'admin.article.comments')]
+    public function adminComments(?Article $article): Response
     {
-        $comments = $this->repoComments->findByArticle($id, $slug);
+        if (!$article instanceof Article) {
+            $this->addFlash('error', 'Article non trouvé');
+
+            return $this->redirectToRoute('admin');
+        }
+
+        /** @var int $articleId */
+        $articleId = $article->getId();
+
+        $comments = $this->repoComments->findByArticle($articleId);
 
         if (!$comments) {
             $this->addFlash('error', 'Pas de commentaires trouvés');
@@ -156,25 +224,39 @@ class ArticleController extends AbstractController
         ]);
     }
 
+    /**
+     * Switch the visibility of a comment.
+     *
+     * @param Comments|null $comment
+     *
+     * @return Response
+     */
     #[Route('/comments/switch/{id}', name: 'admin.comments.switch', methods: 'GET')]
-    public function switchVisibilityComment(?Comments $comment)
+    public function switchVisibilityComment(?Comments $comment): Response
     {
         if (!$comment instanceof Comments) {
             return new Response('Commentaires non trouvé', 404);
         }
 
-        if ($comment) {
-            $comment->isActive() ? $comment->setActive(false) : $comment->setActive(true);
-            $this->repoComments->add($comment, true);
+        $comment->isActive() ? $comment->setActive(false) : $comment->setActive(true);
+        $this->repoComments->add($comment, true);
 
-            return new Response('Visibility changed', 201);
-        }
+        return new Response('Visibility changed', 201);
     }
 
+    /**
+     * Delete a comment with the id url.
+     *
+     * @param Comments $comment
+     *
+     * @return RedirectResponse
+     */
     #[Route('/comment/delete/{id}', name: 'admin.comment.delete', methods: 'DELETE|POST')]
-    public function deleteComment(Comments $comment, Request $request)
+    public function deleteComment(Comments $comment, Request $request): RedirectResponse
     {
-        if ($this->isCsrfTokenValid('delete'.$comment->getId(), $request->get('_token'))) {
+        /** @var string|null $token */
+        $token = $request->get('_token');
+        if ($this->isCsrfTokenValid('delete'.$comment->getId(), $token)) {
             $this->repoComments->remove($comment, true);
             $this->addFlash('success', 'Commentaire supprimé avec succès');
 

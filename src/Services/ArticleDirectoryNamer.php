@@ -61,7 +61,7 @@ class ArticleDirectoryNamer implements DirectoryNamerInterface
         $text = preg_replace('~-+~', $divider, $text);
 
         // lowercase
-        $text = strtolower($text);
+        $text = mb_strtolower($text);
 
         if (empty($text)) {
             return 'n-a';

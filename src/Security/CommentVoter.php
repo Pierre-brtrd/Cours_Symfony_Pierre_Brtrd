@@ -29,6 +29,9 @@ class CommentVoter extends Voter
             return false;
         }
 
-        return $subject->getUser()->getId() === $user->getId();
+        /** @var User $userToTest */
+        $userToTest = $subject->getUser();
+
+        return $userToTest->getId() === $user->getId();
     }
 }

@@ -6,14 +6,21 @@ use App\Entity\User;
 use App\Form\RegistrationFormType;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
+/**
+ * Security Controller class.
+ */
 class SecurityController extends AbstractController
 {
+    /**
+     * Login page.
+     */
     #[Route('/login', name: 'login')]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
@@ -29,23 +36,29 @@ class SecurityController extends AbstractController
         ]);
     }
 
+    /**
+     * Register a new user.
+     */
     #[Route('/register', name: 'register')]
     public function register(
         Request $request,
         UserPasswordHasherInterface $passwordEncoder,
         UserRepository $repo
-    ) {
+    ): Response|RedirectResponse {
         $user = new User();
 
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // Hash the password
+            /** @var string $plainPassword */
+            $plainPassword = $form->get('password')->getData();
+
+            /* @var User $user */
             $user->setPassword(
                 $passwordEncoder->hashPassword(
                     $user,
-                    $form->get('password')->getData()
+                    $plainPassword
                 )
             );
 

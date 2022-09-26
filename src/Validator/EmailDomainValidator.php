@@ -25,14 +25,14 @@ class EmailDomainValidator extends ConstraintValidator
             return;
         }
 
-        $domain = substr($value, strpos($value, '@') + 1);
+        $domain = mb_substr($value, mb_strpos($value, '@') + 1);
         $blockedDomain = array_merge(
             $constraint->blocked,
             $this->configRepository->getAsArray('blocked_domains'),
             $this->globalBlockedDomains
         );
 
-        if (in_array($domain, $blockedDomain)) {
+        if (\in_array($domain, $blockedDomain, true)) {
             $this->context->buildViolation($constraint->message)
                 ->setParameter('{{ value }}', $value)
                 ->addViolation();

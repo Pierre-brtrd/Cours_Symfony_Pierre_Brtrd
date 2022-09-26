@@ -4,15 +4,17 @@ namespace App\Tests\Entity;
 
 use App\Entity\User;
 use App\Repository\UserRepository;
+use App\Tests\Utils\AssertTestTrait;
 use Liip\TestFixturesBundle\Services\DatabaseToolCollection;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
-use Symfony\Component\Validator\ConstraintViolation;
 
 class UserTest extends KernelTestCase
 {
+    use AssertTestTrait;
+
     protected $databaseTool;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -23,13 +25,13 @@ class UserTest extends KernelTestCase
     {
         $users = $this->databaseTool->loadAliceFixture(
             [
-                dirname(__DIR__).'/Fixtures/UserTestFixtures.yaml',
+                \dirname(__DIR__).'/Fixtures/UserTestFixtures.yaml',
             ]
         );
 
         $users = self::getContainer()->get(UserRepository::class)->count([]);
 
-        $this->assertEquals(12, $users);
+        $this->assertSame(12, $users);
     }
 
     public function getEntity()
@@ -43,21 +45,6 @@ class UserTest extends KernelTestCase
             ->setVille('Paris')
             ->setRoles(['ROLE_EDITOR'])
             ->setPassword('Test1234');
-    }
-
-    public function assertHasErrors(User $user, int $number = 0)
-    {
-        self::bootKernel();
-        $errors = self::getContainer()->get('validator')->validate($user);
-
-        $messages = [];
-
-        /** @var ConstraintViolation $error */
-        foreach ($errors as $error) {
-            $messages[] = $error->getPropertyPath().' -> '.$error->getMessage();
-        }
-
-        $this->assertCount($number, $errors, implode(', ', $messages));
     }
 
     public function testValideUserEntity()

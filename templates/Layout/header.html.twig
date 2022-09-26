@@ -19,27 +19,27 @@
 						<div class="navbar-btn me-2">
 							<div class="dropdown">
 								<button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-									<i class="fa-solid fa-screwdriver-wrench"></i>
+									<i class="bi bi-tools"></i>
 									Admin
 								</button>
 								<ul class="dropdown-menu">
 									{% if is_granted('ROLE_ADMIN') %}
 										<li>
 											<a class="dropdown-item" href="{{ path('app_user_index') }}">
-												<i class="fas fa-users"></i>
+												<i class="bi bi-people-fill"></i>
 												<span>{{ 'header.admin.users'|trans(domain = 'content') }}</span>
 											</a>
 										</li>
 									{% endif %}
 									<li>
 										<a href="{{ path('admin') }}" class="dropdown-item">
-											<i class="fas fa-newspaper"></i>
+											<i class="bi bi-newspaper"></i>
 											{{ 'header.admin.posts'|trans(domain = 'content') }}
 										</a>
 									</li>
 									<li>
 										<a href="{{ path('app_categorie_index') }}" class="dropdown-item">
-											<i class="fas fa-tags"></i>
+											<i class="bi bi-tags-fill"></i>
 											{{ 'header.admin.tags'|trans(domain = 'content') }}
 										</a>
 									</li>
@@ -49,23 +49,29 @@
 					{% endif %}
 					<div class="navbar-btn me-2">
 						<a href="{{ path('compte') }}" class="btn btn-light">
-							<i class="fas fa-user"></i>
+							<i class="bi bi-person-badge-fill"></i>
 							<span>{{ 'header.profile'|trans(domain = 'content') }}</span>
 						</a>
 					</div>
 					<div class="navbar-btn">
 						<a href="{{ path('logout') }}" class="btn btn-danger">
-							<i class="fa-solid fa-right-from-bracket"></i>
+							<i class="bi bi-door-open-fill"></i>
 							<span>{{ 'header.logout'|trans(domain = 'content') }}</span>
 						</a>
 					</div>
 				{% else %}
 					<div class="navbar-btn me-2">
-						<a href="{{path('register')}}" class="btn btn-light">{{ 'header.sign_up'|trans(domain = 'content') }}</a>
+						<a href="{{path('register')}}" class="btn btn-light">
+							<i class="bi bi-person-plus"></i>
+							{{ 'header.sign_up'|trans(domain = 'content') }}
+						</a>
 					</div>
 
 					<div class="navbar-btn">
-						<a href="{{path('login')}}" class="btn btn-secondary">{{ 'header.login'|trans(domain = 'content') }}</a>
+						<a href="{{path('login')}}" class="btn btn-secondary">
+							<i class="bi bi-box-arrow-in-right"></i>
+							{{ 'header.login'|trans(domain = 'content') }}
+						</a>
 					</div>
 				{% endif %}
 				<div class="switch-locale navbar-btn ms-2">

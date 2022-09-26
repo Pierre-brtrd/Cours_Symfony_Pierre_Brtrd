@@ -23,7 +23,7 @@
 	</a>
 	<div class="blog-card-content">
 		<p class="blog-card-date">
-			<i class="far fa-calendar-alt"></i>
+			<i class="bi bi-calendar2-week-fill"></i>
 			{{ article.createdAt|format_datetime('full', 'none') }}
 		</p>
 		<h2 class="blog-card-content-header">
@@ -34,9 +34,9 @@
 			<p class="blog-card-reviews text-muted">
 				{% for number in range(1,5) %}
 					{% if number <= avgNote %}
-						<i class="fas fa-star rating-color"></i>
+						<i class="bi bi-star-fill"></i>
 					{% else %}
-						<i class="far fa-star rating-color"></i>
+						<i class="bi bi-star"></i>
 					{% endif %}
 				{% endfor %}
 				<em>
@@ -48,7 +48,6 @@
 		{% for categorie in article.categories %}
 			<em class="text-muted text-primary text-italic">#{{ categorie.titre }}</em>
 		{% endfor %}
-
 		{% if article.user is not null %}
 			<div class="author mt-2">
 				{% if article.user.imageName %}
@@ -56,7 +55,7 @@
 						<img src="{{ vich_uploader_asset(article.user, 'imageFile')}}" alt="{{ article.user.prenom }}">
 					</div>
 				{% else %}
-					<i class="far fa-user-circle"></i>
+					<i class="bi bi-person-circle"></i>
 				{% endif %}
 				<p class="text-muted mt-2 mb-0">
 					{{ article.user ? article.user.prenom : '' }}
@@ -87,7 +86,7 @@
 				{% if article.comments|length > 0 %}
 					<div class="row">
 						<div class="col-md-4 mt-2">
-							<a href="{{ path('admin.article.comments', {'id': article.id, 'slug': article.slug}) }}" class="btn btn-info text-light">{{ 'main.btn.comments'|trans(domain = 'content') }}</a>
+							<a href="{{ path('admin.article.comments', {'id': article.id}) }}" class="btn btn-info text-light">{{ 'main.btn.comments'|trans(domain = 'content') }}</a>
 						</div>
 					</div>
 				{% endif %}

@@ -1,4 +1,29 @@
 {
-    "controllers": [],
+    "controllers": {
+        "@symfony/ux-autocomplete": {
+            "autocomplete": {
+                "enabled": true,
+                "fetch": "eager",
+                "autoimport": {
+                    "tom-select/dist/css/tom-select.default.css": true
+                }
+            }
+        },
+        "@symfony/ux-dropzone": {
+            "dropzone": {
+                "enabled": true,
+                "fetch": "eager",
+                "autoimport": {
+                    "@symfony/ux-dropzone/src/style.css": true
+                }
+            }
+        },
+        "@symfony/ux-lazy-image": {
+            "lazy-image": {
+                "enabled": true,
+                "fetch": "eager"
+            }
+        }
+    },
     "entrypoints": []
 }

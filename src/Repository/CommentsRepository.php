@@ -51,14 +51,11 @@ class CommentsRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    public function findByArticle(int $articleId, string $slug)
+    public function findByArticle(int $articleId)
     {
         return $this->createQueryBuilder('c')
-            ->join('c.article', 'a')
-            ->andWhere('a.id = :articleId')
+            ->andWhere('c.article = :articleId')
             ->setParameter('articleId', $articleId)
-            ->andWhere('a.slug = :slug')
-            ->setParameter('slug', $slug)
             ->orderBy('c.createdAt', 'DESC')
             ->getQuery()
             ->getResult();

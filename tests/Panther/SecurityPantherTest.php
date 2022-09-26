@@ -11,13 +11,13 @@ class SecurityPantherTest extends PantherTestCase
 
     protected $databaseTool;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->client = self::createPantherClient();
 
         $this->databaseTool = self::getContainer()->get(DatabaseToolCollection::class)->get();
         $this->databaseTool->loadAliceFixture([
-            dirname(__DIR__).'/Fixtures/UserTestFixtures.yaml',
+            \dirname(__DIR__).'/Fixtures/UserTestFixtures.yaml',
         ]);
     }
 

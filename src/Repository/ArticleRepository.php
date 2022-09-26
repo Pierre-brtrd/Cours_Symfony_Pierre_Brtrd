@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Data\SearchData;
 use App\Entity\Article;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query;
 use Doctrine\Persistence\ManagerRegistry;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
@@ -44,7 +45,10 @@ class ArticleRepository extends ServiceEntityRepository
         }
     }
 
-    public function createQueryListActiveArticle()
+    /**
+     * Creat query builder with enable posts.
+     */
+    public function createQueryListActiveArticle(): Query
     {
         return $this->createQueryBuilder('a')
             ->andWhere('a.active = :val')
@@ -53,7 +57,14 @@ class ArticleRepository extends ServiceEntityRepository
             ->getQuery();
     }
 
-    public function findLatestArticleWithLimit(int $limit)
+    /**
+     * Search the latest posts with a limit.
+     *
+     * @param int $limit
+     *
+     * @return mixed
+     */
+    public function findLatestArticleWithLimit(int $limit): mixed
     {
         return $this->createQueryBuilder('a')
             ->select('a', 'u', 'i')
@@ -67,6 +78,14 @@ class ArticleRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    /**
+     * SearchData for posts with query, categories and return by default only enable posts.
+     *
+     * @param SearchData $search
+     * @param bool       $active
+     *
+     * @return PaginationInterface
+     */
     public function findSearch(SearchData $search, bool $active = true): PaginationInterface
     {
         $query = $this->createQueryBuilder('a')
@@ -93,6 +112,11 @@ class ArticleRepository extends ServiceEntityRepository
         if (!empty($search->getCategories())) {
             $query = $query->andWhere('c.id IN (:categories)')
                 ->setParameter('categories', $search->getCategories());
+        }
+
+        if (!empty($search->getAuthor())) {
+            $query = $query->andWhere('u.id IN (:authors)')
+                ->setParameter('authors', $search->getAuthor());
         }
 
         $query = $query->getQuery();

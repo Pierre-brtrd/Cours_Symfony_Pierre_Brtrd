@@ -27,6 +27,6 @@ class EmailDomainTest extends TestCase
     {
         $arr = ['a', 'b'];
         $domain = new EmailDomain(['blocked' => $arr]);
-        $this->assertEquals($arr, $domain->blocked);
+        $this->assertSame($arr, $domain->blocked);
     }
 }

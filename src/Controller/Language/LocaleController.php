@@ -8,13 +8,22 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\RouterInterface;
 
+/**
+ * Locale controller class.
+ */
 class LocaleController extends AbstractController
 {
+    /**
+     * Constructor of LocaleController class.
+     */
     public function __construct(
         private RouterInterface $router
     ) {
     }
 
+    /**
+     * Switch the local and save in session app.
+     */
     #[Route(
         '/switch/{_locale<%app.supported_locales%>}',
         defaults: ['_locale<%locale%>'],

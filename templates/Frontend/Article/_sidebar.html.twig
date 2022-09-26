@@ -1,0 +1,43 @@
+<aside class="column-left">
+	<div class="sidebar-content">
+		<div class="info-article">
+			<h2>{{ 'article.show.title.infos.label'|trans(domain = 'content')}}</h2>
+			<p>
+				<i class="bi bi-calendar2-week-fill"></i>
+				<strong>{{ 'article.show.title.infos.date'|trans(domain = 'content')}}</strong>
+				{{ article.createdAt|format_datetime('full', 'none') }}
+			</p>
+			<p>
+				<i class="bi bi-person-badge-fill"></i>
+				<strong>{{ 'article.show.title.infos.author'|trans(domain = 'content')}}</strong>
+				{{ article.user.prenom }}
+				{{ article.user.nom }}
+			</p>
+		</div>
+		{% if article.categories|length > 0 %}
+			<div class="categorie-article">
+				<h2>{{ article.categories|length > 1 ? 'article.show.title.tags.multiple'|trans(domain = 'content') : 'article.show.title.tags.single'|trans(domain = 'content')}}</h2>
+				<div class="list-tag">
+					{% for categorie in article.categories %}
+						{% if categorie.active %}
+							<p class="tag">
+								<i class="bi bi-tags-fill"></i>
+								{{ categorie.titre }}
+							</p>
+						{% endif %}
+					{% endfor %}
+				</div>
+			</div>
+		{% endif %}
+		{% if comments|length > 0 %}
+			<div class="show-comments mt-4">
+				<h2>{{ comments|length > 1 ? 'article.show.title.comments.multiple'|trans(domain = 'content') : 'article.show.title.comments.single'|trans(domain = 'content') }}</h2>
+				<div class="comments-sidebar-list">
+					{% for comment in comments|slice(0, 3) %}
+						{% include "Frontend/Article/Commentaires/_cardComment.html.twig" %}
+					{% endfor %}
+				</div>
+			</div>
+		{% endif %}
+	</div>
+</aside>

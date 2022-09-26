@@ -27,7 +27,9 @@ class EmailDomainValidatorTest extends TestCase
 
         $context = $this->getContext($expectedViolation);
 
-        /* @var ExecutionContextInterface $context */
+        /* @var ExecutionContextInterface $context
+         * @var ConfigRepository $validator
+         */
         $validator->initialize($context);
 
         return $validator;
@@ -72,8 +74,7 @@ class EmailDomainValidatorTest extends TestCase
 
         $validator->initialize($this->getContext(true));
         $validator->validate('demo@globalblocked.fr', $constraint);
-    }
-    **/
+    } */
     private function getContext(bool $expectedViolation): ExecutionContextInterface
     {
         $context = $this->getMockBuilder(ExecutionContextInterface::class)->getMock();

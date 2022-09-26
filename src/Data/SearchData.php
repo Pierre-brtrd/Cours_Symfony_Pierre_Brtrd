@@ -2,14 +2,43 @@
 
 namespace App\Data;
 
+use App\Entity\Categorie;
+use App\Entity\User;
+
+/**
+ * Search Data class to search object in application.
+ */
 class SearchData
 {
+    /**
+     * Number of the page of search.
+     */
     private ?int $page = 1;
 
+    /**
+     * The query for the search (for title fields).
+     */
     private ?string $query = '';
 
+    /**
+     * Array of author filter.
+     *
+     * @var array<int, User>
+     */
+    private ?array $author = [];
+
+    /**
+     * Array of tags filter.
+     *
+     * @var array<int, Categorie>
+     */
     private ?array $categories = [];
 
+    /**
+     * Array of visibility filter.
+     *
+     * @var array<int, bool>
+     */
     private ?array $active = null;
 
     /**
@@ -37,7 +66,7 @@ class SearchData
     /**
      * Get the value of categorie.
      *
-     * @return ?array
+     * @return ?array<int, Categorie>
      */
     public function getCategories(): ?array
     {
@@ -47,7 +76,7 @@ class SearchData
     /**
      * Set the value of categorie.
      *
-     * @param ?array $categorie
+     * @param ?array<int, Categorie> $categories
      */
     public function setCategories(?array $categories): self
     {
@@ -81,7 +110,7 @@ class SearchData
     /**
      * Get the value of active.
      *
-     * @return ?array
+     * @return ?array<int, bool>
      */
     public function getActive(): ?array
     {
@@ -91,11 +120,33 @@ class SearchData
     /**
      * Set the value of active.
      *
-     * @param ?array $active
+     * @param ?array<int, bool> $active
      */
     public function setActive(?array $active): self
     {
         $this->active = $active;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of author.
+     *
+     * @return ?array<int, User>
+     */
+    public function getAuthor(): ?array
+    {
+        return $this->author;
+    }
+
+    /**
+     * Set the value of author.
+     *
+     * @param ?array<int, User> $author
+     */
+    public function setAuthor(?array $author): self
+    {
+        $this->author = $author;
 
         return $this;
     }

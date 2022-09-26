@@ -12,15 +12,15 @@ class ArticlePantherTest extends PantherTestCase
 
     protected $databaseTool;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->client = self::createPantherClient();
 
         $this->databaseTool = self::getContainer()->get(DatabaseToolCollection::class)->get();
         $this->databaseTool->loadAliceFixture([
-            dirname(__DIR__).'/Fixtures/UserTestFixtures.yaml',
-            dirname(__DIR__).'/Fixtures/ArticleTestFixtures.yaml',
-            dirname(__DIR__).'/Fixtures/TagTestFixtures.yaml',
+            \dirname(__DIR__).'/Fixtures/UserTestFixtures.yaml',
+            \dirname(__DIR__).'/Fixtures/ArticleTestFixtures.yaml',
+            \dirname(__DIR__).'/Fixtures/TagTestFixtures.yaml',
         ]);
     }
 
@@ -46,23 +46,6 @@ class ArticlePantherTest extends PantherTestCase
         $this->assertCount(12, $crawler->filter('.blog-list .blog-card'));
     }
 
-    public function testArticlePageSearchSubmit()
-    {
-        $crawler = $this->client->request('GET', '/article/liste');
-
-        $this->client->waitFor('.form-filter', 2);
-
-        $form = $crawler->selectButton('Filtrer')->form([
-            'query' => 'Titre-2',
-        ]);
-
-        $this->client->submit($form);
-
-        $crawler = $this->client->refreshCrawler();
-
-        $this->assertCount(1, $crawler->filter('.blog-list .blog-card'));
-    }
-
     public function testArticlePageNoResults()
     {
         $crawler = $this->client->request('GET', '/article/liste');
@@ -72,7 +55,7 @@ class ArticlePantherTest extends PantherTestCase
         $search = $this->client->findElement(WebDriverBy::cssSelector('.form-filter input[type="text"]'));
         $search->sendKeys('qskfhkqjshfqdsf');
 
-        $this->client->waitFor('.content-response', 2);
+        $this->client->waitFor('.content-response', 3);
 
         // For the flip content time response
         sleep(1);

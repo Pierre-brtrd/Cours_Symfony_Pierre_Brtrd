@@ -2,7 +2,6 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Categorie;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
@@ -10,7 +9,7 @@ use Faker\Generator;
 
 class CategorieFixtures extends Fixture
 {
-    private Generator $faker;
+    public Generator $faker;
 
     public function __construct()
     {

@@ -42,26 +42,6 @@ jobs:
       - name: Check PHP Version
         run: php -v
 
-      # https://github.com/zhulik/redis-action (community)
-      - name: Setup Redis with zhulik/redis-action
-        uses: zhulik/redis-action@1.1.0
-        with:
-          redis version: "5"
-
-      ## —— Yarn 🐱 ————————————————————————————————————————————————————————————
-      - name: Yarn install
-        uses: actions/setup-node@v2
-        with:
-          node-version: "18"
-          #registry-url: npm.fontawesome.com
-      - run:
-          yarn install
-          #env:
-        #NODE_AUTH_TOKEN: ${{ secrets.FONTAWESOME_NPM_AUTH_TOKEN }}
-
-      - name: Yarn build
-        run: yarn run encore production
-
       # —— Composer 🧙‍️ —————————————————————————————————————————————————————————
       - name: Validate composer.json and composer.lock
         run: composer validate
@@ -79,6 +59,20 @@ jobs:
 
       - name: Install Composer dependencies
         run: composer install
+
+      ## —— Yarn 🐱 ————————————————————————————————————————————————————————————
+      - name: Yarn install
+        uses: actions/setup-node@v2
+        with:
+          node-version: "18"
+          #registry-url: npm.fontawesome.com
+      - run:
+          yarn install
+          #env:
+        #NODE_AUTH_TOKEN: ${{ secrets.FONTAWESOME_NPM_AUTH_TOKEN }}
+
+      - name: Yarn build
+        run: yarn run encore production
 
       # —— Symfony 🎵 ——————————————————————————————————————————————————————————
       - name: Check Symfony requirements

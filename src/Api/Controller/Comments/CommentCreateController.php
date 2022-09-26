@@ -13,7 +13,7 @@ class CommentCreateController extends AbstractController
     ) {
     }
 
-    public function __invoke(Comments $data)
+    public function __invoke(Comments $data): Comments
     {
         $data->setUser($this->security->getUser());
 

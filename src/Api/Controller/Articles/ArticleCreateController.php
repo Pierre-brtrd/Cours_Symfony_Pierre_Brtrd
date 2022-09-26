@@ -13,7 +13,7 @@ class ArticleCreateController extends AbstractController
     ) {
     }
 
-    public function __invoke(Article $data)
+    public function __invoke(Article $data): Article
     {
         $data->setUser($this->security->getUser());
 

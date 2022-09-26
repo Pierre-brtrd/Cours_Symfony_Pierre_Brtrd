@@ -32,11 +32,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 180, unique: true)]
     #[Assert\Regex(
         pattern: '/^(?!(?:(?:\x22?\x5C[\x00-\x7E]\x22?)|(?:\x22?[^\x5C\x22]\x22?)){255,})(?!(?:(?:\x22?\x5C[\x00-\x7E]\x22?)|(?:\x22?[^\x5C\x22]\x22?)){65,}@)(?:(?:[\x21\x23-\x27\x2A\x2B\x2D\x2F-\x39\x3D\x3F\x5E-\x7E]+)|(?:\x22(?:[\x01-\x08\x0B\x0C\x0E-\x1F\x21\x23-\x5B\x5D-\x7F]|(?:\x5C[\x00-\x7F]))*\x22))(?:\.(?:(?:[\x21\x23-\x27\x2A\x2B\x2D\x2F-\x39\x3D\x3F\x5E-\x7E]+)|(?:\x22(?:[\x01-\x08\x0B\x0C\x0E-\x1F\x21\x23-\x5B\x5D-\x7F]|(?:\x5C[\x00-\x7F]))*\x22)))*@(?:(?:(?!.*[^.]{64,})(?:(?:(?:xn--)?[a-z0-9]+(?:-[a-z0-9]+)*\.){1,126}){1,}(?:(?:[a-z][a-z0-9]*)|(?:(?:xn--)[a-z0-9]+))(?:-[a-z0-9]+)*)|(?:\[(?:(?:IPv6:(?:(?:[a-f0-9]{1,4}(?::[a-f0-9]{1,4}){7})|(?:(?!(?:.*[a-f0-9][:\]]){7,})(?:[a-f0-9]{1,4}(?::[a-f0-9]{1,4}){0,5})?::(?:[a-f0-9]{1,4}(?::[a-f0-9]{1,4}){0,5})?)))|(?:(?:IPv6:(?:(?:[a-f0-9]{1,4}(?::[a-f0-9]{1,4}){5}:)|(?:(?!(?:.*[a-f0-9]:){5,})(?:[a-f0-9]{1,4}(?::[a-f0-9]{1,4}){0,3})?::(?:[a-f0-9]{1,4}(?::[a-f0-9]{1,4}){0,3}:)?)))?(?:(?:25[0-5])|(?:2[0-4][0-9])|(?:1[0-9]{2})|(?:[1-9]?[0-9]))(?:\.(?:(?:25[0-5])|(?:2[0-4][0-9])|(?:1[0-9]{2})|(?:[1-9]?[0-9]))){3}))\]))$/iD',
-        // match: false,
         message: 'Veuillez rentrer un email valide.'
     )]
     private ?string $email = null;
 
+    /** @var array<int, mixed> $roles */
     #[ORM\Column]
     private array $roles = [];
 
@@ -64,7 +64,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     #[Assert\Regex(
         pattern: '/^(?:0[1-9]|[1-8]\d|9[0-8])\d{3}$/',
-        // match: false,
         message: 'Veuillez rentrer un code postal valide.'
     )]
     private ?string $zipCode = null;
@@ -96,6 +95,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->comments = new ArrayCollection();
     }
 
+    /**
+     * Serialize.
+     *
+     * @return array<string, int|string|array<int, mixed>|null>
+     */
     public function __serialize(): array
     {
         return [
@@ -112,21 +116,67 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         ];
     }
 
-    public function __unserialize(array $data)
+    /**
+     * Unserialize.
+     *
+     * @param array<string, int|string|array<int, string>|null> $data
+     *
+     * @return void
+     */
+    public function __unserialize(array $data): void
     {
-        $this->id = $data['id'];
-        $this->email = $data['email'];
-        $this->roles = $data['roles'];
-        $this->password = $data['password'];
-        $this->prenom = $data['prenom'];
-        $this->nom = $data['nom'];
-        $this->address = $data['address'];
-        $this->zipCode = $data['zip_code'];
-        $this->ville = $data['ville'];
-        $this->imageName = $data['image_name'];
+        /** @var ?int $id */
+        $id = $data['id'];
+        $this->id = $id;
+
+        /** @var ?string $email */
+        $email = $data['email'];
+        $this->email = $email;
+
+        /** @var array<int, string> $roles */
+        $roles = $data['roles'];
+        $this->roles = $roles;
+
+        /** @var ?string $password */
+        $password = $data['password'];
+        $this->password = $password;
+
+        /** @var ?string $prenom */
+        $prenom = $data['prenom'];
+        $this->prenom = $prenom;
+
+        /** @var ?string $nom */
+        $nom = $data['nom'];
+        $this->nom = $nom;
+
+        /** @var ?string $address */
+        $address = $data['address'];
+        $this->address = $address;
+
+        /** @var ?string $zipCode */
+        $zipCode = $data['zip_code'];
+        $this->zipCode = $zipCode;
+
+        /** @var ?string $ville */
+        $ville = $data['ville'];
+        $this->ville = $ville;
+
+        /** @var ?string $imageName */
+        $imageName = $data['image_name'];
+        $this->imageName = $imageName;
     }
 
-    public function getFullName()
+    /**
+     * To string entity.
+     *
+     * @return string
+     */
+    public function __toString(): string
+    {
+        return $this->getFullName();
+    }
+
+    public function getFullName(): string
     {
         return "$this->prenom $this->nom";
     }
@@ -163,6 +213,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getRoles(): array
     {
+        /** @var array<int, string> $roles */
         $roles = $this->roles;
         // guarantee every user at least has ROLE_USER
         $roles[] = 'ROLE_USER';
@@ -170,6 +221,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return array_unique($roles);
     }
 
+    /**
+     * Undocumented function.
+     *
+     * @param array<int, string> $roles
+     *
+     * @return self
+     */
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;
@@ -180,12 +238,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @see PasswordAuthenticatedUserInterface
      */
-    public function getPassword(): string
+    public function getPassword(): ?string
     {
         return $this->password;
     }
 
-    public function setPassword(string $password): self
+    public function setPassword(?string $password): self
     {
         $this->password = $password;
 
@@ -195,7 +253,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @see UserInterface
      */
-    public function eraseCredentials()
+    public function eraseCredentials(): void
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
@@ -351,6 +409,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $comment->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * Get the value of imageUpdatedAt.
+     *
+     * @return ?\DateTimeInterface
+     */
+    public function getImageUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->imageUpdatedAt;
+    }
+
+    /**
+     * Set the value of imageUpdatedAt.
+     *
+     * @param ?\DateTimeInterface $imageUpdatedAt
+     *
+     * @return self
+     */
+    public function setImageUpdatedAt(?\DateTimeInterface $imageUpdatedAt): self
+    {
+        $this->imageUpdatedAt = $imageUpdatedAt;
 
         return $this;
     }

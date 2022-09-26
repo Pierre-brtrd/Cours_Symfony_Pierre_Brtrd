@@ -96,6 +96,7 @@ comment:
 main:
   title:
     visibility: Visibility
+    author: Author
   btn:
     create: Create
     edit: Edit
@@ -103,3 +104,5 @@ main:
     comments: Comments
     enable: Enable
     back: Back
+    login: Login
+    forgotPassword: Forgot your password ?

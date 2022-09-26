@@ -16,7 +16,7 @@ class SecurityControllerTest extends WebTestCase
 
     protected $userRepository;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->client = self::createClient();
 
@@ -24,14 +24,14 @@ class SecurityControllerTest extends WebTestCase
 
         $this->databaseTool = self::getContainer()->get(DatabaseToolCollection::class)->get();
         $this->databaseTool->loadAliceFixture([
-            dirname(__DIR__).'/Fixtures/UserTestFixtures.yaml',
+            \dirname(__DIR__).'/Fixtures/UserTestFixtures.yaml',
         ]);
     }
 
     public function testLoginPage()
     {
         $this->client->request('GET', '/login');
-        $this->assertResponseStatusCodeSame(Response::HTTP_OK);
+        $this->assertResponseIsSuccessful();
     }
 
     public function testLoginPageContentHeadingPage()
@@ -105,7 +105,7 @@ class SecurityControllerTest extends WebTestCase
     public function testRegisterPage()
     {
         $this->client->request('GET', '/register');
-        $this->assertResponseStatusCodeSame(Response::HTTP_OK);
+        $this->assertResponseIsSuccessful();
     }
 
     public function testRegisterPageContentHeadingPage()

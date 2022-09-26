@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Data\SearchData;
 use App\Entity\Categorie;
+use App\Entity\User;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -14,7 +15,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class SearchForm extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->add('query', TextType::class, [
             'label' => false,
@@ -36,6 +37,19 @@ class SearchForm extends AbstractType
                 'expanded' => true,
                 'multiple' => true,
             ])
+            ->add('author', EntityType::class, [
+                'label' => false,
+                'required' => false,
+                'class' => User::class,
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('u')
+                        ->join('u.articles', 'a')
+                        ->andWhere('a.active = true')
+                        ->orderBy('u.nom', 'ASC');
+                },
+                'expanded' => true,
+                'multiple' => true,
+            ])
             ->add('active', ChoiceType::class, [
                 'label' => false,
                 'required' => false,
@@ -48,7 +62,7 @@ class SearchForm extends AbstractType
             ]);
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => SearchData::class,

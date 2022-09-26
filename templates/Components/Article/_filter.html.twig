@@ -8,12 +8,14 @@
 
 {{ form_row(form.query) }}
 <h3 class="mb-2">{{ 'tag.name.multiple'|trans(domain = 'content') }}</h3>
-{{ form_row(form.categories) }}
+{{ form_row(form.categories, {'attr': {'class': 'd-flex flex-wrap gap-2'}}) }}
+
+<h3 class="mb-2">{{ 'main.title.author'|trans(domain = 'content') }}</h3>
+{{ form_row(form.author) }}
 
 {% if app.request.get('_route') == 'admin' %}
 	<h3 class="mb-2">{{ 'main.title.visibility'|trans(domain = 'content') }}</h3>
 	{{ form_row(form.active) }}
 {% endif %}
 
-<button type="submit" class="btn btn-primary w-100 btn-filter-form">{{ 'form.filter.btn'|trans(domain = 'forms') }}</button>
 {{ form_end(form, {render_rest: false}) }}

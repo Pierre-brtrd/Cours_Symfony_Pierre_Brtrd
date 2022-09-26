@@ -131,7 +131,10 @@ class Categorie
 
     public function __toString()
     {
-        return $this->titre;
+        /** @var string $titre */
+        $titre = $this->titre;
+
+        return $titre;
     }
 
     public function getId(): ?int

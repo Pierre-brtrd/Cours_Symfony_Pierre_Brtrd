@@ -19,18 +19,21 @@ class AppFixtures extends Fixture
         $this->faker = Factory::create('fr_FR');
     }
 
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
         $roles = ['ROLE_ADMIN', 'ROLE_USER', 'ROLE_EDITOR'];
+
+        /** @var array<int, string> $role */
+        $role = ['ROLE_ADMIN'];
 
         $user = new User();
         $user->setEmail('pierre@test.com')
             ->setPrenom('Pierre')
             ->setNom('Bertrand')
             ->setAddress('Nouvelle Maryland')
-            ->setZipCode(72350)
+            ->setZipCode('72350')
             ->setVille('Chambéry')
-            ->setRoles(['ROLE_ADMIN']);
+            ->setRoles($role);
 
         $password = $this->hasher->hashPassword($user, 'test1234');
         $user->setPassword($password);
@@ -41,13 +44,16 @@ class AppFixtures extends Fixture
         for ($i = 1; $i <= 25; ++$i) {
             $user = new User();
 
+            /** @var array<int, string> $roleUser */
+            $roleUser = [$this->faker->randomElement($roles)];
+
             $user->setEmail($this->faker->unique()->email())
                 ->setPrenom($this->faker->firstName())
                 ->setNom($this->faker->lastName())
-                ->setRoles([$this->faker->randomElement($roles)])
+                ->setRoles($roleUser)
                 ->setPassword($this->hasher->hashPassword($user, 'test1234'))
                 ->setAddress($this->faker->address())
-                ->setZipCode(72350)
+                ->setZipCode('72350')
                 ->setVille($this->faker->city());
 
             $manager->persist($user);
