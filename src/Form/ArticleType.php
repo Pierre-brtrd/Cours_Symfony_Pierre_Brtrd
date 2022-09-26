@@ -26,17 +26,8 @@ class ArticleType extends AbstractType
                 ],
                 'required' => true,
             ])
-            ->add('categories', EntityType::class, [
-                'class' => Categorie::class,
-                'query_builder' => function (EntityRepository $er) {
-                    return $er->createQueryBuilder('c')
-                        ->andWhere('c.active = true')
-                        ->orderBy('c.titre', 'ASC');
-                },
+            ->add('categories', CategorieAutocompleteField::class, [
                 'label' => 'form.article.fields.tags',
-                'multiple' => true,
-                'choice_label' => 'titre',
-                'by_reference' => false,
             ])
             ->add('content', HiddenType::class)
             ->add('active', CheckboxType::class, [
