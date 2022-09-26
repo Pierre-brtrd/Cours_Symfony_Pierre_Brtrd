@@ -1,0 +1,10 @@
+{% if comments|length > 0 %}
+	<div class="show-comments mt-4">
+		<h2>{{ comments|length > 1 ? 'comment.name.multiple'|trans(domain = 'content') : 'comment.name.single'|trans(domain = 'content')}}</h2>
+		<div class="comments-list">
+			{% for comment in comments %}
+				{% include "Frontend/Article/Commentaires/_cardComment.html.twig" %}
+			{% endfor %}
+		</div>
+	</div>
+{% endif %}

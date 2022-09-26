@@ -104,3 +104,5 @@ main:
     comments: Commentaires
     enable: Actif
     back: Retour
+    login: Se connecter
+    forgotPassword: Mot de passe oublié ?

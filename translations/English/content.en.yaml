@@ -104,3 +104,5 @@ main:
     comments: Comments
     enable: Enable
     back: Back
+    login: Login
+    forgotPassword: Forgot your password ?

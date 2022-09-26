@@ -20,37 +20,7 @@
 		<h1 class="text-center">{{ 'comment.admin.index.heading1'|trans(domain = 'content') }}</h1>
 		<div class="comments-list mt-4">
 			{% for comment in comments %}
-				<div class="comment-item">
-					<div class="comment-header">{{ comment.titre }}</div>
-					<div class="comment-item-content">
-						<em class="card-text">{{ comment.user.fullName }}</em>
-						<p class="card-text">{{ comment.content }}</p>
-						<div class="ratings">
-							{% for number in range(1,5) %}
-								{% if number <= comment.note %}
-									<i class="fas fa-star rating-color"></i>
-								{% else %}
-									<i class="far fa-star rating-color"></i>
-								{% endif %}
-							{% endfor %}
-						</div>
-						<div class="form-check form-switch">
-							<input type="checkbox" class="form-check-input" value="{{ comment.id }}" role="switch" data-switch-active-comment {{ comment.active ? 'checked' }}>
-							<label class="form-check-label">{{ 'main.btn.enable'|trans(domain = 'content') }}</label>
-						</div>
-						<div class="row">
-							<form method="POST" action="{{ path('admin.comment.delete', {'id': comment.id}) }}" onsubmit="return confirm('Êtes-vous sùr de vouloir supprimer ce commentaire ?')">
-								<input type="hidden" name="_method" value="DELETE">
-								<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ comment.id) }}">
-								<button class="btn btn-danger text-light">{{ 'main.btn.delete'|trans(domain = 'content') }}</button>
-							</form>
-						</div>
-						<p class="card-text">
-							<small class="text-muted">Posté il y a
-								{{ comment.createdAt|ago }}</small>
-						</p>
-					</div>
-				</div>
+				{% include "Frontend/Article/Commentaires/_cardComment.html.twig" with {admin: true} %}
 			{% endfor %}
 		</div>
 	</section>

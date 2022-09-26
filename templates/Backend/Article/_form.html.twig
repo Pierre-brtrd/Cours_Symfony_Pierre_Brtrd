@@ -8,8 +8,8 @@
 		<ul id="image-fields-list" class="d-flex flex-wrap gap-2 justify-content-between" data-prototype="{{ form_widget(form.articleImages.vars.prototype)|e }}" data-widget-tags="{{ '<li class="w-30 image-fields"></li>'|e }}" data-widget-counter="{{ form.articleImages|length }}">
 			{% for imageField in form.articleImages %}
 				<li class="list-image w-30">
-					<a class="js-remove-image btn btn-danger">
-						<span class="fa fa-close"></span>
+					<a class="js-remove-image btn btn-danger text-light">
+						<i class="bi bi-x-octagon-fill"></i>
 					</a>
 					{{ form_errors(imageField) }}
 					{{ form_widget(imageField) }}

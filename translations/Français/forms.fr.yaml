@@ -72,6 +72,8 @@ form:
       gdpr:
         label: Rgpd
         help: "En cochant cette case vous acceptez notre politique de confidentialité"
+    btn:
+      send: Envoyer
 
 # Bundles
 vich_uploader.form_label.delete_confirm: Supprimer l'image ?

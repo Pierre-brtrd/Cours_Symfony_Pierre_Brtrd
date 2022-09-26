@@ -1,0 +1,7 @@
+<div class="column-right">
+	<article class="article-content">
+		{{ article.content|raw }}
+	</article>
+	{% include "Frontend/Article/Commentaires/_formComment.html.twig" %}
+	{% include "Frontend/Article/Commentaires/_comments.html.twig" %}
+</div>
