@@ -52,10 +52,12 @@ export default class Filter {
                 this.loadUrl(url);
             }
         }
+
         this.sorting.addEventListener('click', e => {
             linkClikListener(e);
             this.page = 1;
         });
+
         if (this.moreNav) {
             this.pagination.innerHTML = `<button class="btn btn-primary btn-show-more mt-2">${this.content.dataset.jsLocale == 'fr' ? 'Voir plus' : 'Show More'}</button>`;
             this.pagination.querySelector('button').addEventListener('click', this.loadMore.bind(this));
@@ -120,6 +122,7 @@ export default class Filter {
             this.sorting.innerHTML = data.sorting;
             this.count.innerHTML = data.count;
             this.content.classList.add('content-response');
+
             if (!this.moreNav) {
                 this.pagination.innerHTML = data.pagination;
             } else if (this.page === data.pages) {
@@ -127,6 +130,7 @@ export default class Filter {
             } else {
                 this.pagination.style.display = null;
             }
+
             params.delete('ajax');
             history.replaceState({}, '', url.split('?')[0] + '?' + params.toString());
             this.hideLoader();

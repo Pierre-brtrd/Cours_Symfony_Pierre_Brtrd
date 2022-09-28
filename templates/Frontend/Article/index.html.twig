@@ -18,7 +18,7 @@
 						{% include "Components/Article/_sorting.html.twig" %}
 					</div>
 				</div>
-				<div class="blog-list js-filter-content" data-js-locale={{ app.request.locale }}>
+				<div class="blog-list js-filter-content" data-js-locale="{{ app.request.locale }}">
 					{% include "Components/Article/_articles.html.twig" with {articles: articles} only %}
 				</div>
 				{% include "Components/Article/_pagination.html.twig" %}

@@ -17,7 +17,7 @@
 			</div>
 		{% else %}
 			<div class="blog-card-image">
-				<img src="https://placekitten.com/350/240" alt="">
+				<img src="https://picsum.photos/350/240" alt="">
 			</div>
 		{% endfor %}
 	</a>
@@ -39,10 +39,10 @@
 						<i class="bi bi-star"></i>
 					{% endif %}
 				{% endfor %}
-				<em>
+				<small class="text-muted text-italic">
 					({{ countNote }})
 					{{ (countNote > 1 ? 'article.index.review.multiple' : 'article.index.review.single' )|trans(domain = 'content')}}
-				</em>
+				</small>
 			</p>
 		{% endif %}
 		{% for categorie in article.categories %}
