@@ -91,7 +91,7 @@ class ArticlePantherTest extends PantherTestCase
         $this->client->waitFor('.form-filter');
         $this->client->findElement(WebDriverBy::cssSelector('.form-filter input[type="checkbox"]'))->click();
 
-        $this->client->waitFor('.content-response', 2);
+        $this->client->waitFor('.content-response', 3);
 
         // For the flip content time response
         sleep(1);
@@ -109,7 +109,7 @@ class ArticlePantherTest extends PantherTestCase
 
         $this->client->findElement(WebDriverBy::cssSelector('.sortable[title="Nom"]'))->click();
 
-        $this->client->waitFor('.content-response', 2);
+        $this->client->waitFor('.content-response', 3);
 
         // For the flip content time response
         sleep(1);

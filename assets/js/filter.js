@@ -118,17 +118,19 @@ export default class Filter {
 
         if (response.status >= 200 && response.status < 300) {
             const data = await response.json();
+
             this.flipContent(data.content, append);
+
             this.sorting.innerHTML = data.sorting;
             this.count.innerHTML = data.count;
             this.content.classList.add('content-response');
 
             if (!this.moreNav) {
                 this.pagination.innerHTML = data.pagination;
-            } else if (this.page === data.pages) {
+            } else if (this.page == data.pages || this.content.children.item(0) === this.content.children.namedItem('article-no-response')) {
                 this.pagination.style.display = 'none';
             } else {
-                this.pagination.style.display = null;
+                this.pagination.style.display = 'block';
             }
 
             params.delete('ajax');
@@ -158,6 +160,7 @@ export default class Filter {
                     element.style.opacity = opacity;
                     element.style.transform = `translateY(${translateY}px)`;
                 },
+                delay: index * 10,
                 onComplete
             })
         }
@@ -165,7 +168,7 @@ export default class Filter {
             spring({
                 config: 'stiff',
                 values: {
-                    translateY: [0, 20],
+                    translateY: [20, 0],
                     opacity: [0, 1]
                 },
                 onUpdate: ({ translateY, opacity }) => {
@@ -179,16 +182,16 @@ export default class Filter {
         const flipper = new Flipper({
             element: this.content,
         })
-        var cards = this.content.children
+        let cards = this.content.children
         for (let element of cards) {
             flipper.addFlipped({
                 element,
                 spring: springName,
                 flipId: element.id,
-                shouldFlip: false,
                 onExit: exitSpring
             })
         }
+
         flipper.recordBeforeUpdate();
 
         if (append) {
@@ -197,7 +200,7 @@ export default class Filter {
             this.content.innerHTML = content;
         }
 
-        var cards = this.content.children
+        cards = this.content.children
         for (let element of cards) {
             flipper.addFlipped({
                 element,
@@ -206,6 +209,7 @@ export default class Filter {
                 onAppear: appearSpring
             })
         }
+
         flipper.update()
         visibilityArticle();
     }

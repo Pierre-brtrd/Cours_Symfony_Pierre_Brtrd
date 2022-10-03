@@ -25,7 +25,7 @@ class UserTest extends KernelTestCase
     {
         $users = $this->databaseTool->loadAliceFixture(
             [
-                \dirname(__DIR__).'/Fixtures/UserTestFixtures.yaml',
+                \dirname(__DIR__) . '/Fixtures/UserTestFixtures.yaml',
             ]
         );
 
@@ -34,7 +34,7 @@ class UserTest extends KernelTestCase
         $this->assertSame(12, $users);
     }
 
-    public function getEntity()
+    public function getEntity(): User
     {
         return (new User())
             ->setEmail('test@example.com')

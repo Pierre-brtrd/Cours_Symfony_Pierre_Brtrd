@@ -1,7 +1,4 @@
-include:
-  - ArticleTestFixtures.yaml
-
 App\Entity\Categorie:
   categorie{1..10}:
-    titre (unique): "<randomTag()>"
+    titre: "Tag <current()>"
     active: true
