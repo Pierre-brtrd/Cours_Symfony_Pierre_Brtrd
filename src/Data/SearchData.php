@@ -55,6 +55,8 @@ class SearchData
      * Set the value of query.
      *
      * @param ?string $query
+     *
+     * @return SearchData
      */
     public function setQuery(?string $query): self
     {
@@ -99,6 +101,8 @@ class SearchData
      * Set the value of page.
      *
      * @param ?int $page
+     *
+     * @return SearchData
      */
     public function setPage(?int $page): self
     {

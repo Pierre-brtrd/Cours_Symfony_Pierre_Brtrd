@@ -10,7 +10,7 @@ use Vich\UploaderBundle\Naming\DirectoryNamerInterface;
 class ArticleDirectoryNamer implements DirectoryNamerInterface
 {
     public function __construct(
-        private ArticleRepository $repository,
+        private readonly ArticleRepository $repository,
     ){
     }
 
@@ -36,15 +36,17 @@ class ArticleDirectoryNamer implements DirectoryNamerInterface
             return $object->getArticle()->getSlug();
         }
 
-        $dir = self::slugify($object->getArticle()->getTitre());
-
-        return $dir;
+        return self::slugify($object->getArticle()->getTitre());
     }
 
-    private static function slugify($text, string $divider = '-')
-    {
-        // replace non letter or digits by divider
-        $text = preg_replace('~[^\pL\d]+~u', $divider, $text);
+    /**
+     * @param string $text
+     *
+     * @return string
+     */
+    private static function slugify(string $text): string
+    {// replace non letter or digits by divider
+        $text = preg_replace('~[^\pL\d]+~u', '-', $text);
 
         // transliterate
         $text = iconv('utf-8', 'us-ascii//TRANSLIT', $text);
@@ -53,10 +55,10 @@ class ArticleDirectoryNamer implements DirectoryNamerInterface
         $text = preg_replace('~[^-\w]+~', '', $text);
 
         // trim
-        $text = trim($text, $divider);
+        $text = trim($text, '-');
 
         // remove duplicate divider
-        $text = preg_replace('~-+~', $divider, $text);
+        $text = preg_replace('~-+~', '-', $text);
 
         // lowercase
         $text = mb_strtolower($text);
@@ -65,6 +67,7 @@ class ArticleDirectoryNamer implements DirectoryNamerInterface
             return 'n-a';
         }
 
+        /* @var string $text */
         return $text;
     }
 }

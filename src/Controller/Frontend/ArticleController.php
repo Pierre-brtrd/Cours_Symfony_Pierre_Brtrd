@@ -26,9 +26,9 @@ class ArticleController extends AbstractController
      * Construtor of class ArticleController.
      */
     public function __construct(
-        private ArticleRepository $repo,
-        private CommentsRepository $repoComment
-    ) {
+        private readonly ArticleRepository $repo,
+        private readonly CommentsRepository $repoComment
+    ){
     }
 
     /**
@@ -81,8 +81,8 @@ class ArticleController extends AbstractController
         ?Article $article,
         Security $security,
         Request $request
-    ): Response {
-        if (!$article instanceof Article) {
+    ): Response{
+        if ( ! $article instanceof Article) {
             $this->addFlash('error', 'Article non trouvé');
 
             return $this->redirectToRoute('home');

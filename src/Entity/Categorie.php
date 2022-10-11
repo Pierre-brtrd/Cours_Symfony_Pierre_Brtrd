@@ -18,16 +18,13 @@ use Symfony\Component\Serializer\Annotation\Groups;
 #[ApiResource(
     operations: [
         new Get(
-            normalizationContext: ['groups' => ['tags:list']],
             openapiContext: [
                 'summary' => 'Get a Tag',
                 'description' => '# Get One Tag You can retrieve one tag.',
-            ]
+            ],
+            normalizationContext: ['groups' => ['tags:list']]
         ),
         new Put(
-            normalizationContext: ['groups' => ['tags:post']],
-            security: 'is_granted(\'ROLE_ADMIN\')',
-            securityMessage: 'Sorry, but you don\'t have the rights for modify a Tag.',
             openapiContext: [
                 'requestBody' => [
                     'content' => [
@@ -46,27 +43,27 @@ use Symfony\Component\Serializer\Annotation\Groups;
                         ],
                     ],
                 ],
-            ]
+            ],
+            normalizationContext: ['groups' => ['tags:post']],
+            security: 'is_granted(\'ROLE_ADMIN\')',
+            securityMessage: 'Sorry, but you don\'t have the rights for modify a Tag.'
         ),
         new Delete(
-            security: 'is_granted(\'ROLE_ADMIN\')',
-            securityMessage: 'Sorry, but you don\'t have the rights for modify a Tag.',
             openapiContext: [
                 'summary' => 'Delete a Tag',
                 'description' => '# Delete Tag You can delete a Tag but **you have to be administrator**.',
-            ]
+            ],
+            security: 'is_granted(\'ROLE_ADMIN\')',
+            securityMessage: 'Sorry, but you don\'t have the rights for modify a Tag.'
         ),
         new GetCollection(
-            normalizationContext: ['groups' => ['tags:list']],
             openapiContext: [
                 'summary' => 'Get a list of Tags',
                 'description' => '# Retrieve a list of tags The default pagination it\'s 10 items per page.',
-            ]
+            ],
+            normalizationContext: ['groups' => ['tags:list']]
         ),
         new Post(
-            normalizationContext: ['groups' => ['tags:post']],
-            security: 'is_granted(\'ROLE_ADMIN\') or is_granted(\'ROLE_EDITOR\')',
-            securityMessage: 'Sorry, but you have to be connected.',
             openapiContext: [
                 'summary' => 'Create a Tag',
                 'description' => '# Create a tag For create a tag you have to authenticate yourself with an account with the good rights (Admin or Editor).',
@@ -81,7 +78,10 @@ use Symfony\Component\Serializer\Annotation\Groups;
                         ],
                     ],
                 ],
-            ]
+            ],
+            normalizationContext: ['groups' => ['tags:post']],
+            security: 'is_granted(\'ROLE_ADMIN\') or is_granted(\'ROLE_EDITOR\')',
+            securityMessage: 'Sorry, but you have to be connected.'
         ),
     ],
     order: ['titre' => 'ASC'],
@@ -91,28 +91,46 @@ use Symfony\Component\Serializer\Annotation\Groups;
 #[UniqueEntity(fields: ['titre'], message: 'Ce titre est déjà utilisé par une autre categorie')]
 class Categorie
 {
+    /**
+     * @var int|null
+     */
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
+    /**
+     * @var string|null
+     */
     #[ORM\Column(length: 100)]
     #[Groups(['article:list', 'tags:list', 'tags:post'])]
     private ?string $titre = null;
 
+    /**
+     * @var Collection|ArrayCollection
+     */
     #[ORM\ManyToMany(targetEntity: Article::class, inversedBy: 'categories', cascade: ['persist'])]
     #[Groups(['tags:list'])]
     private Collection $articles;
 
+    /**
+     * @var bool|null
+     */
     #[ORM\Column]
     #[Groups(['tags:list', 'tags:post'])]
     private ?bool $active = null;
 
+    /**
+     * Construct of class Categorie
+     */
     public function __construct()
     {
         $this->articles = new ArrayCollection();
     }
 
+    /**
+     * @return string
+     */
     public function __toString()
     {
         /** @var string $titre */
@@ -121,16 +139,27 @@ class Categorie
         return $titre;
     }
 
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * @return string|null
+     */
     public function getTitre(): ?string
     {
         return $this->titre;
     }
 
+    /**
+     * @param string $titre
+     *
+     * @return $this
+     */
     public function setTitre(string $titre): self
     {
         $this->titre = $titre;
@@ -146,6 +175,11 @@ class Categorie
         return $this->articles;
     }
 
+    /**
+     * @param Article $article
+     *
+     * @return $this
+     */
     public function addArticle(Article $article): self
     {
         if ( ! $this->articles->contains($article)) {
@@ -155,6 +189,11 @@ class Categorie
         return $this;
     }
 
+    /**
+     * @param Article $article
+     *
+     * @return $this
+     */
     public function removeArticle(Article $article): self
     {
         $this->articles->removeElement($article);
@@ -162,11 +201,19 @@ class Categorie
         return $this;
     }
 
+    /**
+     * @return bool|null
+     */
     public function isActive(): ?bool
     {
         return $this->active;
     }
 
+    /**
+     * @param bool $active
+     *
+     * @return $this
+     */
     public function setActive(bool $active): self
     {
         $this->active = $active;

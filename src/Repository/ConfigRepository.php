@@ -39,13 +39,6 @@ class ConfigRepository extends ServiceEntityRepository
         }
     }
 
-    public function getAsArray(string $name): array
-    {
-        // To do Get value as array
-
-        return [];
-    }
-
     //    /**
     //     * @return Config[] Returns an array of Config objects
     //     */

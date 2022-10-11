@@ -3,6 +3,7 @@
 namespace App\Controller\Frontend;
 
 use App\Repository\ArticleRepository;
+use Psr\Cache\InvalidArgumentException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -13,11 +14,13 @@ class MainController extends AbstractController
 {
     /**
      * Homepage.
+     *
+     * @throws InvalidArgumentException
      */
     #[Route('/', name: 'home')]
     public function index(ArticleRepository $repository, CacheInterface $cache): Response
     {
-        $articles = $cache->get('home_articles_list', function (ItemInterface $item) use ($repository) {
+        $articles = $cache->get('home_articles_list', function (ItemInterface $item) use ($repository){
             $item->expiresAfter(1000);
 
             return $repository->findLatestArticleWithLimit(6);

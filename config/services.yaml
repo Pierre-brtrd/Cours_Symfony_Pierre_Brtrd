@@ -26,38 +26,24 @@ services:
 
   App\Api\OpenApi\JwtDecorator:
     decorates: "api_platform.openapi.factory"
-    arguments: ["@.inner"]
+    arguments: [ "@.inner" ]
 
   # add more service definitions when explicit configuration is needed
   # please note that last definitions always *replace* previous ones
 
-  App\Validator\EmailDomainValidator:
-    class: App\Validator\EmailDomainValidator
-    arguments:
-      $globalBlockedDomains: "globalblocked.fr, aze.fr"
-
   App\DataFixtures\Providers\HashPasswordProvider:
-    tags: [{ name: nelmio_alice.faker.provider }]
+    tags: [ { name: nelmio_alice.faker.provider } ]
 
   App\DataFixtures\Providers\ArticleImageProvider:
-    tags: [{ name: nelmio_alice.faker.provider }]
+    tags: [ { name: nelmio_alice.faker.provider } ]
 
   App\DataFixtures\Providers\CategorieProvider:
-    tags: [{ name: nelmio_alice.faker.provider }]
+    tags: [ { name: nelmio_alice.faker.provider } ]
 
   App\DataFixtures\Providers\ArticleProvider:
-    tags: [{ name: nelmio_alice.faker.provider }]
+    tags: [ { name: nelmio_alice.faker.provider } ]
 
   app.directory_namer.article:
     class: App\Services\ArticleDirectoryNamer
     public: true
 
-  app.menu_builder:
-    class: App\Menu\MenuBuilder
-    arguments: ["@knp_menu.factory"]
-    tags:
-      - {
-          name: knp_menu.menu_builder,
-          method: createSidebarMenu,
-          alias: sidebar,
-        }

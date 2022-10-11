@@ -17,8 +17,8 @@ class LocaleController extends AbstractController
      * Constructor of LocaleController class.
      */
     public function __construct(
-        private RouterInterface $router
-    ) {
+        private readonly RouterInterface $router
+    ){
     }
 
     /**
@@ -26,8 +26,8 @@ class LocaleController extends AbstractController
      */
     #[Route(
         '/switch/{_locale<%app.supported_locales%>}',
-        defaults: ['_locale<%locale%>'],
-        name: 'locale.switch'
+        name: 'locale.switch',
+        defaults: ['_locale<%locale%>']
     )]
     public function switchLocale(Request $request): RedirectResponse
     {
@@ -36,7 +36,7 @@ class LocaleController extends AbstractController
 
         $url = $request->headers->get('referer');
 
-        if (!$url) {
+        if ( ! $url) {
             $url = $this->router->generate('home');
         }
 

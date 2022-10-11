@@ -6,13 +6,24 @@ use App\Entity\Article;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Security;
 
+/**
+ * Class Api Article Create Controller.
+ */
 class ArticleCreateController extends AbstractController
 {
+    /**
+     * @param Security $security
+     */
     public function __construct(
-        private Security $security
-    ) {
+        private readonly Security $security
+    ){
     }
 
+    /**
+     * @param Article $data
+     *
+     * @return Article
+     */
     public function __invoke(Article $data): Article
     {
         $data->setUser($this->security->getUser());

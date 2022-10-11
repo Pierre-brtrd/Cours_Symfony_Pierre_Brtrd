@@ -15,6 +15,7 @@ use ApiPlatform\Metadata\Post;
 use ApiPlatform\Metadata\Put;
 use App\Api\Controller\Articles\ArticleCreateController;
 use App\Repository\ArticleRepository;
+use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
@@ -29,16 +30,13 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ApiResource(
     operations: [
         new Get(
-            normalizationContext: ['groups' => ['article:list', 'article:item']],
             openapiContext: [
                 'summary' => 'Get an article',
                 'description' => '# Get One article You can retrieve one public article.',
-            ]
+            ],
+            normalizationContext: ['groups' => ['article:list', 'article:item']]
         ),
         new Put(
-            normalizationContext: ['groups' => ['article:put']],
-            security: 'is_granted(\'EDIT_ARTICLE\', object)',
-            securityMessage: 'Sorry, but you don\'t have the owernship on this article.',
             openapiContext: [
                 'summary' => 'Modify an article',
                 'description' => '# Edit One article You can edit an article but you have to be the owner or administrator rights.',
@@ -63,28 +61,28 @@ use Symfony\Component\Validator\Constraints as Assert;
                         ],
                     ],
                 ],
-            ]
+            ],
+            normalizationContext: ['groups' => ['article:put']],
+            security: 'is_granted(\'EDIT_ARTICLE\', object)',
+            securityMessage: 'Sorry, but you don\'t have the owernship on this article.'
         ),
         new Delete(
-            security: 'is_granted(\'EDIT_ARTICLE\', object)',
-            securityMessage: 'Sorry, but you don\'t have the owernship on this article.',
             openapiContext: [
                 'summary' => 'Delete an article',
                 'description' => '# Delete Article You can delete an article but **you have to be the owner** of the delete comment or an **Admin user**.',
-            ]
+            ],
+            security: 'is_granted(\'EDIT_ARTICLE\', object)',
+            securityMessage: 'Sorry, but you don\'t have the owernship on this article.'
         ),
         new GetCollection(
-            normalizationContext: ['groups' => ['article:list']],
             openapiContext: [
                 'summary' => 'Get a list of articles',
                 'description' => '# Retrieve a list of articles The default pagination it\'s 5 items per page.',
-            ]
+            ],
+            normalizationContext: ['groups' => ['article:list']]
         ),
         new Post(
-            normalizationContext: ['groups' => ['article:post']],
             controller: ArticleCreateController::class,
-            security: 'is_granted(\'ROLE_ADMIN\') or is_granted(\'ROLE_EDITOR\')',
-            securityMessage: 'Sorry, but you have to be connected.',
             openapiContext: [
                 'summary' => 'Post a new article',
                 'description' => '# You can create an article. For create an article you have to authenticate yourself',
@@ -109,7 +107,10 @@ use Symfony\Component\Validator\Constraints as Assert;
                         ],
                     ],
                 ],
-            ]
+            ],
+            normalizationContext: ['groups' => ['article:post']],
+            security: 'is_granted(\'ROLE_ADMIN\') or is_granted(\'ROLE_EDITOR\')',
+            securityMessage: 'Sorry, but you have to be connected.'
         ),
     ],
     order: ['createdAt' => 'DESC'],
@@ -123,63 +124,102 @@ use Symfony\Component\Validator\Constraints as Assert;
     'categories.titre' => 'partial',
 ])]
 #[ApiFilter(filterClass: BooleanFilter::class, properties: ['active'])]
-#[ApiResource(uriTemplate: '/categories/{id}/articles', uriVariables: [
-    'id' => new Link(
-        fromClass: \App\Entity\Categorie::class, identifiers: ['id']
-    ),
-], status: 200, filters: [
-    'annotated_app_entity_article_api_platform_core_bridge_doctrine_orm_filter_search_filter',
-    'annotated_app_entity_article_api_platform_core_bridge_doctrine_orm_filter_boolean_filter',
-], operations: [new GetCollection()])]
+#[ApiResource(
+    uriTemplate: '/categories/{id}/articles',
+    operations: [new GetCollection()],
+    uriVariables: [
+        'id' => new Link(
+            fromClass: Categorie::class, identifiers: ['id']
+        ),
+    ],
+    status: 200,
+    filters: [
+        'annotated_app_entity_article_api_platform_core_bridge_doctrine_orm_filter_search_filter',
+        'annotated_app_entity_article_api_platform_core_bridge_doctrine_orm_filter_boolean_filter',
+    ])
+]
 class Article
 {
+    /**
+     * @var int|null
+     */
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
+    /**
+     * @var string|null
+     */
     #[ORM\Column(length: 150, unique: true)]
     #[Groups(['comment:list', 'article:list', 'article:post', 'article:put'])]
     private ?string $titre = null;
 
+    /**
+     * @var string|null
+     */
     #[ORM\Column(type: Types::TEXT)]
     #[Groups(['article:list', 'article:item', 'article:post', 'article:put'])]
     #[Assert\Length(min: 10, minMessage: 'Le contenu de l\'article ne peut être inférieur à {{ limit }} caractères.')]
     private ?string $content = null;
 
+    /**
+     * @var string|null
+     */
     #[ORM\Column(length: 150, unique: true)]
     #[Gedmo\Slug(fields: ['titre'])]
     private ?string $slug;
 
+    /**
+     * @var DateTimeImmutable|null
+     */
     #[ORM\Column]
     #[Gedmo\Timestampable(on: 'create')]
     #[Groups(['article:list'])]
     #[Context(normalizationContext: [DateTimeNormalizer::FORMAT_KEY => 'Y-m-d H:i'])]
-    private ?\DateTimeImmutable $createdAt = null;
+    private ?DateTimeImmutable $createdAt = null;
 
+    /**
+     * @var DateTimeImmutable|null
+     */
     #[ORM\Column]
     #[Gedmo\Timestampable(on: 'update')]
     #[Groups(['article:list'])]
     #[Context(normalizationContext: [DateTimeNormalizer::FORMAT_KEY => 'Y-m-d H:i'])]
-    private ?\DateTimeImmutable $updatedAt = null;
+    private ?DateTimeImmutable $updatedAt = null;
 
+    /**
+     * @var User|null
+     */
     #[ORM\ManyToOne(inversedBy: 'articles')]
     #[ORM\JoinColumn(nullable: true)]
     #[Groups(['article:list'])]
     private ?User $user = null;
 
+    /**
+     * @var Collection
+     */
     #[ORM\ManyToMany(targetEntity: Categorie::class, mappedBy: 'articles', cascade: ['persist'])]
     #[Groups(['article:list', 'article:post', 'article:put'])]
     private Collection $categories;
 
+    /**
+     * @var Collection
+     */
     #[ORM\OneToMany(mappedBy: 'article', targetEntity: Comments::class, orphanRemoval: true)]
     private Collection $comments;
 
+    /**
+     * @var Collection
+     */
     #[ApiProperty(iris: ['https://schema.org/image'])]
-    #[ORM\OneToMany(mappedBy: 'article', targetEntity: ArticleImage::class, orphanRemoval: true, cascade: ['persist'])]
+    #[ORM\OneToMany(mappedBy: 'article', targetEntity: ArticleImage::class, cascade: ['persist'], orphanRemoval: true)]
     #[Groups(['article:list', 'image:post'])]
     private Collection $articleImages;
 
+    /**
+     * @var bool|null
+     */
     #[ORM\Column]
     #[Groups(['article:list', 'article:post', 'article:put'])]
     private ?bool $active = null;
@@ -191,16 +231,27 @@ class Article
         $this->articleImages = new ArrayCollection();
     }
 
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * @return string|null
+     */
     public function getTitre(): ?string
     {
         return $this->titre;
     }
 
+    /**
+     * @param string $titre
+     *
+     * @return self
+     */
     public function setTitre(string $titre): self
     {
         $this->titre = $titre;
@@ -208,11 +259,19 @@ class Article
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getContent(): ?string
     {
         return $this->content;
     }
 
+    /**
+     * @param string $content
+     *
+     * @return self
+     */
     public function setContent(string $content): self
     {
         $this->content = $content;
@@ -220,11 +279,19 @@ class Article
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getSlug(): ?string
     {
         return $this->slug;
     }
 
+    /**
+     * @param string|null $slug
+     *
+     * @return self
+     */
     public function setSlug(?string $slug): self
     {
         $this->slug = $slug;
@@ -232,35 +299,59 @@ class Article
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeImmutable
+    /**
+     * @return DateTimeImmutable|null
+     */
+    public function getCreatedAt(): ?DateTimeImmutable
     {
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $createdAt): self
+    /**
+     * @param DateTimeImmutable $createdAt
+     *
+     * @return $this
+     */
+    public function setCreatedAt(DateTimeImmutable $createdAt): self
     {
         $this->createdAt = $createdAt;
 
         return $this;
     }
 
-    public function getUpdatedAt(): ?\DateTimeImmutable
+    /**
+     * @return DateTimeImmutable|null
+     */
+    public function getUpdatedAt(): ?DateTimeImmutable
     {
         return $this->updatedAt;
     }
 
-    public function setUpdatedAt(\DateTimeImmutable $updatedAt): self
+    /**
+     * @param DateTimeImmutable $updatedAt
+     *
+     * @return $this
+     */
+    public function setUpdatedAt(DateTimeImmutable $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
 
         return $this;
     }
 
+    /**
+     * @return User|null
+     */
     public function getUser(): ?User
     {
         return $this->user;
     }
 
+    /**
+     * @param User|null $user
+     *
+     * @return $this
+     */
     public function setUser(?User $user): self
     {
         $this->user = $user;
@@ -276,6 +367,11 @@ class Article
         return $this->categories;
     }
 
+    /**
+     * @param Categorie $category
+     *
+     * @return $this
+     */
     public function addCategory(Categorie $category): self
     {
         if ( ! $this->categories->contains($category)) {
@@ -286,6 +382,11 @@ class Article
         return $this;
     }
 
+    /**
+     * @param Categorie $category
+     *
+     * @return $this
+     */
     public function removeCategory(Categorie $category): self
     {
         if ($this->categories->removeElement($category)) {
@@ -303,6 +404,11 @@ class Article
         return $this->comments;
     }
 
+    /**
+     * @param Comments $comment
+     *
+     * @return $this
+     */
     public function addComment(Comments $comment): self
     {
         if ( ! $this->comments->contains($comment)) {
@@ -313,6 +419,11 @@ class Article
         return $this;
     }
 
+    /**
+     * @param Comments $comment
+     *
+     * @return $this
+     */
     public function removeComment(Comments $comment): self
     {
         if ($this->comments->removeElement($comment)) {
@@ -333,6 +444,11 @@ class Article
         return $this->articleImages;
     }
 
+    /**
+     * @param ArticleImage $articleImage
+     *
+     * @return $this
+     */
     public function addArticleImage(ArticleImage $articleImage): self
     {
         if ( ! $this->articleImages->contains($articleImage)) {
@@ -343,6 +459,11 @@ class Article
         return $this;
     }
 
+    /**
+     * @param ArticleImage $articleImage
+     *
+     * @return $this
+     */
     public function removeArticleImage(ArticleImage $articleImage): self
     {
         if ($this->articleImages->removeElement($articleImage)) {
@@ -355,11 +476,19 @@ class Article
         return $this;
     }
 
+    /**
+     * @return bool|null
+     */
     public function isActive(): ?bool
     {
         return $this->active;
     }
 
+    /**
+     * @param bool $active
+     *
+     * @return $this
+     */
     public function setActive(bool $active): self
     {
         $this->active = $active;

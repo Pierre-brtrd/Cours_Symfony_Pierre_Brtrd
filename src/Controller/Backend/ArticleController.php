@@ -30,9 +30,9 @@ class ArticleController extends AbstractController
      * @param CommentsRepository $repoComments
      */
     public function __construct(
-        private ArticleRepository $repoArticle,
-        private CommentsRepository $repoComments
-    ) {
+        private readonly ArticleRepository $repoArticle,
+        private readonly CommentsRepository $repoComments
+    ){
     }
 
     /**
@@ -125,7 +125,7 @@ class ArticleController extends AbstractController
     #[Route('/article/edit/{id}-{slug}', name: 'admin.article.update')]
     public function editArticle(?Article $article, Request $request): Response
     {
-        if (!$article instanceof Article) {
+        if ( ! $article instanceof Article) {
             $this->addFlash('error', 'Article non trouvé');
 
             return $this->redirectToRoute('admin');
@@ -149,7 +149,7 @@ class ArticleController extends AbstractController
     /**
      * Switch visibility in ajax for post.
      *
-     * @param Article $article
+     * @param ?Article $article
      *
      * @return Response
      */
@@ -202,7 +202,7 @@ class ArticleController extends AbstractController
     #[Route('/article/{id}/comments', name: 'admin.article.comments')]
     public function adminComments(?Article $article): Response
     {
-        if (!$article instanceof Article) {
+        if ( ! $article instanceof Article) {
             $this->addFlash('error', 'Article non trouvé');
 
             return $this->redirectToRoute('admin');
@@ -213,7 +213,7 @@ class ArticleController extends AbstractController
 
         $comments = $this->repoComments->findByArticle($articleId);
 
-        if (!$comments) {
+        if ( ! $comments) {
             $this->addFlash('error', 'Pas de commentaires trouvés');
 
             return $this->redirectToRoute('admin');
@@ -234,7 +234,7 @@ class ArticleController extends AbstractController
     #[Route('/comments/switch/{id}', name: 'admin.comments.switch', methods: 'GET')]
     public function switchVisibilityComment(?Comments $comment): Response
     {
-        if (!$comment instanceof Comments) {
+        if ( ! $comment instanceof Comments) {
             return new Response('Commentaires non trouvé', 404);
         }
 
@@ -248,6 +248,7 @@ class ArticleController extends AbstractController
      * Delete a comment with the id url.
      *
      * @param Comments $comment
+     * @param Request  $request
      *
      * @return RedirectResponse
      */
