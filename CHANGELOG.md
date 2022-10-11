@@ -1,3 +1,15 @@
+## [2.5.1](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/compare/v2.5.0...v2.5.1) (2022-10-11)
+
+
+### Bug Fixes
+
+* add doctrine migration recipe ([5bc7c2a](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/commit/5bc7c2ac78dbf05ee5cdac2fab685d00b6d5ea39))
+* **api:** update api-plateform v3 ([90480ee](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/commit/90480ee24a4a4c03b39e420761b41a258eff040e))
+* **images:** update images with picsum ([95bd9c6](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/commit/95bd9c6fc5e44484dbb0d608e612cc0b93521d9c))
+* update doctrine recipe ([64871d3](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/commit/64871d35a61fc14cacfa6ca5076bd67f2551ebc0))
+
+
+
 # [2.5.0](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/compare/v2.4.2...v2.5.0) (2022-09-26)
 
 
