@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Test\Panther;
+namespace App\Tests\Panther;
 
 use Facebook\WebDriver\WebDriverBy;
 use Liip\TestFixturesBundle\Services\DatabaseToolCollection;
@@ -44,6 +44,21 @@ class ArticlePantherTest extends PantherTestCase
         $crawler = $this->client->refreshCrawler();
 
         $this->assertCount(12, $crawler->filter('.blog-list .blog-card'));
+    }
+
+    public function testArticleLastestPageShowMore()
+    {
+        $this->client->request('GET', '/article/liste');
+
+        $this->client->waitFor('.btn-show-more', 2);
+
+        foreach (range(1, 3) as $i) {
+            $this->client->executeScript("document.querySelector('.btn-show-more').click()");
+
+            $this->client->waitForEnabled('.btn-show-more', 2);
+        }
+
+        $this->assertSelectorIsNotVisible('.btn-show-more');
     }
 
     public function testArticlePageNoResults()
@@ -91,7 +106,7 @@ class ArticlePantherTest extends PantherTestCase
         $this->client->waitFor('.form-filter');
         $this->client->findElement(WebDriverBy::cssSelector('.form-filter input[type="checkbox"]'))->click();
 
-        $this->client->waitFor('.content-response', 3);
+        $this->client->waitFor('.content-response', 4);
 
         // For the flip content time response
         sleep(1);
@@ -109,7 +124,7 @@ class ArticlePantherTest extends PantherTestCase
 
         $this->client->findElement(WebDriverBy::cssSelector('.sortable[title="Nom"]'))->click();
 
-        $this->client->waitFor('.content-response', 3);
+        $this->client->waitFor('.content-response', 4);
 
         // For the flip content time response
         sleep(1);

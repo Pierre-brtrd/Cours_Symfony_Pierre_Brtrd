@@ -25,7 +25,7 @@ class UserTest extends KernelTestCase
     {
         $users = $this->databaseTool->loadAliceFixture(
             [
-                \dirname(__DIR__) . '/Fixtures/UserTestFixtures.yaml',
+                \dirname(__DIR__).'/Fixtures/UserTestFixtures.yaml',
             ]
         );
 

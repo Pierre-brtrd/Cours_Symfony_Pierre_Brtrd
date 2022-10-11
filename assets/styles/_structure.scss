@@ -1,21 +1,21 @@
 * {
-    margin: 0px;
-    padding: 0px;
-    outline: 0px;
+  margin: 0;
+  padding: 0;
+  outline: 0;
 }
 
 html,
 body {
-    scroll-behavior: smooth;
+  scroll-behavior: smooth;
 }
 
 body {
-    font-family: $font-primary;
-    font-size: 16px;
-    font-weight: 400;
-    color: $text-color;
-    line-height: 28px;
-    transition: 0.5s;
+  font-family: $font-primary;
+  font-size: 16px;
+  font-weight: 400;
+  color: $text-color;
+  line-height: 28px;
+  transition: 0.5s;
 }
 
 h1,
@@ -24,61 +24,61 @@ h3,
 h4,
 h5,
 h6 {
-    color: $heading;
-    margin-bottom: 0px;
+  color: $heading;
+  margin-bottom: 0;
 }
 
 h1 {
-    font-size: 35px;
-    font-weight: 600;
-    line-height: 45px;
+  font-size: 35px;
+  font-weight: 600;
+  line-height: 45px;
 }
 
 h2 {
-    font-size: 32px;
-    font-weight: 600;
-    line-height: 43px;
-    letter-spacing: -0.8px;
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 43px;
+  letter-spacing: -0.8px;
 }
 
 h3 {
-    font-size: 28px;
-    font-weight: 500;
-    line-height: 32px;
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 32px;
 }
 
 h4 {
-    font-size: 22px;
-    font-weight: 400;
-    line-height: 30px;
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 30px;
 }
 
 h5 {
-    font-size: 18px;
-    font-weight: 400;
+  font-size: 18px;
+  font-weight: 400;
 }
 
 h6 {
-    font-size: 16px;
-    font-weight: 300;
+  font-size: 16px;
+  font-weight: 300;
 }
 
 .btn-primary {
-    color: $white !important;
-    background-color: $secondary;
-    border: 1px solid $secondary;
+  color: $white !important;
+  background-color: $secondary;
+  border: 1px solid $secondary;
 
-    &:hover {
-        background-color: darken($secondary, 10%);
-        border: 1px solid darken($secondary, 10%);
-    }
+  &:hover {
+    background-color: darken($secondary, 10%);
+    border: 1px solid darken($secondary, 10%);
+  }
 }
 
 .alert {
-    margin-bottom: 0;
+  margin-bottom: 0;
 }
 
 pre {
-    width: 100%;
-    border-radius: $border-radius;
+  width: 100%;
+  border-radius: $border-radius;
 }

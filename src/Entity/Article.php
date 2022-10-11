@@ -2,11 +2,17 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiFilter;
-use ApiPlatform\Core\Annotation\ApiProperty;
-use ApiPlatform\Core\Annotation\ApiResource;
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Doctrine\Orm\Filter\BooleanFilter;
+use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Metadata\ApiFilter;
+use ApiPlatform\Metadata\ApiProperty;
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Delete;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Link;
+use ApiPlatform\Metadata\Post;
+use ApiPlatform\Metadata\Put;
 use App\Api\Controller\Articles\ArticleCreateController;
 use App\Repository\ArticleRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -20,69 +26,22 @@ use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
 use Symfony\Component\Validator\Constraints as Assert;
 
-#[ORM\Entity(repositoryClass: ArticleRepository::class)]
 #[ApiResource(
-    collectionOperations: [
-        'get' => [
-            'normalization_context' => ['groups' => ['article:list']],
-            'openapi_context' => [
-                'summary' => 'Get a list of articles',
-                'description' => "# Retrieve a list of articles\n\nThe default pagination it's 5 items per page.",
-            ],
-        ],
-        'post' => [
-            'normalization_context' => ['groups' => ['article:post']],
-            'controller' => ArticleCreateController::class,
-            'security' => "is_granted('ROLE_ADMIN') or is_granted('ROLE_EDITOR')",
-            'security_message' => 'Sorry, but you have to be connected.',
-            'openapi_context' => [
-                'summary' => 'Post a new article',
-                'description' => "# You can create an article\n\nFor create an article you have to authenticate yourself",
-                'requestBody' => [
-                    'content' => [
-                        'application/ld+json' => [
-                            'schema' => [
-                                'type' => 'object',
-                                'properties' => [
-                                    'titre' => ['type' => 'string'],
-                                    'content' => ['type' => 'string'],
-                                    'categories' => [
-                                        'type' => 'array',
-                                        'format' => 'iri',
-                                    ],
-                                    'active' => ['type' => 'boolean'],
-                                ],
-                                'example' => [
-                                    'titre' => 'Great Title of Article',
-                                    'content' => 'It\'s a great article I write here',
-                                    'categories' => [
-                                        '/api/categories/1',
-                                        '/api/categories/2',
-                                    ],
-                                    'active' => true,
-                                ],
-                            ],
-                        ],
-                    ],
-                ],
-            ],
-        ],
-    ],
-    itemOperations: [
-        'get' => [
-            'normalization_context' => ['groups' => ['article:list', 'article:item']],
-            'openapi_context' => [
+    operations: [
+        new Get(
+            normalizationContext: ['groups' => ['article:list', 'article:item']],
+            openapiContext: [
                 'summary' => 'Get an article',
-                'description' => "# Get One article\n\nYou can retrieve one public article.",
-            ],
-        ],
-        'put' => [
-            'normalization_context' => ['groups' => ['article:put']],
-            'security' => "is_granted('EDIT_ARTICLE', object)",
-            'security_message' => 'Sorry, but you don\'t have the owernship on this article.',
-            'openapi_context' => [
+                'description' => '# Get One article You can retrieve one public article.',
+            ]
+        ),
+        new Put(
+            normalizationContext: ['groups' => ['article:put']],
+            security: 'is_granted(\'EDIT_ARTICLE\', object)',
+            securityMessage: 'Sorry, but you don\'t have the owernship on this article.',
+            openapiContext: [
                 'summary' => 'Modify an article',
-                'description' => "# Edit One article\n\nYou can edit an article but you have to be the owner or administrator rights.",
+                'description' => '# Edit One article You can edit an article but you have to be the owner or administrator rights.',
                 'requestBody' => [
                     'content' => [
                         'application/ld+json' => [
@@ -91,54 +50,92 @@ use Symfony\Component\Validator\Constraints as Assert;
                                 'properties' => [
                                     'titre' => ['type' => 'string'],
                                     'content' => ['type' => 'string'],
-                                    'categories' => [
-                                        'type' => 'array',
-                                        'format' => 'iri',
-                                    ],
+                                    'categories' => ['type' => 'array', 'format' => 'iri'],
                                     'active' => ['type' => 'boolean'],
                                 ],
                             ],
                             'example' => [
                                 'titre' => 'Great New Title of Article',
                                 'content' => 'It\'s a great article I edit here',
-                                'categories' => [
-                                    '/api/categories/1',
-                                    '/api/categories/2',
-                                ],
+                                'categories' => ['/api/categories/1', '/api/categories/2'],
                                 'active' => true,
                             ],
                         ],
                     ],
                 ],
-            ],
-        ],
-        'delete' => [
-            'security' => "is_granted('EDIT_ARTICLE', object)",
-            'security_message' => 'Sorry, but you don\'t have the owernship on this article.',
-            'openapi_context' => [
+            ]
+        ),
+        new Delete(
+            security: 'is_granted(\'EDIT_ARTICLE\', object)',
+            securityMessage: 'Sorry, but you don\'t have the owernship on this article.',
+            openapiContext: [
                 'summary' => 'Delete an article',
-                'description' => "# Delete Article\n\nYou can delete an article but **you have to be the owner** of the delete comment or an **Admin user**.",
-            ],
-        ],
+                'description' => '# Delete Article You can delete an article but **you have to be the owner** of the delete comment or an **Admin user**.',
+            ]
+        ),
+        new GetCollection(
+            normalizationContext: ['groups' => ['article:list']],
+            openapiContext: [
+                'summary' => 'Get a list of articles',
+                'description' => '# Retrieve a list of articles The default pagination it\'s 5 items per page.',
+            ]
+        ),
+        new Post(
+            normalizationContext: ['groups' => ['article:post']],
+            controller: ArticleCreateController::class,
+            security: 'is_granted(\'ROLE_ADMIN\') or is_granted(\'ROLE_EDITOR\')',
+            securityMessage: 'Sorry, but you have to be connected.',
+            openapiContext: [
+                'summary' => 'Post a new article',
+                'description' => '# You can create an article. For create an article you have to authenticate yourself',
+                'requestBody' => [
+                    'content' => [
+                        'application/ld+json' => [
+                            'schema' => [
+                                'type' => 'object',
+                                'properties' => [
+                                    'titre' => ['type' => 'string'],
+                                    'content' => ['type' => 'string'],
+                                    'categories' => ['type' => 'array', 'format' => 'iri'],
+                                    'active' => ['type' => 'boolean'],
+                                ],
+                                'example' => [
+                                    'titre' => 'Great Title of Article',
+                                    'content' => 'It\'s a great article I write here',
+                                    'categories' => ['/api/categories/1', '/api/categories/2'],
+                                    'active' => true,
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+            ]
+        ),
     ],
     order: ['createdAt' => 'DESC'],
-    paginationItemsPerPage: 5,
+    paginationItemsPerPage: 5
 )]
-#[ApiFilter(SearchFilter::class, properties: [
+#[ORM\Entity(repositoryClass: ArticleRepository::class)]
+#[UniqueEntity(fields: ['titre'], message: 'Ce titre est déjà utilisé par un autre article')]
+#[ApiFilter(filterClass: SearchFilter::class, properties: [
     'titre' => 'partial',
     'user.prenom' => 'partial',
     'categories.titre' => 'partial',
 ])]
-#[ApiFilter(BooleanFilter::class, properties: ['active'])]
-#[UniqueEntity(
-    fields: ['titre'],
-    message: 'Ce titre est déjà utilisé par un autre article'
-)]
+#[ApiFilter(filterClass: BooleanFilter::class, properties: ['active'])]
+#[ApiResource(uriTemplate: '/categories/{id}/articles', uriVariables: [
+    'id' => new Link(
+        fromClass: \App\Entity\Categorie::class, identifiers: ['id']
+    ),
+], status: 200, filters: [
+    'annotated_app_entity_article_api_platform_core_bridge_doctrine_orm_filter_search_filter',
+    'annotated_app_entity_article_api_platform_core_bridge_doctrine_orm_filter_boolean_filter',
+], operations: [new GetCollection()])]
 class Article
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column()]
+    #[ORM\Column]
     private ?int $id = null;
 
     #[ORM\Column(length: 150, unique: true)]
@@ -147,10 +144,7 @@ class Article
 
     #[ORM\Column(type: Types::TEXT)]
     #[Groups(['article:list', 'article:item', 'article:post', 'article:put'])]
-    #[Assert\Length(
-        min: 10,
-        minMessage: 'Le contenu de l\'article ne peut être inférieur à {{ limit }} caractères.'
-    )]
+    #[Assert\Length(min: 10, minMessage: 'Le contenu de l\'article ne peut être inférieur à {{ limit }} caractères.')]
     private ?string $content = null;
 
     #[ORM\Column(length: 150, unique: true)]
@@ -181,9 +175,9 @@ class Article
     #[ORM\OneToMany(mappedBy: 'article', targetEntity: Comments::class, orphanRemoval: true)]
     private Collection $comments;
 
+    #[ApiProperty(iris: ['https://schema.org/image'])]
     #[ORM\OneToMany(mappedBy: 'article', targetEntity: ArticleImage::class, orphanRemoval: true, cascade: ['persist'])]
     #[Groups(['article:list', 'image:post'])]
-    #[ApiProperty(iri: 'https://schema.org/image')]
     private Collection $articleImages;
 
     #[ORM\Column]
@@ -284,7 +278,7 @@ class Article
 
     public function addCategory(Categorie $category): self
     {
-        if (!$this->categories->contains($category)) {
+        if ( ! $this->categories->contains($category)) {
             $this->categories[] = $category;
             $category->addArticle($this);
         }
@@ -311,7 +305,7 @@ class Article
 
     public function addComment(Comments $comment): self
     {
-        if (!$this->comments->contains($comment)) {
+        if ( ! $this->comments->contains($comment)) {
             $this->comments[] = $comment;
             $comment->setArticle($this);
         }
@@ -341,7 +335,7 @@ class Article
 
     public function addArticleImage(ArticleImage $articleImage): self
     {
-        if (!$this->articleImages->contains($articleImage)) {
+        if ( ! $this->articleImages->contains($articleImage)) {
             $this->articleImages[] = $articleImage;
             $articleImage->setArticle($this);
         }

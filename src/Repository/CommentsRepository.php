@@ -39,7 +39,7 @@ class CommentsRepository extends ServiceEntityRepository
         }
     }
 
-    public function findActiveByArticle(int $articleId)
+    public function findActiveByArticle(int $articleId): ?array
     {
         return $this->createQueryBuilder('a')
             ->andWhere('a.article = :id')
@@ -51,7 +51,7 @@ class CommentsRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    public function findByArticle(int $articleId)
+    public function findByArticle(int $articleId): ?array
     {
         return $this->createQueryBuilder('c')
             ->andWhere('c.article = :articleId')

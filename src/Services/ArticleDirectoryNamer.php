@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Entity\ArticleImage;
-use App\Repository\ArticleImageRepository;
 use App\Repository\ArticleRepository;
 use Vich\UploaderBundle\Mapping\PropertyMapping;
 use Vich\UploaderBundle\Naming\DirectoryNamerInterface;
@@ -12,8 +11,7 @@ class ArticleDirectoryNamer implements DirectoryNamerInterface
 {
     public function __construct(
         private ArticleRepository $repository,
-        private ArticleImageRepository $repoImage
-    ) {
+    ){
     }
 
     /**
@@ -26,7 +24,7 @@ class ArticleDirectoryNamer implements DirectoryNamerInterface
         /*
          * @TODO do resolve path for delete file
          */
-        if (!$object->getArticle()) {
+        if ( ! $object->getArticle()) {
             return '';
         }
 

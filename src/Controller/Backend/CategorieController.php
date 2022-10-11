@@ -23,8 +23,8 @@ class CategorieController extends AbstractController
      * @param CategorieRepository $repository
      */
     public function __construct(
-        private CategorieRepository $repository
-    ) {
+        private readonly CategorieRepository $repository
+    ){
     }
 
     /**
