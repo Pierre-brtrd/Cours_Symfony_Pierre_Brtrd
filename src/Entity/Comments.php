@@ -2,13 +2,19 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiFilter;
-use ApiPlatform\Core\Annotation\ApiResource;
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Doctrine\Orm\Filter\BooleanFilter;
+use ApiPlatform\Doctrine\Orm\Filter\OrderFilter;
+use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Metadata\ApiFilter;
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Delete;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Post;
+use ApiPlatform\Metadata\Put;
 use App\Api\Controller\Comments\CommentCreateController;
 use App\Repository\CommentsRepository;
+use DateTimeImmutable;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -17,68 +23,19 @@ use Symfony\Component\Serializer\Annotation\Context;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
 
-#[ORM\Entity(repositoryClass: CommentsRepository::class)]
 #[ApiResource(
-    collectionOperations: [
-        'get' => [
-            'normalization_context' => ['groups' => 'comment:list'],
-            'openapi_context' => [
-                'summary' => 'Get a list of comments',
-                'description' => "# Get a list of comments\n\nThe pagination by default it's 10 items.",
-            ],
-        ],
-        'post' => [
-            'controller' => CommentCreateController::class,
-            'normalization_context' => ['groups' => 'comment:post'],
-            'openapi_context' => [
-                'summary' => 'Create a comment for article',
-                'description' => "# Create comment for article\n\nYou can create a comment but you have to get an id of article or the IRI article object",
-                'requestBody' => [
-                    'content' => [
-                        'application/ld+json' => [
-                            'schema' => [
-                                'type' => 'object',
-                                'properties' => [
-                                    'titre' => ['type' => 'string'],
-                                    'content' => ['type' => 'string'],
-                                    'note' => ['type' => 'integer'],
-                                    'active' => ['type' => 'boolean'],
-                                    'rgpd' => ['type' => 'boolean'],
-                                    'article' => [
-                                        'type' => 'string',
-                                        'format' => 'iri',
-                                    ],
-                                ],
-                            ],
-                            'example' => [
-                                'titre' => 'Great Title',
-                                'content' => 'It\'s a great comment example',
-                                'note' => 5,
-                                'active' => true,
-                                'rgpd' => true,
-                                'article' => '/api/articles/{id}',
-                            ],
-                        ],
-                    ],
-                ],
-            ],
-        ],
-    ],
-    itemOperations: [
-        'get' => [
-            'normalization_context' => ['groups' => ['comment:list']],
-            'openapi_context' => [
+    operations: [
+        new Get(
+            openapiContext: [
                 'summary' => 'Get a comment',
-                'description' => "# Get One comment\n\nYou can retrieve one public comment.",
+                'description' => '# Get One comment You can retrieve one public comment.',
             ],
-        ],
-        'put' => [
-            'normalization_context' => ['groups' => ['comment:put']],
-            'security' => "is_granted('EDIT_COMMENT', object)",
-            'security_message' => 'Sorry, but you are not the comment owner.',
-            'openapi_context' => [
+            normalizationContext: ['groups' => ['comment:list']]
+        ),
+        new Put(
+            openapiContext: [
                 'summary' => 'Modify a comment',
-                'description' => "# Modify comment\n\nYou can modify a comment but you can modify only the comments you have post",
+                'description' => '# Modify comment You can modify a comment but you can modify only the comments you have post',
                 'requestBody' => [
                     'content' => [
                         'application/ld+json' => [
@@ -90,10 +47,7 @@ use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
                                     'note' => ['type' => 'integer'],
                                     'active' => ['type' => 'boolean'],
                                     'rgpd' => ['type' => 'boolean'],
-                                    'article' => [
-                                        'type' => 'string',
-                                        'format' => 'iri',
-                                    ],
+                                    'article' => ['type' => 'string', 'format' => 'iri'],
                                 ],
                             ],
                             'example' => [
@@ -108,25 +62,69 @@ use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
                     ],
                 ],
             ],
-        ],
-        'delete' => [
-            'security' => "is_granted('EDIT_COMMENT', object)",
-            'security_message' => 'Sorry, but you are not the comment owner.',
-            'openapi_context' => [
+            normalizationContext: ['groups' => ['comment:put']],
+            security: 'is_granted(\'EDIT_COMMENT\', object)',
+            securityMessage: 'Sorry, but you are not the comment owner.'
+        ),
+        new Delete(
+            openapiContext: [
                 'summary' => 'Delete a comment',
-                'description' => "# Delete a comment\n\nYou can delete a comment but **you have to be the owner** of the delete comment.",
+                'description' => '# Delete a comment You can delete a comment but **you have to be the owner** of the delete comment.',
             ],
-        ],
+            security: 'is_granted(\'EDIT_COMMENT\', object)',
+            securityMessage: 'Sorry, but you are not the comment owner.'
+        ),
+        new GetCollection(
+            openapiContext: [
+                'summary' => 'Get a list of comments',
+                'description' => '# Get a list of comments The pagination by default it\'s 10 items.',
+            ],
+            normalizationContext: ['groups' => 'comment:list']
+        ),
+        new Post(
+            controller: CommentCreateController::class,
+            openapiContext: [
+                'summary' => 'Create a comment for article',
+                'description' => '# Create comment for article You can create a comment but you have to get an id of article or the IRI article object',
+                'requestBody' => [
+                    'content' => [
+                        'application/ld+json' => [
+                            'schema' => [
+                                'type' => 'object',
+                                'properties' => [
+                                    'titre' => ['type' => 'string'],
+                                    'content' => ['type' => 'string'],
+                                    'note' => ['type' => 'integer'],
+                                    'active' => ['type' => 'boolean'],
+                                    'rgpd' => ['type' => 'boolean'],
+                                    'article' => ['type' => 'string', 'format' => 'iri'],
+                                ],
+                            ],
+                            'example' => [
+                                'titre' => 'Great Title',
+                                'content' => 'It\'s a great comment example',
+                                'note' => 5,
+                                'active' => true,
+                                'rgpd' => true,
+                                'article' => '/api/articles/{id}',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+            normalizationContext: ['groups' => 'comment:post']
+        ),
     ],
     order: ['createdAt' => 'DESC'],
-    paginationItemsPerPage: 10,
+    paginationItemsPerPage: 10
 )]
-#[ApiFilter(SearchFilter::class, properties: ['article' => 'exact'])]
+#[ORM\Entity(repositoryClass: CommentsRepository::class)]
+#[ApiFilter(filterClass: SearchFilter::class, properties: ['article' => 'exact'])]
 class Comments
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column()]
+    #[ORM\Column]
     #[Groups(['comment:list'])]
     private ?int $id = null;
 
@@ -141,15 +139,19 @@ class Comments
     #[ORM\Column]
     #[Gedmo\Timestampable(on: 'create')]
     #[Groups(['comment:list'])]
-    #[Context(normalizationContext: [DateTimeNormalizer::FORMAT_KEY => 'Y-m-d H:i'])]
-    #[ApiFilter(OrderFilter::class)]
-    private ?\DateTimeImmutable $createdAt = null;
+    #[Context(
+        normalizationContext: [DateTimeNormalizer::FORMAT_KEY => 'Y-m-d H:i']
+    )]
+    #[ApiFilter(filterClass: OrderFilter::class)]
+    private ?DateTimeImmutable $createdAt = null;
 
     #[ORM\Column]
     #[Gedmo\Timestampable(on: 'update')]
     #[Groups(['comment:list'])]
-    #[Context(normalizationContext: [DateTimeNormalizer::FORMAT_KEY => 'Y-m-d H:i'])]
-    private ?\DateTimeImmutable $updatedAt = null;
+    #[Context(
+        normalizationContext: [DateTimeNormalizer::FORMAT_KEY => 'Y-m-d H:i']
+    )]
+    private ?DateTimeImmutable $updatedAt = null;
 
     #[ORM\Column]
     #[Groups(['comment:list', 'comment:post', 'comment:put'])]
@@ -157,7 +159,7 @@ class Comments
 
     #[ORM\Column]
     #[Groups(['comment:list', 'comment:post', 'comment:put'])]
-    #[ApiFilter(BooleanFilter::class)]
+    #[ApiFilter(filterClass: BooleanFilter::class)]
     private ?bool $active = null;
 
     #[ORM\Column]
@@ -203,24 +205,24 @@ class Comments
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeImmutable
+    public function getCreatedAt(): ?DateTimeImmutable
     {
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $createdAt): self
+    public function setCreatedAt(DateTimeImmutable $createdAt): self
     {
         $this->createdAt = $createdAt;
 
         return $this;
     }
 
-    public function getUpdatedAt(): ?\DateTimeImmutable
+    public function getUpdatedAt(): ?DateTimeImmutable
     {
         return $this->updatedAt;
     }
 
-    public function setUpdatedAt(\DateTimeImmutable $updatedAt): self
+    public function setUpdatedAt(DateTimeImmutable $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
 

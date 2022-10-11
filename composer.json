@@ -1,141 +1,141 @@
 {
-    "name": "pierre-brtrd/demo_sf",
-    "description": "Project for demo symfony 6",
-    "type": "project",
-    "license": "proprietary",
-    "minimum-stability": "stable",
-    "prefer-stable": true,
-    "require": {
-        "php": ">=8.1",
-        "ext-ctype": "*",
-        "ext-gd": "*",
-        "ext-iconv": "*",
-        "ext-intl": "*",
-        "api-platform/core": "^2.6",
-        "doctrine/annotations": "^1.0",
-        "doctrine/doctrine-bundle": "^2.7",
-        "doctrine/doctrine-migrations-bundle": "^3.2",
-        "doctrine/orm": "^2.12",
-        "friendsofphp/php-cs-fixer": "^3.9",
-        "knplabs/knp-gaufrette-bundle": "^0.7.2",
-        "knplabs/knp-paginator-bundle": "^5.8",
-        "knplabs/knp-time-bundle": "^1.19",
-        "lexik/jwt-authentication-bundle": "^2.16",
-        "liip/imagine-bundle": "^2.8",
-        "nelmio/cors-bundle": "^2.2",
-        "phpdocumentor/reflection-docblock": "^5.3",
-        "phpstan/phpdoc-parser": "^1.6",
-        "sensio/framework-extra-bundle": "^6.1",
-        "stof/doctrine-extensions-bundle": "^1.7",
-        "symfony/apache-pack": "^1.0",
-        "symfony/asset": "6.1.*",
-        "symfony/console": "6.1.*",
-        "symfony/doctrine-messenger": "6.1.*",
-        "symfony/dotenv": "6.1.*",
-        "symfony/expression-language": "6.1.*",
-        "symfony/flex": "^2",
-        "symfony/form": "6.1.*",
-        "symfony/framework-bundle": "6.1.*",
-        "symfony/http-client": "6.1.*",
-        "symfony/intl": "6.1.*",
-        "symfony/mailer": "6.1.*",
-        "symfony/mime": "6.1.*",
-        "symfony/monolog-bundle": "^3.0",
-        "symfony/notifier": "6.1.*",
-        "symfony/process": "6.1.*",
-        "symfony/property-access": "6.1.*",
-        "symfony/property-info": "6.1.*",
-        "symfony/proxy-manager-bridge": "6.1.*",
-        "symfony/requirements-checker": "^2.0",
-        "symfony/runtime": "6.1.*",
-        "symfony/security-bundle": "6.1.*",
-        "symfony/serializer": "6.1.*",
-        "symfony/string": "6.1.*",
-        "symfony/translation": "6.1.*",
-        "symfony/twig-bundle": "6.1.*",
-        "symfony/ux-autocomplete": "^2.4",
-        "symfony/ux-dropzone": "^2.4",
-        "symfony/ux-lazy-image": "^2.4",
-        "symfony/validator": "6.1.*",
-        "symfony/web-link": "6.1.*",
-        "symfony/webpack-encore-bundle": "^1.15",
-        "symfony/yaml": "6.1.*",
-        "symfonycasts/reset-password-bundle": "^1.14",
-        "twig/extra-bundle": "^2.12|^3.0",
-        "twig/intl-extra": "^3.4",
-        "twig/twig": "^2.12|^3.0",
-        "vich/uploader-bundle": "^1.20"
+  "name": "pierre-brtrd/demo_sf",
+  "description": "Project for demo symfony 6",
+  "type": "project",
+  "license": "proprietary",
+  "minimum-stability": "stable",
+  "prefer-stable": true,
+  "require": {
+    "php": ">=8.1",
+    "ext-ctype": "*",
+    "ext-gd": "*",
+    "ext-iconv": "*",
+    "ext-intl": "*",
+    "api-platform/core": "^3.0",
+    "doctrine/annotations": "^1.0",
+    "doctrine/doctrine-bundle": "^2.7",
+    "doctrine/doctrine-migrations-bundle": "^3.2",
+    "doctrine/orm": "^2.12",
+    "friendsofphp/php-cs-fixer": "^3.9",
+    "knplabs/knp-gaufrette-bundle": "^0.7.2",
+    "knplabs/knp-paginator-bundle": "^5.8",
+    "knplabs/knp-time-bundle": "^1.19",
+    "lexik/jwt-authentication-bundle": "^2.16",
+    "liip/imagine-bundle": "^2.8",
+    "nelmio/cors-bundle": "^2.2",
+    "phpdocumentor/reflection-docblock": "^5.3",
+    "phpstan/phpdoc-parser": "^1.6",
+    "sensio/framework-extra-bundle": "^6.1",
+    "stof/doctrine-extensions-bundle": "^1.7",
+    "symfony/apache-pack": "^1.0",
+    "symfony/asset": "6.1.*",
+    "symfony/console": "6.1.*",
+    "symfony/doctrine-messenger": "6.1.*",
+    "symfony/dotenv": "6.1.*",
+    "symfony/expression-language": "6.1.*",
+    "symfony/flex": "^2",
+    "symfony/form": "6.1.*",
+    "symfony/framework-bundle": "6.1.*",
+    "symfony/http-client": "6.1.*",
+    "symfony/intl": "6.1.*",
+    "symfony/mailer": "6.1.*",
+    "symfony/mime": "6.1.*",
+    "symfony/monolog-bundle": "^3.0",
+    "symfony/notifier": "6.1.*",
+    "symfony/process": "6.1.*",
+    "symfony/property-access": "6.1.*",
+    "symfony/property-info": "6.1.*",
+    "symfony/proxy-manager-bridge": "6.1.*",
+    "symfony/requirements-checker": "^2.0",
+    "symfony/runtime": "6.1.*",
+    "symfony/security-bundle": "6.1.*",
+    "symfony/serializer": "6.1.*",
+    "symfony/string": "6.1.*",
+    "symfony/translation": "6.1.*",
+    "symfony/twig-bundle": "6.1.*",
+    "symfony/ux-autocomplete": "^2.4",
+    "symfony/ux-dropzone": "^2.4",
+    "symfony/ux-lazy-image": "^2.4",
+    "symfony/validator": "6.1.*",
+    "symfony/web-link": "6.1.*",
+    "symfony/webpack-encore-bundle": "^1.15",
+    "symfony/yaml": "6.1.*",
+    "symfonycasts/reset-password-bundle": "^1.14",
+    "twig/extra-bundle": "^2.12|^3.0",
+    "twig/intl-extra": "^3.4",
+    "twig/twig": "^2.12|^3.0",
+    "vich/uploader-bundle": "^1.20"
+  },
+  "config": {
+    "allow-plugins": {
+      "composer/package-versions-deprecated": true,
+      "symfony/flex": true,
+      "symfony/runtime": true
     },
-    "config": {
-        "allow-plugins": {
-            "composer/package-versions-deprecated": true,
-            "symfony/flex": true,
-            "symfony/runtime": true
-        },
-        "optimize-autoloader": true,
-        "preferred-install": {
-            "*": "dist"
-        },
-        "sort-packages": true
+    "optimize-autoloader": true,
+    "preferred-install": {
+      "*": "dist"
     },
-    "autoload": {
-        "psr-4": {
-            "App\\": "src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "App\\Tests\\": "tests/"
-        }
-    },
-    "replace": {
-        "symfony/polyfill-ctype": "*",
-        "symfony/polyfill-iconv": "*",
-        "symfony/polyfill-php72": "*",
-        "symfony/polyfill-php73": "*",
-        "symfony/polyfill-php74": "*",
-        "symfony/polyfill-php80": "*",
-        "symfony/polyfill-php81": "*"
-    },
-    "scripts": {
-        "auto-scripts": {
-            "cache:clear": "symfony-cmd",
-            "assets:install %PUBLIC_DIR%": "symfony-cmd",
-            "requirements-checker": "script"
-        },
-        "post-install-cmd": [
-            "@auto-scripts"
-        ],
-        "post-update-cmd": [
-            "@auto-scripts"
-        ]
-    },
-    "conflict": {
-        "symfony/symfony": "*"
-    },
-    "extra": {
-        "symfony": {
-            "allow-contrib": false,
-            "require": "6.1.*"
-        }
-    },
-    "require-dev": {
-        "dbrekelmans/bdi": "^1.0",
-        "doctrine/doctrine-fixtures-bundle": "^3.4",
-        "fakerphp/faker": "^1.20",
-        "hautelook/alice-bundle": "^2.11",
-        "liip/test-fixtures-bundle": "^2.0.0",
-        "nelmio/alice": "^3.11",
-        "phpstan/phpstan": "^1.8",
-        "phpunit/phpunit": "^9.5",
-        "symfony/browser-kit": "6.1.*",
-        "symfony/css-selector": "6.1.*",
-        "symfony/debug-bundle": "6.1.*",
-        "symfony/maker-bundle": "^1.0",
-        "symfony/panther": "^2.0",
-        "symfony/phpunit-bridge": "^6.1",
-        "symfony/stopwatch": "6.1.*",
-        "symfony/web-profiler-bundle": "6.1.*",
-        "theofidry/alice-data-fixtures": "^1.6"
+    "sort-packages": true
+  },
+  "autoload": {
+    "psr-4": {
+      "App\\": "src/"
     }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "App\\Tests\\": "tests/"
+    }
+  },
+  "replace": {
+    "symfony/polyfill-ctype": "*",
+    "symfony/polyfill-iconv": "*",
+    "symfony/polyfill-php72": "*",
+    "symfony/polyfill-php73": "*",
+    "symfony/polyfill-php74": "*",
+    "symfony/polyfill-php80": "*",
+    "symfony/polyfill-php81": "*"
+  },
+  "scripts": {
+    "auto-scripts": {
+      "cache:clear": "symfony-cmd",
+      "assets:install %PUBLIC_DIR%": "symfony-cmd",
+      "requirements-checker": "script"
+    },
+    "post-install-cmd": [
+      "@auto-scripts"
+    ],
+    "post-update-cmd": [
+      "@auto-scripts"
+    ]
+  },
+  "conflict": {
+    "symfony/symfony": "*"
+  },
+  "extra": {
+    "symfony": {
+      "allow-contrib": false,
+      "require": "6.1.*"
+    }
+  },
+  "require-dev": {
+    "dbrekelmans/bdi": "^1.0",
+    "doctrine/doctrine-fixtures-bundle": "^3.4",
+    "fakerphp/faker": "^1.20",
+    "hautelook/alice-bundle": "^2.11",
+    "liip/test-fixtures-bundle": "^2.0.0",
+    "nelmio/alice": "^3.11",
+    "phpstan/phpstan": "^1.8",
+    "phpunit/phpunit": "^9.5",
+    "symfony/browser-kit": "6.1.*",
+    "symfony/css-selector": "6.1.*",
+    "symfony/debug-bundle": "6.1.*",
+    "symfony/maker-bundle": "^1.0",
+    "symfony/panther": "^2.0",
+    "symfony/phpunit-bridge": "^6.1",
+    "symfony/stopwatch": "6.1.*",
+    "symfony/web-profiler-bundle": "6.1.*",
+    "theofidry/alice-data-fixtures": "^1.6"
+  }
 }

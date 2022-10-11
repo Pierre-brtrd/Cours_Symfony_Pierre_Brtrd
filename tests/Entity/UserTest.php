@@ -34,7 +34,7 @@ class UserTest extends KernelTestCase
         $this->assertSame(12, $users);
     }
 
-    public function getEntity()
+    public function getEntity(): User
     {
         return (new User())
             ->setEmail('test@example.com')

@@ -6,6 +6,6 @@ parameters:
 
 	paths:
 		- src
-#		- tests
+		- tests
 	
 	checkGenericClassInNonGenericObjectType: false

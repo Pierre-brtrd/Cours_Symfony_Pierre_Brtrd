@@ -1,42 +1,42 @@
 api_platform:
-    title: "API demo Symfony"
+  title: "API demo Symfony"
 
-    # The description of the API.
-    description: "API for demo to learn about symfony and API Platform"
+  # The description of the API.
+  description: "API for demo to learn about symfony and API Platform"
 
-    # The version of the API.
-    version: "1.0.0"
+  # The version of the API.
+  version: "1.0.0"
 
-    enable_swagger_ui: false
-    show_webby: true
+  enable_swagger_ui: false
+  show_webby: true
 
-    openapi:
-        # The contact information for the exposed API.
-        contact:
-            # The identifying name of the contact person/organization.
-            name: "Pierre Bertrand"
-            # The URL pointing to the contact information. MUST be in the format of a URL.
-            url: "https://www.pierre-bertrand-marketing.com/"
-            # The email address of the contact person/organization. MUST be in the format of an email address.
-            email: "pierre.bertrand.profesionnel@gmail.com"
+  openapi:
+    # The contact information for the exposed API.
+    contact:
+      # The identifying name of the contact person/organization.
+      name: "Pierre Bertrand"
+      # The URL pointing to the contact information. MUST be in the format of a URL.
+      url: "https://www.pierre-bertrand-marketing.com/"
+      # The email address of the contact person/organization. MUST be in the format of an email address.
+      email: "pierre.bertrand.profesionnel@gmail.com"
 
-    formats:
-        jsonld:
-            mime_types: ["application/ld+json"]
+  formats:
+    jsonld:
+      mime_types: [ "application/ld+json" ]
 
-        json:
-            mime_types: ["application/json"]
+    json:
+      mime_types: [ "application/json" ]
 
-        html:
-            mime_types: ["text/html"]
+    html:
+      mime_types: [ "text/html" ]
 
-    mapping:
-        paths: ["%kernel.project_dir%/src/Entity"]
-    patch_formats:
-        json: ["application/merge-patch+json"]
-    swagger:
-        versions: [3]
-        api_keys:
-            JWT:
-                name: Authorization
-                type: header
+  mapping:
+    paths: [ "%kernel.project_dir%/src/Entity" ]
+  patch_formats:
+    json: [ "application/merge-patch+json" ]
+  swagger:
+    versions: [ 3 ]
+    api_keys:
+      JWT:
+        name: Authorization
+        type: header
