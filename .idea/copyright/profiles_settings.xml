@@ -1,0 +1,10 @@
+<component name="CopyrightManager">
+  <settings>
+    <LanguageOptions name="PHP">
+      <option name="fileTypeOverride" value="3" />
+      <option name="separateBefore" value="true" />
+      <option name="lenBefore" value="2" />
+      <option name="filler" value="*" />
+    </LanguageOptions>
+  </settings>
+</component>

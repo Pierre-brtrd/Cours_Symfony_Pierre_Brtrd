@@ -26,7 +26,7 @@ class CommentsType extends AbstractType
                 'required' => true,
                 'constraints' => [
                     new Length([
-                        'min' => 10,
+                        'min' => 5,
                         'minMessage' => 'Le titre de votre commentaire doit être supérieur à {{ limit }} caractères',
                         'max' => 150,
                         'maxMessage' => 'Le titre de votre commentaire ne doit pas dépasser {{ limit }} caractères',

@@ -9,6 +9,7 @@
 /vendor/
 /.yarn/
 /yarn.lock
+/.idea/
 ###< symfony/framework-bundle ###
 
 ###> phpunit/phpunit ###

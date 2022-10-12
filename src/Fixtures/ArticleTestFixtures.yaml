@@ -4,16 +4,18 @@ include:
 
 App\Entity\Article:
   article{1..19}:
-    titre: "Titre-<current()>"
-    content: "<sentence(10)>"
+    titre (unique): "<word(2)>"
+    content: "<generateLoremDesc()>"
     active: true
-    categories: <numberBetween(1, 19)>x @categorie*
-    user: "@userAdmin"
-    #articleImages: [<uploadImageArticle()>]
+    categories: <numberBetween(1, 10)>x @categorie*
+    user: <randomElement([@userAdmin, @userEditor])>
+    articleImages: <numberBetween(1, 3)>x <uploadImageArticle()>
+    createdAt: <generateDate()>
 
   articleName:
     titre: "Article de test"
-    content: "<sentence(10)>"
+    content: "<generateLoremDesc()>"
     active: true
     categories: <numberBetween(1, 19)>x @categorie*
+    articleImages: <numberBetween(1, 3)>x <uploadImageArticle()>
     user: "@userAdmin"
