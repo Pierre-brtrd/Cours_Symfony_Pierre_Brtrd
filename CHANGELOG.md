@@ -1,3 +1,12 @@
+## [2.6.3](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/compare/v2.6.2...v2.6.3) (2022-10-20)
+
+
+### Bug Fixes
+
+* **tag:** update controller for tag visibility ([cecafd1](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/commit/cecafd120883bdb11d0c535e7347170ff7838cca))
+
+
+
 ## [2.6.2](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/compare/v2.6.1...v2.6.2) (2022-10-20)
 
 
