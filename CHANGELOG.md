@@ -1,3 +1,12 @@
+## [2.6.2](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/compare/v2.6.1...v2.6.2) (2022-10-20)
+
+
+### Bug Fixes
+
+* **tag:** fix create tag with default enable ([68a9207](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/commit/68a920797e93ee697abc11336de744bc61851331))
+
+
+
 ## [2.6.1](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/compare/v2.6.0...v2.6.1) (2022-10-20)
 
 
