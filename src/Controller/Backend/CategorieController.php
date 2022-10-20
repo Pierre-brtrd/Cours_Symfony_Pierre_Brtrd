@@ -109,6 +109,26 @@ class CategorieController extends AbstractController
     }
 
     /**
+     * Switch visibility in ajax for post.
+     *
+     * @param ?Categorie $categorie
+     *
+     * @return Response
+     */
+    #[Route('/switch/{id}', name: 'admin.categorie.switch', methods: 'GET')]
+    public function switchVisibilityTag(?Categorie $categorie): Response
+    {
+        if ($categorie instanceof Categorie) {
+            $categorie->isActive() ? $categorie->setActive(false) : $categorie->setActive(true);
+            $this->repository->add($categorie, true);
+
+            return new Response('Visibility changed', 201);
+        }
+
+        return new Response('Catégorie non trouvée', 404);
+    }
+
+    /**
      * Delete a tag with id paramter url.
      *
      * @param Categorie $categorie
