@@ -1,3 +1,18 @@
+# [2.6.0](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/compare/v2.5.1...v2.6.0) (2022-10-20)
+
+
+### Bug Fixes
+
+* **ci:** update database url env variable ([5a1e6c4](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/commit/5a1e6c4a1da8e37165d38e7fa3bbd91a795d74ee))
+* **fixtures:** add image fixtures config ([73d69f7](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/commit/73d69f7aac68e1bc3aa702cc446112cf93997d90))
+
+
+### Features
+
+* **fixtures:** add setup fixtures image ([f0d5f94](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/commit/f0d5f94bb34283941771ae8b8862e936a4ff7dc7))
+
+
+
 ## [2.5.1](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/compare/v2.5.0...v2.5.1) (2022-10-11)
 
 
