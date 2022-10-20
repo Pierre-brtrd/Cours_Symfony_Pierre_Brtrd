@@ -11,7 +11,7 @@ class ArticleImageProvider
     public function uploadImageArticle(): ArticleImage
     {
         /** @var array<string> $files */
-        $files = glob(realpath(\dirname(__DIR__).'/images/Articles/').'/*.*');
+        $files = glob(realpath(\dirname(__DIR__) . '/Images/Articles/') . '/*.*');
 
         $file = array_rand($files);
 
@@ -27,7 +27,7 @@ class ArticleImageProvider
     public function uploadImageUser(string $file = 'default.png'): UploadedFile
     {
         /** @var array<string> $files */
-        $file = realpath(\dirname(__DIR__).'/images/'.$file);
+        $file = realpath(\dirname(__DIR__) . '/Images/' . $file);
 
         $imageFile = new File($file);
 
