@@ -22,7 +22,7 @@ class ArticleRepository extends ServiceEntityRepository
 {
     public function __construct(
         ManagerRegistry $registry,
-        private PaginatorInterface $paginator
+        private readonly PaginatorInterface $paginator
     ) {
         parent::__construct($registry, Article::class);
     }
@@ -97,11 +97,9 @@ class ArticleRepository extends ServiceEntityRepository
 
         if ($active) {
             $query->andWhere('a.active = true');
-        } else {
-            if (!empty($search->getActive())) {
-                $query->andWhere('a.active IN (:active)')
-                    ->setParameter('active', $search->getActive());
-            }
+        } elseif (!empty($search->getActive())) {
+            $query->andWhere('a.active IN (:active)')
+                ->setParameter('active', $search->getActive());
         }
 
         if (!empty($search->getQuery())) {

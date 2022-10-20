@@ -21,7 +21,7 @@ class UserController extends AbstractController
      * Constructor of class UserController.
      */
     public function __construct(
-        private Security $security
+        private readonly Security $security
     ) {
     }
 

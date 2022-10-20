@@ -24,7 +24,7 @@ class SecurityController extends AbstractController
     #[Route('/login', name: 'login')]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
-        // Get the login error if there one
+        // Get the login error if their one
         $error = $authenticationUtils->getLastAuthenticationError();
 
         // Last username entered by the user

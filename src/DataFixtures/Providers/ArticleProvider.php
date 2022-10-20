@@ -24,8 +24,6 @@ class ArticleProvider
 
     public function generateDate(): DateTimeImmutable
     {
-        $datetime = DateTimeImmutable::createFromMutable($this->faker->dateTimeThisYear());
-
-        return $datetime;
+        return DateTimeImmutable::createFromMutable($this->faker->dateTimeThisYear());
     }
 }

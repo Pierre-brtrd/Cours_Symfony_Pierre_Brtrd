@@ -10,14 +10,25 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Attribute\AsController;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
+/**
+ * Class Api create Image Article.
+ */
 #[AsController]
 final class CreateImageController extends AbstractController
 {
+    /**
+     * @param ArticleRepository $repoArticle
+     */
     public function __construct(
-        private ArticleRepository $repoArticle
+        private readonly ArticleRepository $repoArticle
     ) {
     }
 
+    /**
+     * @param Request $request
+     *
+     * @return ArticleImage
+     */
     public function __invoke(Request $request): ArticleImage
     {
         /** @var ?File $uploadedFile */

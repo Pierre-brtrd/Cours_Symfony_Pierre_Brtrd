@@ -14,7 +14,7 @@ class AppFixtures extends Fixture
     private Generator $faker;
 
     public function __construct(
-        private UserPasswordHasherInterface $hasher
+        private readonly UserPasswordHasherInterface $hasher
     ) {
         $this->faker = Factory::create('fr_FR');
     }
@@ -23,7 +23,6 @@ class AppFixtures extends Fixture
     {
         $roles = ['ROLE_ADMIN', 'ROLE_USER', 'ROLE_EDITOR'];
 
-        /** @var array<int, string> $role */
         $role = ['ROLE_ADMIN'];
 
         $user = new User();

@@ -3,48 +3,46 @@
 namespace App\Services;
 
 use App\Entity\ArticleImage;
-use App\Repository\ArticleRepository;
 use Vich\UploaderBundle\Mapping\PropertyMapping;
 use Vich\UploaderBundle\Naming\DirectoryNamerInterface;
 
 class ArticleDirectoryNamer implements DirectoryNamerInterface
 {
-    public function __construct(
-        private ArticleRepository $repository,
-    ){
-    }
-
     /**
      * DirectoryNamer for article.
      *
      * @param ArticleImage $object
+     *
+     * @throws \Exception
      */
     public function directoryName($object, PropertyMapping $mapping): string
     {
-        /*
-         * @TODO do resolve path for delete file
-         */
-        if ( ! $object->getArticle()) {
-            return '';
-        }
+        /*if ( ! $object->getArticle()) {
+            dd($mapping, $object);
 
-        $articleInDb = $this->repository->find($object->getArticle()->getId() ?: 0);
-        if (
-            $object->getArticle()->getSlug() ||
-            $articleInDb ? $articleInDb->getSlug() : null === self::slugify($object->getArticle()->getTitre())
-        ) {
+            $dir = $mapping->getUploadDir($object);
+            $srcFile = $dir.'/'.$object->getImageName();
+
+            if (file_exists($srcFile)) {
+                unlink($srcFile);
+            }
+        }*/
+
+        if ($object->getArticle()->getId()) {
             return $object->getArticle()->getSlug();
         }
 
-        $dir = self::slugify($object->getArticle()->getTitre());
-
-        return $dir;
+        return self::slugify($object->getArticle()->getTitre());
     }
 
-    private static function slugify($text, string $divider = '-')
-    {
-        // replace non letter or digits by divider
-        $text = preg_replace('~[^\pL\d]+~u', $divider, $text);
+    /**
+     * @param string $text
+     *
+     * @return string
+     */
+    private static function slugify(string $text): string
+    {// replace non letter or digits by divider
+        $text = preg_replace('~[^\pL\d]+~u', '-', $text);
 
         // transliterate
         $text = iconv('utf-8', 'us-ascii//TRANSLIT', $text);
@@ -53,10 +51,10 @@ class ArticleDirectoryNamer implements DirectoryNamerInterface
         $text = preg_replace('~[^-\w]+~', '', $text);
 
         // trim
-        $text = trim($text, $divider);
+        $text = trim($text, '-');
 
         // remove duplicate divider
-        $text = preg_replace('~-+~', $divider, $text);
+        $text = preg_replace('~-+~', '-', $text);
 
         // lowercase
         $text = mb_strtolower($text);
@@ -65,6 +63,7 @@ class ArticleDirectoryNamer implements DirectoryNamerInterface
             return 'n-a';
         }
 
+        /* @var string $text */
         return $text;
     }
 }

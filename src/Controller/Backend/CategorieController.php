@@ -24,7 +24,7 @@ class CategorieController extends AbstractController
      */
     public function __construct(
         private readonly CategorieRepository $repository
-    ){
+    ) {
     }
 
     /**

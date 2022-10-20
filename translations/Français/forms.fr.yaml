@@ -51,7 +51,7 @@ form:
       image:
         multiple: "Images:"
         single: "Image:"
-      enable: "Actif:"
+      enable: "Actif"
     btn:
       create: Créer
       add_image: Ajouter une image

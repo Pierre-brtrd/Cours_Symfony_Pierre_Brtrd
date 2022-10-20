@@ -1,4 +1,4 @@
 App\Entity\Categorie:
   categorie{1..10}:
-    titre: "Tag <current()>"
+    titre (unique): "<randomTag()>"
     active: true

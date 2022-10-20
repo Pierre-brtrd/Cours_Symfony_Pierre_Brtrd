@@ -5,10 +5,12 @@
 /.env.*.local
 /config/secrets/prod/prod.decrypt.private.php
 /public/bundles/
+/public/images/
 /var/
 /vendor/
 /.yarn/
 /yarn.lock
+/.idea/
 ###< symfony/framework-bundle ###
 
 ###> phpunit/phpunit ###

@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use DateTime;
+use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -24,11 +26,17 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 #[Vich\Uploadable]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
+    /**
+     * @var int|null
+     */
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column()]
+    #[ORM\Column]
     private ?int $id = null;
 
+    /**
+     * @var string|null
+     */
     #[ORM\Column(length: 180, unique: true)]
     #[Assert\Regex(
         pattern: '/^(?!(?:(?:\x22?\x5C[\x00-\x7E]\x22?)|(?:\x22?[^\x5C\x22]\x22?)){255,})(?!(?:(?:\x22?\x5C[\x00-\x7E]\x22?)|(?:\x22?[^\x5C\x22]\x22?)){65,}@)(?:(?:[\x21\x23-\x27\x2A\x2B\x2D\x2F-\x39\x3D\x3F\x5E-\x7E]+)|(?:\x22(?:[\x01-\x08\x0B\x0C\x0E-\x1F\x21\x23-\x5B\x5D-\x7F]|(?:\x5C[\x00-\x7F]))*\x22))(?:\.(?:(?:[\x21\x23-\x27\x2A\x2B\x2D\x2F-\x39\x3D\x3F\x5E-\x7E]+)|(?:\x22(?:[\x01-\x08\x0B\x0C\x0E-\x1F\x21\x23-\x5B\x5D-\x7F]|(?:\x5C[\x00-\x7F]))*\x22)))*@(?:(?:(?!.*[^.]{64,})(?:(?:(?:xn--)?[a-z0-9]+(?:-[a-z0-9]+)*\.){1,126}){1,}(?:(?:[a-z][a-z0-9]*)|(?:(?:xn--)[a-z0-9]+))(?:-[a-z0-9]+)*)|(?:\[(?:(?:IPv6:(?:(?:[a-f0-9]{1,4}(?::[a-f0-9]{1,4}){7})|(?:(?!(?:.*[a-f0-9][:\]]){7,})(?:[a-f0-9]{1,4}(?::[a-f0-9]{1,4}){0,5})?::(?:[a-f0-9]{1,4}(?::[a-f0-9]{1,4}){0,5})?)))|(?:(?:IPv6:(?:(?:[a-f0-9]{1,4}(?::[a-f0-9]{1,4}){5}:)|(?:(?!(?:.*[a-f0-9]:){5,})(?:[a-f0-9]{1,4}(?::[a-f0-9]{1,4}){0,3})?::(?:[a-f0-9]{1,4}(?::[a-f0-9]{1,4}){0,3}:)?)))?(?:(?:25[0-5])|(?:2[0-4][0-9])|(?:1[0-9]{2})|(?:[1-9]?[0-9]))(?:\.(?:(?:25[0-5])|(?:2[0-4][0-9])|(?:1[0-9]{2})|(?:[1-9]?[0-9]))){3}))\]))$/iD',
@@ -41,7 +49,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private array $roles = [];
 
     /**
-     * @var string The hashed password
+     * @var string|null
      */
     #[ORM\Column]
     #[Assert\Regex(
@@ -50,17 +58,29 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     )]
     private ?string $password = null;
 
+    /**
+     * @var string|null
+     */
     #[ORM\Column(length: 150)]
     #[Groups(['comment:list', 'article:list'])]
     private ?string $prenom = null;
 
+    /**
+     * @var string|null
+     */
     #[ORM\Column(length: 100)]
     #[Groups(['comment:list', 'article:list'])]
     private ?string $nom = null;
 
+    /**
+     * @var string|null
+     */
     #[ORM\Column(length: 255)]
     private ?string $address = null;
 
+    /**
+     * @var string|null
+     */
     #[ORM\Column]
     #[Assert\Regex(
         pattern: '/^(?:0[1-9]|[1-8]\d|9[0-8])\d{3}$/',
@@ -68,26 +88,47 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     )]
     private ?string $zipCode = null;
 
+    /**
+     * @var string|null
+     */
     #[ORM\Column(length: 255)]
     private ?string $ville = null;
 
+    /**
+     * @var Collection|ArrayCollection
+     */
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Article::class)]
-    private Collection $articles;
+    private Collection|ArrayCollection $articles;
 
+    /**
+     * @var File|null
+     */
     #[Vich\UploadableField(mapping: 'user_image', fileNameProperty: 'imageName', size: 'imageSize')]
     private ?File $imageFile = null;
 
+    /**
+     * @var string|null
+     */
     #[ORM\Column(type: 'string', nullable: true)]
     private ?string $imageName = null;
 
+    /**
+     * @var int|null
+     */
     #[ORM\Column(type: 'integer', nullable: true)]
     private ?int $imageSize = null;
 
+    /**
+     * @var DateTimeInterface|null
+     */
     #[ORM\Column(type: 'datetime', nullable: true)]
-    private ?\DateTimeInterface $imageUpdatedAt = null;
+    private ?DateTimeInterface $imageUpdatedAt = null;
 
+    /**
+     * @var Collection|ArrayCollection
+     */
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Comments::class, orphanRemoval: true)]
-    private Collection $comments;
+    private Collection|ArrayCollection $comments;
 
     public function __construct()
     {
@@ -176,21 +217,35 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->getFullName();
     }
 
+    /**
+     * @return string
+     */
     public function getFullName(): string
     {
         return "$this->prenom $this->nom";
     }
 
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * @return string|null
+     */
     public function getEmail(): ?string
     {
         return $this->email;
     }
 
+    /**
+     * @param string $email
+     *
+     * @return $this
+     */
     public function setEmail(string $email): self
     {
         $this->email = $email;
@@ -243,6 +298,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->password;
     }
 
+    /**
+     * @param string|null $password
+     *
+     * @return $this
+     */
     public function setPassword(?string $password): self
     {
         $this->password = $password;
@@ -259,11 +319,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         // $this->plainPassword = null;
     }
 
+    /**
+     * @return string|null
+     */
     public function getPrenom(): ?string
     {
         return $this->prenom;
     }
 
+    /**
+     * @param string $prenom
+     *
+     * @return $this
+     */
     public function setPrenom(string $prenom): self
     {
         $this->prenom = $prenom;
@@ -271,11 +339,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getNom(): ?string
     {
         return $this->nom;
     }
 
+    /**
+     * @param string $nom
+     *
+     * @return $this
+     */
     public function setNom(string $nom): self
     {
         $this->nom = $nom;
@@ -283,11 +359,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getAddress(): ?string
     {
         return $this->address;
     }
 
+    /**
+     * @param string $address
+     *
+     * @return $this
+     */
     public function setAddress(string $address): self
     {
         $this->address = $address;
@@ -295,11 +379,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getZipCode(): ?string
     {
         return $this->zipCode;
     }
 
+    /**
+     * @param string $zipCode
+     *
+     * @return $this
+     */
     public function setZipCode(string $zipCode): self
     {
         $this->zipCode = $zipCode;
@@ -307,11 +399,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getVille(): ?string
     {
         return $this->ville;
     }
 
+    /**
+     * @param string $ville
+     *
+     * @return $this
+     */
     public function setVille(string $ville): self
     {
         $this->ville = $ville;
@@ -327,6 +427,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->articles;
     }
 
+    /**
+     * @param Article $article
+     *
+     * @return $this
+     */
     public function addArticle(Article $article): self
     {
         if (!$this->articles->contains($article)) {
@@ -337,6 +442,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    /**
+     * @param Article $article
+     *
+     * @return $this
+     */
     public function removeArticle(Article $article): self
     {
         if ($this->articles->removeElement($article)) {
@@ -349,35 +459,59 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    /**
+     * @param File|null $imageFile
+     *
+     * @return void
+     */
     public function setImageFile(?File $imageFile = null): void
     {
         $this->imageFile = $imageFile;
 
         if ($this->imageFile instanceof UploadedFile) {
-            $this->imageUpdatedAt = new \DateTime('now');
+            $this->imageUpdatedAt = new DateTime('now');
         }
     }
 
+    /**
+     * @return File|null
+     */
     public function getImageFile(): ?File
     {
         return $this->imageFile;
     }
 
+    /**
+     * @param string|null $imageName
+     *
+     * @return void
+     */
     public function setImageName(?string $imageName): void
     {
         $this->imageName = $imageName;
     }
 
+    /**
+     * @return string|null
+     */
     public function getImageName(): ?string
     {
         return $this->imageName;
     }
 
+    /**
+     * @param int|null $imageSize
+     *
+     * @return void
+     */
     public function setImageSize(?int $imageSize): void
     {
         $this->imageSize = $imageSize;
     }
 
+    /**
+     * @return int|null
+     */
     public function getImageSize(): ?int
     {
         return $this->imageSize;
@@ -391,6 +525,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->comments;
     }
 
+    /**
+     * @param Comments $comment
+     *
+     * @return $this
+     */
     public function addComment(Comments $comment): self
     {
         if (!$this->comments->contains($comment)) {
@@ -401,6 +540,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    /**
+     * @param Comments $comment
+     *
+     * @return $this
+     */
     public function removeComment(Comments $comment): self
     {
         if ($this->comments->removeElement($comment)) {
@@ -416,9 +560,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * Get the value of imageUpdatedAt.
      *
-     * @return ?\DateTimeInterface
+     * @return ?DateTimeInterface
      */
-    public function getImageUpdatedAt(): ?\DateTimeInterface
+    public function getImageUpdatedAt(): ?DateTimeInterface
     {
         return $this->imageUpdatedAt;
     }
@@ -426,11 +570,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * Set the value of imageUpdatedAt.
      *
-     * @param ?\DateTimeInterface $imageUpdatedAt
+     * @param ?DateTimeInterface $imageUpdatedAt
      *
      * @return self
      */
-    public function setImageUpdatedAt(?\DateTimeInterface $imageUpdatedAt): self
+    public function setImageUpdatedAt(?DateTimeInterface $imageUpdatedAt): self
     {
         $this->imageUpdatedAt = $imageUpdatedAt;
 

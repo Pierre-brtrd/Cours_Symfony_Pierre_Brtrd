@@ -3,6 +3,7 @@
 namespace App\Controller\Frontend;
 
 use App\Repository\ArticleRepository;
+use Psr\Cache\InvalidArgumentException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -13,6 +14,8 @@ class MainController extends AbstractController
 {
     /**
      * Homepage.
+     *
+     * @throws InvalidArgumentException
      */
     #[Route('/', name: 'home')]
     public function index(ArticleRepository $repository, CacheInterface $cache): Response

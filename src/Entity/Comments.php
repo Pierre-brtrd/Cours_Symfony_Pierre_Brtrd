@@ -23,6 +23,9 @@ use Symfony\Component\Serializer\Annotation\Context;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
 
+/**
+ * Class Comment for entity.
+ */
 #[ApiResource(
     operations: [
         new Get(
@@ -122,20 +125,32 @@ use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
 #[ApiFilter(filterClass: SearchFilter::class, properties: ['article' => 'exact'])]
 class Comments
 {
+    /**
+     * @var int|null
+     */
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     #[Groups(['comment:list'])]
     private ?int $id = null;
 
+    /**
+     * @var string|null
+     */
     #[ORM\Column(length: 150)]
     #[Groups(['comment:list', 'comment:post', 'comment:put'])]
     private ?string $titre = null;
 
+    /**
+     * @var string|null
+     */
     #[ORM\Column(type: Types::TEXT)]
     #[Groups(['comment:list', 'comment:post', 'comment:put'])]
     private ?string $content = null;
 
+    /**
+     * @var DateTimeImmutable|null
+     */
     #[ORM\Column]
     #[Gedmo\Timestampable(on: 'create')]
     #[Groups(['comment:list'])]
@@ -145,6 +160,9 @@ class Comments
     #[ApiFilter(filterClass: OrderFilter::class)]
     private ?DateTimeImmutable $createdAt = null;
 
+    /**
+     * @var DateTimeImmutable|null
+     */
     #[ORM\Column]
     #[Gedmo\Timestampable(on: 'update')]
     #[Groups(['comment:list'])]
@@ -153,39 +171,65 @@ class Comments
     )]
     private ?DateTimeImmutable $updatedAt = null;
 
+    /**
+     * @var int|null
+     */
     #[ORM\Column]
     #[Groups(['comment:list', 'comment:post', 'comment:put'])]
     private ?int $note = null;
 
+    /**
+     * @var bool|null
+     */
     #[ORM\Column]
     #[Groups(['comment:list', 'comment:post', 'comment:put'])]
     #[ApiFilter(filterClass: BooleanFilter::class)]
     private ?bool $active = null;
 
+    /**
+     * @var bool|null
+     */
     #[ORM\Column]
     #[Groups(['comment:list', 'comment:post', 'comment:put'])]
     private ?bool $rgpd = null;
 
+    /**
+     * @var User|null
+     */
     #[ORM\ManyToOne(inversedBy: 'comments')]
     #[ORM\JoinColumn(nullable: false)]
     #[Groups(['comment:list'])]
     private ?User $user = null;
 
+    /**
+     * @var Article|null
+     */
     #[ORM\ManyToOne(inversedBy: 'comments')]
     #[ORM\JoinColumn(nullable: false)]
     #[Groups(['comment:list'])]
     private ?Article $article = null;
 
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * @return string|null
+     */
     public function getTitre(): ?string
     {
         return $this->titre;
     }
 
+    /**
+     * @param string $titre
+     *
+     * @return $this
+     */
     public function setTitre(string $titre): self
     {
         $this->titre = $titre;
@@ -193,11 +237,19 @@ class Comments
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getContent(): ?string
     {
         return $this->content;
     }
 
+    /**
+     * @param string $content
+     *
+     * @return $this
+     */
     public function setContent(string $content): self
     {
         $this->content = $content;
@@ -205,11 +257,19 @@ class Comments
         return $this;
     }
 
+    /**
+     * @return DateTimeImmutable|null
+     */
     public function getCreatedAt(): ?DateTimeImmutable
     {
         return $this->createdAt;
     }
 
+    /**
+     * @param DateTimeImmutable $createdAt
+     *
+     * @return $this
+     */
     public function setCreatedAt(DateTimeImmutable $createdAt): self
     {
         $this->createdAt = $createdAt;
@@ -217,11 +277,19 @@ class Comments
         return $this;
     }
 
+    /**
+     * @return DateTimeImmutable|null
+     */
     public function getUpdatedAt(): ?DateTimeImmutable
     {
         return $this->updatedAt;
     }
 
+    /**
+     * @param DateTimeImmutable $updatedAt
+     *
+     * @return $this
+     */
     public function setUpdatedAt(DateTimeImmutable $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
@@ -229,11 +297,19 @@ class Comments
         return $this;
     }
 
+    /**
+     * @return int|null
+     */
     public function getNote(): ?int
     {
         return $this->note;
     }
 
+    /**
+     * @param int $note
+     *
+     * @return $this
+     */
     public function setNote(int $note): self
     {
         $this->note = $note;
@@ -241,11 +317,19 @@ class Comments
         return $this;
     }
 
+    /**
+     * @return bool|null
+     */
     public function isActive(): ?bool
     {
         return $this->active;
     }
 
+    /**
+     * @param bool $active
+     *
+     * @return $this
+     */
     public function setActive(bool $active): self
     {
         $this->active = $active;
@@ -253,11 +337,19 @@ class Comments
         return $this;
     }
 
+    /**
+     * @return bool|null
+     */
     public function isRgpd(): ?bool
     {
         return $this->rgpd;
     }
 
+    /**
+     * @param bool $rgpd
+     *
+     * @return $this
+     */
     public function setRgpd(bool $rgpd): self
     {
         $this->rgpd = $rgpd;
@@ -265,11 +357,19 @@ class Comments
         return $this;
     }
 
+    /**
+     * @return User|UserInterface|null
+     */
     public function getUser(): User|UserInterface|null
     {
         return $this->user;
     }
 
+    /**
+     * @param User|UserInterface|null $user
+     *
+     * @return $this
+     */
     public function setUser(User|UserInterface|null $user): self
     {
         $this->user = $user;
@@ -277,11 +377,19 @@ class Comments
         return $this;
     }
 
+    /**
+     * @return Article|null
+     */
     public function getArticle(): ?Article
     {
         return $this->article;
     }
 
+    /**
+     * @param Article|null $article
+     *
+     * @return $this
+     */
     public function setArticle(?Article $article): self
     {
         $this->article = $article;

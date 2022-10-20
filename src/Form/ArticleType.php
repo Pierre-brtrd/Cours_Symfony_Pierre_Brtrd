@@ -3,6 +3,9 @@
 namespace App\Form;
 
 use App\Entity\Article;
+use App\Entity\Categorie;
+use App\Repository\CategorieRepository;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -23,8 +26,19 @@ class ArticleType extends AbstractType
                 ],
                 'required' => true,
             ])
-            ->add('categories', CategorieAutocompleteField::class, [
+            ->add('categories', EntityType::class, [
                 'label' => 'form.article.fields.tags',
+                'class' => Categorie::class,
+                'placeholder' => 'Choisir une categorie',
+                'choice_label' => 'titre',
+                'multiple' => true,
+                'query_builder' => function (CategorieRepository $categorieRepository) {
+                    return $categorieRepository->createQueryBuilder('c')
+                        ->andWhere('c.active = true')
+                        ->orderBy('c.titre', 'ASC');
+                },
+                'autocomplete' => true,
+                'by_reference' => false,
             ])
             ->add('content', HiddenType::class)
             ->add('active', CheckboxType::class, [
@@ -37,7 +51,7 @@ class ArticleType extends AbstractType
                 'delete_empty' => true,
                 'prototype' => true,
                 'by_reference' => false,
-                'label' => 'form.article.fields.image.multiple',
+                'label' => false,
             ]);
     }
 

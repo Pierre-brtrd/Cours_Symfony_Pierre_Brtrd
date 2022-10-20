@@ -13,7 +13,7 @@ class ArticleVoter extends Voter
     public const EDIT = 'EDIT_ARTICLE';
 
     public function __construct(
-        private Security $security
+        private readonly Security $security
     ) {
     }
 

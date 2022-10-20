@@ -26,8 +26,8 @@ class ArticleController extends AbstractController
      * Construtor of class ArticleController.
      */
     public function __construct(
-        private ArticleRepository $repo,
-        private CommentsRepository $repoComment
+        private readonly ArticleRepository $repo,
+        private readonly CommentsRepository $repoComment
     ) {
     }
 

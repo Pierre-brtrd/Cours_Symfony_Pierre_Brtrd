@@ -30,8 +30,8 @@ class ArticleController extends AbstractController
      * @param CommentsRepository $repoComments
      */
     public function __construct(
-        private ArticleRepository $repoArticle,
-        private CommentsRepository $repoComments
+        private readonly ArticleRepository $repoArticle,
+        private readonly CommentsRepository $repoComments
     ) {
     }
 
@@ -149,7 +149,7 @@ class ArticleController extends AbstractController
     /**
      * Switch visibility in ajax for post.
      *
-     * @param Article $article
+     * @param ?Article $article
      *
      * @return Response
      */
@@ -248,6 +248,7 @@ class ArticleController extends AbstractController
      * Delete a comment with the id url.
      *
      * @param Comments $comment
+     * @param Request  $request
      *
      * @return RedirectResponse
      */
