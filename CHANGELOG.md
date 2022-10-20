@@ -1,3 +1,12 @@
+## [2.6.1](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/compare/v2.6.0...v2.6.1) (2022-10-20)
+
+
+### Bug Fixes
+
+* **fixtures:** update link file for fixtures ([151b86c](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/commit/151b86c5704a10c563de7625a1c6148feed3c9d9))
+
+
+
 # [2.6.0](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/compare/v2.5.1...v2.6.0) (2022-10-20)
 
 
