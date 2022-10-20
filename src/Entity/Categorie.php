@@ -121,7 +121,7 @@ class Categorie
     private ?bool $active = null;
 
     /**
-     * Construct of class Categorie
+     * Construct of class Categorie.
      */
     public function __construct()
     {
@@ -182,7 +182,7 @@ class Categorie
      */
     public function addArticle(Article $article): self
     {
-        if ( ! $this->articles->contains($article)) {
+        if (!$this->articles->contains($article)) {
             $this->articles[] = $article;
         }
 

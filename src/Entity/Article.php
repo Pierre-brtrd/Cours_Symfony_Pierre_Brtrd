@@ -374,7 +374,7 @@ class Article
      */
     public function addCategory(Categorie $category): self
     {
-        if ( ! $this->categories->contains($category)) {
+        if (!$this->categories->contains($category)) {
             $this->categories[] = $category;
             $category->addArticle($this);
         }
@@ -411,7 +411,7 @@ class Article
      */
     public function addComment(Comments $comment): self
     {
-        if ( ! $this->comments->contains($comment)) {
+        if (!$this->comments->contains($comment)) {
             $this->comments[] = $comment;
             $comment->setArticle($this);
         }
@@ -451,7 +451,7 @@ class Article
      */
     public function addArticleImage(ArticleImage $articleImage): self
     {
-        if ( ! $this->articleImages->contains($articleImage)) {
+        if (!$this->articleImages->contains($articleImage)) {
             $this->articleImages[] = $articleImage;
             $articleImage->setArticle($this);
         }

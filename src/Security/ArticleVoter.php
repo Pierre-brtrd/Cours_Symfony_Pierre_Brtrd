@@ -14,7 +14,7 @@ class ArticleVoter extends Voter
 
     public function __construct(
         private readonly Security $security
-    ){
+    ) {
     }
 
     protected function supports(string $attribute, $subject): bool
@@ -29,8 +29,8 @@ class ArticleVoter extends Voter
         $user = $token->getUser();
 
         if (
-            ! $user instanceof User ||
-            ! $subject instanceof Article
+            !$user instanceof User ||
+            !$subject instanceof Article
         ) {
             return false;
         }

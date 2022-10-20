@@ -36,8 +36,8 @@ class CommentVoter extends Voter
         $user = $token->getUser();
 
         if (
-            ! $user instanceof User ||
-            ! $subject instanceof Comments
+            !$user instanceof User ||
+            !$subject instanceof Comments
         ) {
             return false;
         }

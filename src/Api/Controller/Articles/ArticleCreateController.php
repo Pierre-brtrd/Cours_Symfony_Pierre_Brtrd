@@ -16,7 +16,7 @@ class ArticleCreateController extends AbstractController
      */
     public function __construct(
         private readonly Security $security
-    ){
+    ) {
     }
 
     /**

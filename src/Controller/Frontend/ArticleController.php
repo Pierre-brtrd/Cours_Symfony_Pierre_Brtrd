@@ -28,7 +28,7 @@ class ArticleController extends AbstractController
     public function __construct(
         private readonly ArticleRepository $repo,
         private readonly CommentsRepository $repoComment
-    ){
+    ) {
     }
 
     /**
@@ -81,8 +81,8 @@ class ArticleController extends AbstractController
         ?Article $article,
         Security $security,
         Request $request
-    ): Response{
-        if ( ! $article instanceof Article) {
+    ): Response {
+        if (!$article instanceof Article) {
             $this->addFlash('error', 'Article non trouvé');
 
             return $this->redirectToRoute('home');

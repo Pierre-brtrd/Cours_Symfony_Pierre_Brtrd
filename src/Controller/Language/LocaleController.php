@@ -18,7 +18,7 @@ class LocaleController extends AbstractController
      */
     public function __construct(
         private readonly RouterInterface $router
-    ){
+    ) {
     }
 
     /**
@@ -36,7 +36,7 @@ class LocaleController extends AbstractController
 
         $url = $request->headers->get('referer');
 
-        if ( ! $url) {
+        if (!$url) {
             $url = $this->router->generate('home');
         }
 

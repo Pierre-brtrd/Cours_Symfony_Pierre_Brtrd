@@ -34,7 +34,7 @@ class ResetPasswordController extends AbstractController
     public function __construct(
         private readonly ResetPasswordHelperInterface $resetPasswordHelper,
         private readonly EntityManagerInterface $entityManager
-    ){
+    ) {
     }
 
     /**
@@ -87,7 +87,7 @@ class ResetPasswordController extends AbstractController
         UserPasswordHasherInterface $userPasswordHasher,
         TranslatorInterface $translator,
         string $token = null
-    ): Response{
+    ): Response {
         if ($token) {
             // We store the token in session and remove it from the URL, to avoid the URL being
             // loaded in a browser and potentially leaking the token to 3rd party JavaScript.
@@ -163,13 +163,13 @@ class ResetPasswordController extends AbstractController
         mixed $emailFormData,
         MailerInterface $mailer,
         TranslatorInterface $translator
-    ): RedirectResponse{
+    ): RedirectResponse {
         $user = $this->entityManager->getRepository(User::class)->findOneBy([
             'email' => $emailFormData,
         ]);
 
         // Do not reveal whether a user account was found or not.
-        if ( ! $user) {
+        if (!$user) {
             return $this->redirectToRoute('app_check_email');
         }
 

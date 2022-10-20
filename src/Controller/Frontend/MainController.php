@@ -20,7 +20,7 @@ class MainController extends AbstractController
     #[Route('/', name: 'home')]
     public function index(ArticleRepository $repository, CacheInterface $cache): Response
     {
-        $articles = $cache->get('home_articles_list', function (ItemInterface $item) use ($repository){
+        $articles = $cache->get('home_articles_list', function (ItemInterface $item) use ($repository) {
             $item->expiresAfter(1000);
 
             return $repository->findLatestArticleWithLimit(6);

@@ -2,19 +2,12 @@
 
 namespace App\Services;
 
-use App\Entity\Article;
 use App\Entity\ArticleImage;
-use App\Repository\ArticleRepository;
 use Vich\UploaderBundle\Mapping\PropertyMapping;
 use Vich\UploaderBundle\Naming\DirectoryNamerInterface;
 
 class ArticleDirectoryNamer implements DirectoryNamerInterface
 {
-    public function __construct(
-        private readonly ArticleRepository $repository,
-    ){
-    }
-
     /**
      * DirectoryNamer for article.
      *
@@ -24,12 +17,16 @@ class ArticleDirectoryNamer implements DirectoryNamerInterface
      */
     public function directoryName($object, PropertyMapping $mapping): string
     {
-        /*
-         * @TODO do resolve path for delete file
-         */
-        if ( ! $object->getArticle() instanceof Article) {
-            throw new \Exception('The object must be a image related to an article');
-        }
+        /*if ( ! $object->getArticle()) {
+            dd($mapping, $object);
+
+            $dir = $mapping->getUploadDir($object);
+            $srcFile = $dir.'/'.$object->getImageName();
+
+            if (file_exists($srcFile)) {
+                unlink($srcFile);
+            }
+        }*/
 
         if ($object->getArticle()->getId()) {
             return $object->getArticle()->getSlug();

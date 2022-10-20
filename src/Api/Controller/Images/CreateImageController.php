@@ -21,7 +21,7 @@ final class CreateImageController extends AbstractController
      */
     public function __construct(
         private readonly ArticleRepository $repoArticle
-    ){
+    ) {
     }
 
     /**
@@ -35,11 +35,11 @@ final class CreateImageController extends AbstractController
         $uploadedFile = $request->files->get('imageFile');
         $articleId = $request->get('article');
 
-        if ( ! $uploadedFile) {
+        if (!$uploadedFile) {
             throw new BadRequestHttpException('"file" is required');
         }
 
-        if ( ! is_numeric($articleId)) {
+        if (!is_numeric($articleId)) {
             throw new BadRequestHttpException('Article id must be numeric');
         }
 

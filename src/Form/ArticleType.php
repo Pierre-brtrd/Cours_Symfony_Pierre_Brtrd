@@ -32,7 +32,7 @@ class ArticleType extends AbstractType
                 'placeholder' => 'Choisir une categorie',
                 'choice_label' => 'titre',
                 'multiple' => true,
-                'query_builder' => function (CategorieRepository $categorieRepository){
+                'query_builder' => function (CategorieRepository $categorieRepository) {
                     return $categorieRepository->createQueryBuilder('c')
                         ->andWhere('c.active = true')
                         ->orderBy('c.titre', 'ASC');
@@ -51,7 +51,7 @@ class ArticleType extends AbstractType
                 'delete_empty' => true,
                 'prototype' => true,
                 'by_reference' => false,
-                'label' => 'form.article.fields.image.multiple',
+                'label' => false,
             ]);
     }
 

@@ -22,7 +22,7 @@ class UserController extends AbstractController
      */
     public function __construct(
         private readonly Security $security
-    ){
+    ) {
     }
 
     /**
@@ -45,7 +45,7 @@ class UserController extends AbstractController
     public function edit(
         Request $request,
         UserRepository $userRepository
-    ): Response{
+    ): Response {
         /** @var User $user */
         $user = $this->security->getUser();
 

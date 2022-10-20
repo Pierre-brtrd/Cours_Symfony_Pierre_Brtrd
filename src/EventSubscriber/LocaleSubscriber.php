@@ -10,13 +10,13 @@ class LocaleSubscriber implements EventSubscriberInterface
 {
     public function __construct(
         private readonly string $defaultLocale = 'fr'
-    ){
+    ) {
     }
 
     public function onKernelRequest(RequestEvent $event): void
     {
         $request = $event->getRequest();
-        if ( ! $request->hasPreviousSession()) {
+        if (!$request->hasPreviousSession()) {
             return;
         }
 

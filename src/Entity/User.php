@@ -260,7 +260,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getUserIdentifier(): string
     {
-        return (string)$this->email;
+        return (string) $this->email;
     }
 
     /**
@@ -434,7 +434,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function addArticle(Article $article): self
     {
-        if ( ! $this->articles->contains($article)) {
+        if (!$this->articles->contains($article)) {
             $this->articles[] = $article;
             $article->setUser($this);
         }
@@ -532,7 +532,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function addComment(Comments $comment): self
     {
-        if ( ! $this->comments->contains($comment)) {
+        if (!$this->comments->contains($comment)) {
             $this->comments[] = $comment;
             $comment->setUser($this);
         }
