@@ -20,6 +20,8 @@ import CodeBlock from '@ckeditor/ckeditor5-code-block/src/codeblock';
 import ListProperties from '@ckeditor/ckeditor5-list/src/listproperties';
 import HorizontalLine from '@ckeditor/ckeditor5-horizontal-line/src/horizontalline';
 import SourceEditing from '@ckeditor/ckeditor5-source-editing/src/sourceediting';
+import Table from '@ckeditor/ckeditor5-table/src/table';
+import TableToolbar from '@ckeditor/ckeditor5-table/src/tabletoolbar';
 //import CKEditorInspector from '@ckeditor/ckeditor5-inspector';
 
 let form = document.querySelector('.form-article');
@@ -34,13 +36,13 @@ if (form) {
                 EssentialsPlugin, AutoformatPlugin, Bold, Italic, Underline, Code,
                 Font, Alignment, Indent, IndentBlock, BlockQuotePlugin, HeadingPlugin,
                 LinkPlugin, ListPlugin, ParagraphPlugin, FindAndReplace, HtmlEmbed,
-                CodeBlock, ListProperties, HorizontalLine, SourceEditing
+                CodeBlock, ListProperties, HorizontalLine, SourceEditing, Table, TableToolbar,
             ],
             toolbar: {
                 items: [
                     'heading', '|',
                     'bold', 'italic', 'underline', 'link', 'code', '|',
-                    'numberedList', 'bulletedList', '|',
+                    'insertTable', 'numberedList', 'bulletedList', '|',
                     'outdent', 'indent', '|',
                     'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor', 'alignment', '|',
                     'htmlEmbed', 'codeBlock', '|',
@@ -62,6 +64,10 @@ if (form) {
                     { model: 'heading3', view: 'h3', title: 'Heading 3', class: 'ck-heading_heading3' },
                     { model: 'heading4', view: 'h4', title: 'Heading 4', class: 'ck-heading_heading4' },
                 ]
+            },
+            table: {
+                contentToolbar: ['tableColumn', 'tableRow', 'mergeTableCells'],
+                defaultHeadings: { rows: 1, columns: 1 }
             },
             list: {
                 properties: {

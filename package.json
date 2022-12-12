@@ -7,6 +7,7 @@
     "@ckeditor/ckeditor5-autoformat": "^35.0.1",
     "@ckeditor/ckeditor5-basic-styles": "^35.0.1",
     "@ckeditor/ckeditor5-block-quote": "^35.0.1",
+    "@ckeditor/ckeditor5-ckfinder": "^35.2.1",
     "@ckeditor/ckeditor5-code-block": "^35.0.1",
     "@ckeditor/ckeditor5-dev-utils": "^30.4.0",
     "@ckeditor/ckeditor5-easy-image": "^35.0.1",
@@ -18,15 +19,16 @@
     "@ckeditor/ckeditor5-heading": "^35.0.1",
     "@ckeditor/ckeditor5-horizontal-line": "^35.0.1",
     "@ckeditor/ckeditor5-html-embed": "^35.0.1",
-    "@ckeditor/ckeditor5-image": "^35.0.1",
+    "@ckeditor/ckeditor5-image": "^35.2.1",
     "@ckeditor/ckeditor5-indent": "^35.0.1",
     "@ckeditor/ckeditor5-inspector": "^4.1.0",
     "@ckeditor/ckeditor5-link": "^35.0.1",
     "@ckeditor/ckeditor5-list": "^35.0.1",
     "@ckeditor/ckeditor5-paragraph": "^35.0.1",
     "@ckeditor/ckeditor5-source-editing": "^35.0.1",
+    "@ckeditor/ckeditor5-table": "^35.2.1",
     "@ckeditor/ckeditor5-theme-lark": "^35.0.1",
-    "@ckeditor/ckeditor5-upload": "^35.0.1",
+    "@ckeditor/ckeditor5-upload": "^35.2.1",
     "@commitlint/cli": "^17.0.3",
     "@commitlint/config-conventional": "^17.0.3",
     "@commitlint/cz-commitlint": "^17.0.3",
@@ -65,10 +67,6 @@
     }
   },
   "private": true,
-  "engines": {
-    "node": "18.x",
-    "npm": "8.x"
-  },
   "scripts": {
     "dev-server": "encore dev-server",
     "dev": "encore dev",
