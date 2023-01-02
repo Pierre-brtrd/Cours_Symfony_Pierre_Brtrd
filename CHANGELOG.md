@@ -1,3 +1,12 @@
+## [2.6.5](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/compare/v2.6.4...v2.6.5) (2023-01-02)
+
+
+### Bug Fixes
+
+* **variable:** update typo for variable front ([9cd1e02](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/commit/9cd1e020f65abc9659bb8753cfbf75330e877d63))
+
+
+
 ## [2.6.4](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/compare/v2.6.3...v2.6.4) (2022-12-12)
 
 
@@ -105,17 +114,6 @@
 
 * **cache:** update cache for homepage ([f8c8978](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/commit/f8c89780715624ae5d94e097a11b26163996b883))
 * **database:** improve query performance in database ([f553ddb](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/commit/f553ddbe5f97a80aa2e70b3a56e2ebc7d11b6ead))
-
-
-
-## [2.3.2](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/compare/v2.3.0...v2.3.2) (2022-08-17)
-
-
-### Bug Fixes
-
-* **pr-description:** change action github for run job ([59d0a5d](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/commit/59d0a5d1eefd90c6203bc7a768bf45cdff9b032a))
-* **pr-description:** change action pr desc ([0bb6cef](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/commit/0bb6cef8c54c251fad121579e8e135ccfccb86f3))
-* **pr-description:** update config for run job ([db8806a](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/commit/db8806a3c0c3fefed00b97013f9c6372a2d59bd4))
 
 
 
