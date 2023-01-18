@@ -1,3 +1,12 @@
+## [2.6.6](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/compare/v2.6.5...v2.6.6) (2023-01-18)
+
+
+### Bug Fixes
+
+* **php:** update php cs fixer review ([74842c1](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/commit/74842c1ffa026230c223187a20bcec5bc22c33e1))
+
+
+
 ## [2.6.5](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/compare/v2.6.4...v2.6.5) (2023-01-02)
 
 
@@ -93,27 +102,6 @@
 ### Bug Fixes
 
 * **build:** update composer-lock for build CI ([d4985b6](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/commit/d4985b6ace75604fafabeeeb6c26bcd34f01d8bc))
-
-
-
-# [2.4.0](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/compare/v2.3.2...v2.4.0) (2022-08-17)
-
-
-### Bug Fixes
-
-* **article:** update query for home and test ([0511807](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/commit/05118070e36102f5892827aa57379a48f6f1d123))
-
-
-### Features
-
-* **images:** add and setup gaufrette storage for images ([dda468a](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/commit/dda468a1f9ad294296b5a7c9efc9f86680716cf8))
-* **images:** add liip imagine for thumbnail images ([1c9f7f0](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/commit/1c9f7f0671fed9ef98bb76f4e340971c2573ef49))
-
-
-### Performance Improvements
-
-* **cache:** update cache for homepage ([f8c8978](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/commit/f8c89780715624ae5d94e097a11b26163996b883))
-* **database:** improve query performance in database ([f553ddb](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/commit/f553ddbe5f97a80aa2e70b3a56e2ebc7d11b6ead))
 
 
 
