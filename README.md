@@ -7,14 +7,11 @@
   <img src="https://img.shields.io/badge/Code-Scss-blueviolet?style=flat&logo=sass&color=CD6799" />
 </p>
 <p>
-  <img alt="GitHub Workflow Status (event)" src="https://img.shields.io/github/workflow/status/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/Full%20CI%20process%20for%20Symfony%206?label=Build&logo=github">
+  <img alt="GitHub Workflow Status" src="https://img.shields.io/github/actions/workflow/status/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/symfony.yml?logo=github">
   <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd?label=Last%20Commit">
   <img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/m/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd?label=Commit%20Activity">
   <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd">
   <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd?label=Languages&color=yellow">
-  <a href="https://validator.w3.org/nu/?doc=https%3A%2F%2Fsymfony-cours-app.herokuapp.com%2F">
-    <img alt="W3C Validation" src="https://img.shields.io/w3c-validation/html?label=validate&logo=w3c&targetUrl=http%3A%2F%2Fsymfony-cours-app.herokuapp.com%2F">
-  </a>
   <img alt="GitHub release (latest SemVer)" src="https://img.shields.io/github/v/release/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd?display_name=tag">
 </p>
 
