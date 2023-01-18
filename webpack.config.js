@@ -1,6 +1,6 @@
 const Encore = require('@symfony/webpack-encore');
 
-const {styles} = require('@ckeditor/ckeditor5-dev-utils');
+const { styles } = require('@ckeditor/ckeditor5-dev-utils');
 const CKEditorWebpackPlugin = require('@ckeditor/ckeditor5-dev-webpack-plugin');
 
 // Manually configure the runtime environment if not already configured yet by the "encore" command.
@@ -14,7 +14,7 @@ Encore
   .setOutputPath('public/build/')
   // public path used by the web server to access the output path
   .setPublicPath('/build')
-  // only needed for CDN's or sub-directory deploy
+  // only needed for CDN's or subdirectory deploy
   //.setManifestKeyPrefix('build/')
 
   /*
