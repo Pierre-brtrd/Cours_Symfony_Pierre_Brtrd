@@ -10,6 +10,7 @@
     "@ckeditor/ckeditor5-ckfinder": "^35.4.0",
     "@ckeditor/ckeditor5-code-block": "^35.4.0",
     "@ckeditor/ckeditor5-dev-utils": "^32.1.0",
+    "@ckeditor/ckeditor5-dev-webpack-plugin": "^31.1.13",
     "@ckeditor/ckeditor5-easy-image": "^35.4.0",
     "@ckeditor/ckeditor5-editor-classic": "^35.4.0",
     "@ckeditor/ckeditor5-engine": "^35.4.0",
