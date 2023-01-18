@@ -10,7 +10,6 @@ use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Post;
 use App\Api\Controller\Images\CreateImageController;
 use App\Repository\ArticleImageRepository;
-use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -115,10 +114,10 @@ class ArticleImage
     private ?int $imageSize = null;
 
     /**
-     * @var DateTimeImmutable|null
+     * @var \DateTimeImmutable|null
      */
     #[ORM\Column]
-    private ?DateTimeImmutable $updatedAt = null;
+    private ?\DateTimeImmutable $updatedAt = null;
 
     /**
      * @return int|null
@@ -189,19 +188,19 @@ class ArticleImage
     }
 
     /**
-     * @return DateTimeImmutable|null
+     * @return \DateTimeImmutable|null
      */
-    public function getUpdatedAt(): ?DateTimeImmutable
+    public function getUpdatedAt(): ?\DateTimeImmutable
     {
         return $this->updatedAt;
     }
 
     /**
-     * @param DateTimeImmutable $updatedAt
+     * @param \DateTimeImmutable $updatedAt
      *
      * @return $this
      */
-    public function setUpdatedAt(DateTimeImmutable $updatedAt): self
+    public function setUpdatedAt(\DateTimeImmutable $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
 
@@ -219,7 +218,7 @@ class ArticleImage
         if (null !== $imageFile) {
             // It is required that at least one field changes if you are using doctrine
             // otherwise the event listeners won't be called and the file is lost
-            $this->updatedAt = new DateTimeImmutable();
+            $this->updatedAt = new \DateTimeImmutable();
         }
     }
 

@@ -3,7 +3,6 @@
 namespace App\Tests\Controller;
 
 use App\Repository\UserRepository;
-use Exception;
 use Liip\TestFixturesBundle\Services\DatabaseToolCollection;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Response;
@@ -133,7 +132,7 @@ class SecurityControllerTest extends WebTestCase
         $newUser = $this->userRepository->findOneByEmail('john@example.com');
 
         if (!$newUser) {
-            throw new Exception('User not created');
+            throw new \Exception('User not created');
         }
 
         $this->assertResponseRedirects();

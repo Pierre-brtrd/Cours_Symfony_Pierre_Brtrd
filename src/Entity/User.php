@@ -3,8 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
-use DateTime;
-use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -119,10 +117,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $imageSize = null;
 
     /**
-     * @var DateTimeInterface|null
+     * @var \DateTimeInterface|null
      */
     #[ORM\Column(type: 'datetime', nullable: true)]
-    private ?DateTimeInterface $imageUpdatedAt = null;
+    private ?\DateTimeInterface $imageUpdatedAt = null;
 
     /**
      * @var Collection|ArrayCollection
@@ -469,7 +467,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->imageFile = $imageFile;
 
         if ($this->imageFile instanceof UploadedFile) {
-            $this->imageUpdatedAt = new DateTime('now');
+            $this->imageUpdatedAt = new \DateTime('now');
         }
     }
 
@@ -560,9 +558,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * Get the value of imageUpdatedAt.
      *
-     * @return ?DateTimeInterface
+     * @return ?\DateTimeInterface
      */
-    public function getImageUpdatedAt(): ?DateTimeInterface
+    public function getImageUpdatedAt(): ?\DateTimeInterface
     {
         return $this->imageUpdatedAt;
     }
@@ -570,11 +568,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * Set the value of imageUpdatedAt.
      *
-     * @param ?DateTimeInterface $imageUpdatedAt
+     * @param ?\DateTimeInterface $imageUpdatedAt
      *
      * @return self
      */
-    public function setImageUpdatedAt(?DateTimeInterface $imageUpdatedAt): self
+    public function setImageUpdatedAt(?\DateTimeInterface $imageUpdatedAt): self
     {
         $this->imageUpdatedAt = $imageUpdatedAt;
 

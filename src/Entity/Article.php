@@ -15,7 +15,6 @@ use ApiPlatform\Metadata\Post;
 use ApiPlatform\Metadata\Put;
 use App\Api\Controller\Articles\ArticleCreateController;
 use App\Repository\ArticleRepository;
-use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
@@ -171,22 +170,22 @@ class Article
     private ?string $slug;
 
     /**
-     * @var DateTimeImmutable|null
+     * @var \DateTimeImmutable|null
      */
     #[ORM\Column]
     #[Gedmo\Timestampable(on: 'create')]
     #[Groups(['article:list'])]
     #[Context(normalizationContext: [DateTimeNormalizer::FORMAT_KEY => 'Y-m-d H:i'])]
-    private ?DateTimeImmutable $createdAt = null;
+    private ?\DateTimeImmutable $createdAt = null;
 
     /**
-     * @var DateTimeImmutable|null
+     * @var \DateTimeImmutable|null
      */
     #[ORM\Column]
     #[Gedmo\Timestampable(on: 'update')]
     #[Groups(['article:list'])]
     #[Context(normalizationContext: [DateTimeNormalizer::FORMAT_KEY => 'Y-m-d H:i'])]
-    private ?DateTimeImmutable $updatedAt = null;
+    private ?\DateTimeImmutable $updatedAt = null;
 
     /**
      * @var User|null
@@ -300,19 +299,19 @@ class Article
     }
 
     /**
-     * @return DateTimeImmutable|null
+     * @return \DateTimeImmutable|null
      */
-    public function getCreatedAt(): ?DateTimeImmutable
+    public function getCreatedAt(): ?\DateTimeImmutable
     {
         return $this->createdAt;
     }
 
     /**
-     * @param DateTimeImmutable $createdAt
+     * @param \DateTimeImmutable $createdAt
      *
      * @return $this
      */
-    public function setCreatedAt(DateTimeImmutable $createdAt): self
+    public function setCreatedAt(\DateTimeImmutable $createdAt): self
     {
         $this->createdAt = $createdAt;
 
@@ -320,19 +319,19 @@ class Article
     }
 
     /**
-     * @return DateTimeImmutable|null
+     * @return \DateTimeImmutable|null
      */
-    public function getUpdatedAt(): ?DateTimeImmutable
+    public function getUpdatedAt(): ?\DateTimeImmutable
     {
         return $this->updatedAt;
     }
 
     /**
-     * @param DateTimeImmutable $updatedAt
+     * @param \DateTimeImmutable $updatedAt
      *
      * @return $this
      */
-    public function setUpdatedAt(DateTimeImmutable $updatedAt): self
+    public function setUpdatedAt(\DateTimeImmutable $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
 

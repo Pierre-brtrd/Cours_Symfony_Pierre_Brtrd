@@ -5,7 +5,6 @@
 namespace App\Serializer;
 
 use App\Entity\ArticleImage;
-use ArrayObject;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
@@ -25,7 +24,7 @@ final class ArticleImageNormalizer implements NormalizerInterface, NormalizerAwa
         $object,
         ?string $format = null,
         array $context = []
-    ): array|string|int|float|bool|ArrayObject|null {
+    ): array|string|int|float|bool|\ArrayObject|null {
         $context[self::ALREADY_CALLED] = true;
 
         $object->imageUrl = $this->storage->resolveUri($object, 'imageFile');

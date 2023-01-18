@@ -7,7 +7,6 @@ namespace App\Api\OpenApi;
 use ApiPlatform\OpenApi\Factory\OpenApiFactoryInterface;
 use ApiPlatform\OpenApi\Model;
 use ApiPlatform\OpenApi\OpenApi;
-use ArrayObject;
 
 /**
  * Class JwtDecorator for decorated token api documentation.
@@ -34,7 +33,7 @@ final class JwtDecorator implements OpenApiFactoryInterface
         $openApi = ($this->decorated)($context);
         $schemas = $openApi->getComponents()->getSchemas();
 
-        $schemas['Token'] = new ArrayObject([
+        $schemas['Token'] = new \ArrayObject([
             'type' => 'object',
             'properties' => [
                 'token' => [
@@ -43,7 +42,7 @@ final class JwtDecorator implements OpenApiFactoryInterface
                 ],
             ],
         ]);
-        $schemas['Credentials'] = new ArrayObject([
+        $schemas['Credentials'] = new \ArrayObject([
             'type' => 'object',
             'properties' => [
                 'email' => [
@@ -58,7 +57,7 @@ final class JwtDecorator implements OpenApiFactoryInterface
         ]);
 
         $schemas = $openApi->getComponents()->getSecuritySchemes() ?? [];
-        $schemas['JWT'] = new ArrayObject([
+        $schemas['JWT'] = new \ArrayObject([
             'type' => 'http',
             'scheme' => 'bearer',
             'bearerFormat' => 'JWT',
@@ -83,7 +82,7 @@ final class JwtDecorator implements OpenApiFactoryInterface
                 description: 'Your Token will be store in cookies session.',
                 requestBody: new Model\RequestBody(
                     description: 'Generate new JWT Token',
-                    content: new ArrayObject([
+                    content: new \ArrayObject([
                         'application/json' => [
                             'schema' => [
                                 '$ref' => '#/components/schemas/Credentials',

@@ -2,7 +2,6 @@
 
 namespace App\DataFixtures\Providers;
 
-use DateTimeImmutable;
 use Faker\Factory;
 use Faker\Generator;
 
@@ -22,8 +21,8 @@ class ArticleProvider
         return $content;
     }
 
-    public function generateDate(): DateTimeImmutable
+    public function generateDate(): \DateTimeImmutable
     {
-        return DateTimeImmutable::createFromMutable($this->faker->dateTimeThisYear());
+        return \DateTimeImmutable::createFromMutable($this->faker->dateTimeThisYear());
     }
 }

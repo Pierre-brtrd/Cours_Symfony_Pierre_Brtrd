@@ -14,7 +14,6 @@ use ApiPlatform\Metadata\Post;
 use ApiPlatform\Metadata\Put;
 use App\Api\Controller\Comments\CommentCreateController;
 use App\Repository\CommentsRepository;
-use DateTimeImmutable;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -149,7 +148,7 @@ class Comments
     private ?string $content = null;
 
     /**
-     * @var DateTimeImmutable|null
+     * @var \DateTimeImmutable|null
      */
     #[ORM\Column]
     #[Gedmo\Timestampable(on: 'create')]
@@ -158,10 +157,10 @@ class Comments
         normalizationContext: [DateTimeNormalizer::FORMAT_KEY => 'Y-m-d H:i']
     )]
     #[ApiFilter(filterClass: OrderFilter::class)]
-    private ?DateTimeImmutable $createdAt = null;
+    private ?\DateTimeImmutable $createdAt = null;
 
     /**
-     * @var DateTimeImmutable|null
+     * @var \DateTimeImmutable|null
      */
     #[ORM\Column]
     #[Gedmo\Timestampable(on: 'update')]
@@ -169,7 +168,7 @@ class Comments
     #[Context(
         normalizationContext: [DateTimeNormalizer::FORMAT_KEY => 'Y-m-d H:i']
     )]
-    private ?DateTimeImmutable $updatedAt = null;
+    private ?\DateTimeImmutable $updatedAt = null;
 
     /**
      * @var int|null
@@ -258,19 +257,19 @@ class Comments
     }
 
     /**
-     * @return DateTimeImmutable|null
+     * @return \DateTimeImmutable|null
      */
-    public function getCreatedAt(): ?DateTimeImmutable
+    public function getCreatedAt(): ?\DateTimeImmutable
     {
         return $this->createdAt;
     }
 
     /**
-     * @param DateTimeImmutable $createdAt
+     * @param \DateTimeImmutable $createdAt
      *
      * @return $this
      */
-    public function setCreatedAt(DateTimeImmutable $createdAt): self
+    public function setCreatedAt(\DateTimeImmutable $createdAt): self
     {
         $this->createdAt = $createdAt;
 
@@ -278,19 +277,19 @@ class Comments
     }
 
     /**
-     * @return DateTimeImmutable|null
+     * @return \DateTimeImmutable|null
      */
-    public function getUpdatedAt(): ?DateTimeImmutable
+    public function getUpdatedAt(): ?\DateTimeImmutable
     {
         return $this->updatedAt;
     }
 
     /**
-     * @param DateTimeImmutable $updatedAt
+     * @param \DateTimeImmutable $updatedAt
      *
      * @return $this
      */
-    public function setUpdatedAt(DateTimeImmutable $updatedAt): self
+    public function setUpdatedAt(\DateTimeImmutable $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
 

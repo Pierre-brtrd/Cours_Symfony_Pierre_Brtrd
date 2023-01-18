@@ -142,7 +142,7 @@ class CategorieController extends AbstractController
         /** @var string|null $token */
         $token = $request->get('_token');
 
-        if ($this->isCsrfTokenValid('delete' . $categorie->getId(), $token)) {
+        if ($this->isCsrfTokenValid('delete'.$categorie->getId(), $token)) {
             $this->repository->remove($categorie, true);
             $this->addFlash('success', 'Categorie supprimée avec succès');
 
