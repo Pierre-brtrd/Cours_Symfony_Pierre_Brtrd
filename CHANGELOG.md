@@ -1,3 +1,20 @@
+# [2.7.0](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/compare/v2.6.6...v2.7.0) (2023-02-03)
+
+
+### Bug Fixes
+
+* **update:** composer dump-autoload ([8868364](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/commit/8868364c72bef8039664f253d9d917986ce736f7))
+* **update:** update recipe for doctrine ([10f7c8d](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/commit/10f7c8dbf3e0243af46600026c169d509afd2bc9))
+* **update:** update recipe framework bundle ([3bd870a](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/commit/3bd870a474d73d0dfc04581320fbe43b7f941a49))
+* **update:** update route recipe ([54ef7f3](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/commit/54ef7f3b270ec0ed22520301e3d2d2255c6a4295))
+
+
+### Features
+
+* update symfony version 6.2 ([5cc924c](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/commit/5cc924cf6c57d08c1ce04c50a1f3410101a5828f))
+
+
+
 ## [2.6.6](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/compare/v2.6.5...v2.6.6) (2023-01-18)
 
 
@@ -93,15 +110,6 @@
 * add bootstrap icons lib ([75c405c](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/commit/75c405cf4f288d6332eb72b93484ce906bacb978))
 * add ux-components for entity type ([01dfc87](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/commit/01dfc874fea7e76a5ad217d06bd229ba9c53cf32))
 * **search:** add search for user article list ([c9d9f14](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/commit/c9d9f145c164ee3ebc08be43c420538073ca2b46))
-
-
-
-## [2.4.2](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/compare/v2.4.0...v2.4.2) (2022-08-17)
-
-
-### Bug Fixes
-
-* **build:** update composer-lock for build CI ([d4985b6](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/commit/d4985b6ace75604fafabeeeb6c26bcd34f01d8bc))
 
 
 
