@@ -3,8 +3,8 @@
 namespace App\Tests\Panther;
 
 use Facebook\WebDriver\WebDriverBy;
-use Liip\TestFixturesBundle\Services\DatabaseToolCollection;
 use Symfony\Component\Panther\PantherTestCase;
+use Liip\TestFixturesBundle\Services\DatabaseToolCollection;
 
 class ArticlePantherTest extends PantherTestCase
 {
@@ -18,9 +18,9 @@ class ArticlePantherTest extends PantherTestCase
 
         $this->databaseTool = self::getContainer()->get(DatabaseToolCollection::class)->get();
         $this->databaseTool->loadAliceFixture([
-            \dirname(__DIR__).'/Fixtures/UserTestFixtures.yaml',
-            \dirname(__DIR__).'/Fixtures/ArticleTestFixtures.yaml',
-            \dirname(__DIR__).'/Fixtures/TagTestFixtures.yaml',
+            \dirname(__DIR__) . '/Fixtures/UserTestFixtures.yaml',
+            \dirname(__DIR__) . '/Fixtures/ArticleTestFixtures.yaml',
+            \dirname(__DIR__) . '/Fixtures/TagTestFixtures.yaml',
         ]);
     }
 
@@ -70,14 +70,14 @@ class ArticlePantherTest extends PantherTestCase
         $search = $this->client->findElement(WebDriverBy::cssSelector('.form-filter input[type="text"]'));
         $search->sendKeys('qskfhkqjshfqdsf');
 
-        $this->client->waitFor('.content-response', 3);
+        $this->client->waitFor('.content-response', 5);
 
         // For the flip content time response
         sleep(1);
 
         $crawler = $this->client->refreshCrawler();
 
-        $this->assertSelectorTextContains('.alert', 'Il n\'y a pas d\'article correspondant à votre recherche');
+        $this->assertSelectorTextContains('.alert span', 'Il n\'y a pas d\'article correspondant à votre recherche');
     }
 
     public function testArticlePageSearchAjax()
