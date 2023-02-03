@@ -131,7 +131,7 @@ class Categorie
     /**
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         /** @var string $titre */
         $titre = $this->titre;
@@ -160,7 +160,7 @@ class Categorie
      *
      * @return $this
      */
-    public function setTitre(string $titre): self
+    public function setTitre(string $titre): static
     {
         $this->titre = $titre;
 
@@ -180,7 +180,7 @@ class Categorie
      *
      * @return $this
      */
-    public function addArticle(Article $article): self
+    public function addArticle(Article $article): static
     {
         if (!$this->articles->contains($article)) {
             $this->articles[] = $article;
@@ -194,7 +194,7 @@ class Categorie
      *
      * @return $this
      */
-    public function removeArticle(Article $article): self
+    public function removeArticle(Article $article): static
     {
         $this->articles->removeElement($article);
 
@@ -214,7 +214,7 @@ class Categorie
      *
      * @return $this
      */
-    public function setActive(bool $active): self
+    public function setActive(bool $active): static
     {
         $this->active = $active;
 

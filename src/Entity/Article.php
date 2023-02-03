@@ -251,7 +251,7 @@ class Article
      *
      * @return self
      */
-    public function setTitre(string $titre): self
+    public function setTitre(string $titre): \App\Entity\Article
     {
         $this->titre = $titre;
 
@@ -271,7 +271,7 @@ class Article
      *
      * @return self
      */
-    public function setContent(string $content): self
+    public function setContent(string $content): \App\Entity\Article
     {
         $this->content = $content;
 
@@ -291,7 +291,7 @@ class Article
      *
      * @return self
      */
-    public function setSlug(?string $slug): self
+    public function setSlug(?string $slug): \App\Entity\Article
     {
         $this->slug = $slug;
 
@@ -311,7 +311,7 @@ class Article
      *
      * @return $this
      */
-    public function setCreatedAt(\DateTimeImmutable $createdAt): self
+    public function setCreatedAt(\DateTimeImmutable $createdAt): static
     {
         $this->createdAt = $createdAt;
 
@@ -331,7 +331,7 @@ class Article
      *
      * @return $this
      */
-    public function setUpdatedAt(\DateTimeImmutable $updatedAt): self
+    public function setUpdatedAt(\DateTimeImmutable $updatedAt): static
     {
         $this->updatedAt = $updatedAt;
 
@@ -351,7 +351,7 @@ class Article
      *
      * @return $this
      */
-    public function setUser(?User $user): self
+    public function setUser(?User $user): static
     {
         $this->user = $user;
 
@@ -371,7 +371,7 @@ class Article
      *
      * @return $this
      */
-    public function addCategory(Categorie $category): self
+    public function addCategory(Categorie $category): static
     {
         if (!$this->categories->contains($category)) {
             $this->categories[] = $category;
@@ -386,7 +386,7 @@ class Article
      *
      * @return $this
      */
-    public function removeCategory(Categorie $category): self
+    public function removeCategory(Categorie $category): static
     {
         if ($this->categories->removeElement($category)) {
             $category->removeArticle($this);
@@ -408,7 +408,7 @@ class Article
      *
      * @return $this
      */
-    public function addComment(Comments $comment): self
+    public function addComment(Comments $comment): static
     {
         if (!$this->comments->contains($comment)) {
             $this->comments[] = $comment;
@@ -423,7 +423,7 @@ class Article
      *
      * @return $this
      */
-    public function removeComment(Comments $comment): self
+    public function removeComment(Comments $comment): static
     {
         if ($this->comments->removeElement($comment)) {
             // set the owning side to null (unless already changed)
@@ -448,7 +448,7 @@ class Article
      *
      * @return $this
      */
-    public function addArticleImage(ArticleImage $articleImage): self
+    public function addArticleImage(ArticleImage $articleImage): static
     {
         if (!$this->articleImages->contains($articleImage)) {
             $this->articleImages[] = $articleImage;
@@ -463,7 +463,7 @@ class Article
      *
      * @return $this
      */
-    public function removeArticleImage(ArticleImage $articleImage): self
+    public function removeArticleImage(ArticleImage $articleImage): static
     {
         if ($this->articleImages->removeElement($articleImage)) {
             // set the owning side to null (unless already changed)
@@ -488,7 +488,7 @@ class Article
      *
      * @return $this
      */
-    public function setActive(bool $active): self
+    public function setActive(bool $active): static
     {
         $this->active = $active;
 

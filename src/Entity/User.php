@@ -244,7 +244,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      *
      * @return $this
      */
-    public function setEmail(string $email): self
+    public function setEmail(string $email): static
     {
         $this->email = $email;
 
@@ -281,7 +281,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      *
      * @return self
      */
-    public function setRoles(array $roles): self
+    public function setRoles(array $roles): \App\Entity\User
     {
         $this->roles = $roles;
 
@@ -301,7 +301,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      *
      * @return $this
      */
-    public function setPassword(?string $password): self
+    public function setPassword(?string $password): static
     {
         $this->password = $password;
 
@@ -330,7 +330,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      *
      * @return $this
      */
-    public function setPrenom(string $prenom): self
+    public function setPrenom(string $prenom): static
     {
         $this->prenom = $prenom;
 
@@ -350,7 +350,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      *
      * @return $this
      */
-    public function setNom(string $nom): self
+    public function setNom(string $nom): static
     {
         $this->nom = $nom;
 
@@ -370,7 +370,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      *
      * @return $this
      */
-    public function setAddress(string $address): self
+    public function setAddress(string $address): static
     {
         $this->address = $address;
 
@@ -390,7 +390,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      *
      * @return $this
      */
-    public function setZipCode(string $zipCode): self
+    public function setZipCode(string $zipCode): static
     {
         $this->zipCode = $zipCode;
 
@@ -410,7 +410,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      *
      * @return $this
      */
-    public function setVille(string $ville): self
+    public function setVille(string $ville): static
     {
         $this->ville = $ville;
 
@@ -430,7 +430,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      *
      * @return $this
      */
-    public function addArticle(Article $article): self
+    public function addArticle(Article $article): static
     {
         if (!$this->articles->contains($article)) {
             $this->articles[] = $article;
@@ -445,7 +445,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      *
      * @return $this
      */
-    public function removeArticle(Article $article): self
+    public function removeArticle(Article $article): static
     {
         if ($this->articles->removeElement($article)) {
             // set the owning side to null (unless already changed)
@@ -528,7 +528,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      *
      * @return $this
      */
-    public function addComment(Comments $comment): self
+    public function addComment(Comments $comment): static
     {
         if (!$this->comments->contains($comment)) {
             $this->comments[] = $comment;
@@ -543,7 +543,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      *
      * @return $this
      */
-    public function removeComment(Comments $comment): self
+    public function removeComment(Comments $comment): static
     {
         if ($this->comments->removeElement($comment)) {
             // set the owning side to null (unless already changed)
@@ -572,7 +572,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      *
      * @return self
      */
-    public function setImageUpdatedAt(?\DateTimeInterface $imageUpdatedAt): self
+    public function setImageUpdatedAt(?\DateTimeInterface $imageUpdatedAt): \App\Entity\User
     {
         $this->imageUpdatedAt = $imageUpdatedAt;
 

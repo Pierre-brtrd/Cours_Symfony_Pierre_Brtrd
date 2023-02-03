@@ -140,7 +140,7 @@ class ArticleImage
      *
      * @return $this
      */
-    public function setArticle(?Article $article): self
+    public function setArticle(?Article $article): static
     {
         $this->article = $article;
 
@@ -160,7 +160,7 @@ class ArticleImage
      *
      * @return $this
      */
-    public function setImageName(?string $imageName): self
+    public function setImageName(?string $imageName): static
     {
         $this->imageName = $imageName;
 
@@ -180,7 +180,7 @@ class ArticleImage
      *
      * @return $this
      */
-    public function setImageSize(?int $imageSize): self
+    public function setImageSize(?int $imageSize): static
     {
         $this->imageSize = $imageSize;
 
@@ -200,7 +200,7 @@ class ArticleImage
      *
      * @return $this
      */
-    public function setUpdatedAt(\DateTimeImmutable $updatedAt): self
+    public function setUpdatedAt(\DateTimeImmutable $updatedAt): static
     {
         $this->updatedAt = $updatedAt;
 

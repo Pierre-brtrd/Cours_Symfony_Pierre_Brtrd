@@ -229,7 +229,7 @@ class Comments
      *
      * @return $this
      */
-    public function setTitre(string $titre): self
+    public function setTitre(string $titre): static
     {
         $this->titre = $titre;
 
@@ -249,7 +249,7 @@ class Comments
      *
      * @return $this
      */
-    public function setContent(string $content): self
+    public function setContent(string $content): static
     {
         $this->content = $content;
 
@@ -269,7 +269,7 @@ class Comments
      *
      * @return $this
      */
-    public function setCreatedAt(\DateTimeImmutable $createdAt): self
+    public function setCreatedAt(\DateTimeImmutable $createdAt): static
     {
         $this->createdAt = $createdAt;
 
@@ -289,7 +289,7 @@ class Comments
      *
      * @return $this
      */
-    public function setUpdatedAt(\DateTimeImmutable $updatedAt): self
+    public function setUpdatedAt(\DateTimeImmutable $updatedAt): static
     {
         $this->updatedAt = $updatedAt;
 
@@ -309,7 +309,7 @@ class Comments
      *
      * @return $this
      */
-    public function setNote(int $note): self
+    public function setNote(int $note): static
     {
         $this->note = $note;
 
@@ -329,7 +329,7 @@ class Comments
      *
      * @return $this
      */
-    public function setActive(bool $active): self
+    public function setActive(bool $active): static
     {
         $this->active = $active;
 
@@ -349,7 +349,7 @@ class Comments
      *
      * @return $this
      */
-    public function setRgpd(bool $rgpd): self
+    public function setRgpd(bool $rgpd): static
     {
         $this->rgpd = $rgpd;
 
@@ -369,7 +369,7 @@ class Comments
      *
      * @return $this
      */
-    public function setUser(User|UserInterface|null $user): self
+    public function setUser(User|UserInterface|null $user): static
     {
         $this->user = $user;
 
@@ -389,7 +389,7 @@ class Comments
      *
      * @return $this
      */
-    public function setArticle(?Article $article): self
+    public function setArticle(?Article $article): static
     {
         $this->article = $article;
 
