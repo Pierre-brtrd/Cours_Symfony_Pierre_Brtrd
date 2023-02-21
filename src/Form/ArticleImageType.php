@@ -5,8 +5,8 @@ namespace App\Form;
 use App\Entity\ArticleImage;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 use Vich\UploaderBundle\Form\Type\VichImageType;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ArticleImageType extends AbstractType
 {
@@ -18,6 +18,9 @@ class ArticleImageType extends AbstractType
             'image_uri' => true,
             'asset_helper' => true,
             'label' => 'form.article.fields.image.single',
+            'attr' => [
+                'class' => 'file-upload',
+            ]
         ]);
     }
 

@@ -1,6 +1,15 @@
+{% form_theme form with ['Form/custom_theme.html.twig'] %}
+
 {{ form_start(form, {'attr': {'class': 'form-article'}}) }}
 
-{{ form_row(form.titre) }}
+<div class="row align-items-center">
+	<div class="col-md-6">
+		{{ form_row(form.titre) }}
+	</div>
+	<div class="col-md-6">
+		{{ form_widget(form.active)}}
+	</div>
+</div>
 {{ form_row(form.categories) }}
 <div class="row mb-4">
 	<div class="col-md-12">
@@ -26,9 +35,6 @@
 	</div>
 	<div id="word-count"></div>
 	{{ form_row(form.content) }}
-</div>
-<div class="mb-3">
-	{{ form_widget(form.active)}}
 </div>
 <div class="mt-4 text-center">
 	<button type="submit" class="btn btn-primary">{{ button_label|default('Enregistrer') }}</button>
