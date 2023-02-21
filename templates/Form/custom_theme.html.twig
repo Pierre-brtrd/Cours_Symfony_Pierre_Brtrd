@@ -1,0 +1,6 @@
+{% block _article_active_widget %}
+	<div class="form-check form-switch">
+		<input class="form-check-input" type="checkbox" id="{{ form.vars.id }}" name="{{ form.vars.full_name }}" {{ form.vars.checked ? 'checked' }}>
+		<label class="form-check-label" for="{{ form.vars.full_name }}">{{ form.vars.label|trans(domain = 'forms') }}</label>
+	</div>
+{% endblock %}
