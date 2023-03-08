@@ -251,7 +251,7 @@ class Article
      *
      * @return self
      */
-    public function setTitre(string $titre): \App\Entity\Article
+    public function setTitre(string $titre): self
     {
         $this->titre = $titre;
 
@@ -271,7 +271,7 @@ class Article
      *
      * @return self
      */
-    public function setContent(string $content): \App\Entity\Article
+    public function setContent(string $content): self
     {
         $this->content = $content;
 
@@ -291,7 +291,7 @@ class Article
      *
      * @return self
      */
-    public function setSlug(?string $slug): \App\Entity\Article
+    public function setSlug(?string $slug): self
     {
         $this->slug = $slug;
 

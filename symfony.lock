@@ -61,7 +61,7 @@
         ]
     },
     "friendsofphp/php-cs-fixer": {
-        "version": "3.13",
+        "version": "3.14",
         "recipe": {
             "repo": "github.com/symfony/recipes",
             "branch": "main",
@@ -273,12 +273,12 @@
         }
     },
     "symfony/messenger": {
-        "version": "6.1",
+        "version": "6.2",
         "recipe": {
             "repo": "github.com/symfony/recipes",
             "branch": "main",
             "version": "6.0",
-            "ref": "2523f7d31488903e247a522e760dc279be7f7aaf"
+            "ref": "ba1ac4e919baba5644d31b57a3284d6ba12d52ee"
         },
         "files": [
             "config/packages/messenger.yaml"
@@ -441,7 +441,7 @@
             "repo": "github.com/symfony/recipes",
             "branch": "main",
             "version": "1.0",
-            "ref": "2fb3513dbc139884fc5b7c751242b66f9f10f0c3"
+            "ref": "aece95c8a188f6e6d04f01ccb8678d1764fd2642"
         },
         "files": [
             "config/packages/messenger.yaml"

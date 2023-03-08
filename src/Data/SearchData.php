@@ -58,7 +58,7 @@ class SearchData
      *
      * @return SearchData
      */
-    public function setQuery(?string $query): SearchData
+    public function setQuery(?string $query): self
     {
         $this->query = $query;
 
@@ -104,7 +104,7 @@ class SearchData
      *
      * @return SearchData
      */
-    public function setPage(?int $page): SearchData
+    public function setPage(?int $page): self
     {
         $this->page = $page;
 

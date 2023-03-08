@@ -281,7 +281,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      *
      * @return self
      */
-    public function setRoles(array $roles): \App\Entity\User
+    public function setRoles(array $roles): self
     {
         $this->roles = $roles;
 
@@ -572,7 +572,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      *
      * @return self
      */
-    public function setImageUpdatedAt(?\DateTimeInterface $imageUpdatedAt): \App\Entity\User
+    public function setImageUpdatedAt(?\DateTimeInterface $imageUpdatedAt): self
     {
         $this->imageUpdatedAt = $imageUpdatedAt;
 
