@@ -78,7 +78,7 @@ class ArticleController extends AbstractController
             ]);
         }
 
-        return $this->renderForm('Backend/Article/index.html.twig', [
+        return $this->render('Backend/Article/index.html.twig', [
             'articles' => $articles,
             'form' => $form,
         ]);

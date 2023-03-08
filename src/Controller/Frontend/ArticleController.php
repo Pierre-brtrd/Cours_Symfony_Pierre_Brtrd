@@ -66,7 +66,7 @@ class ArticleController extends AbstractController
             ]);
         }
 
-        return $this->renderForm('Frontend/Article/index.html.twig', [
+        return $this->render('Frontend/Article/index.html.twig', [
             'articles' => $articles,
             'form' => $form,
             'curentPage' => 'articles',
@@ -116,7 +116,7 @@ class ArticleController extends AbstractController
             ], 301);
         }
 
-        return $this->renderForm('Frontend/Article/show.html.twig', [
+        return $this->render('Frontend/Article/show.html.twig', [
             'article' => $article,
             'form' => $form,
             'comments' => $comments,

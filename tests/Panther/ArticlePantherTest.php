@@ -3,8 +3,8 @@
 namespace App\Tests\Panther;
 
 use Facebook\WebDriver\WebDriverBy;
-use Symfony\Component\Panther\PantherTestCase;
 use Liip\TestFixturesBundle\Services\DatabaseToolCollection;
+use Symfony\Component\Panther\PantherTestCase;
 
 class ArticlePantherTest extends PantherTestCase
 {
@@ -18,9 +18,9 @@ class ArticlePantherTest extends PantherTestCase
 
         $this->databaseTool = self::getContainer()->get(DatabaseToolCollection::class)->get();
         $this->databaseTool->loadAliceFixture([
-            \dirname(__DIR__) . '/Fixtures/UserTestFixtures.yaml',
-            \dirname(__DIR__) . '/Fixtures/ArticleTestFixtures.yaml',
-            \dirname(__DIR__) . '/Fixtures/TagTestFixtures.yaml',
+            \dirname(__DIR__).'/Fixtures/UserTestFixtures.yaml',
+            \dirname(__DIR__).'/Fixtures/ArticleTestFixtures.yaml',
+            \dirname(__DIR__).'/Fixtures/TagTestFixtures.yaml',
         ]);
     }
 
