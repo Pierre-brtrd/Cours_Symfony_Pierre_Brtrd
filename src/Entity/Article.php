@@ -123,19 +123,22 @@ use Symfony\Component\Validator\Constraints as Assert;
     'categories.titre' => 'partial',
 ])]
 #[ApiFilter(filterClass: BooleanFilter::class, properties: ['active'])]
-#[ApiResource(
-    uriTemplate: '/categories/{id}/articles',
-    operations: [new GetCollection()],
-    uriVariables: [
-        'id' => new Link(
-            fromClass: Categorie::class, identifiers: ['id']
-        ),
-    ],
-    status: 200,
-    filters: [
-        'annotated_app_entity_article_api_platform_core_bridge_doctrine_orm_filter_search_filter',
-        'annotated_app_entity_article_api_platform_core_bridge_doctrine_orm_filter_boolean_filter',
-    ])
+#[
+    ApiResource(
+        uriTemplate: '/categories/{id}/articles',
+        operations: [new GetCollection()],
+        uriVariables: [
+            'id' => new Link(
+                fromClass: Categorie::class,
+                identifiers: ['id']
+            ),
+        ],
+        status: 200,
+        filters: [
+            'annotated_app_entity_article_api_platform_core_bridge_doctrine_orm_filter_search_filter',
+            'annotated_app_entity_article_api_platform_core_bridge_doctrine_orm_filter_boolean_filter',
+        ]
+    )
 ]
 class Article
 {

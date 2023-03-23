@@ -1,5 +1,5 @@
-import {Flipper, spring} from "flip-toolkit";
-import {debounce} from "lodash";
+import { Flipper, spring } from "flip-toolkit";
+import { debounce } from "lodash";
 import visibilityArticle from "./visibilityArticle";
 
 /**
@@ -68,9 +68,27 @@ export default class Filter {
     this.form.querySelectorAll('input[type="checkbox"]').forEach(input => {
       input.addEventListener('change', debounce(this.loadForm.bind(this), 300));
     });
+
     this.form.querySelector('input[type="text"]')
       .addEventListener('keyup', debounce(this.loadForm.bind(this), 500));
+
+    this.form.querySelector('#btn-reset-filter').addEventListener('click', this.resetForm.bind(this));
   };
+
+  async resetForm() {
+    /* On récupère l'url de destination pour construire l'url en ajoutant les paramètres par la suite */
+    const url = new URL(this.form.getAttribute('action') || window.location.href);
+
+    this.form.querySelectorAll('input').forEach(input => {
+      if (input.type == "checkbox") {
+        input.checked = false;
+      } else {
+        input.value = "";
+      }
+    });
+
+    return this.loadUrl(url.pathname.split('?')[0]);
+  }
 
   /**
    * Load more content on the page
@@ -156,7 +174,7 @@ export default class Filter {
           translateY: [0, -20],
           opacity: [1, 0]
         },
-        onUpdate: ({translateY, opacity}) => {
+        onUpdate: ({ translateY, opacity }) => {
           element.style.opacity = opacity;
           element.style.transform = `translateY(${translateY}px)`;
         },
@@ -171,7 +189,7 @@ export default class Filter {
           translateY: [20, 0],
           opacity: [0, 1]
         },
-        onUpdate: ({translateY, opacity}) => {
+        onUpdate: ({ translateY, opacity }) => {
           element.style.opacity = opacity;
           element.style.transform = `translateY(${translateY}px)`;
         },
