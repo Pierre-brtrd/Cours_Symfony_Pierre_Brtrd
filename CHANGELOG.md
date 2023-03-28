@@ -1,3 +1,12 @@
+## [2.7.2](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/compare/v2.7.1...v2.7.2) (2023-03-28)
+
+
+### Bug Fixes
+
+* **redirect:** update redirect link ([45b6d99](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/commit/45b6d994633b39744a5432968bfdd6c58888fb17))
+
+
+
 ## [2.7.1](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/compare/v2.7.0...v2.7.1) (2023-03-28)
 
 
@@ -91,18 +100,6 @@
 ### Features
 
 * **fixtures:** add setup fixtures image ([f0d5f94](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/commit/f0d5f94bb34283941771ae8b8862e936a4ff7dc7))
-
-
-
-## [2.5.1](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/compare/v2.5.0...v2.5.1) (2022-10-11)
-
-
-### Bug Fixes
-
-* add doctrine migration recipe ([5bc7c2a](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/commit/5bc7c2ac78dbf05ee5cdac2fab685d00b6d5ea39))
-* **api:** update api-plateform v3 ([90480ee](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/commit/90480ee24a4a4c03b39e420761b41a258eff040e))
-* **images:** update images with picsum ([95bd9c6](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/commit/95bd9c6fc5e44484dbb0d608e612cc0b93521d9c))
-* update doctrine recipe ([64871d3](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/commit/64871d35a61fc14cacfa6ca5076bd67f2551ebc0))
 
 
 
