@@ -1,3 +1,13 @@
+## [2.7.1](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/compare/v2.7.0...v2.7.1) (2023-03-28)
+
+
+### Bug Fixes
+
+* **article:** fix search in ajax reset bouton ([b83324b](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/commit/b83324bafec5b99f7983fec50f40396f4b09c56d))
+* **htaccess:** update redirect www and https ([7d579d4](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/commit/7d579d4fd62ad03fccc1d38f104253b6fedebfb5))
+
+
+
 # [2.7.0](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/compare/v2.6.6...v2.7.0) (2023-02-03)
 
 
@@ -93,23 +103,6 @@
 * **api:** update api-plateform v3 ([90480ee](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/commit/90480ee24a4a4c03b39e420761b41a258eff040e))
 * **images:** update images with picsum ([95bd9c6](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/commit/95bd9c6fc5e44484dbb0d608e612cc0b93521d9c))
 * update doctrine recipe ([64871d3](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/commit/64871d35a61fc14cacfa6ca5076bd67f2551ebc0))
-
-
-
-# [2.5.0](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/compare/v2.4.2...v2.5.0) (2022-09-26)
-
-
-### Bug Fixes
-
-* **comments:** update routing and query for comments ([4420f1e](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/commit/4420f1e5b7f7a4cce39d58b89aeb426702b522e1))
-* **phpcs:** review phpcs code ([72ae1e5](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/commit/72ae1e52506639f29337f2f1202cb026e53bcfc9))
-
-
-### Features
-
-* add bootstrap icons lib ([75c405c](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/commit/75c405cf4f288d6332eb72b93484ce906bacb978))
-* add ux-components for entity type ([01dfc87](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/commit/01dfc874fea7e76a5ad217d06bd229ba9c53cf32))
-* **search:** add search for user article list ([c9d9f14](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/commit/c9d9f145c164ee3ebc08be43c420538073ca2b46))
 
 
 
