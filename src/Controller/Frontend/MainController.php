@@ -4,11 +4,11 @@ namespace App\Controller\Frontend;
 
 use App\Repository\ArticleRepository;
 use Psr\Cache\InvalidArgumentException;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Contracts\Cache\ItemInterface;
+use Symfony\Contracts\Cache\CacheInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Contracts\Cache\CacheInterface;
-use Symfony\Contracts\Cache\ItemInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class MainController extends AbstractController
 {
@@ -23,7 +23,7 @@ class MainController extends AbstractController
         $articles = $cache->get('home_articles_list', function (ItemInterface $item) use ($repository) {
             $item->expiresAfter(1000);
 
-            return $repository->findLatestArticleWithLimit(6);
+            return $repository->findLatestArticleWithLimit(3);
         });
 
         $response = $this->render('Frontend/Home/index.html.twig', [

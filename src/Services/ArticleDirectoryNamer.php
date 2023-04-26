@@ -28,8 +28,10 @@ class ArticleDirectoryNamer implements DirectoryNamerInterface
             }
         }*/
 
-        if ($object->getArticle()->getId()) {
-            return $object->getArticle()->getSlug();
+        if ($object->getArticle()) {
+            if ($object->getArticle()->getId()) {
+                return $object->getArticle()->getSlug();
+            }
         }
 
         return self::slugify($object->getArticle()->getTitre());
@@ -41,7 +43,7 @@ class ArticleDirectoryNamer implements DirectoryNamerInterface
      * @return string
      */
     private static function slugify(string $text): string
-    {// replace non letter or digits by divider
+    { // replace non letter or digits by divider
         $text = preg_replace('~[^\pL\d]+~u', '-', $text);
 
         // transliterate

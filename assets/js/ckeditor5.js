@@ -24,11 +24,11 @@ import Table from '@ckeditor/ckeditor5-table/src/table';
 import TableToolbar from '@ckeditor/ckeditor5-table/src/tabletoolbar';
 //import CKEditorInspector from '@ckeditor/ckeditor5-inspector';
 
-let form = document.querySelector('.form-article');
+const form = document.querySelector('.form-article');
 
 if (form) {
-    let editorInput = document.querySelector('#editor');
-    let placeholder = editor.dataset.placeholder;
+    const editorInput = document.querySelector('#editor');
+    const placeholder = editor.dataset.placeholder;
 
     ClassicEditor
         .create(editorInput, {

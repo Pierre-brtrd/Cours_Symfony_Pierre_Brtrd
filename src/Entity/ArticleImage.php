@@ -2,19 +2,19 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\Post;
+use ApiPlatform\Metadata\Delete;
+use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Metadata\ApiProperty;
 use ApiPlatform\Metadata\ApiResource;
-use ApiPlatform\Metadata\Delete;
-use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
-use ApiPlatform\Metadata\Post;
-use App\Api\Controller\Images\CreateImageController;
 use App\Repository\ArticleImageRepository;
-use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Serializer\Annotation\Groups;
-use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use App\Api\Controller\Images\CreateImageController;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ApiResource(
     types: ['https://schema.org/MediaObject'],
@@ -160,7 +160,7 @@ class ArticleImage
      *
      * @return $this
      */
-    public function setImageName(?string $imageName): static
+    public function setImageName(?string $imageName): self
     {
         $this->imageName = $imageName;
 
