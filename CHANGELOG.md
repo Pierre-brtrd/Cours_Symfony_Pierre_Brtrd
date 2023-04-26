@@ -1,3 +1,12 @@
+## [2.7.4](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/compare/v2.7.3...v2.7.4) (2023-04-26)
+
+
+### Bug Fixes
+
+* **ux-autocomplete:** update yarn link dependencies ([761cb61](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/commit/761cb6130418eef27d5e84bf48b0e2fe5d0b7d34))
+
+
+
 ## [2.7.3](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/compare/v2.7.2...v2.7.3) (2023-04-26)
 
 
@@ -85,15 +94,6 @@
 ### Bug Fixes
 
 * **tag:** fix create tag with default enable ([68a9207](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/commit/68a920797e93ee697abc11336de744bc61851331))
-
-
-
-## [2.6.1](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/compare/v2.6.0...v2.6.1) (2022-10-20)
-
-
-### Bug Fixes
-
-* **fixtures:** update link file for fixtures ([151b86c](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/commit/151b86c5704a10c563de7625a1c6148feed3c9d9))
 
 
 
