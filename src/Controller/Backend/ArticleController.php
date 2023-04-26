@@ -2,20 +2,20 @@
 
 namespace App\Controller\Backend;
 
-use App\Entity\Article;
 use App\Data\SearchData;
+use App\Entity\Article;
 use App\Entity\Comments;
-use App\Form\SearchForm;
 use App\Form\ArticleType;
+use App\Form\SearchForm;
 use App\Repository\ArticleRepository;
 use App\Repository\CommentsRepository;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\Security;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Security;
 
 /**
  * Article controller backend class.
@@ -180,7 +180,7 @@ class ArticleController extends AbstractController
         /** @var string|null $token */
         $token = $request->get('_token');
 
-        if ($this->isCsrfTokenValid('delete' . $article->getId(), $token)) {
+        if ($this->isCsrfTokenValid('delete'.$article->getId(), $token)) {
             $this->repoArticle->remove($article, true);
             $this->addFlash('success', 'Article supprimé avec succès');
 
@@ -257,7 +257,7 @@ class ArticleController extends AbstractController
     {
         /** @var string|null $token */
         $token = $request->get('_token');
-        if ($this->isCsrfTokenValid('delete' . $comment->getId(), $token)) {
+        if ($this->isCsrfTokenValid('delete'.$comment->getId(), $token)) {
             $this->repoComments->remove($comment, true);
             $this->addFlash('success', 'Commentaire supprimé avec succès');
 

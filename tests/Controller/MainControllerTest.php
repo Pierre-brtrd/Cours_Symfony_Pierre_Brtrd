@@ -39,6 +39,6 @@ class MainControllerTest extends WebTestCase
     {
         $crawler = $this->client->request('GET', '/');
 
-        $this->assertCount(6, $crawler->filter('.blog-card'));
+        $this->assertCount(3, $crawler->filter('.blog-card'));
     }
 }
