@@ -52,7 +52,7 @@
     "symfony/string": "6.2.*",
     "symfony/translation": "6.2.*",
     "symfony/twig-bundle": "6.2.*",
-    "symfony/ux-autocomplete": "^2.4",
+    "symfony/ux-autocomplete": "^2.7",
     "symfony/ux-dropzone": "^2.4",
     "symfony/ux-lazy-image": "^2.4",
     "symfony/validator": "6.2.*",
