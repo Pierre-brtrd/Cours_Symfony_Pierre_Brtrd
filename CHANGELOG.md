@@ -1,3 +1,12 @@
+## [2.7.3](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/compare/v2.7.2...v2.7.3) (2023-04-26)
+
+
+### Bug Fixes
+
+* **sidebar:** update sidebar article page design ([564b61f](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/commit/564b61f628a7a6e45230319c10fa9d08d1200d75))
+
+
+
 ## [2.7.2](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/compare/v2.7.1...v2.7.2) (2023-03-28)
 
 
@@ -85,21 +94,6 @@
 ### Bug Fixes
 
 * **fixtures:** update link file for fixtures ([151b86c](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/commit/151b86c5704a10c563de7625a1c6148feed3c9d9))
-
-
-
-# [2.6.0](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/compare/v2.5.1...v2.6.0) (2022-10-20)
-
-
-### Bug Fixes
-
-* **ci:** update database url env variable ([5a1e6c4](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/commit/5a1e6c4a1da8e37165d38e7fa3bbd91a795d74ee))
-* **fixtures:** add image fixtures config ([73d69f7](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/commit/73d69f7aac68e1bc3aa702cc446112cf93997d90))
-
-
-### Features
-
-* **fixtures:** add setup fixtures image ([f0d5f94](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/commit/f0d5f94bb34283941771ae8b8862e936a4ff7dc7))
 
 
 
