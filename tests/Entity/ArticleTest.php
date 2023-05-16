@@ -3,12 +3,12 @@
 namespace App\Tests\Entity;
 
 use App\Entity\Article;
-use App\Repository\ArticleRepository;
-use App\Repository\CategorieRepository;
 use App\Repository\UserRepository;
 use App\Tests\Utils\AssertTestTrait;
-use Liip\TestFixturesBundle\Services\DatabaseToolCollection;
+use App\Repository\ArticleRepository;
+use App\Repository\CategorieRepository;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Liip\TestFixturesBundle\Services\DatabaseToolCollection;
 
 class ArticleTest extends KernelTestCase
 {
@@ -27,9 +27,9 @@ class ArticleTest extends KernelTestCase
     {
         $articles = $this->databaseTool->loadAliceFixture(
             [
-                \dirname(__DIR__).'/Fixtures/UserTestFixtures.yaml',
-                \dirname(__DIR__).'/Fixtures/ArticleTestFixtures.yaml',
-                \dirname(__DIR__).'/Fixtures/TagTestFixtures.yaml',
+                \dirname(__DIR__) . '/Fixtures/UserTestFixtures.yaml',
+                \dirname(__DIR__) . '/Fixtures/ArticleTestFixtures.yaml',
+                \dirname(__DIR__) . '/Fixtures/TagTestFixtures.yaml',
             ]
         );
 
