@@ -9,7 +9,7 @@ jobs:
   symfony:
     name: Symfony 6 (PHP ${{ matrix.php-versions }})
     # https://hub.docker.com/_/ubuntu/
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     services:
       # https://docs.docker.com/samples/library/mysql/
       mysql:
