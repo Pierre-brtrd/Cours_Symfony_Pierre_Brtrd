@@ -14,20 +14,34 @@ form:
       register: S'inscrire
       login: Se connecter
     fields:
-      firstname: "Prénom:"
-      lastname: "Nom:"
-      email: "Email:"
-      address: "Adresse:"
-      zipcode: "Code postal:"
+      firstname:
+        label: "Prénom:"
+        placeholder: "John"
+      lastname:
+        label: "Nom:"
+        placeholder: "Doe"
+      email:
+        label: "Email:"
+        placeholder: "john@exemple.com"
+      address:
+        label: "Adresse:"
+        placeholder: "12 rue de paradis"
+      zipcode:
+        label: "Code postal:"
+        placeholder: "75000"
       image: "Image:"
       choices.user: Utilisateur
       choices.editor: Éditeur
       choices.admin: Administrateur
       roles: "Rôles:"
-      city: "Ville:"
+      city:
+        label: "Ville:"
+        placeholder: "Paris"
       password:
+        placeholder: "S3CR3T"
         main: "Mot de passe:"
         repeat: Répétez le mot de passe
+        regex: "Votre mot de passe doit contenir au moins 1 nombre, 1 lettre en minuscule, 1 lettre en majuscule et un caractère spécial"
 
   tag:
     title:

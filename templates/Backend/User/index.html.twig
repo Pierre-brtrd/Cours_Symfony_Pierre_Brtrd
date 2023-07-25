@@ -18,23 +18,25 @@
 {% block body %}
 	<section class="container mt-4">
 		<h1 class="text-center">{{ 'user.admin.index.heading1'|trans(domain = 'content') }}</h1>
-		<table class="table mt-4">
+		<table class="table table-light table-striped mt-4">
 			<thead>
 				<tr>
-					<th>Id</th>
-					<th>Email</th>
-					<th>Prenom</th>
-					<th>Nom</th>
-					<th>Address</th>
-					<th>ZipCode</th>
-					<th>Ville</th>
-					<th>actions</th>
+					<th scope="col">Id</th>
+					<th scope="col">Email</th>
+					<th scope="col">Prenom</th>
+					<th scope="col">Nom</th>
+					<th scope="col">roles</th>
+					<th scope="col">Address</th>
+					<th scope="col">ZipCode</th>
+					<th scope="col">Ville</th>
+					<th scope="col">Vérifié</th>
+					<th scope="col">actions</th>
 				</tr>
 			</thead>
 			<tbody>
 				{% for user in users %}
 					<tr>
-						<td>{{ user.id }}</td>
+						<td scope="row">{{ user.id }}</td>
 						<td>{{ user.email }}</td>
 						<td>{{ user.roles ? user.roles|json_encode : '' }}</td>
 						<td>{{ user.prenom }}</td>
@@ -42,6 +44,9 @@
 						<td>{{ user.address }}</td>
 						<td>{{ user.zipCode }}</td>
 						<td>{{ user.ville }}</td>
+						<td>
+							<span class="badge {{ user.isVerified ? 'bg-success' : 'bg-danger' }}">{{ user.isVerified ? 'vérifié' : 'non vérifié' }}</span>
+						</td>
 						<td>
 							<div class="row">
 								<div class="col-md-6">

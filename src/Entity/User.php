@@ -128,6 +128,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Comments::class, orphanRemoval: true)]
     private Collection|ArrayCollection $comments;
 
+    #[ORM\Column(type: 'boolean')]
+    private $isVerified = false;
+
     public function __construct()
     {
         $this->articles = new ArrayCollection();
@@ -575,6 +578,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setImageUpdatedAt(?\DateTimeInterface $imageUpdatedAt): self
     {
         $this->imageUpdatedAt = $imageUpdatedAt;
+
+        return $this;
+    }
+
+    public function isVerified(): bool
+    {
+        return $this->isVerified;
+    }
+
+    public function setIsVerified(bool $isVerified): static
+    {
+        $this->isVerified = $isVerified;
 
         return $this;
     }
