@@ -1,3 +1,12 @@
+## [2.8.1](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/compare/v2.8.0...v2.8.1) (2023-07-25)
+
+
+### Bug Fixes
+
+* **mailer:** update mailer dsn and fix test ([7c78d23](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/commit/7c78d23f97c4097d87f598e3d034bd5241f7c46d))
+
+
+
 # [2.8.0](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/compare/v2.7.4...v2.8.0) (2023-07-25)
 
 
@@ -92,15 +101,6 @@
 ### Bug Fixes
 
 * **db:** update db link serveur ([b4c6c65](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/commit/b4c6c655d625b8e6d1084b4bc75a9cc8d83cc5d7))
-
-
-
-## [2.6.3](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/compare/v2.6.2...v2.6.3) (2022-10-20)
-
-
-### Bug Fixes
-
-* **tag:** update controller for tag visibility ([cecafd1](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/commit/cecafd120883bdb11d0c535e7347170ff7838cca))
 
 
 
