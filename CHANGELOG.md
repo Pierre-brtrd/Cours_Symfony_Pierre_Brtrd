@@ -1,3 +1,12 @@
+## [2.8.2](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/compare/v2.8.1...v2.8.2) (2023-07-25)
+
+
+### Bug Fixes
+
+* **db:** update database link [SKIP CI] ([240b419](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/commit/240b41983c4dc484d8bc873f3fde4b40528781bd))
+
+
+
 ## [2.8.1](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/compare/v2.8.0...v2.8.1) (2023-07-25)
 
 
@@ -92,15 +101,6 @@
 ### Bug Fixes
 
 * **variable:** update typo for variable front ([9cd1e02](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/commit/9cd1e020f65abc9659bb8753cfbf75330e877d63))
-
-
-
-## [2.6.4](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/compare/v2.6.3...v2.6.4) (2022-12-12)
-
-
-### Bug Fixes
-
-* **db:** update db link serveur ([b4c6c65](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/commit/b4c6c655d625b8e6d1084b4bc75a9cc8d83cc5d7))
 
 
 
