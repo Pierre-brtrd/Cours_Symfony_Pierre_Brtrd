@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Entity\ArticleImage;
 use Vich\UploaderBundle\Mapping\PropertyMapping;
+use Symfony\Component\HttpKernel\KernelInterface;
 use Vich\UploaderBundle\Naming\DirectoryNamerInterface;
 
 class ArticleDirectoryNamer implements DirectoryNamerInterface
@@ -17,17 +18,6 @@ class ArticleDirectoryNamer implements DirectoryNamerInterface
      */
     public function directoryName($object, PropertyMapping $mapping): string
     {
-        /*if ( ! $object->getArticle()) {
-            dd($mapping, $object);
-
-            $dir = $mapping->getUploadDir($object);
-            $srcFile = $dir.'/'.$object->getImageName();
-
-            if (file_exists($srcFile)) {
-                unlink($srcFile);
-            }
-        }*/
-
         if ($object->getArticle()) {
             if ($object->getArticle()->getId()) {
                 return $object->getArticle()->getSlug();
@@ -61,11 +51,6 @@ class ArticleDirectoryNamer implements DirectoryNamerInterface
         // lowercase
         $text = mb_strtolower($text);
 
-        if (empty($text)) {
-            return 'n-a';
-        }
-
-        /* @var string $text */
-        return $text;
+        return $text ?: 'default-img';
     }
 }
