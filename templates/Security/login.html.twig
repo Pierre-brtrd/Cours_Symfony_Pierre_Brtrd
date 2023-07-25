@@ -14,11 +14,15 @@
 					{{ error.messageKey|trans(error.messageData, 'security') }}
 				</div>
 			{% endif %}
-			<label for="username" class="form-label">{{ 'form.user.fields.email.label'|trans(domain = 'forms') }}</label>
-			<input type="text" id="username" class="form-control" name="_username" placeholder="{{ 'form.user.fields.email.placeholder'|trans(domain = 'forms') }}" value="{{ lastUsername }}"/>
+			<div class="mb-3">
+				<label for="username" class="form-label">{{ 'form.user.fields.email.label'|trans(domain = 'forms') }}</label>
+				<input type="text" id="username" class="form-control" name="_username" placeholder="{{ 'form.user.fields.email.placeholder'|trans(domain = 'forms') }}" value="{{ lastUsername }}"/>
+			</div>
 
-			<label for="password" class="form-label">{{ 'form.user.fields.password.main'|trans(domain = 'forms') }}</label>
-			<input type="password" id="password" class="form-control" placeholder="{{ 'form.user.fields.password.placeholder'|trans(domain = 'forms') }}" name="_password"/>
+			<div class="mb-3">
+				<label for="password" class="form-label">{{ 'form.user.fields.password.main'|trans(domain = 'forms') }}</label>
+				<input type="password" id="password" class="form-control" placeholder="{{ 'form.user.fields.password.placeholder'|trans(domain = 'forms') }}" name="_password"/>
+			</div>
 
 			<div class="d-grid gap-2 d-md-block mt-4 text-center">
 				<button type="submit" class="btn btn-primary">{{ 'main.btn.login'|trans(domain = 'content') }}</button>

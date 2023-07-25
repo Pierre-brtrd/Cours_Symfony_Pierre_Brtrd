@@ -82,3 +82,16 @@ pre {
   width: 100%;
   border-radius: $border-radius;
 }
+
+.parent-password {
+  position: relative;
+}
+
+.icon-password {
+  position: absolute;
+  top: 50%;
+  right: 1%;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  color: $primary;
+}
