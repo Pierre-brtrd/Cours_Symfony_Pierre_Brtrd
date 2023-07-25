@@ -4,7 +4,6 @@ namespace App\Services;
 
 use App\Entity\ArticleImage;
 use Vich\UploaderBundle\Mapping\PropertyMapping;
-use Symfony\Component\HttpKernel\KernelInterface;
 use Vich\UploaderBundle\Naming\DirectoryNamerInterface;
 
 class ArticleDirectoryNamer implements DirectoryNamerInterface

@@ -13,7 +13,7 @@ class SecurityPantherTest extends PantherTestCase
 
     protected function setUp(): void
     {
-        $this->client = self::createPantherClient();
+        $this->client = static::createPantherClient(['browser' => static::FIREFOX]);
 
         $this->databaseTool = self::getContainer()->get(DatabaseToolCollection::class)->get();
         $this->databaseTool->loadAliceFixture([
@@ -54,5 +54,19 @@ class SecurityPantherTest extends PantherTestCase
         $this->client->submit($form);
 
         $this->assertSelectorTextContains('.alert', 'Identifiants invalides.');
+    }
+
+    public function testLoginPageUserNotVerified()
+    {
+        $crawler = $this->client->request('GET', '/login');
+
+        $form = $crawler->selectButton('Se connecter')->form([
+            '_username' => 'editor@test.com',
+            '_password' => 'kqhfkhjqsf',
+        ]);
+
+        $this->client->submit($form);
+
+        $this->assertSelectorTextContains('.alert', 'Votre adresse email n\'est pas vérifiée, veuillez cliquer sur le lien envoyé par email lors de votre inscription');
     }
 }

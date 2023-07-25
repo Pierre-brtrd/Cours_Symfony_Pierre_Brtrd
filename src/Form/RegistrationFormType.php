@@ -4,16 +4,16 @@ namespace App\Form;
 
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilderInterface;
-use Vich\UploaderBundle\Form\Type\VichImageType;
-use Symfony\Component\Validator\Constraints\Regex;
-use Symfony\Component\Validator\Constraints\Length;
-use Symfony\Component\Validator\Constraints\NotBlank;
-use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Regex;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class RegistrationFormType extends AbstractType
 {
@@ -23,7 +23,7 @@ class RegistrationFormType extends AbstractType
             ->add('email', EmailType::class, [
                 'label' => 'form.user.fields.email.label',
                 'attr' => [
-                    'placeholder' => 'form.user.fields.email.placeholder'
+                    'placeholder' => 'form.user.fields.email.placeholder',
                 ],
                 'required' => true,
             ])
@@ -32,7 +32,7 @@ class RegistrationFormType extends AbstractType
                 'first_options' => [
                     'attr' => [
                         'autocomplete' => 'new-password',
-                        'placeholder' => 'form.user.fields.password.placeholder'
+                        'placeholder' => 'form.user.fields.password.placeholder',
                     ],
                     'constraints' => [
                         new NotBlank([
@@ -47,7 +47,7 @@ class RegistrationFormType extends AbstractType
                         new Regex(
                             pattern: '/^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\w\d\s:])([^\s]){8,16}$/',
                             message: 'form.user.password.regex',
-                        )
+                        ),
                     ],
                     'label' => 'form.user.fields.password.main',
                 ],
@@ -55,7 +55,7 @@ class RegistrationFormType extends AbstractType
                     'label' => 'form.user.fields.password.repeat',
                     'attr' => [
                         'placeholder' => 'form.user.fields.password.placeholder',
-                    ]
+                    ],
                 ],
                 'invalid_message' => 'form.user.validator.password.no_match',
                 // Instead of being set onto the object directly,
@@ -65,35 +65,35 @@ class RegistrationFormType extends AbstractType
             ->add('prenom', TextType::class, [
                 'label' => 'form.user.fields.firstname.label',
                 'attr' => [
-                    'placeholder' => 'form.user.fields.firstname.placeholder'
+                    'placeholder' => 'form.user.fields.firstname.placeholder',
                 ],
                 'required' => true,
             ])
             ->add('nom', TextType::class, [
                 'label' => 'form.user.fields.lastname.label',
                 'attr' => [
-                    'placeholder' => 'form.user.fields.lastname.placeholder'
+                    'placeholder' => 'form.user.fields.lastname.placeholder',
                 ],
                 'required' => true,
             ])
             ->add('address', TextType::class, [
                 'label' => 'form.user.fields.address.label',
                 'attr' => [
-                    'placeholder' => 'form.user.fields.address.placeholder'
+                    'placeholder' => 'form.user.fields.address.placeholder',
                 ],
                 'required' => true,
             ])
             ->add('zipCode', TextType::class, [
                 'label' => 'form.user.fields.zipcode.label',
                 'attr' => [
-                    'placeholder' => 'form.user.fields.zipcode.placeholder'
+                    'placeholder' => 'form.user.fields.zipcode.placeholder',
                 ],
                 'required' => true,
             ])
             ->add('ville', TextType::class, [
                 'label' => 'form.user.fields.city.label',
                 'attr' => [
-                    'placeholder' => 'form.user.fields.city.placeholder'
+                    'placeholder' => 'form.user.fields.city.placeholder',
                 ],
                 'required' => true,
             ])

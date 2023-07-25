@@ -14,7 +14,7 @@ class ArticlePantherTest extends PantherTestCase
 
     protected function setUp(): void
     {
-        $this->client = self::createPantherClient();
+        $this->client = static::createPantherClient(['browser' => static::FIREFOX]);
 
         $this->databaseTool = self::getContainer()->get(DatabaseToolCollection::class)->get();
         $this->databaseTool->loadAliceFixture([
@@ -109,7 +109,7 @@ class ArticlePantherTest extends PantherTestCase
         $this->client->waitFor('.content-response', 4);
 
         // For the flip content time response
-        sleep(1);
+        sleep(2);
 
         $crawler = $this->client->refreshCrawler();
 

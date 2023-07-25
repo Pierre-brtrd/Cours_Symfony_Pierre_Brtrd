@@ -26,7 +26,6 @@ class ArticleImageProvider
 
     public function uploadImageUser(string $file = 'default.png'): UploadedFile
     {
-        /** @var array<string> $files */
         $file = realpath(\dirname(__DIR__).'/Images/'.$file);
 
         $imageFile = new File($file);

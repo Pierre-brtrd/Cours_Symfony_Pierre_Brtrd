@@ -8,6 +8,7 @@ App\Entity\User:
     address: "15 rue de paradis"
     zipCode: "73250"
     ville: "Chambéry"
+    isVerified: true
 
   userEditor:
     email: editor@test.com

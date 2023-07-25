@@ -365,11 +365,11 @@ class Comments
     }
 
     /**
-     * @param User|UserInterface|null $user
+     * @param ?User $user
      *
      * @return $this
      */
-    public function setUser(User|UserInterface|null $user): static
+    public function setUser(?User $user): static
     {
         $this->user = $user;
 
