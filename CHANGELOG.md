@@ -1,3 +1,19 @@
+# [2.8.0](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/compare/v2.7.4...v2.8.0) (2023-07-25)
+
+
+### Bug Fixes
+
+* **image:** update remove file and dir for delete article image ([4a6d214](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/commit/4a6d214e4d7699ecf5152de7c690bfd6c63c3b8a))
+
+
+### Features
+
+* add show password for input password ([8479096](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/commit/847909669b0503b4b731314bd2b108dadc21fbe5))
+* add verify email on register ([78f5279](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/commit/78f5279394142ac25d190f324e51f66da1765a94))
+* upgrade symfony 6.3 ([a2846db](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/commit/a2846db599001d3d9c4fcf46d4f76dfb8dfdb45a))
+
+
+
 ## [2.7.4](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/compare/v2.7.3...v2.7.4) (2023-04-26)
 
 
@@ -85,15 +101,6 @@
 ### Bug Fixes
 
 * **tag:** update controller for tag visibility ([cecafd1](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/commit/cecafd120883bdb11d0c535e7347170ff7838cca))
-
-
-
-## [2.6.2](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/compare/v2.6.1...v2.6.2) (2022-10-20)
-
-
-### Bug Fixes
-
-* **tag:** fix create tag with default enable ([68a9207](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/commit/68a920797e93ee697abc11336de744bc61851331))
 
 
 
