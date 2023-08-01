@@ -1,3 +1,12 @@
+## [2.8.3](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/compare/v2.8.2...v2.8.3) (2023-08-01)
+
+
+### Bug Fixes
+
+* **perf:** optimise code with ajax request ([eefab78](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/commit/eefab781c288a50765aa5bab7cbb0c4965cadb14))
+
+
+
 ## [2.8.2](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/compare/v2.8.1...v2.8.2) (2023-07-25)
 
 
@@ -92,15 +101,6 @@
 ### Bug Fixes
 
 * **php:** update php cs fixer review ([74842c1](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/commit/74842c1ffa026230c223187a20bcec5bc22c33e1))
-
-
-
-## [2.6.5](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/compare/v2.6.4...v2.6.5) (2023-01-02)
-
-
-### Bug Fixes
-
-* **variable:** update typo for variable front ([9cd1e02](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/commit/9cd1e020f65abc9659bb8753cfbf75330e877d63))
 
 
 
