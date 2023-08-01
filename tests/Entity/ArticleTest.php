@@ -3,12 +3,12 @@
 namespace App\Tests\Entity;
 
 use App\Entity\Article;
-use App\Repository\ArticleRepository;
-use App\Repository\CategorieRepository;
 use App\Repository\UserRepository;
 use App\Tests\Utils\AssertTestTrait;
-use Liip\TestFixturesBundle\Services\DatabaseToolCollection;
+use App\Repository\ArticleRepository;
+use App\Repository\CategorieRepository;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Liip\TestFixturesBundle\Services\DatabaseToolCollection;
 
 class ArticleTest extends KernelTestCase
 {
@@ -27,9 +27,9 @@ class ArticleTest extends KernelTestCase
     {
         $articles = $this->databaseTool->loadAliceFixture(
             [
-                \dirname(__DIR__).'/Fixtures/UserTestFixtures.yaml',
-                \dirname(__DIR__).'/Fixtures/ArticleTestFixtures.yaml',
-                \dirname(__DIR__).'/Fixtures/TagTestFixtures.yaml',
+                \dirname(__DIR__) . '/Fixtures/UserTestFixtures.yaml',
+                \dirname(__DIR__) . '/Fixtures/ArticleTestFixtures.yaml',
+                \dirname(__DIR__) . '/Fixtures/TagTestFixtures.yaml',
             ]
         );
 
@@ -64,12 +64,42 @@ class ArticleTest extends KernelTestCase
         $this->assertHasErrors($article, 1);
     }
 
-    public function testMinLentgthContentEntity()
+    /**
+     * @dataProvider provideLengthTitre
+     * @return void
+     */
+    public function testLengthTitle(string $title): void
     {
         $article = $this->getEntity()
-            ->setContent('Desc');
+            ->setTitre($title);
 
         $this->assertHasErrors($article, 1);
+    }
+
+    private function provideLengthTitre(): array
+    {
+        return [
+            'min' => ['title' => str_repeat('a', 2)],
+            'max' => ['title' => str_repeat('a', 151)],
+        ];
+    }
+
+    /**
+     * @dataProvider provideLengthContent
+     */
+    public function testLentgthContentEntity(string $content): void
+    {
+        $article = $this->getEntity()
+            ->setContent($content);
+
+        $this->assertHasErrors($article, 1);
+    }
+
+    private function provideLengthContent(): array
+    {
+        return [
+            'min' => ['content' => str_repeat('a', 2)]
+        ];
     }
 
     protected function tearDown(): void

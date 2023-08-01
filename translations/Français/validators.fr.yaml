@@ -6,3 +6,9 @@ form:
         not_blank: Entrez un mot de passe
         min_length: Votre mot de passe doit faire plus de {{ limit }} caractères
         no_match: Les mot de passe ne correspondent pas.
+
+tag:
+  title:
+    length:
+      min: Le titre doit contenir au moins {{ limit }} caractères
+      max: Le titre doit contenir au maximum {{ limit }} caractères
