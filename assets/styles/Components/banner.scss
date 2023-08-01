@@ -1,7 +1,6 @@
 #hero {
     height: 80vh;
-    background-image: url("../../images/banner-formations.jpg");
-    background-size: cover;
+    background: center / cover url("../../images/banner-formations.jpg");
     display: flex;
     justify-content: center;
     align-items: center;
@@ -16,6 +15,11 @@
         backdrop-filter: blur(5px);
         -webkit-backdrop-filter: blur(5px);
         border: 1px solid rgba(255, 255, 255, 0.3);
+
+        @media screen and (max-width: 768px) {
+            width: 90%;
+            margin: auto;
+        }
 
         h1 {
             color: $white;

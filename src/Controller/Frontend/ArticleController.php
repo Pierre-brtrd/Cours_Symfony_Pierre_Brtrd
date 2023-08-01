@@ -2,20 +2,20 @@
 
 namespace App\Controller\Frontend;
 
-use App\Data\SearchData;
-use App\Entity\Article;
-use App\Entity\Comments;
 use App\Entity\User;
-use App\Form\CommentsType;
+use App\Entity\Article;
+use App\Data\SearchData;
+use App\Entity\Comments;
 use App\Form\SearchForm;
+use App\Form\CommentsType;
 use App\Repository\ArticleRepository;
 use App\Repository\CommentsRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Security;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * Article controller Fontend class.

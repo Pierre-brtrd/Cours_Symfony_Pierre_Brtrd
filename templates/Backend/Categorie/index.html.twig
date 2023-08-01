@@ -36,6 +36,7 @@
 								</div>
 							</div>
 						</div>
+						<p class="blog-card-actif {{ categorie.active ? 'text-success' : 'text-danger' }}">{{ categorie.active ? 'Actif' : 'Inactif' }}</p>
 						<div class="d-flex align-items-center mt-2">
 							<div class="col-md-6">
 								<a href="{{ path('app_categorie_edit', {'id': categorie.id}) }}" class="btn btn-primary">{{ 'main.btn.edit'|trans(domain = 'content')}}</a>

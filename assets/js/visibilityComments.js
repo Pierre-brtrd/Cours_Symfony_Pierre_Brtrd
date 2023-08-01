@@ -1,12 +1,12 @@
-import axios from 'axios';
+import { sendRequest } from './senRequestActif';
 
-let switchs = document.querySelectorAll('[data-switch-active-comment]');
+const switchs = document.querySelectorAll('[data-switch-active-comment]');
 
 if (switchs) {
     switchs.forEach((element) => {
-        element.addEventListener('change', () => {
+        element.addEventListener('change', (e) => {
             let commentId = element.value;
-            axios.get(`/admin/comments/switch/${commentId}`);
+            sendRequest(`/admin/comments/switch/${commentId}`, e.target);
         });
     });
 }

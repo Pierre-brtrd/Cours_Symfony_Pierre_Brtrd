@@ -1,14 +1,12 @@
-import axios from 'axios';
+import { sendRequest } from './senRequestActif';
 
-window.onload = () => {
-    let switchs = document.querySelectorAll('[data-switch-active-tag]');
+const switchs = document.querySelectorAll('[data-switch-active-tag]');
 
-    if (switchs) {
-        switchs.forEach((element) => {
-            element.addEventListener('change', () => {
-                let tagId = element.value;
-                axios.get(`/admin/categorie/switch/${tagId}`);
-            });
+if (switchs) {
+    switchs.forEach((element) => {
+        element.addEventListener('change', (e) => {
+            let tagId = element.value;
+            sendRequest(`/admin/categorie/switch/${tagId}`, e.target);
         });
-    }
+    });
 }

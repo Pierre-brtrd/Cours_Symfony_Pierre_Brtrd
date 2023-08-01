@@ -11,10 +11,10 @@
 			<h1>{{ 'home.content.heading1'|trans(domain = 'content') }}</h1>
 		</div>
 	</div>
-	<section class="container position-relative mt-4">
+	<section class="container mt-4">
 		<div class="position-relative">
 			<h2 class="text-center">{{ 'home.content.posts.last'|trans(domain = 'content') }}</h2>
-			<a href="{{ path('article.index') }}" class="btn btn-primary text-light position-absolute top-0">{{ 'home.content.posts.btn_show_post'|trans(domain = 'content') }}</a>
+			<a href="{{ path('article.index') }}" class="btn btn-primary text-light">{{ 'home.content.posts.btn_show_post'|trans(domain = 'content') }}</a>
 		</div>
 		<div class="blog-list mt-4">
 			{% include "Components/Article/_articles.html.twig" with {articles: articles} only %}

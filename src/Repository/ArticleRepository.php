@@ -2,13 +2,13 @@
 
 namespace App\Repository;
 
-use App\Data\SearchData;
 use App\Entity\Article;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query;
+use App\Data\SearchData;
 use Doctrine\Persistence\ManagerRegistry;
-use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
+use Knp\Component\Pager\Pagination\PaginationInterface;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @extends ServiceEntityRepository<Article>
@@ -104,21 +104,21 @@ class ArticleRepository extends ServiceEntityRepository
         }
 
         if (!empty($search->getQuery())) {
-            $query = $query->andWhere('a.titre LIKE :titre')
+            $query->andWhere('a.titre LIKE :titre')
                 ->setParameter('titre', "%{$search->getQuery()}%");
         }
 
         if (!empty($search->getCategories())) {
-            $query = $query->andWhere('c.id IN (:categories)')
+            $query->andWhere('c.id IN (:categories)')
                 ->setParameter('categories', $search->getCategories());
         }
 
         if (!empty($search->getAuthor())) {
-            $query = $query->andWhere('u.id IN (:authors)')
+            $query->andWhere('u.id IN (:authors)')
                 ->setParameter('authors', $search->getAuthor());
         }
 
-        $query = $query->getQuery();
+        $query->getQuery();
 
         return $this->paginator->paginate(
             $query,

@@ -5,6 +5,10 @@
     justify-content: space-between;
     flex-wrap: wrap;
     align-items: stretch;
+
+    @media screen and (max-width: 768px) {
+        justify-content: center;
+    }
 }
 
 .blog-card {
@@ -15,7 +19,14 @@
     margin-bottom: 30px;
     border-radius: $border-radius;
     background: $white;
-    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+    box-shadow:
+        0 2px 2px 0 rgba(0, 0, 0, 0.14),
+        0 3px 1px -2px rgba(0, 0, 0, 0.2),
+        0 1px 5px 0 rgba(0, 0, 0, 0.12);
+
+    @media screen and (max-width: 768px) {
+        width: 90%;
+    }
 
     &-image {
         overflow: hidden;
@@ -23,7 +34,9 @@
         margin-right: 15px;
         margin-top: -60px;
         border-radius: $border-radius;
-        box-shadow: 0 16px 38px -12px rgba(0, 0, 0, 0.56), 0 4px 25px 0px rgba(0, 0, 0, 0.12),
+        box-shadow:
+            0 16px 38px -12px rgba(0, 0, 0, 0.56),
+            0 4px 25px 0px rgba(0, 0, 0, 0.12),
             0 8px 10px -5px rgba(0, 0, 0, 0.2);
 
         img {

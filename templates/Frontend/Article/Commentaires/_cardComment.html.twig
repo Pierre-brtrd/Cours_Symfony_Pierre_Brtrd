@@ -1,6 +1,6 @@
 <div class="comment-item">
 	<div class="comment-header">{{ comment.titre }}</div>
-	<div class="comment-content">
+	<div class="comment-content blog-card-content">
 		<em class="card-text">{{ comment.user.fullName }}</em>
 		<p class="card-text">{{ comment.content }}</p>
 		<div class="ratings">
@@ -13,6 +13,7 @@
 			{% endfor %}
 		</div>
 		{% if admin is defined and admin is not null %}
+			<p class="blog-card-actif {{ comment.active ? 'text-success' : 'text-danger' }}">{{ comment.active ? 'Actif' : 'Inactif' }}</p>
 			<div class="form-check form-switch">
 				<input class="form-check-input" type="checkbox" role="switch" value="{{ comment.id }}" data-switch-active-comment {{ comment.active ? 'checked' }}>
 				<label class="form-check-label">Actif</label>

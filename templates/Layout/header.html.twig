@@ -16,7 +16,7 @@
 				</ul>
 				{% if app.user %}
 					{% if is_granted('ROLE_ADMIN') or is_granted('ROLE_EDITOR') %}
-						<div class="navbar-btn me-2">
+						<div class="navbar-btn me-0 me-md-2 text-center text-md-start">
 							<div class="dropdown">
 								<button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
 									<i class="bi bi-tools"></i>
@@ -47,27 +47,27 @@
 							</div>
 						</div>
 					{% endif %}
-					<div class="navbar-btn me-2">
+					<div class="navbar-btn me-0 me-md-2 text-center text-md-start">
 						<a href="{{ path('compte') }}" class="btn btn-light">
 							<i class="bi bi-person-badge-fill"></i>
 							<span>{{ 'header.profile'|trans(domain = 'content') }}</span>
 						</a>
 					</div>
-					<div class="navbar-btn">
+					<div class="navbar-btn text-center text-md-start">
 						<a href="{{ path('logout') }}" class="btn btn-danger text-light">
 							<i class="bi bi-door-open-fill"></i>
 							<span>{{ 'header.logout'|trans(domain = 'content') }}</span>
 						</a>
 					</div>
 				{% else %}
-					<div class="navbar-btn me-2">
+					<div class="navbar-btn me-0 me-md-2 text-center text-md-start">
 						<a href="{{path('register')}}" class="btn btn-light">
 							<i class="bi bi-person-plus"></i>
 							{{ 'header.sign_up'|trans(domain = 'content') }}
 						</a>
 					</div>
 
-					<div class="navbar-btn">
+					<div class="navbar-btn text-center mt-2 mt-md-0 text-md-start">
 						<a href="{{path('login')}}" class="btn btn-secondary">
 							<i class="bi bi-box-arrow-in-right"></i>
 							{{ 'header.login'|trans(domain = 'content') }}

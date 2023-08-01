@@ -2,20 +2,20 @@
 
 namespace App\Controller\Backend;
 
-use App\Data\SearchData;
 use App\Entity\Article;
+use App\Data\SearchData;
 use App\Entity\Comments;
-use App\Form\ArticleType;
 use App\Form\SearchForm;
+use App\Form\ArticleType;
 use App\Repository\ArticleRepository;
 use App\Repository\CommentsRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Security;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Security;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * Article controller backend class.
@@ -156,14 +156,22 @@ class ArticleController extends AbstractController
     #[Route('/article/switch/{id}', name: 'admin.article.switch', methods: 'GET')]
     public function switchVisibilityArticle(?Article $article): Response
     {
-        if ($article instanceof Article) {
-            $article->isActive() ? $article->setActive(false) : $article->setActive(true);
-            $this->repoArticle->add($article, true);
-
-            return new Response('Visibility changed', 201);
+        if (!$article instanceof Article) {
+            return new JsonResponse([
+                'status' => 'error',
+                'message' => 'Article non trouvée'
+            ], 404);
         }
 
-        return new Response('Article non trouvé', 404);
+        $article->setActive(!$article->isActive());
+
+        $this->repoArticle->add($article, true);
+
+        return new JsonResponse([
+            'status' => 'success',
+            'message' => 'Article mise à jour avec succès',
+            'enable' => $article->isActive()
+        ], 201);
     }
 
     /**
@@ -180,7 +188,7 @@ class ArticleController extends AbstractController
         /** @var string|null $token */
         $token = $request->get('_token');
 
-        if ($this->isCsrfTokenValid('delete'.$article->getId(), $token)) {
+        if ($this->isCsrfTokenValid('delete' . $article->getId(), $token)) {
             $this->repoArticle->remove($article, true);
             $this->addFlash('success', 'Article supprimé avec succès');
 
@@ -235,13 +243,21 @@ class ArticleController extends AbstractController
     public function switchVisibilityComment(?Comments $comment): Response
     {
         if (!$comment instanceof Comments) {
-            return new Response('Commentaires non trouvé', 404);
+            return new JsonResponse([
+                'status' => 'error',
+                'message' => 'Commentaire non trouvée'
+            ], 404);
         }
 
-        $comment->isActive() ? $comment->setActive(false) : $comment->setActive(true);
+        $comment->setActive(!$comment->isActive());
+
         $this->repoComments->add($comment, true);
 
-        return new Response('Visibility changed', 201);
+        return new JsonResponse([
+            'status' => 'success',
+            'message' => 'Comment mise à jour avec succès',
+            'enable' => $comment->isActive()
+        ], 201);
     }
 
     /**
@@ -257,7 +273,7 @@ class ArticleController extends AbstractController
     {
         /** @var string|null $token */
         $token = $request->get('_token');
-        if ($this->isCsrfTokenValid('delete'.$comment->getId(), $token)) {
+        if ($this->isCsrfTokenValid('delete' . $comment->getId(), $token)) {
             $this->repoComments->remove($comment, true);
             $this->addFlash('success', 'Commentaire supprimé avec succès');
 

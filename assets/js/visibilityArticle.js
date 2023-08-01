@@ -1,13 +1,13 @@
-import axios from 'axios';
+import { sendRequest } from './senRequestActif';
 
 export default function visibilityArticle() {
-    let switchs = document.querySelectorAll('[data-switch-active-article]');
+    const switchs = document.querySelectorAll('[data-switch-active-article]');
 
     if (switchs) {
         switchs.forEach((element) => {
-            element.addEventListener('change', () => {
+            element.addEventListener('change', (e) => {
                 let articleId = element.value;
-                axios.get(`/admin/article/switch/${articleId}`);
+                sendRequest(`/admin/article/switch/${articleId}`, e.target);
             });
         });
     }

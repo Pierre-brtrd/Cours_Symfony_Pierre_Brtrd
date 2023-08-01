@@ -5,11 +5,12 @@ namespace App\Controller\Backend;
 use App\Entity\Categorie;
 use App\Form\CategorieType;
 use App\Repository\CategorieRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * Tag controller class.
@@ -116,16 +117,24 @@ class CategorieController extends AbstractController
      * @return Response
      */
     #[Route('/switch/{id}', name: 'admin.categorie.switch', methods: 'GET')]
-    public function switchVisibilityTag(?Categorie $categorie): Response
+    public function switchVisibilityTag(?Categorie $categorie): JsonResponse
     {
-        if ($categorie instanceof Categorie) {
-            $categorie->isActive() ? $categorie->setActive(false) : $categorie->setActive(true);
-            $this->repository->add($categorie, true);
-
-            return new Response('Visibility changed', 201);
+        if (!$categorie instanceof Categorie) {
+            return new JsonResponse([
+                'status' => 'error',
+                'message' => 'Catégorie non trouvée'
+            ], 404);
         }
 
-        return new Response('Catégorie non trouvée', 404);
+        $categorie->setActive(!$categorie->isActive());
+
+        $this->repository->add($categorie, true);
+
+        return new JsonResponse([
+            'status' => 'success',
+            'message' => 'Catégorie mise à jour avec succès',
+            'enable' => $categorie->isActive()
+        ], 201);
     }
 
     /**
@@ -142,7 +151,7 @@ class CategorieController extends AbstractController
         /** @var string|null $token */
         $token = $request->get('_token');
 
-        if ($this->isCsrfTokenValid('delete'.$categorie->getId(), $token)) {
+        if ($this->isCsrfTokenValid('delete' . $categorie->getId(), $token)) {
             $this->repository->remove($categorie, true);
             $this->addFlash('success', 'Categorie supprimée avec succès');
 
