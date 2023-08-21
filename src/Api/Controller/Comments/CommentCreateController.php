@@ -3,8 +3,8 @@
 namespace App\Api\Controller\Comments;
 
 use App\Entity\Comments;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Security\Core\Security;
 
 /**
  * Class Api Comment Controller.

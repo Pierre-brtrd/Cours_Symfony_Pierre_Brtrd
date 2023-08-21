@@ -3,8 +3,8 @@
 namespace App\Api\Controller\Articles;
 
 use App\Entity\Article;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Security\Core\Security;
 
 /**
  * Class Api Article Create Controller.

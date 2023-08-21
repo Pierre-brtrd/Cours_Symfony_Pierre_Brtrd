@@ -1,4 +1,4 @@
-import { sendRequest } from './senRequestActif';
+import { sendRequest } from './sendRequestActif';
 
 const switchs = document.querySelectorAll('[data-switch-active-tag]');
 

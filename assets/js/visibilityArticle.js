@@ -1,4 +1,4 @@
-import { sendRequest } from './senRequestActif';
+import { sendRequest } from './sendRequestActif';
 
 export default function visibilityArticle() {
     const switchs = document.querySelectorAll('[data-switch-active-article]');

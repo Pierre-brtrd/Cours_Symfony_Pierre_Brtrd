@@ -39,11 +39,11 @@ export default class Filter {
    */
   bindEvents() {
     const linkClikListener = (e) => {
-      if (e.target.tagName === 'A' || e.target.tagName === 'I') {
+      if (e.target.tagName === 'A' || e.target.tagName === 'I' || e.target.tagName === 'SPAN') {
         e.preventDefault();
         let url;
 
-        if (e.target.tagName === 'I') {
+        if (e.target.tagName === 'I' || e.target.tagName === 'SPAN') {
           url = e.target.parentNode.parentNode.getAttribute('href');
         } else {
           url = e.target.getAttribute('href');

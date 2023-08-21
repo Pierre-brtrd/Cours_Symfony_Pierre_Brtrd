@@ -14,7 +14,7 @@ class ArticleDirectoryNamer implements DirectoryNamerInterface
                 return $object->getArticle()->getSlug();
             }
 
-            return self::slugify($object->getArticle()->getTitle());
+            return self::slugify($object->getArticle()->getTitre());
         }
 
         return 'articles';
