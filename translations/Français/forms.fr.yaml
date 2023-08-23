@@ -29,7 +29,9 @@ form:
       zipcode:
         label: "Code postal:"
         placeholder: "75000"
-      image: "Image:"
+      image:
+        label: "Image:"
+        placeholder: "Sélectionnez une image"
       choices.user: Utilisateur
       choices.editor: Éditeur
       choices.admin: Administrateur

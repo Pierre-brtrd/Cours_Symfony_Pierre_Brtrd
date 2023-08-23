@@ -2,5 +2,37 @@
 	<div class="form-check form-switch">
 		<input class="form-check-input" type="checkbox" id="{{ form.vars.id }}" name="{{ form.vars.full_name }}" {{ form.vars.checked ? 'checked' }}>
 		<label class="form-check-label" for="{{ form.vars.full_name }}">{{ form.vars.label|trans(domain = 'forms') }}</label>
+		{{ form_errors(form) }}
+	</div>
+{% endblock %}
+
+{% block vich_image_widget %}
+	<div class="mb-3">
+		<div class="input-image-content">
+			{%- if errors|length > 0 -%}
+				{%- set attr = attr|merge({class: (attr.class|default('') ~ ' is-invalid')|trim}) -%}
+			{%- endif -%}
+			<input type="file" class="{{ attr.class|default('')|trim }}" name="{{ form.file.vars.full_name }}" id="{{ form.file.vars.id }}">
+			<label for="{{ form.file.vars.id }}">
+				<i class="bi bi-cloud-arrow-down-fill"></i>
+				<span>{{ 'form.user.fields.image.placeholder'|trans(domain="forms") }}</span>
+			</label>
+			{%- if image_uri -%}
+				<a href="{{ asset_helper is same as(true) ? asset(image_uri) : image_uri }}" download>
+					<img src="{{ asset_helper is same as(true) ? asset(image_uri) : image_uri }}" class="preview-img" alt="" loading="lazy"/>
+				</a>
+			{% else %}
+				<img src="" class="preview-img">
+			{%- endif -%}
+
+			{%- if download_uri -%}
+				<a href="{{ asset_helper is same as(true) ? asset(download_uri) : download_uri }}" download>
+					{{ translation_domain is same as(false) ? download_label : download_label|trans({}, translation_domain) }}
+				</a>
+			{%- endif -%}
+		</div>
+		{%- if form.delete is defined -%}
+			{{- form_row(form.delete) -}}
+		{%- endif -%}
 	</div>
 {% endblock %}

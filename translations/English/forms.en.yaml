@@ -29,7 +29,9 @@ form:
       zipcode:
         label: "Zip code:"
         placeholder: "75000"
-      image: "Image:"
+      image:
+        label: "Image:"
+        placeholder: "Select an image"
       choices.user: User
       choices.editor: Editor
       choices.admin: Administrator

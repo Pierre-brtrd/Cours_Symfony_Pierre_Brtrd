@@ -4,18 +4,19 @@ App\Entity\User:
     password: "<hashPassword('Test1234')>"
     nom: "Doe"
     prenom: "John"
-    roles: [ "ROLE_ADMIN" ]
+    roles: ["ROLE_ADMIN"]
     address: "15 rue de paradis"
     zipCode: "73250"
     ville: "Chambéry"
     imageFile: "<uploadImageUser('img-profil.jpeg')>"
+    isVerifed: true
 
   userEditor:
     email: editor@test.com
     password: "<hashPassword('Test1234')>"
     nom: <firstName()>
     prenom: <lastName()>
-    roles: [ "ROLE_EDITOR" ]
+    roles: ["ROLE_EDITOR"]
     address: <address()>
     zipCode: "73000"
     ville: <city()>
@@ -26,7 +27,8 @@ App\Entity\User:
     password: "<hashPassword('Test1234')>"
     nom: <firstName()>
     prenom: <lastName()>
-    roles: [ "ROLE_USER" ]
+    roles: ["ROLE_USER"]
     address: <address()>
     zipCode: "73000"
     ville: <city()>
+    isVerifed: <bool()>
