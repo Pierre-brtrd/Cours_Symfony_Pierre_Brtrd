@@ -1,3 +1,13 @@
+## [2.8.4](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/compare/v2.8.3...v2.8.4) (2023-08-23)
+
+
+### Bug Fixes
+
+* **input:** update input file design with form theme ([b5b4a73](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/commit/b5b4a73484d7d6736a05b7a4fb541037edd56648))
+* **password:** fix password input ([4c582ec](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/commit/4c582ec105f0502cd34bbd6ff3ebefc84710151d))
+
+
+
 ## [2.8.3](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/compare/v2.8.2...v2.8.3) (2023-08-01)
 
 
@@ -92,15 +102,6 @@
 ### Features
 
 * update symfony version 6.2 ([5cc924c](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/commit/5cc924cf6c57d08c1ce04c50a1f3410101a5828f))
-
-
-
-## [2.6.6](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/compare/v2.6.5...v2.6.6) (2023-01-18)
-
-
-### Bug Fixes
-
-* **php:** update php cs fixer review ([74842c1](https://github.com/Pierre-brtrd/Cours_Symfony_Pierre_Brtrd/commit/74842c1ffa026230c223187a20bcec5bc22c33e1))
 
 
 
